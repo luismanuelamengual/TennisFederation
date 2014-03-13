@@ -53,7 +53,10 @@ class PortalView extends DefaultView
         return  
         $this->createCarousel() .
         '<div class="container">
-            ' . $this->createFeaturettesSection() . '
+            ' . $this->createSectionsRow() . '
+            <hr class="featurette-divider">
+            ' . $this->createOurHomeRow() . '
+            ' . $this->createObjectivesRow () . '
         </div>';
     }
     
@@ -114,10 +117,10 @@ class PortalView extends DefaultView
                 </div>
               </div>
               <div class="item">
-                <img src="' . $this->getBaseUrl() . 'images/fondo2.jpg" alt="">
+                <img src="' . $this->getBaseUrl() . 'images/fondo3.jpg" alt="">
                 <div class="carousel-caption">
                   <h1 style="color:#ffffff">' . $this->getApplication()->getName() . '</h1>
-                  <p>La Federación de Tenis Mendocina organiza más de 100 torneos al año entre los cuales participan menores, seniors y profesionales en diversas categorías</p>
+                  <p>La F.M.T organiza por año más de 100 torneos para menores, seniors y profesionales en sus distintas categorías</p>
                 </div>
               </div>
             </div>
@@ -126,26 +129,53 @@ class PortalView extends DefaultView
         </div>';
     }
     
-    protected function createFeaturettesSection ()
+    protected function createSectionsRow ()
     {
         $imageWidth = 260;
         $imageHeight = 175;
         return '
         <div class="row text-center">
-            <div class="col-lg-4">
-                <img class="img-thumbnail" src="' . $this->getBaseUrl() . 'images/featurettes/featurette1.jpg" data-src="holder.js/' . $imageWidth . 'x' . $imageHeight . '" alt="" style="width: ' . $imageWidth . 'px; height: ' . $imageHeight . 'px;">
+            <div class="col-sm-4">
+                <img class="img-thumbnail" src="' . $this->getBaseUrl() . 'images/featurette3.jpg" data-src="holder.js/' . $imageWidth . 'x' . $imageHeight . '" alt="" style="width: ' . $imageWidth . 'px; height: ' . $imageHeight . 'px;">
                 <h2>Menores</h2>
-                <p>Aliquam tempor adipiscing lorem quis sodales. Vestibulum aliquet massa at elit egestas, vitae pulvinar ipsum porta. Nunc faucibus urna ut ante commodo aliquam. Donec in eros ut enim placerat gravida eu sit amet est. Donec a egestas urna, id interdum massa. Vestibulum pharetra, mi laoreet sagittis condimentum, leo nisl volutpat libero, cursus volutpat lorem tortor eget justo. Cras ac felis nec felis volutpat rutrum eu vel ligula. Pellentesque justo nisl, posuere non placerat eu, vestibulum mollis risus. Maecenas porttitor nisl varius quam fringilla, quis gravida leo convallis. Morbi quis nisi vitae magna interdum feugiat.</p>
+                <!--p>Aliquam tempor adipiscing lorem quis sodales. Vestibulum aliquet massa at elit egestas. </p-->
             </div>
-            <div class="col-lg-4">
-                <img class="img-thumbnail" src="' . $this->getBaseUrl() . 'images/featurettes/featurette2.jpg" data-src="holder.js/' . $imageWidth . 'x' . $imageHeight . '" alt="" style="width: ' . $imageWidth . 'px; height: ' . $imageHeight . 'px;">
+            <div class="col-sm-4">
+                <img class="img-thumbnail" src="' . $this->getBaseUrl() . 'images/featurette4.jpg" data-src="holder.js/' . $imageWidth . 'x' . $imageHeight . '" alt="" style="width: ' . $imageWidth . 'px; height: ' . $imageHeight . 'px;">
                 <h2>Categorías - Seniors</h2>
-                <p>Duis ut nisl vitae quam elementum tempor a non sem. Integer consectetur arcu ut tellus blandit euismod. Sed aliquet aliquet nisi, in faucibus quam laoreet eleifend. Nam ac libero erat. Aliquam ullamcorper velit orci, et laoreet eros vestibulum non. Nullam rutrum sapien at pharetra malesuada. Sed feugiat sapien ut neque auctor, id consequat tortor aliquet. Proin ac erat rhoncus, dictum sapien vel, rhoncus libero.</p>
+                <!--p>Aliquam tempor adipiscing lorem quis sodales. Vestibulum aliquet massa at elit egestas. </p-->
             </div>
-            <div class="col-lg-4">
-                <img class="img-thumbnail" src="' . $this->getBaseUrl() . 'images/featurettes/featurette3.jpg" data-src="holder.js/' . $imageWidth . 'x' . $imageHeight . '" alt="" style="width: ' . $imageWidth . 'px; height: ' . $imageHeight . 'px;">
+            <div class="col-sm-4">
+                <img class="img-thumbnail" src="' . $this->getBaseUrl() . 'images/featurette5.jpg" data-src="holder.js/' . $imageWidth . 'x' . $imageHeight . '" alt="" style="width: ' . $imageWidth . 'px; height: ' . $imageHeight . 'px;">
                 <h2>Profesionales</h2>
-                <p>Vivamus pulvinar libero at justo luctus euismod. Proin quis imperdiet sem. Curabitur orci purus, viverra eget lectus ut, pharetra condimentum nibh. Nullam cursus ligula varius, tincidunt dolor id, bibendum arcu. In a iaculis velit, et commodo nunc. Suspendisse dolor orci, pretium at porttitor vitae, sollicitudin et turpis. Etiam sollicitudin massa at malesuada euismod. Vivamus pharetra nulla ac mi sodales condimentum.</p>
+                <!--p>Aliquam tempor adipiscing lorem quis sodales. Vestibulum aliquet massa at elit egestas. </p-->
+            </div>
+        </div>';
+    }
+    
+    protected function createOurHomeRow ()
+    {
+        return '
+        <div class="row featurette">
+            <div class="col-md-12">
+                <h2 class="featurette-heading">NUESTRA CASA</h2>
+                <p class="lead">La Federación tiene sede propia y es la oficina privilegiadamente ubicada en el centro de la capital de Mendoza, nuestra casa ,durante este ejercicio se refacciono recientemente contando con una superficie cubierta propia de 54 metros cuadrados distribuidos en una sala de atención y administración, un privado y una amplia sala de reunion .nuestra federación actualmente cuenta con equipos modernos de computación en red y banda ancha de internet. </p>
+            </div>
+        </div>';
+    }
+    
+    protected function createObjectivesRow ()
+    {
+        return '
+        <div class="row featurette">
+            <div class="col-md-12">
+                <h2 class="featurette-heading">FINES Y OBJETIVOS</h2>
+                <p class="lead">La Federación tiene sede propia y es la oficina privilegiadamente ubicada en el centro de la capital de Mendoza, nuestra casa ,durante este ejercicio se refacciono recientemente contando con una superficie cubierta propia de 54 metros cuadrados distribuidos en una sala de atención y administración, un privado y una amplia sala de reunion .nuestra federación actualmente cuenta con equipos modernos de computación en red y banda ancha de internet.</p>
+                <p class="lead">La F.M.T es la Asociación Civil rectora de todo cuanto se relaciona con el deporte del Tenis en la provincia de Mendoza y las entidades afiliadas a la misma .proponiendonos durante el ejercicio. la promoción, fomento y desarrollo del deporte del tenis en toda la Provincia. Para cumplimentar tales fines y objetivos, que se establecen como fundamentales:</p>
+                <p class="lead">Organizamos, fiscalizamos , patrocinamos y dirigimos torneos, campeonatos o competencias de tenis en las que intervengan las entidades que la integran o sus jugadores, y aquellos eventos de carácter provincial ,nacional e internacional que se desarrollen en la Provincia.</p>
+                <p class="lead">Representamos en forma exclusiva a los clubes y jugadores afiliados en los organismos nacionales que dirigen el tenis, reconociendo las funciones y atribuciones correspondientes a la Asociación Argentina de Tenis, conforme a sus estatutos y reglamentos.</p>
+                <p class="lead">Designamos a los jugadores que representen a la Provincia, en las distintas competencias nacionales en las que participen representaciones Mendocinas.</p>
+                <p class="lead">Propendemos a la camaradería entre jugadores y demás participantes en el deporte del tenis.</p>
             </div>
         </div>';
     }
