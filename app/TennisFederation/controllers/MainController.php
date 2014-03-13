@@ -8,7 +8,7 @@ class MainController extends WebController
 {
     public function indexAction ()
     {
-        echo "superv";
+        $this->executeAction("site/portal/");
     }
 }
 

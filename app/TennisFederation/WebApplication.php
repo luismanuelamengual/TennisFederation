@@ -6,7 +6,7 @@ class WebApplication extends \NeoPHP\web\WebApplication
 {
     public function __construct ()
     {
-        parent::__construct("TennisFederation", true);
+        parent::__construct("Federación Mendocina de Tenis", true);
     }
     
     /**
