@@ -74,9 +74,9 @@ class PortalView extends DefaultView
     {
         return '
         <hr>
-        <div class="container">
+        <div class="container">        
         <p class="pull-right"><a href="#">Volver al inicio</a></p>
-        <p class="text-muted credit">© Copyright 2014. ' . $this->getApplication()->getName() . ' - Todos los derechos reservados</p>
+        <p class="text-muted credit">' . $this->getApplication()->getName() . ' <br>Dirección: San Martin 1362 1º Piso Of. 2 - Mendoza - Argentina <br>Telefono/Fax: 2615552686/2616306174 <br>E-mail: femetenis@yahoo.com.ar </p>
         </div>';
     }
     
@@ -138,17 +138,14 @@ class PortalView extends DefaultView
             <div class="col-sm-4">
                 <img class="img-thumbnail" src="' . $this->getBaseUrl() . 'images/featurette3.jpg" data-src="holder.js/' . $imageWidth . 'x' . $imageHeight . '" alt="" style="width: ' . $imageWidth . 'px; height: ' . $imageHeight . 'px;">
                 <h2>Menores</h2>
-                <!--p>Aliquam tempor adipiscing lorem quis sodales. Vestibulum aliquet massa at elit egestas. </p-->
             </div>
             <div class="col-sm-4">
-                <img class="img-thumbnail" src="' . $this->getBaseUrl() . 'images/featurette4.jpg" data-src="holder.js/' . $imageWidth . 'x' . $imageHeight . '" alt="" style="width: ' . $imageWidth . 'px; height: ' . $imageHeight . 'px;">
+                <img class="img-thumbnail" src="' . $this->getBaseUrl() . 'images/featurette7.jpg" data-src="holder.js/' . $imageWidth . 'x' . $imageHeight . '" alt="" style="width: ' . $imageWidth . 'px; height: ' . $imageHeight . 'px;">
                 <h2>Categorías - Seniors</h2>
-                <!--p>Aliquam tempor adipiscing lorem quis sodales. Vestibulum aliquet massa at elit egestas. </p-->
             </div>
             <div class="col-sm-4">
                 <img class="img-thumbnail" src="' . $this->getBaseUrl() . 'images/featurette5.jpg" data-src="holder.js/' . $imageWidth . 'x' . $imageHeight . '" alt="" style="width: ' . $imageWidth . 'px; height: ' . $imageHeight . 'px;">
                 <h2>Profesionales</h2>
-                <!--p>Aliquam tempor adipiscing lorem quis sodales. Vestibulum aliquet massa at elit egestas. </p-->
             </div>
         </div>';
     }
