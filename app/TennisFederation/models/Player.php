@@ -1,0 +1,253 @@
+<?php
+
+namespace TennisFederation\models;
+
+use NeoPHP\mvc\Model;
+
+/**
+ * @Table (tableName="player")
+ */
+class Player extends Model
+{
+    /**
+     * @Column (columnName="playerid", id=true)
+     */
+    private $id;
+    
+    /**
+     * @Column (columnName="username")
+     */
+    private $username;
+    
+    /**
+     * @Column (columnName="password")
+     */
+    private $password;
+    
+    /**
+     * @Column (columnName="playertypeid", relatedTableName="playertype")
+     */
+    private $playerType;
+    
+    /**
+     * @Column (columnName="firstname")
+     */
+    private $firstname;
+    
+    /**
+     * @Column (columnName="lastname")
+     */
+    private $lastname;
+    
+    /**
+     * @Column (columnName="birthdate")
+     */
+    private $birthDate;
+    
+    /**
+     * @Column (columnName="address")
+     */
+    private $address;
+    
+    /**
+     * @Column (columnName="contactvia1")
+     */
+    private $contactVia1;
+    
+    /**
+     * @Column (columnName="contactvia2")
+     */
+    private $contactVia2;
+    
+    /**
+     * @Column (columnName="contactvia3")
+     */
+    private $contactVia3;
+    
+    /**
+     * @Column (columnName="email")
+     */
+    private $email;
+    
+    /**
+     * @Column (columnName="documentnumber")
+     */
+    private $documentNumber;
+    
+    /**
+     * @Column (columnName="countryid", relatedTableName="country")
+     */
+    private $country;
+    
+    /**
+     * @Column (columnName="provinceid", relatedTableName="province")
+     */
+    private $province;
+    
+    /**
+     * @Column (columnName="disponibility")
+     */
+    private $disponibility;
+    
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    public function setUsername($username)
+    {
+        $this->username = $username;
+    }
+
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
+    public function getPlayerType()
+    {
+        return $this->playerType;
+    }
+
+    public function setPlayerType(PlayerType $playerType)
+    {
+        $this->playerType = $playerType;
+    }
+
+    public function getFirstname()
+    {
+        return $this->firstname;
+    }
+
+    public function setFirstname($firstname)
+    {
+        $this->firstname = $firstname;
+    }
+
+    public function getLastname()
+    {
+        return $this->lastname;
+    }
+
+    public function setLastname($lastname)
+    {
+        $this->lastname = $lastname;
+    }
+
+    public function getBirthDate()
+    {
+        return $this->birthDate;
+    }
+
+    public function setBirthDate($birthDate)
+    {
+        $this->birthDate = $birthDate;
+    }
+
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    }
+
+    public function getContactVia1()
+    {
+        return $this->contactVia1;
+    }
+
+    public function setContactVia1($contactVia1)
+    {
+        $this->contactVia1 = $contactVia1;
+    }
+
+    public function getContactVia2()
+    {
+        return $this->contactVia2;
+    }
+
+    public function setContactVia2($contactVia2)
+    {
+        $this->contactVia2 = $contactVia2;
+    }
+
+    public function getContactVia3()
+    {
+        return $this->contactVia3;
+    }
+
+    public function setContactVia3($contactVia3)
+    {
+        $this->contactVia3 = $contactVia3;
+    }
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    public function getDocumentNumber()
+    {
+        return $this->documentNumber;
+    }
+
+    public function setDocumentNumber($documentNumber)
+    {
+        $this->documentNumber = $documentNumber;
+    }
+
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    public function setCountry(Country $country)
+    {
+        $this->country = $country;
+    }
+
+    public function getProvince()
+    {
+        return $this->province;
+    }
+
+    public function setProvince(Province $province)
+    {
+        $this->province = $province;
+    }
+
+    public function getDisponibility()
+    {
+        return $this->disponibility;
+    }
+
+    public function setDisponibility($disponibility)
+    {
+        $this->disponibility = $disponibility;
+    }
+}
+
+?>
