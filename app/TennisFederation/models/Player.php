@@ -89,6 +89,11 @@ class Player extends Model
      */
     private $disponibility;
     
+    /**
+     * @Column (columnName="active")
+     */
+    private $active;
+    
     public function getId()
     {
         return $this->id;
@@ -247,6 +252,16 @@ class Player extends Model
     public function setDisponibility($disponibility)
     {
         $this->disponibility = $disponibility;
+    }
+    
+    public function setActive($active)
+    {
+        $this->active = $active;
+    }
+    
+    public function isActive()
+    {
+        return $this->active;
     }
 }
 

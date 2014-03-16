@@ -24,6 +24,8 @@ class TournamentPhase extends Model
      */
     private $tournament;
     
+    private $zones = array();
+    
     /**
      * @Column (columnName="order")
      */
@@ -68,6 +70,16 @@ class TournamentPhase extends Model
     {
         $this->order = $order;
     } 
+    
+    public function getZones()
+    {
+        return $this->zones;
+    }
+    
+    public function addZone (TournamentZone $zone)
+    {
+        $this->zones[] = $zone;
+    }
 }
 
 ?>

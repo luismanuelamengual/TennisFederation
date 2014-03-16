@@ -49,6 +49,8 @@ class Tournament extends Model
      */
     private $state;
     
+    private $phases = array();
+    
     public function getId()
     {
         return $this->id;
@@ -127,6 +129,16 @@ class Tournament extends Model
     public function setState(TournamentState $state)
     {
         $this->state = $state;
+    }
+    
+    public function getPhases()
+    {
+        return $this->phases;
+    }
+    
+    public function addPhase (TournamentPhase $phase)
+    {
+        $this->phases[] = $phase;
     }
 }
 

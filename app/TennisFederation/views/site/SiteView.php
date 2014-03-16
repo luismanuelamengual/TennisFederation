@@ -57,22 +57,19 @@ class SiteView extends DefaultView
     
     protected function createSideBar ()
     {
-        $tools = unserialize($this->getSession()->tools);
         $sidebar = new Tag("div", array("class"=>"col-sm-3 col-md-2 sidebar"));
-        $sidebarList = new Tag("ul", array("class"=>"nav nav-sidebar"));
-        $sidebarList->add ($this->createSideBarMenuItem ("Dashboard", "site/dashboard/"));
-        if(is_array($tools))
-        {
-            foreach ($tools as $tool)
-            {
-                $sidebarList->add ($this->createSideBarMenuItem ($tool->getDescription(), $tool->getAction()));
-            }
-        }
-        $sidebar->add ($sidebarList);
+        $sidebar->add ($this->createMainToolsMenu());
         return $sidebar;
     }
     
-    protected function createSideBarMenuItem ($title, $action)
+    protected function createMainToolsMenu ()
+    {
+        $list = new Tag("ul", array("class"=>"nav nav-sidebar"));
+        $list->add ($this->createToolMenuItem ("Dashboard", "site/dashboard/"));
+        return $list;
+    }
+    
+    protected function createToolMenuItem ($title, $action)
     {
         $menuItem = new Tag("li", array(), new Tag("a", array("href"=>$this->getUrl($action)), $title));
         if ($this->getMenuItemAction() == $action)

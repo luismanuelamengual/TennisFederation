@@ -24,6 +24,8 @@ class TournamentZone extends Model
      */
     private $phase;
     
+    private $playerTeams = array();
+    
     public function getId()
     {
         return $this->id;
@@ -52,6 +54,16 @@ class TournamentZone extends Model
     public function setPhase(TournamentPhase $phase)
     {
         $this->phase = $phase;
+    }
+    
+    public function getPlayerTeams()
+    {
+        return $this->playerTeams;
+    }
+    
+    public function addPlayerTeam (PlayerTeam $team)
+    {
+        $this->playerTeams[] = $team;
     }
 }
 

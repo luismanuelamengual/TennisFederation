@@ -20,7 +20,7 @@ class Category extends Model
     private $description;
     
     /**
-     * @Column (columnName="matchtypeid", relatedTableName="matchtype")
+     * @Column (columnName="matchtype")
      */
     private $matchType;
     
@@ -49,7 +49,7 @@ class Category extends Model
         return $this->matchType;
     }
 
-    public function setMatchType(MatchType $matchType) 
+    public function setMatchType($matchType) 
     {
         $this->matchType = $matchType;
     }

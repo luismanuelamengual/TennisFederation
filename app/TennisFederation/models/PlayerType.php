@@ -9,6 +9,10 @@ use NeoPHP\mvc\Model;
  */
 class PlayerType extends Model 
 {
+    const PLAYERTYPE_ADMINISTRATOR = 1;
+    const PLAYERTYPE_ORGANIZER = 2;
+    const PLAYERTYPE_PLAYER = 3;
+    
     /**
      * @Column (columnName="playertypeid", id=true)
      */
