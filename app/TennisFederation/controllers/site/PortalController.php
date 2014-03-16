@@ -8,11 +8,11 @@ class PortalController extends WebController
 {   
     public function onBeforeActionExecution ($action)
     {
-        $this->executeAction("session/destroySession");
+        $this->executeAction("session/deleteResource");
         return true;
     }
     
-    public function indexAction ($message=null)
+    public function indexAction ()
     {
         $this->createView('site/portal')->render();
     }

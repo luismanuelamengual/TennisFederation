@@ -89,6 +89,40 @@ class PortalView extends DefaultView
     
     protected function createLoginForm ()
     {
+        $this->addScript('
+            function login ()
+            {
+                var username = $(\'input[name=username]\')[0].value;
+                var password = $(\'input[name=password]\')[0].value;
+                $.ajax("' . $this->getUrl("session/") . '?username=" + username + "&password=" + password + "&returnFormat=json",
+                {
+                    success: function (jsonData)
+                    {
+                        var data = jQuery.parseJSON(jsonData);
+                        if (data.success)
+                        {
+                            window.open("' . $this->getUrl("site/dashboard/") . '", "_self");
+                        }
+                        else
+                        {
+                            alert(data.message);
+                        }
+                    },
+                    error: function (qXHR, textStatus, errorThrown)
+                    {
+                        alert(errorThrown);
+                    },
+                    timeout: function ()
+                    {
+                        alert("Se ha agotado el tiempo de conexión. Intente más tarde");
+                    }
+                });
+            }
+        ');
+        $loginAttributes = array("class"=>"btn btn-primary");
+        $loginAttributes["onclick"] = 'login(); return false;';
+        $loginButton = new Button("Ingresar", $loginAttributes);
+        $registerButton = new Button("Registrarse", array("class"=>"btn btn-primary"), $this->getUrl("site/register"));
         return '
         <form class="navbar-form navbar-right" action="' . $this->getUrl("site/login") . '" method="post">
             <div class="form-group">
@@ -97,8 +131,8 @@ class PortalView extends DefaultView
             <div class="form-group">
                 <input type="password" name="password" placeholder="Contraseña" class="form-control">
             </div>
-            ' . new Button("Ingresar", array("class"=>"btn btn-primary"), $this->getUrl("site/login")) . '
-            ' . new Button("Registrarse", array("class"=>"btn btn-primary"), $this->getUrl("site/register")) . '
+            ' . $loginButton . '
+            ' . $registerButton . '
         </form>';
     }
     

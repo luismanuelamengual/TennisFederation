@@ -4,7 +4,7 @@ namespace TennisFederation\views\site;
 
 use NeoPHP\web\html\Tag;
 
-class SiteView extends BootstrapView
+class SiteView extends DefaultView
 {
     protected function build ()
     {
@@ -107,7 +107,7 @@ class SiteView extends BootstrapView
         return '
         <ul class="nav navbar-nav pull-right">
             <li class="dropdown">            
-                <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-user"></i> ' . $this->getSession()->firstName . ' ' . $this->getSession()->lastName . ' <b class="caret"></b></a>
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-user"></i> ' . $this->getSession()->firstname . ' ' . $this->getSession()->lastname . ' <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li><a href="' . $this->getUrl("account/") . '"><i class="icon-user"></i> Mi Cuenta</a></li>
                     <li><a href="' . $this->getUrl("settings/") . '"><i class="icon-gear"></i> Configuración</a></li>
