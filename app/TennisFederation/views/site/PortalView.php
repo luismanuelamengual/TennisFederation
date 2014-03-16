@@ -15,6 +15,19 @@ class PortalView extends DefaultView
         $this->addStyleFile($this->getBaseUrl() . "css/style.css");
         $this->getBodyTag()->setAttribute("data-spy", "scroll");
         $this->getBodyTag()->setAttribute("data-target", "#mainNavbar");
+        $this->getBodyTag()->add('
+            <div id="myModal" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">' . $this->getApplication()->getName() . '</h4>
+                        </div>
+                        <div class="modal-body"></div>
+                    </div>
+                </div>
+            </div>
+        ');
         $this->buildHead();
         $this->buildBody();
     }
@@ -90,6 +103,12 @@ class PortalView extends DefaultView
     protected function createLoginForm ()
     {
         $this->addScript('
+            function showMessage (message)
+            {
+                $("#myModal .modal-body").html(message);
+                $("#myModal").modal("show");
+            }
+
             function login ()
             {
                 var username = $(\'input[name=username]\')[0].value;
@@ -105,16 +124,16 @@ class PortalView extends DefaultView
                         }
                         else
                         {
-                            alert(data.message);
+                            showMessage(data.message);
                         }
                     },
                     error: function (qXHR, textStatus, errorThrown)
                     {
-                        alert(errorThrown);
+                        showMessage(errorThrown);
                     },
                     timeout: function ()
                     {
-                        alert("Se ha agotado el tiempo de conexión. Intente más tarde");
+                        showMessage("Se ha agotado el tiempo de conexión. Intente más tarde");
                     }
                 });
             }
