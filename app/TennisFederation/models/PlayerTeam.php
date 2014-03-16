@@ -9,6 +9,12 @@ class PlayerTeam extends Model
     private $playerA;
     private $playerB;
     
+    public function __construct(Player $playerA = null, Player $playerB = null)
+    {
+        $this->playerA = $playerA;
+        $this->playerB = $playerB;
+    }
+    
     public function setPlayerA (Player $player)
     {
         $this->playerA = $player;

@@ -25,6 +25,7 @@ class TournamentPhase extends Model
     private $tournament;
     
     private $zones = array();
+    private $matches = array();
     
     /**
      * @Column (columnName="order")
@@ -79,6 +80,16 @@ class TournamentPhase extends Model
     public function addZone (TournamentZone $zone)
     {
         $this->zones[] = $zone;
+    }
+    
+    public function getMatches()
+    {
+        return $this->matches;
+    }
+    
+    public function addMatch (Match $match)
+    {
+        $this->matches[] = $match;
     }
 }
 

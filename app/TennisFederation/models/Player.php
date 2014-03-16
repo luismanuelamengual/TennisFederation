@@ -27,7 +27,7 @@ class Player extends Model
     /**
      * @Column (columnName="playertypeid", relatedTableName="playertype")
      */
-    private $playerType;
+    private $type;
     
     /**
      * @Column (columnName="firstname")
@@ -124,14 +124,14 @@ class Player extends Model
         $this->password = $password;
     }
 
-    public function getPlayerType()
+    public function getType()
     {
-        return $this->playerType;
+        return $this->type;
     }
 
-    public function setPlayerType(PlayerType $playerType)
+    public function setType(PlayerType $type)
     {
-        $this->playerType = $playerType;
+        $this->type = $type;
     }
 
     public function getFirstname()

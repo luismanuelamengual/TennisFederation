@@ -50,6 +50,8 @@ class Tournament extends Model
     private $state;
     
     private $phases = array();
+    private $categories = array();
+    private $inscriptions = array();
     
     public function getId()
     {
@@ -139,6 +141,37 @@ class Tournament extends Model
     public function addPhase (TournamentPhase $phase)
     {
         $this->phases[] = $phase;
+    }
+    
+    public function getCategories ()
+    {
+        return $this->categories;
+    }
+    
+    public function addCategory (Category $category)
+    {
+        $this->categories[] = $category;
+    }
+    
+    public function getInscriptions (Category $category = null)
+    {
+        $inscriptions = array();
+        if ($category == null)
+        { 
+            $inscriptions = array_values($this->inscriptions);
+        }
+        else if (isset($this->inscriptions[$category]))
+        {
+            $inscriptions = $this->inscriptions[$category];
+        }
+        return $inscriptions;
+    }
+    
+    public function addInscription(Category $category, PlayerTeam $team)
+    {
+        if (!isset($this->inscriptions[$category]))
+            $this->inscriptions[$category] = array();
+        $this->inscriptions[$category][] = $team;
     }
 }
 
