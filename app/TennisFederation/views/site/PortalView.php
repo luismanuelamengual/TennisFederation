@@ -2,6 +2,8 @@
 
 namespace TennisFederation\views\site;
 
+use TennisFederation\components\Button;
+
 class PortalView extends DefaultView
 {
     private $message;
@@ -95,7 +97,8 @@ class PortalView extends DefaultView
             <div class="form-group">
                 <input type="password" name="password" placeholder="Contraseña" class="form-control">
             </div>
-            <button type="submit" class="btn btn-primary">Ingresar</button>
+            ' . new Button("Ingresar", array("class"=>"btn btn-primary"), $this->getUrl("site/login")) . '
+            ' . new Button("Registrarse", array("class"=>"btn btn-primary"), $this->getUrl("site/register")) . '
         </form>';
     }
     
