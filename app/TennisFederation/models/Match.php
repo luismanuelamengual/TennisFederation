@@ -11,6 +11,9 @@ class Match extends Model
 {
     const MATCHTYPE_SINGLES = 1;
     const MATCHTYPE_DOUBLES = 2;
+    const RESULT_NOTPLAYED = 0;
+    const RESULT_TEAMAWIN = 1;
+    const RESULT_TEAMBWIN = 2;
     
     /**
      * @Column (columnName="matchid", id=true)
@@ -48,6 +51,11 @@ class Match extends Model
      * @Column (columnName="result")
      */
     private $result;
+    
+    /**
+     * @Column (columnName="resultdetail")
+     */
+    private $resultDetail;
     
     public function getId()
     {
@@ -137,6 +145,16 @@ class Match extends Model
     public function setResult ($result)
     {
         $this->result = $result;
+    }
+    
+    public function getResultDetail ()
+    {
+        return $this->resultDetail;
+    }
+    
+    public function setResultDetail ($resultDetail)
+    {
+        $this->resultDetail = $resultDetail;
     }
 }
 

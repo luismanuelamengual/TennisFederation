@@ -3,6 +3,7 @@
 namespace TennisFederation\views\site;
 
 use NeoPHP\web\html\Tag;
+use TennisFederation\models\PlayerType;
 
 class SiteView extends DefaultView
 {
@@ -59,13 +60,46 @@ class SiteView extends DefaultView
     {
         $sidebar = new Tag("div", array("class"=>"col-sm-3 col-md-2 sidebar"));
         $sidebar->add ($this->createMainToolsMenu());
+        if ($this->getSession()->type == PlayerType::PLAYERTYPE_ADMINISTRATOR)
+            $sidebar->add ($this->createAdministratorToolsMenu());
+        if ($this->getSession()->type == PlayerType::PLAYERTYPE_ADMINISTRATOR || $this->getSession()->type == PlayerType::PLAYERTYPE_ORGANIZER)
+            $sidebar->add ($this->createOrganizerToolsMenu());
+        if ($this->getSession()->type == PlayerType::PLAYERTYPE_ADMINISTRATOR || $this->getSession()->type == PlayerType::PLAYERTYPE_ORGANIZER || $this->getSession()->type == PlayerType::PLAYERTYPE_PLAYER)
+            $sidebar->add ($this->createPlayerToolsMenu());
         return $sidebar;
     }
     
     protected function createMainToolsMenu ()
     {
         $list = new Tag("ul", array("class"=>"nav nav-sidebar"));
-        $list->add ($this->createToolMenuItem ("Dashboard", "site/dashboard/"));
+        $list->add ($this->createToolMenuItem ("Tabla de Anuncios", "site/dashboard/"));
+        return $list;
+    }
+    
+    protected function createAdministratorToolsMenu ()
+    {
+        $list = new Tag("ul", array("class"=>"nav nav-sidebar"));
+        $list->add ($this->createToolMenuItem ("Adm Jugadores", "site/player/"));
+        $list->add ($this->createToolMenuItem ("Adm Categorías", "site/category/"));
+        $list->add ($this->createToolMenuItem ("Adm Clubes", "site/club/"));
+        $list->add ($this->createToolMenuItem ("Adm Paises", "site/country/"));
+        $list->add ($this->createToolMenuItem ("Adm Provincias", "site/province/"));
+        return $list;
+    }
+    
+    protected function createOrganizerToolsMenu ()
+    {
+        $list = new Tag("ul", array("class"=>"nav nav-sidebar"));
+        $list->add ($this->createToolMenuItem ("Adm Torneos", "site/tournament/"));
+        $list->add ($this->createToolMenuItem ("Adm Rankings", "site/ranking/"));
+        return $list;
+    }
+    
+    protected function createPlayerToolsMenu ()
+    {
+        $list = new Tag("ul", array("class"=>"nav nav-sidebar"));
+        $list->add ($this->createToolMenuItem ("Ver Torneos", "site/tournament/viewAll"));
+        $list->add ($this->createToolMenuItem ("Ver Rankings", "site/ranking/viewAll"));
         return $list;
     }
     
