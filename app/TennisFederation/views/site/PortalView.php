@@ -16,7 +16,7 @@ class PortalView extends DefaultView
         $this->getBodyTag()->setAttribute("data-spy", "scroll");
         $this->getBodyTag()->setAttribute("data-target", "#mainNavbar");
         $this->getBodyTag()->add('
-            <div id="myModal" class="modal fade">
+            <div id="messageBox" class="modal fade">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -105,8 +105,8 @@ class PortalView extends DefaultView
         $this->addScript('
             function showMessage (message)
             {
-                $("#myModal .modal-body").html(message);
-                $("#myModal").modal("show");
+                $("#messageBox .modal-body").html(message);
+                $("#messageBox").modal("show");
             }
 
             function login ()
@@ -141,7 +141,6 @@ class PortalView extends DefaultView
         $loginAttributes = array("class"=>"btn btn-primary");
         $loginAttributes["onclick"] = 'login(); return false;';
         $loginButton = new Button("Ingresar", $loginAttributes);
-        $registerButton = new Button("Registrarse", array("class"=>"btn btn-primary"), $this->getUrl("site/register"));
         return '
         <form class="navbar-form navbar-right" action="' . $this->getUrl("site/login") . '" method="post">
             <div class="form-group">
@@ -151,7 +150,6 @@ class PortalView extends DefaultView
                 <input type="password" name="password" placeholder="Contraseña" class="form-control">
             </div>
             ' . $loginButton . '
-            ' . $registerButton . '
         </form>';
     }
     
