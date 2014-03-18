@@ -29,19 +29,19 @@ class CategoryFormView extends SiteView
     
     protected function createForm ()
     {
-        $matchTypeSelector = new Selector($this, array("placeholder"=>"Tipo de Partido"));
+        $matchTypeSelector = new Selector($this, array("placeholder"=>"Tipo de Partido", "name"=>"matchtype"));
         $matchTypeSelector->setOptions(array(Match::MATCHTYPE_SINGLES=>"Singles", Match::MATCHTYPE_DOUBLES=>"Dobles"));
-        $descriptionTextField = new Tag("input", array("placeholder"=>"Descripción", "type"=>"text", "class"=>"form-control"));
+        $descriptionTextField = new Tag("input", array("placeholder"=>"Descripción", "type"=>"text", "class"=>"form-control", "name"=>"description"));
         if ($this->category != null)
         {
             $matchTypeSelector->setValue($this->category->getMatchType ());
             $descriptionTextField->setAttribute("value", $this->category->getDescription());
         }
-        $form = new Form(array("method"=>"post"));
+        $form = new Form(array("method"=>"post", "action"=>($this->category != null)? "updateCategory" : "createCategory"));
         $form->setType(Form::TYPE_HORIZONTAL);
         $form->addField($descriptionTextField, "Descripción");
         $form->addField($matchTypeSelector, "Tipo de Partido");
-        $form->addButton(new Button("Guardar datos", array("class"=>"btn btn-primary"), ($this->category != null)? "updateCategory" : "createCategory"));
+        $form->addButton(new Button("Guardar datos", array("class"=>"btn btn-primary")));
         return $form;
     }
 }
