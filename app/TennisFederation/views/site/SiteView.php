@@ -92,6 +92,7 @@ class SiteView extends DefaultView
         $list = new Tag("ul", array("class"=>"nav nav-sidebar"));
         $list->add ($this->createToolMenuItem ("Adm Torneos", "site/tournament/"));
         $list->add ($this->createToolMenuItem ("Adm Rankings", "site/ranking/"));
+        $list->add ($this->createToolMenuItem ("Adm Anuncios", "site/notification/"));
         return $list;
     }
     
