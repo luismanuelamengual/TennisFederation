@@ -27,24 +27,43 @@ class CategoriesView extends SiteView
     
     protected function createCategoriesGrid()
     {
-        $table = new Table();
-        $table->addColumn (Table::createColumn ("#", "id"));
-        $table->addColumn (Table::createColumn ("Nombre", "description"));
-        $table->addColumn (Table::createColumn ("Tipo de Partido", "matchtype", function ($matchType) { return $matchType==1?"Singles":"Dobles";}));
+        $table = new Table($this, array("id"=>"categoriesTable"));
+        $table->setRecordsIdProperty("id");
+        $table->addColumn ("#", "id");
+        $table->addColumn ("Nombre", "description");
+        $table->addColumn ("Tipo de Partido", "matchtype", function ($matchType) { return $matchType==1?"Singles":"Dobles";});
         $table->setRecords($this->categories);  
-        $this->addScript ('$(document).ready(function() { $("table > tbody > tr").on("click", function(event) { console.log($(this)); $(this).addClass("danger").siblings().removeClass("danger"); }); }); ');        
+        $table->setSelectable(true);
         return $table;
     }
     
     protected function createButtonToolbar()
     {
-        $createButton = new Button('<span class="glyphicon glyphicon-file"></span>&nbsp;Crear', array("class"=>"btn btn-primary"));
-        $updateButton = new Button('<span class="glyphicon glyphicon-pencil"></span>&nbsp;Modifiar', array("class"=>"btn btn-primary"));
-        $deleteButton = new Button('<span class="glyphicon glyphicon-trash"></span>&nbsp;Eliminar', array("class"=>"btn btn-primary"));
+        $this->addScript ('
+            function createCategory ()
+            {
+                window.open("' . $this->getUrl("site/category/showCategoryForm") . '", "_self");
+            }
+            
+            function updateCategory ()
+            {
+                var selectedCategoryId = $("#categoriesTable").get(0).getSelectedRecordId();
+                if (selectedCategoryId != false)
+                    window.open("' . $this->getUrl("site/category/showCategoryForm") . '?categoryid=" + selectedCategoryId, "_self");
+            }
+            
+            function deleteCategory ()
+            {
+                var selectedCategoryId = $("#categoriesTable").get(0).getSelectedRecordId();
+                if (selectedCategoryId != false)
+                    if (window.confirm("Esta seguro de eliminar la categoría " + selectedCategoryId + " ?"))
+                        window.open("' . $this->getUrl("site/category/deleteCategory") . '?categoryid=" + selectedCategoryId, "_self");
+            }
+        ');
         $toolbar = new Tag("ul", array("class"=>"nav nav-pills"));
-        $toolbar->add (new Tag("li", $createButton));
-        $toolbar->add (new Tag("li", $updateButton));
-        $toolbar->add (new Tag("li", $deleteButton));
+        $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-file"></span>&nbsp;Crear', array("class"=>"btn btn-primary", "onclick"=>"createCategory();"))));
+        $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-pencil"></span>&nbsp;Modifiar', array("class"=>"btn btn-primary", "onclick"=>"updateCategory();"))));
+        $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-trash"></span>&nbsp;Eliminar', array("class"=>"btn btn-primary", "onclick"=>"deleteCategory();"))));
         return $toolbar;
     }
 }
