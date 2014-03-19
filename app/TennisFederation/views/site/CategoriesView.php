@@ -32,6 +32,7 @@ class CategoriesView extends SiteView
         $table->addColumn ("Nombre", "description");
         $table->addColumn ("Tipo de Partido", "matchtype", function ($matchType) { return $matchType==1?"Singles":"Dobles";});
         $table->setEntities($this->categories);
+        $table->setStriped(true);
         $table->addEntityProperty("categoryId", "id");
         $this->addOnDocumentReadyScript('
             var tableRows = $("#categoriesTable > tbody > tr");
