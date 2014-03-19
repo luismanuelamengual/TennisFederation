@@ -25,14 +25,23 @@ class CategoryController extends SiteController
         $categoryView->render();
     }
     
-    public function createCategoryAction()
+    public function createCategoryAction($description, $matchtype)
     {
-//        $this->renderCategoriesView();
+        $category = new Category();
+        $category->setDescription($description);
+        $category->setMatchType($matchtype);
+        $this->createCategory($category);
+        $this->renderCategoriesView();
     }
     
-    public function updateCategoryAction()
+    public function updateCategoryAction($categoryid, $description, $matchtype)
     {
-//        $this->renderCategoriesView();
+        $category = new Category();
+        $category->setId($categoryid);
+        $category->setDescription($description);
+        $category->setMatchType($matchtype);
+        $this->updateCategory($category);
+        $this->renderCategoriesView();
     }
     
     public function deleteCategoryAction($categoryid)
@@ -76,6 +85,25 @@ class CategoryController extends SiteController
             $category->completeFromFieldsArray($doCategory->getFields());
         }
         return $category;
+    }
+    
+    private function createCategory (Category $category)
+    {
+        $database = $this->getApplication()->getDefaultDatabase ();
+        $doCategory = $database->getDataObject ("category");
+        $doCategory->description = $category->getDescription();
+        $doCategory->matchtype = $category->getMatchType();
+        $doCategory->insert();
+    }
+    
+    private function updateCategory (Category $category)
+    {
+        $database = $this->getApplication()->getDefaultDatabase ();
+        $doCategory = $database->getDataObject ("category");
+        $doCategory->description = $category->getDescription();
+        $doCategory->matchtype = $category->getMatchType();
+        $doCategory->addWhereCondition("categoryid = " . $category->getId());
+        $doCategory->update();
     }
     
     private function deleteCategory ($categoryid)

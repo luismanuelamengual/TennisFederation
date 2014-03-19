@@ -37,10 +37,11 @@ class CategoryFormView extends SiteView
             $matchTypeSelector->setValue($this->category->getMatchType ());
             $descriptionTextField->setAttribute("value", $this->category->getDescription());
         }
-        $form = new Form(array("method"=>"post", "action"=>($this->category != null)? "updateCategory" : "createCategory"));
-        $form->setType(Form::TYPE_HORIZONTAL);
+        $form = new Form(Form::TYPE_HORIZONTAL, array("method"=>"post", "action"=>($this->category != null)? "updateCategory" : "createCategory"));
         $form->addField($descriptionTextField, "Descripción");
         $form->addField($matchTypeSelector, "Tipo de Partido");
+        if ($this->category != null)
+            $form->add(new Tag("input", array("type"=>"hidden", "name"=>"categoryid", "value"=>$this->category->getId())));
         $form->addButton(new Button("Guardar datos", array("class"=>"btn btn-primary")));
         return $form;
     }
