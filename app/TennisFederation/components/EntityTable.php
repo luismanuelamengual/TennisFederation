@@ -4,40 +4,34 @@ namespace TennisFederation\components;
 
 use NeoPHP\util\IntrospectionUtils;
 use NeoPHP\web\html\HTMLComponent;
-use NeoPHP\web\html\HTMLView;
 use NeoPHP\web\html\Tag;
 use stdClass;
 
-class Table extends HTMLComponent
+class EntityTable extends HTMLComponent
 {
-    private $view;
     private $id;
     private $columns;
-    private $records;
+    private $entities;
+    private $entityProperties;
     private $attributes;
     private $hover;
     private $striped;
     private $bordered;
     private $condensed;
-    private $selectable;
-    private $selectionClass;
     private $responsive;
-    private $recordsIdProperty;
     
-    public function __construct(HTMLView $view=null, $attributes = array())
+    public function __construct($attributes = array())
     {
         static $idCounter = 0;
-        $this->view = $view;
-        $this->id = isset($attributes["id"])? $attributes["id"] : "table_" . ($idCounter++);        
+        $this->id = isset($attributes["id"])? $attributes["id"] : "table_" . ($idCounter++);
         $this->columns = array();
-        $this->records = array();
+        $this->entities = array();
+        $this->entityProperties = array();
         $this->attributes = $attributes;
         $this->hover = false;
         $this->striped = false;
         $this->bordered = false;
         $this->responsive = true;
-        $this->recordsIdProperty = null;
-        $this->selectionClass = "active";
     }
     
     public function addColumn ($name, $property, callable $renderer=null)
@@ -49,25 +43,16 @@ class Table extends HTMLComponent
         $this->columns[] = $column;
     }
     
-    public function setRecords ($records)
+    public function setEntities ($entities)
     {
-        $this->records = $records;
+        $this->entities = $entities;
     }
     
-    public function addRecord ($record)
+    public function addEntity ($entity)
     {
-        $this->records[] = $record;
+        $this->entities[] = $entity;
     }
     
-    public function getRecordsIdProperty()
-    {
-        return $this->recordsIdProperty;
-    }
-
-    public function setRecordsIdProperty($idProperty)
-    {
-        $this->recordsIdProperty = $idProperty;
-    }
     public function getHover()
     {
         return $this->hover;
@@ -118,26 +103,6 @@ class Table extends HTMLComponent
         $this->responsive = $responsive;
     }
     
-    public function getSelectable()
-    {
-        return $this->selectable;
-    }
-
-    public function setSelectable($selectable)
-    {
-        $this->selectable = $selectable;
-    }
-    
-    public function getSelectionClass()
-    {
-        return $this->selectionClass;
-    }
-
-    public function setSelectionClass($selectionClass)
-    {
-        $this->selectionClass = $selectionClass;
-    }
-
     public function getAttributes()
     {
         return $this->attributes;
@@ -148,10 +113,15 @@ class Table extends HTMLComponent
         $this->attributes = $attributes;
     }
     
+    public function addEntityProperty($propertyName, $entityPropertyName)
+    {
+        $this->entityProperties[$propertyName] = $entityPropertyName;
+    }
+    
     protected function createContent ()
     {
         $columns = $this->columns;
-        $records = $this->records;
+        $entities = $this->entities;
         $tableHead = new Tag("thead");
         $tableHeadContainer = new Tag("tr");
         foreach ($columns as $column)
@@ -161,22 +131,22 @@ class Table extends HTMLComponent
         $tableHead->add($tableHeadContainer);
         
         $tableBody = new Tag("tbody");
-        foreach ($records as $record)
+        foreach ($entities as $entity)
         {
             $tableRow = new Tag("tr");
-            if (!empty($this->recordsIdProperty))
+            foreach ($this->entityProperties as $propertyName=>$entityPropertyName)
             {
-                $tableRow->setAttribute("recordId", IntrospectionUtils::getRecursivePropertyValue($record, $this->recordsIdProperty));
+                $tableRow->setAttribute($propertyName, IntrospectionUtils::getRecursivePropertyValue($entity, $entityPropertyName));
             }
             foreach ($columns as $column)
             {
                 if (!is_string($column->property) && is_callable($column->property))
                 {
-                    $columnValue = call_user_func_array($column->property, array($record));
+                    $columnValue = call_user_func_array($column->property, array($entity));
                 }
                 else
                 {
-                    $columnValue = IntrospectionUtils::getRecursivePropertyValue($record, $column->property);
+                    $columnValue = IntrospectionUtils::getRecursivePropertyValue($entity, $column->property);
                     if (isset($column->renderer))
                         $columnValue = call_user_func_array($column->renderer, array($columnValue));
                 }
@@ -194,27 +164,11 @@ class Table extends HTMLComponent
             $tableClassName .= " table-bordered";
         if ($this->condensed)
             $tableClassName .= " table-condensed";
+        $tableClassName .= " unselectable";
         $table = new Tag("table", array_merge(array("id"=>$this->id, "class"=>$tableClassName, "style"=>"cursor:pointer;"), $this->attributes));
         $table->add($tableHead);
         $table->add($tableBody);
         return ($this->responsive)? new Tag("div", array("class"=>"table-responsive"), $table) : $table;
-    }
-    
-    protected function onBeforeBuild ()
-    {
-        if ($this->view != null)
-        {
-            if ($this->selectable)
-            {
-                $this->view->addScript('
-                    $(document).ready(function() 
-                    { 
-                        $("#' . $this->id . ' > tbody > tr").on("click", function(event) { $(this).addClass("' . $this->selectionClass . '").siblings().removeClass("' . $this->selectionClass . '"); });
-                        $("#' . $this->id . '").get(0).getSelectedRecordId = function () { var selectedRows = $("#' . $this->id . ' > tbody > tr.' . $this->selectionClass . '"); return (selectedRows.length > 0)? selectedRows.first().attr("recordId") : false; }
-                    });
-                ');
-            }
-        }
     }
 }
 
