@@ -28,11 +28,6 @@ class Match extends Model
     private $teamB;
     
     /**
-     * @Column (columnName="tournamentid", relatedTableName="tournament")
-     */
-    private $tournament;
-    
-    /**
      * @Column (columnName="tournamentphaseid", relatedTableName="tournamentphase")
      */
     private $phase;
@@ -95,16 +90,6 @@ class Match extends Model
     public function setTeamB(PlayerTeam $teamB)
     {
         $this->teamB = $teamB;
-    }
-    
-    public function getTournament ()
-    {
-        return $this->tournament;
-    }
-    
-    public function setTournament (Tournament $tournament)
-    {
-        $this->tournament = $tournament;
     }
     
     public function getPhase ()

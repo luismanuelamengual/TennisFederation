@@ -24,6 +24,11 @@ class TournamentPhase extends Model
      */
     private $tournament;
     
+    /**
+     * @Column (columnName="categoryid", relatedTableName="category")
+     */
+    private $phase;
+    
     private $zones = array();
     private $matches = array();
     
@@ -60,6 +65,16 @@ class TournamentPhase extends Model
     public function setTournament(Tournament $tournament)
     {
         $this->tournament = $tournament;
+    }
+    
+    public function getPhase()
+    {
+        return $this->phase;
+    }
+
+    public function setPhase($phase)
+    {
+        $this->phase = $phase;
     }
 
     public function getOrder()
