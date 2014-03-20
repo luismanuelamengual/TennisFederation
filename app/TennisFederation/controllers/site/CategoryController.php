@@ -63,6 +63,7 @@ class CategoryController extends SiteController
         $categories = array();
         $database = $this->getApplication()->getDefaultDatabase ();
         $doCategory = $database->getDataObject ("category");
+        $doCategory->addOrderByField ("categoryid");
         $doCategory->find();
         while ($doCategory->fetch())
         {
