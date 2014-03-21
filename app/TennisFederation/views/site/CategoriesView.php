@@ -10,7 +10,7 @@ use TennisFederation\views\site\SiteView;
 
 class CategoriesView extends SiteView
 {
-    private $categories;
+    private $categories = array();
     
     public function setCategories ($categories)
     {
