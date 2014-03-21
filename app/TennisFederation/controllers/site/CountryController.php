@@ -62,7 +62,7 @@ class CountryController extends SiteController
     {
         $countries = $this->getCountries();        
         $countryView = $this->createView("site/countries");
-        $countryView->set ($countries);
+        $countryView->setCountries ($countries);
         $countryView->render();
     }
     
