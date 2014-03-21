@@ -5,6 +5,7 @@ namespace TennisFederation\views\site;
 use NeoPHP\web\html\Tag;
 use TennisFederation\components\Button;
 use TennisFederation\components\EntityTable;
+use TennisFederation\models\Match;
 use TennisFederation\views\site\SiteView;
 
 class CategoriesView extends SiteView
@@ -30,13 +31,13 @@ class CategoriesView extends SiteView
         $table = new EntityTable(array("id"=>"categoriesTable"));
         $table->addColumn ("#", "id");
         $table->addColumn ("Nombre", "description");
-        $table->addColumn ("Tipo de Partido", "matchtype", function ($matchType) { return $matchType==1?"Singles":"Dobles";});
+        $table->addColumn ("Tipo de Partido", "matchtype", function ($matchType) { return $matchType==Match::MATCHTYPE_SINGLES?"Singles":"Dobles";});
         $table->setEntities($this->categories);
         $table->setStriped(true);
         $table->addEntityProperty("categoryId", "id");
         $this->addOnDocumentReadyScript('
             var tableRows = $("#categoriesTable > tbody > tr");
-            tableRows.on("click", function(event) { $(this).addClass("danger").siblings().removeClass("danger"); $("#updateButton").prop("disabled",false); $("#deleteButton").prop("disabled",false); });
+            tableRows.on("click", function(event) { selectCategory($(this).attr("categoryId")); });
             tableRows.on("dblclick", function(event) { updateCategory(); });
         ');
         return $table;
@@ -51,6 +52,13 @@ class CategoriesView extends SiteView
                 return (selectedRows.length > 0)? selectedRows.first().attr("categoryId") : false;
             }
             
+            function selectCategory (categoryId)
+            {
+                $("tr[categoryId=" + categoryId + "]").addClass("danger").siblings().removeClass("danger");
+                $("#updateButton").prop("disabled",false); 
+                $("#deleteButton").prop("disabled",false);
+            }
+
             function createCategory ()
             {
                 window.open("' . $this->getUrl("site/category/showCategoryForm") . '", "_self");
