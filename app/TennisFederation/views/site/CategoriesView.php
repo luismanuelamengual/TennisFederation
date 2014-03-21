@@ -36,7 +36,7 @@ class CategoriesView extends SiteView
         $table->addEntityProperty("categoryId", "id");
         $this->addOnDocumentReadyScript('
             var tableRows = $("#categoriesTable > tbody > tr");
-            tableRows.on("click", function(event) { $(this).addClass("danger").siblings().removeClass("danger"); });
+            tableRows.on("click", function(event) { $(this).addClass("danger").siblings().removeClass("danger"); $("#updateButton").prop("disabled",false); $("#deleteButton").prop("disabled",false); });
             tableRows.on("dblclick", function(event) { updateCategory(); });
         ');
         return $table;
@@ -50,7 +50,7 @@ class CategoriesView extends SiteView
                 var selectedRows = $("#categoriesTable > tbody > tr.danger"); 
                 return (selectedRows.length > 0)? selectedRows.first().attr("categoryId") : false;
             }
-
+            
             function createCategory ()
             {
                 window.open("' . $this->getUrl("site/category/showCategoryForm") . '", "_self");
@@ -73,8 +73,8 @@ class CategoriesView extends SiteView
         ');
         $toolbar = new Tag("ul", array("class"=>"nav nav-pills"));
         $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-file"></span>&nbsp;Crear', array("class"=>"btn btn-primary", "onclick"=>"createCategory();"))));
-        $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-pencil"></span>&nbsp;Modifiar', array("class"=>"btn btn-primary", "onclick"=>"updateCategory();"))));
-        $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-trash"></span>&nbsp;Eliminar', array("class"=>"btn btn-primary", "onclick"=>"deleteCategory();"))));
+        $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-pencil"></span>&nbsp;Modifiar', array("id"=>"updateButton", "class"=>"btn btn-primary", "onclick"=>"updateCategory();", "disabled"=>"true"))));
+        $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-trash"></span>&nbsp;Eliminar', array("id"=>"deleteButton", "class"=>"btn btn-primary", "onclick"=>"deleteCategory();", "disabled"=>"true"))));
         return $toolbar;
     }
 }
