@@ -2,11 +2,21 @@
 
 namespace TennisFederation\controllers\site;
 
+use Exception;
 use TennisFederation\controllers\SiteController;
 use TennisFederation\models\Category;
+use TennisFederation\models\PlayerType;
 
 class CategoryController extends SiteController
 {
+    public function onBeforeActionExecution ($action)
+    {
+        $executeAction = parent::onBeforeActionExecution($action);
+        if ($executeAction && $this->getSession()->type != PlayerType::PLAYERTYPE_ADMINISTRATOR)
+            throw new Exception ("No tiene permisos para acceder a este controlador");
+        return $executeAction;
+    }
+    
     public function indexAction()
     {
         $this->showCategoriesListAction();
@@ -58,7 +68,7 @@ class CategoryController extends SiteController
         $categoryView->render();
     }
     
-    private function getCategories ()
+    public function getCategories ()
     {
         $categories = array();
         $database = $this->getApplication()->getDefaultDatabase ();
@@ -74,7 +84,7 @@ class CategoryController extends SiteController
         return $categories;
     }
     
-    private function getCategory ($categoryid)
+    public function getCategory ($categoryid)
     {
         $category = null;
         $database = $this->getApplication()->getDefaultDatabase ();
@@ -88,7 +98,7 @@ class CategoryController extends SiteController
         return $category;
     }
     
-    private function createCategory (Category $category)
+    public function createCategory (Category $category)
     {
         $database = $this->getApplication()->getDefaultDatabase ();
         $doCategory = $database->getDataObject ("category");
@@ -97,7 +107,7 @@ class CategoryController extends SiteController
         $doCategory->insert();
     }
     
-    private function updateCategory (Category $category)
+    public function updateCategory (Category $category)
     {
         $database = $this->getApplication()->getDefaultDatabase ();
         $doCategory = $database->getDataObject ("category");
@@ -107,7 +117,7 @@ class CategoryController extends SiteController
         $doCategory->update();
     }
     
-    private function deleteCategory ($categoryid)
+    public function deleteCategory ($categoryid)
     {
         $database = $this->getApplication()->getDefaultDatabase ();
         $doCategory = $database->getDataObject ("category");
