@@ -29,7 +29,7 @@ class EntityTable extends HTMLComponent
         $this->entityProperties = array();
         $this->attributes = $attributes;
         $this->hover = false;
-        $this->striped = false;
+        $this->striped = true;
         $this->bordered = false;
         $this->responsive = true;
     }

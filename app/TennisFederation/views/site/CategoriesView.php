@@ -26,6 +26,15 @@ class CategoriesView extends SiteView
         return $container;
     }
     
+    protected function createButtonToolbar()
+    {
+        $toolbar = new Tag("ul", array("class"=>"nav nav-pills"));
+        $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-file"></span>&nbsp;Crear', array("class"=>"btn btn-primary", "onclick"=>"createCategory();"))));
+        $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-pencil"></span>&nbsp;Modifiar', array("id"=>"updateButton", "class"=>"btn btn-primary", "onclick"=>"updateCategory();", "disabled"=>"true"))));
+        $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-trash"></span>&nbsp;Eliminar', array("id"=>"deleteButton", "class"=>"btn btn-primary", "onclick"=>"deleteCategory();", "disabled"=>"true"))));
+        return $toolbar;
+    }
+    
     protected function createCategoriesTable()
     {
         $table = new EntityTable(array("id"=>"categoriesTable"));
@@ -33,18 +42,13 @@ class CategoriesView extends SiteView
         $table->addColumn ("Nombre", "description");
         $table->addColumn ("Tipo de Partido", "matchtype", function ($matchType) { return $matchType==Match::MATCHTYPE_SINGLES?"Singles":"Dobles";});
         $table->setEntities($this->categories);
-        $table->setStriped(true);
         $table->addEntityProperty("categoryId", "id");
-        $this->addOnDocumentReadyScript('
-            var tableRows = $("#categoriesTable > tbody > tr");
-            tableRows.on("click", function(event) { selectCategory($(this).attr("categoryId")); });
-            tableRows.on("dblclick", function(event) { updateCategory(); });
-        ');
         return $table;
     }
     
-    protected function createButtonToolbar()
+    protected function addScripts ()
     {
+        parent::addScripts();
         $this->addScript ('
             function getSelectedCategoryId ()
             {
@@ -79,11 +83,12 @@ class CategoriesView extends SiteView
                         window.open("' . $this->getUrl("site/category/deleteCategory") . '?categoryid=" + selectedCategoryId, "_self");
             }
         ');
-        $toolbar = new Tag("ul", array("class"=>"nav nav-pills"));
-        $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-file"></span>&nbsp;Crear', array("class"=>"btn btn-primary", "onclick"=>"createCategory();"))));
-        $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-pencil"></span>&nbsp;Modifiar', array("id"=>"updateButton", "class"=>"btn btn-primary", "onclick"=>"updateCategory();", "disabled"=>"true"))));
-        $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-trash"></span>&nbsp;Eliminar', array("id"=>"deleteButton", "class"=>"btn btn-primary", "onclick"=>"deleteCategory();", "disabled"=>"true"))));
-        return $toolbar;
+        
+        $this->addOnDocumentReadyScript('
+            var tableRows = $("#categoriesTable > tbody > tr");
+            tableRows.on("click", function(event) { selectCategory($(this).attr("categoryId")); });
+            tableRows.on("dblclick", function(event) { updateCategory(); });
+        ');
     }
 }
 

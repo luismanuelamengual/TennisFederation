@@ -11,10 +11,15 @@ class SiteView extends DefaultView
     {
         parent::build();
         $this->setTitle($this->getApplication()->getName());
-        $this->addStyleFile($this->getBaseUrl() . "assets/font-awesome/css/font-awesome.css");
-        $this->addStyleFile($this->getBaseUrl() . "css/style.css?_dc=4");
+        $this->addScripts();
         $this->buildHead();
         $this->buildBody();
+    }
+    
+    protected function addScripts ()
+    {
+        $this->addStyleFile($this->getBaseUrl() . "assets/font-awesome/css/font-awesome.css");
+        $this->addStyleFile($this->getBaseUrl() . "css/style.css?_dc=4");
     }
     
     protected function buildHead ()
