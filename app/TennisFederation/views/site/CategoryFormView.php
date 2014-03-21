@@ -29,7 +29,7 @@ class CategoryFormView extends SiteView
     
     protected function createForm ()
     {
-        $idHiddenField = new Tag("input", array("type"=>"hidden", "name"=>"categoryid", "value"=>$this->category->getId()));
+        $idHiddenField = new Tag("input", array("type"=>"hidden", "name"=>"categoryid"));
         $matchTypeCombobox = new Combobox($this, array("placeholder"=>"Tipo de Partido", "name"=>"matchtype"), array(Match::MATCHTYPE_SINGLES=>"Singles", Match::MATCHTYPE_DOUBLES=>"Dobles"));
         $descriptionTextField = new Tag("input", array("placeholder"=>"Descripción", "type"=>"text", "class"=>"form-control", "name"=>"description"));
         if ($this->category != null)
