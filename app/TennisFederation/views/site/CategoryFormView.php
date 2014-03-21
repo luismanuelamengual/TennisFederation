@@ -4,8 +4,8 @@ namespace TennisFederation\views\site;
 
 use NeoPHP\web\html\Tag;
 use TennisFederation\components\Button;
+use TennisFederation\components\Combobox;
 use TennisFederation\components\Form;
-use TennisFederation\components\Selector;
 use TennisFederation\models\Category;
 use TennisFederation\models\Match;
 use TennisFederation\views\site\SiteView;
@@ -29,19 +29,20 @@ class CategoryFormView extends SiteView
     
     protected function createForm ()
     {
-        $matchTypeSelector = new Selector($this, array("placeholder"=>"Tipo de Partido", "name"=>"matchtype"));
-        $matchTypeSelector->setOptions(array(Match::MATCHTYPE_SINGLES=>"Singles", Match::MATCHTYPE_DOUBLES=>"Dobles"));
+        $idHiddenField = new Tag("input", array("type"=>"hidden", "name"=>"categoryid", "value"=>$this->category->getId()));
+        $matchTypeCombobox = new Combobox($this, array("placeholder"=>"Tipo de Partido", "name"=>"matchtype"), array(Match::MATCHTYPE_SINGLES=>"Singles", Match::MATCHTYPE_DOUBLES=>"Dobles"));
         $descriptionTextField = new Tag("input", array("placeholder"=>"Descripción", "type"=>"text", "class"=>"form-control", "name"=>"description"));
         if ($this->category != null)
         {
-            $matchTypeSelector->setValue($this->category->getMatchType ());
+            $idHiddenField->setAttribute("value", $this->category->getId());
             $descriptionTextField->setAttribute("value", $this->category->getDescription());
+            $matchTypeCombobox->setAttribute("value", $this->category->getMatchType());
         }
+        
         $form = new Form(Form::TYPE_HORIZONTAL, array("method"=>"post", "action"=>($this->category != null)? "updateCategory" : "createCategory"));
+        $form->add($idHiddenField);
         $form->addField($descriptionTextField, "Descripción");
-        $form->addField($matchTypeSelector, "Tipo de Partido");
-        if ($this->category != null)
-            $form->add(new Tag("input", array("type"=>"hidden", "name"=>"categoryid", "value"=>$this->category->getId())));
+        $form->addField($matchTypeCombobox, "Tipo de Partido");    
         $form->addButton(new Button("Guardar datos", array("class"=>"btn btn-primary")));
         return $form;
     }
