@@ -13,12 +13,18 @@ use TennisFederation\views\site\SiteView;
 class PlayerFormView extends SiteView
 {
     private $player;
+    private $playertypes;
     private $countries;
     private $provinces;
     
     public function setPlayer (Player $player)
     {
         $this->player = $player;
+    }
+    
+    public function setPlayerTypes ($playertypes)
+    {
+        $this->playertypes = $playertypes;
     }
     
     public function setCountries ($countries)
@@ -42,6 +48,7 @@ class PlayerFormView extends SiteView
     protected function createForm ()
     {
         $idHiddenField = new Tag("input", array("type"=>"hidden", "name"=>"playerid"));
+        $userTypeField = new EntityCombobox(array("placeholder"=>"Tipo de usuario", "class"=>"form-control", "name"=>"playertypeid"), $this->playertypes);
         $usernameTextField = new Tag("input", array("placeholder"=>"Nombre de Usuario", "type"=>"text", "class"=>"form-control", "name"=>"username"));
         $passwordTextField = new Tag("input", array("placeholder"=>"Contraseña", "type"=>"password", "class"=>"form-control", "name"=>"password"));
         $passwordRepeatTextField = new Tag("input", array("placeholder"=>"Contraseña (Rep)", "type"=>"password", "class"=>"form-control", "name"=>"passwordrepeat"));
@@ -60,6 +67,7 @@ class PlayerFormView extends SiteView
         if ($this->player != null)
         {
             $idHiddenField->setAttribute("value", $this->player->getId());
+            $userTypeField->setAttribute("value", $this->player->getType()->getId());
             $usernameTextField->setAttribute("value", $this->player->getUsername());
             $passwordTextField->setAttribute("value", $this->player->getPassword());
             $passwordRepeatTextField->setAttribute("value", $this->player->getPassword());
@@ -78,6 +86,7 @@ class PlayerFormView extends SiteView
         
         $form = new Form(Form::TYPE_HORIZONTAL, array("method"=>"post", "action"=>($this->player != null)? "updatePlayer" : "createPlayer"));
         $form->add($idHiddenField);
+        $form->addField($userTypeField, "Tipo de usuario");
         $form->addField($usernameTextField, "Nombre de Usuario");
         $form->addField($passwordTextField, "Contraseña");
         $form->addField($passwordRepeatTextField, "Contraseña (Rep)");  

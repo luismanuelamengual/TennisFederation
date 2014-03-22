@@ -29,11 +29,10 @@ class PlayerController extends SiteController
     
     public function showPlayerFormAction($playerid=null)
     {
-        $countries = $this->getApplication()->getController("site/country")->getCountries();
-        $provinces = $this->getApplication()->getController("site/province")->getProvinces();
         $playerView = $this->createView("site/playerForm");
-        $playerView->setCountries ($countries);
-        $playerView->setProvinces ($provinces);
+        $playerView->setCountries ($this->getApplication()->getController("site/country")->getCountries());
+        $playerView->setProvinces ($this->getApplication()->getController("site/province")->getProvinces());
+        $playerView->setPlayerTypes ($this->getPlayerTypes());
         if ($playerid != null)
             $playerView->setPlayer($this->getPlayer($playerid));
         $playerView->render();
@@ -84,6 +83,22 @@ class PlayerController extends SiteController
             $players[] = $player;
         }
         return $players;
+    }
+    
+    public function getPlayerTypes ()
+    {
+        $playertypes = array();
+        $database = $this->getApplication()->getDefaultDatabase ();
+        $doPlayerType = $database->getDataObject ("playertype");
+        $doPlayerType->addOrderByField ("playertypeid");
+        $doPlayerType->find();
+        while ($doPlayerType->fetch())
+        {
+            $playertype = new PlayerType();
+            $playertype->completeFromFieldsArray($doPlayerType->getFields());
+            $playertypes[] = $playertype;
+        }
+        return $playertypes;
     }
     
     public function getPlayer ($playerid)
