@@ -38,7 +38,7 @@ class PlayerController extends SiteController
         $playerView->render();
     }
     
-    public function createPlayerAction($description)
+    public function createPlayerAction($playertypeid, $username, $password, $firstname, $lastname, $birthdate, $documentnumber, $countryid, $provinceid, $address, $contactvia1, $contactvia2, $contactvia3, $email)
     {
         $player = new Player();
         $player->setDescription($description);
@@ -46,7 +46,7 @@ class PlayerController extends SiteController
         $this->renderPlayersView();
     }
     
-    public function updatePlayerAction($playerid, $description)
+    public function updatePlayerAction($playerid, $playertypeid, $username, $password, $firstname, $lastname, $birthdate, $documentnumber, $countryid, $provinceid, $address, $contactvia1, $contactvia2, $contactvia3, $email)
     {
         $player = new Player();
         $player->setId($playerid);
