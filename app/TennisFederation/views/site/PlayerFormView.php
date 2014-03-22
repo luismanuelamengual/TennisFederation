@@ -53,6 +53,10 @@ class PlayerFormView extends SiteView
         $countryField = new EntityCombobox(array("placeholder"=>"País", "class"=>"form-control", "name"=>"countryid"), $this->countries);
         $provinceField = new EntityCombobox(array("placeholder"=>"Provincia", "class"=>"form-control", "name"=>"provinceid"), $this->provinces);
         $addressTextField = new Tag("input", array("placeholder"=>"Dirección", "type"=>"text", "class"=>"form-control", "name"=>"address"));
+        $contactVia1TextField = new Tag("input", array("placeholder"=>"Telefono 1", "type"=>"text", "class"=>"form-control", "name"=>"contactvia1"));
+        $contactVia2TextField = new Tag("input", array("placeholder"=>"Telefono 2", "type"=>"text", "class"=>"form-control", "name"=>"contactvia2"));
+        $contactVia3TextField = new Tag("input", array("placeholder"=>"Telefono 3", "type"=>"text", "class"=>"form-control", "name"=>"contactvia3"));
+        $emailTextField = new Tag("input", array("placeholder"=>"E-mail", "type"=>"text", "class"=>"form-control", "name"=>"email"));
         if ($this->player != null)
         {
             $idHiddenField->setAttribute("value", $this->player->getId());
@@ -66,6 +70,10 @@ class PlayerFormView extends SiteView
             $countryField->setAttribute("value", $this->player->getCountry()->getId());
             $provinceField->setAttribute("value", $this->player->getProvince()->getId());
             $addressTextField->setAttribute("value", $this->player->getAddress());
+            $contactVia1TextField->setAttribute("value", $this->player->getContactVia1());
+            $contactVia2TextField->setAttribute("value", $this->player->getContactVia2());
+            $contactVia3TextField->setAttribute("value", $this->player->getContactVia3());
+            $emailTextField->setAttribute("value", $this->player->getEmail());
         }
         
         $form = new Form(Form::TYPE_HORIZONTAL, array("method"=>"post", "action"=>($this->player != null)? "updatePlayer" : "createPlayer"));
@@ -80,6 +88,10 @@ class PlayerFormView extends SiteView
         $form->addField($countryField, "País");
         $form->addField($provinceField, "Provincia");
         $form->addField($addressTextField, "Dirección");
+        $form->addField($contactVia1TextField, "Telefono 1");
+        $form->addField($contactVia2TextField, "Telefono 2");
+        $form->addField($contactVia3TextField, "Telefono 3");
+        $form->addField($emailTextField, "E-mail");
         $form->addButton(new Button("Guardar datos", array("class"=>"btn btn-primary")));
         return $form;
     }
