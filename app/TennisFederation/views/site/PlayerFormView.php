@@ -5,6 +5,7 @@ namespace TennisFederation\views\site;
 use NeoPHP\web\html\Tag;
 use TennisFederation\components\Button;
 use TennisFederation\components\DatetimePicker;
+use TennisFederation\components\EntityCombobox;
 use TennisFederation\components\Form;
 use TennisFederation\models\Player;
 use TennisFederation\views\site\SiteView;
@@ -12,10 +13,22 @@ use TennisFederation\views\site\SiteView;
 class PlayerFormView extends SiteView
 {
     private $player;
+    private $countries;
+    private $provinces;
     
     public function setPlayer (Player $player)
     {
         $this->player = $player;
+    }
+    
+    public function setCountries ($countries)
+    {
+        $this->countries = $countries;
+    }
+    
+    public function setProvinces ($provinces)
+    {
+        $this->provinces = $provinces;
     }
     
     protected function createMainContent() 
@@ -34,10 +47,12 @@ class PlayerFormView extends SiteView
         $passwordRepeatTextField = new Tag("input", array("placeholder"=>"Contraseña (Rep)", "type"=>"password", "class"=>"form-control", "name"=>"passwordrepeat"));
         $firstnameTextField = new Tag("input", array("placeholder"=>"Nombre", "type"=>"text", "class"=>"form-control", "name"=>"firstname"));
         $lastnameTextField = new Tag("input", array("placeholder"=>"Apellido", "type"=>"text", "class"=>"form-control", "name"=>"lastname"));
-        $birthDateField = new DatetimePicker($this, array("placeholder"=>"Fecha de nacimiento", "type"=>"text", "name"=>"birthdate"));
+        $birthDateField = new DatetimePicker($this, array("placeholder"=>"Fecha de nacimiento", "name"=>"birthdate"));
         $documentTextField = new Tag("input", array("placeholder"=>"Número de Documento", "type"=>"text", "class"=>"form-control", "name"=>"documentnumber"));
-        $addressTextField = new Tag("input", array("placeholder"=>"Dirección", "type"=>"text", "class"=>"form-control", "name"=>"address"));
         $birthDateField->setTimeEnabled(false);
+        $countryField = new EntityCombobox(array("placeholder"=>"País", "class"=>"form-control", "name"=>"countryid"), $this->countries);
+        $provinceField = new EntityCombobox(array("placeholder"=>"Provincia", "class"=>"form-control", "name"=>"provinceid"), $this->provinces);
+        $addressTextField = new Tag("input", array("placeholder"=>"Dirección", "type"=>"text", "class"=>"form-control", "name"=>"address"));
         if ($this->player != null)
         {
             $idHiddenField->setAttribute("value", $this->player->getId());
@@ -48,6 +63,8 @@ class PlayerFormView extends SiteView
             $lastnameTextField->setAttribute("value", $this->player->getLastname());
             $birthDateField->setAttribute("value", $this->player->getBirthDate());
             $documentTextField->setAttribute("value", $this->player->getDocumentNumber());
+            $countryField->setAttribute("value", $this->player->getCountry()->getId());
+            $provinceField->setAttribute("value", $this->player->getProvince()->getId());
             $addressTextField->setAttribute("value", $this->player->getAddress());
         }
         
@@ -60,6 +77,8 @@ class PlayerFormView extends SiteView
         $form->addField($lastnameTextField, "Apellido");
         $form->addField($birthDateField, "Fecha de Nacimiento");
         $form->addField($documentTextField, "Número de Documento");
+        $form->addField($countryField, "País");
+        $form->addField($provinceField, "Provincia");
         $form->addField($addressTextField, "Dirección");
         $form->addButton(new Button("Guardar datos", array("class"=>"btn btn-primary")));
         return $form;

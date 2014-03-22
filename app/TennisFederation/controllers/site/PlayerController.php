@@ -29,7 +29,11 @@ class PlayerController extends SiteController
     
     public function showPlayerFormAction($playerid=null)
     {
+        $countries = $this->getApplication()->getController("site/country")->getCountries();
+        $provinces = $this->getApplication()->getController("site/province")->getProvinces();
         $playerView = $this->createView("site/playerForm");
+        $playerView->setCountries ($countries);
+        $playerView->setProvinces ($provinces);
         if ($playerid != null)
             $playerView->setPlayer($this->getPlayer($playerid));
         $playerView->render();
@@ -60,7 +64,7 @@ class PlayerController extends SiteController
     
     private function renderPlayersView ()
     {
-        $players = $this->getPlayers();        
+        $players = $this->getPlayers();
         $playerView = $this->createView("site/players");
         $playerView->setPlayers ($players);
         $playerView->render();
