@@ -11,10 +11,22 @@ class Form extends Tag
     const TYPE_HORIZONTAL = 2;
     
     private $type;
+    private $columns;
     
-    public function __construct($type=self::TYPE_BASIC, $attributes = array())
+    public function __construct($attributes = array())
     {
         parent::__construct("form", $attributes);
+        $this->type = self::TYPE_BASIC;
+        $this->columns = 1;
+    }
+    
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    public function setType($type)
+    {
         $this->type = $type;
         switch ($this->type)
         {
@@ -27,18 +39,15 @@ class Form extends Tag
         }
     }
     
-    public function getType()
+    public function setColumns($columns)
     {
-        return $this->type;
-    }
-
-    public function setType($type)
-    {
-        $this->type = $type;
+        $this->columns = $columns;
     }
     
     public function addField ($field, $label=null)
     {
+        if (!isset($this->fieldsCounter))
+            $this->fieldsCounter = 0;
         switch ($this->type)
         {
             case self::TYPE_BASIC:
@@ -46,7 +55,20 @@ class Form extends Tag
                 if (!empty($label))
                     $formgroup->add (new Tag("label", $label));
                 $formgroup->add ($field);
-                $this->add($formgroup);
+                
+                if ($this->columns > 1)
+                {
+                    if ($this->fieldsCounter % $this->columns == 0)
+                    {
+                        $this->fieldRow = new Tag("div", array("class"=>"row"));
+                        $this->add ($this->fieldRow);
+                    }
+                    $this->fieldRow->add(new Tag("div", array("class"=>"col-md-" . (12/$this->columns)), $formgroup));
+                }
+                else
+                {
+                    $this->add($formgroup);
+                }
                 break;
             case self::TYPE_INLINE:
                 $formgroup = new Tag("div", array("class"=>"form-group"));
@@ -66,9 +88,22 @@ class Form extends Tag
                 {
                     $formgroup->add (new Tag("div", array("class"=>"col-sm-12"), $field));
                 }
-                $this->add($formgroup);
+                if ($this->columns > 1)
+                {
+                    if ($this->fieldsCounter % $this->columns == 0)
+                    {
+                        $this->fieldRow = new Tag("div", array("class"=>"row"));
+                        $this->add ($this->fieldRow);
+                    }
+                    $this->fieldRow->add(new Tag("div", array("class"=>"col-md-" . (12/$this->columns)), $formgroup));
+                }
+                else
+                {
+                    $this->add($formgroup);
+                }
                 break;
         }
+        $this->fieldsCounter++;
     }
     
     public function addButton (Button $button)

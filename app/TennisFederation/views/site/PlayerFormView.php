@@ -119,7 +119,8 @@ class PlayerFormView extends SiteView
             $emailTextField->setAttribute("value", $this->player->getEmail());
         }
         
-        $form = new Form(Form::TYPE_HORIZONTAL, array("method"=>"post", "action"=>($this->player != null)? "updatePlayer" : "createPlayer"));
+        $form = new Form(array("method"=>"post", "action"=>($this->player != null)? "updatePlayer" : "createPlayer"));
+        $form->setColumns(2);
         $form->add($idHiddenField);
         $form->addField($userTypeField, "Tipo de usuario");
         $form->addField($usernameTextField, "Nombre de Usuario");
