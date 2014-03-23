@@ -21,6 +21,31 @@ class PlayerFormView extends SiteView
     {
         parent::addScripts();
         $this->addScript('
+            function removeAllFieldsErrors ()
+            {
+                $(".form-group").removeClass("has-error");
+                $messages = $(".form-group p");
+                $messages.addClass("hidden");
+                $messages.html("");
+            }
+
+            function addFieldError (fieldName, error)
+            {
+                var $field = $("input[name=" + fieldName + "]");
+                var $fieldFormGroup = $field.closest(".form-group");
+                var $messageText = $fieldFormGroup.find("p");
+                if (!$fieldFormGroup.hasClass("has-error"))
+                    $fieldFormGroup.addClass("has-error");
+                if ($messageText.hasClass("hidden"))
+                    $messageText.removeClass("hidden");
+                    
+                var messages = $messageText.html();
+                if (messages != "")
+                    messages += "<br>";
+                messages += error;
+                $messageText.html(messages);
+            }
+
             function validateEmptyField (fieldName)
             {
                 var valid = true;
@@ -28,12 +53,22 @@ class PlayerFormView extends SiteView
                 var $fieldFormGroup = $field.closest(".form-group");
                 if ($field[0].value.trim() == "")
                 {
-                    $fieldFormGroup.addClass("has-error");
+                    addFieldError(fieldName, "El campo es requerido");
                     valid = false;
                 }
-                else
+                return valid;
+            }
+            
+            function validatePasswords ()
+            {
+                var valid = true;
+                var $passwordField = $("input[name=password]");
+                var $passwordRepeatField = $("input[name=passwordrepeat]");
+                if ($passwordField[0].value != $passwordRepeatField[0].value)
                 {
-                    $fieldFormGroup.removeClass("has-error");
+                    addFieldError("password", "Los campos de contraseñas deben coincidir");
+                    addFieldError("passwordrepeat", "Los campos de contraseñas deben coincidir");
+                    valid = false;
                 }
                 return valid;
             }
@@ -41,11 +76,13 @@ class PlayerFormView extends SiteView
             function validateFields ()
             {
                 var valid = true;
+                removeAllFieldsErrors();
                 valid = valid & validateEmptyField("username");
                 valid = valid & validateEmptyField("password");
                 valid = valid & validateEmptyField("passwordrepeat");
                 valid = valid & validateEmptyField("firstname");
                 valid = valid & validateEmptyField("lastname");
+                valid = valid & validatePasswords();
                 if (valid == 0) valid = false;
                 return valid;
             }

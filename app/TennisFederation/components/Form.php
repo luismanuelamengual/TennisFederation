@@ -53,8 +53,9 @@ class Form extends Tag
             case self::TYPE_BASIC:
                 $formgroup = new Tag("div", array("class"=>"form-group"));
                 if (!empty($label))
-                    $formgroup->add (new Tag("label", $label));
+                    $formgroup->add (new Tag("label", array("class"=>"control-label"), $label));
                 $formgroup->add ($field);
+                $formgroup->add (new Tag("p", array("class"=>"help-block hidden"), ""));
                 
                 if ($this->columns > 1)
                 {
@@ -88,6 +89,7 @@ class Form extends Tag
                 {
                     $formgroup->add (new Tag("div", array("class"=>"col-sm-12"), $field));
                 }
+                $formgroup->add (new Tag("p", array("class"=>"help-block hidden"), ""));
                 if ($this->columns > 1)
                 {
                     if ($this->fieldsCounter % $this->columns == 0)
