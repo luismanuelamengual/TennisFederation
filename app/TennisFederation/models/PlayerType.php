@@ -23,6 +23,11 @@ class PlayerType extends Model
      */
     private $description;
     
+    public function __construct($id=null)
+    {
+        $this->id = $id; 
+    }
+    
     public function getId() 
     {
         return $this->id;

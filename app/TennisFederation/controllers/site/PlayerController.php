@@ -38,19 +38,18 @@ class PlayerController extends SiteController
         $playerView->render();
     }
     
-    public function createPlayerAction($playertypeid, $username, $password, $firstname, $lastname, $birthdate, $documentnumber, $countryid, $provinceid, $address, $contactvia1, $contactvia2, $contactvia3, $email)
+    public function createPlayerAction()
     {
         $player = new Player();
-        $player->setDescription($description);
+        $player->completeFromFieldsArray($this->getRequest()->getParameters()->getVars());
         $this->createPlayer($player);
         $this->renderPlayersView();
     }
     
-    public function updatePlayerAction($playerid, $playertypeid, $username, $password, $firstname, $lastname, $birthdate, $documentnumber, $countryid, $provinceid, $address, $contactvia1, $contactvia2, $contactvia3, $email)
+    public function updatePlayerAction()
     {
         $player = new Player();
-        $player->setId($playerid);
-        $player->setDescription($description);
+        $player->completeFromFieldsArray($this->getRequest()->getParameters()->getVars());
         $this->updatePlayer($player);
         $this->renderPlayersView();
     }
@@ -119,7 +118,21 @@ class PlayerController extends SiteController
     {
         $database = $this->getApplication()->getDefaultDatabase ();
         $doPlayer = $database->getDataObject ("player");
-        $doPlayer->description = $player->getDescription();
+        $doPlayer->playertypeid = $player->getType()->getId();
+        $doPlayer->address = $player->getAddress();
+        $doPlayer->birthdate = $player->getBirthDate();
+        $doPlayer->contactvia1 = $player->getContactVia1();
+        $doPlayer->contactvia2 = $player->getContactVia2();
+        $doPlayer->contactvia3 = $player->getContactVia3();
+        $doPlayer->countryid = $player->getCountry()->getId();
+        $doPlayer->documentnumber = $player->getDocumentNumber();
+        $doPlayer->email = $player->getEmail();
+        $doPlayer->firstname = $player->getFirstname();
+        $doPlayer->lastname = $player->getLastname();
+        $doPlayer->username = $player->getUsername();
+        $doPlayer->password = $player->getPassword();
+        $doPlayer->provinceid = $player->getProvince()->getId();
+        $doPlayer->active = true;
         $doPlayer->insert();
     }
     
@@ -127,7 +140,20 @@ class PlayerController extends SiteController
     {
         $database = $this->getApplication()->getDefaultDatabase ();
         $doPlayer = $database->getDataObject ("player");
-        $doPlayer->description = $player->getDescription();
+        $doPlayer->playertypeid = $player->getType()->getId();
+        $doPlayer->address = $player->getAddress();
+        $doPlayer->birthdate = $player->getBirthDate();
+        $doPlayer->contactvia1 = $player->getContactVia1();
+        $doPlayer->contactvia2 = $player->getContactVia2();
+        $doPlayer->contactvia3 = $player->getContactVia3();
+        $doPlayer->countryid = $player->getCountry()->getId();
+        $doPlayer->documentnumber = $player->getDocumentNumber();
+        $doPlayer->email = $player->getEmail();
+        $doPlayer->firstname = $player->getFirstname();
+        $doPlayer->lastname = $player->getLastname();
+        $doPlayer->username = $player->getUsername();
+        $doPlayer->password = $player->getPassword();
+        $doPlayer->provinceid = $player->getProvince()->getId();
         $doPlayer->addWhereCondition("playerid = " . $player->getId());
         $doPlayer->update();
     }
