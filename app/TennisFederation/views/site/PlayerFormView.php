@@ -17,6 +17,41 @@ class PlayerFormView extends SiteView
     private $countries;
     private $provinces;
     
+    protected function addScripts ()
+    {
+        parent::addScripts();
+        $this->addScript('
+            function validateEmptyField (fieldName)
+            {
+                var valid = true;
+                var $field = $("input[name=" + fieldName + "]");
+                var $fieldFormGroup = $field.closest(".form-group");
+                if ($field[0].value.trim() == "")
+                {
+                    $fieldFormGroup.addClass("has-error");
+                    valid = false;
+                }
+                else
+                {
+                    $fieldFormGroup.removeClass("has-error");
+                }
+                return valid;
+            }
+
+            function validateFields ()
+            {
+                var valid = true;
+                valid = valid & validateEmptyField("username");
+                valid = valid & validateEmptyField("password");
+                valid = valid & validateEmptyField("passwordrepeat");
+                valid = valid & validateEmptyField("firstname");
+                valid = valid & validateEmptyField("lastname");
+                if (valid == 0) valid = false;
+                return valid;
+            }
+        ');
+    }
+    
     public function setPlayer (Player $player)
     {
         $this->player = $player;
@@ -101,7 +136,7 @@ class PlayerFormView extends SiteView
         $form->addField($contactVia2TextField, "Telefono 2");
         $form->addField($contactVia3TextField, "Telefono 3");
         $form->addField($emailTextField, "E-mail");
-        $form->addButton(new Button("Guardar datos", array("class"=>"btn btn-primary")));
+        $form->addButton(new Button("Guardar datos", array("class"=>"btn btn-primary", "onclick"=>"return validateFields();")));
         return $form;
     }
 }
