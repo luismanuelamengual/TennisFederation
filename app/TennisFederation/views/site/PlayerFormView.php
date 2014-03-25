@@ -156,7 +156,7 @@ class PlayerFormView extends SiteView
             $emailTextField->setAttribute("value", $this->player->getEmail());
         }
         
-        $form = new Form(array("method"=>"post", "action"=>($this->player != null)? "updatePlayer" : "createPlayer"));
+        $form = new Form(array("method"=>"post", "enctype"=>"multipart/form-data", "action"=>($this->player != null)? "updatePlayer" : "createPlayer"));
         $form->setColumns(2);
         $form->add($idHiddenField);
         $form->addField($userTypeField, "Tipo de usuario");
@@ -174,6 +174,7 @@ class PlayerFormView extends SiteView
         $form->addField($contactVia2TextField, "Telefono 2");
         $form->addField($contactVia3TextField, "Telefono 3");
         $form->addField($emailTextField, "E-mail");
+        $form->addField('<input type="file" name="image">', "Imagen");
         $form->addButton(new Button("Guardar datos", array("class"=>"btn btn-primary", "onclick"=>"return validateFields();")));
         return $form;
     }

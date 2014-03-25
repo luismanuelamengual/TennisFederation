@@ -42,15 +42,17 @@ class PlayerController extends SiteController
     {
         $player = new Player();
         $player->completeFromFieldsArray($this->getRequest()->getParameters()->getVars());
-        $this->createPlayer($player);
+        $playerid = $this->createPlayer($player);
+        $this->updatePlayerImage($playerid);
         $this->renderPlayersView();
     }
     
-    public function updatePlayerAction()
+    public function updatePlayerAction($playerid)
     {
         $player = new Player();
         $player->completeFromFieldsArray($this->getRequest()->getParameters()->getVars());
         $this->updatePlayer($player);
+        $this->updatePlayerImage($playerid);
         $this->renderPlayersView();
     }
     
@@ -134,6 +136,7 @@ class PlayerController extends SiteController
         $doPlayer->provinceid = $player->getProvince()->getId();
         $doPlayer->active = true;
         $doPlayer->insert();
+        return intval($database->getLastInsertedId("player_playerid_seq"));
     }
     
     public function updatePlayer (Player $player)
@@ -156,6 +159,18 @@ class PlayerController extends SiteController
         $doPlayer->provinceid = $player->getProvince()->getId();
         $doPlayer->addWhereCondition("playerid = " . $player->getId());
         $doPlayer->update();
+    }
+    
+    public function updatePlayerImage ($playerid)
+    {
+        if (!empty($playerid) && !empty($_FILES) && !empty($_FILES["image"]) && $_FILES["image"]["type"] == "image/jpeg")
+        {
+            $uploaddir = realpath("") . "/images/players/";
+            if (!file_exists($uploaddir))
+                mkdir($uploaddir);
+            $uploadfile = $uploaddir . $playerid . ".jpg";
+            move_uploaded_file($_FILES['image']['tmp_name'], $uploadfile);
+        }
     }
     
     public function deletePlayer ($playerid)
