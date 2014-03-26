@@ -72,6 +72,20 @@ class PlayerFormView extends SiteView
                 }
                 return valid;
             }
+            
+            function validateBirthdate ()
+            {
+                var valid = true;
+                var $birthdateField = $("input[name=birthdate]");
+                var value = $birthdateField[0].value.trim();
+                
+                if (value != "" && !value.match(/^(\d{4})([\/-])(\d{1,2})\2(\d{1,2})$/))
+                {
+                    addFieldError("birthdate", "El campo de fecha no contiene un valor valido");
+                    valid = false;
+                }
+                return valid;
+            }
 
             function validateFields ()
             {
@@ -82,6 +96,7 @@ class PlayerFormView extends SiteView
                 valid = valid & validateEmptyField("passwordrepeat");
                 valid = valid & validateEmptyField("firstname");
                 valid = valid & validateEmptyField("lastname");
+                valid = valid & validateBirthdate();
                 valid = valid & validatePasswords();
                 if (valid == 0) valid = false;
                 return valid;
@@ -174,7 +189,6 @@ class PlayerFormView extends SiteView
         $form->addField($contactVia2TextField, "Telefono 2");
         $form->addField($contactVia3TextField, "Telefono 3");
         $form->addField($emailTextField, "E-mail");
-        $form->addField('<input type="file" name="image">', "Imagen");
         $form->addButton(new Button("Guardar datos", array("class"=>"btn btn-primary", "onclick"=>"return validateFields();")));
         return $form;
     }

@@ -42,8 +42,7 @@ class PlayerController extends SiteController
     {
         $player = new Player();
         $player->completeFromFieldsArray($this->getRequest()->getParameters()->getVars());
-        $playerid = $this->createPlayer($player);
-        $this->updatePlayerImage($playerid);
+        $this->createPlayer($player);
         $this->renderPlayersView();
     }
     
@@ -52,7 +51,6 @@ class PlayerController extends SiteController
         $player = new Player();
         $player->completeFromFieldsArray($this->getRequest()->getParameters()->getVars());
         $this->updatePlayer($player);
-        $this->updatePlayerImage($playerid);
         $this->renderPlayersView();
     }
     
@@ -122,7 +120,8 @@ class PlayerController extends SiteController
         $doPlayer = $database->getDataObject ("player");
         $doPlayer->playertypeid = $player->getType()->getId();
         $doPlayer->address = $player->getAddress();
-        $doPlayer->birthdate = $player->getBirthDate();
+        if (!empty($player->getBirthDate()))
+            $doPlayer->birthdate = $player->getBirthDate();
         $doPlayer->contactvia1 = $player->getContactVia1();
         $doPlayer->contactvia2 = $player->getContactVia2();
         $doPlayer->contactvia3 = $player->getContactVia3();
@@ -145,7 +144,8 @@ class PlayerController extends SiteController
         $doPlayer = $database->getDataObject ("player");
         $doPlayer->playertypeid = $player->getType()->getId();
         $doPlayer->address = $player->getAddress();
-        $doPlayer->birthdate = $player->getBirthDate();
+        if (!empty($player->getBirthDate()))
+            $doPlayer->birthdate = $player->getBirthDate();
         $doPlayer->contactvia1 = $player->getContactVia1();
         $doPlayer->contactvia2 = $player->getContactVia2();
         $doPlayer->contactvia3 = $player->getContactVia3();
