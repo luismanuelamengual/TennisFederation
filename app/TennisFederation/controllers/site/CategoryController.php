@@ -5,14 +5,14 @@ namespace TennisFederation\controllers\site;
 use Exception;
 use TennisFederation\controllers\SiteController;
 use TennisFederation\models\Category;
-use TennisFederation\models\PlayerType;
+use TennisFederation\models\UserType;
 
 class CategoryController extends SiteController
 {
     public function onBeforeActionExecution ($action)
     {
         $executeAction = parent::onBeforeActionExecution($action);
-        if ($executeAction && $this->getSession()->type != PlayerType::PLAYERTYPE_ADMINISTRATOR)
+        if ($executeAction && $this->getSession()->type != UserType::USERTYPE_ADMINISTRATOR)
             throw new Exception ("No tiene permisos para acceder a este controlador");
         return $executeAction;
     }

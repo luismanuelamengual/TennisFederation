@@ -5,7 +5,7 @@ namespace TennisFederation\controllers;
 use Exception;
 use NeoPHP\web\WebRestController;
 use stdClass;
-use TennisFederation\models\Player;
+use TennisFederation\models\User;
 
 class SessionController extends WebRestController
 {
@@ -39,16 +39,16 @@ class SessionController extends WebRestController
     {
         $this->getSession()->destroy();
         $sessionId = false;
-        $player = $this->getPlayerForUsernameAndPassword($username, $password);
-        if ($player != null)
+        $user = $this->getUserForUsernameAndPassword($username, $password);
+        if ($user != null)
         {
             $this->getSession()->start();
             $this->getSession()->sessionId = session_id();
             $this->getSession()->sessionName = session_name();
-            $this->getSession()->playerId = $player->getId();
-            $this->getSession()->firstname = $player->getFirstname();
-            $this->getSession()->lastname = $player->getLastname();
-            $this->getSession()->type = $player->getType()->getId();
+            $this->getSession()->userId = $user->getId();
+            $this->getSession()->firstname = $user->getFirstname();
+            $this->getSession()->lastname = $user->getLastname();
+            $this->getSession()->type = $user->getType()->getId();
             $sessionId = session_id();
         }
         else
@@ -63,19 +63,19 @@ class SessionController extends WebRestController
         $this->getSession()->destroy();
     }
     
-    private function getPlayerForUsernameAndPassword ($username, $password)
+    private function getUserForUsernameAndPassword ($username, $password)
     {
-        $player = null;
+        $user = null;
         $database = $this->getApplication()->getDefaultDatabase ();
-        $doPlayer = $database->getDataObject ("player");
-        $doPlayer->addWhereCondition("username = '" . $username . "'");
-        $doPlayer->addWhereCondition("password = '" . $password . "'");
-        if ($doPlayer->find(true))
+        $doUser = $database->getDataObject ("user");
+        $doUser->addWhereCondition("username = '" . $username . "'");
+        $doUser->addWhereCondition("password = '" . $password . "'");
+        if ($doUser->find(true))
         {
-            $player = new Player();
-            $player->completeFromFieldsArray($doPlayer->getFields());
+            $user = new User();
+            $user->completeFromFieldsArray($doUser->getFields());
         }
-        return $player;
+        return $user;
     }
 }
 

@@ -5,12 +5,12 @@ namespace TennisFederation\models;
 use NeoPHP\mvc\Model;
 
 /**
- * @Table (tableName="player")
+ * @Table (tableName="user")
  */
-class Player extends Model
+class User extends Model
 {
     /**
-     * @Column (columnName="playerid", id=true)
+     * @Column (columnName="userid", id=true)
      */
     private $id;
     
@@ -25,7 +25,7 @@ class Player extends Model
     private $password;
     
     /**
-     * @Column (columnName="playertypeid", relatedTableName="playertype")
+     * @Column (columnName="usertypeid", relatedTableName="usertype")
      */
     private $type;
     
@@ -129,7 +129,7 @@ class Player extends Model
         return $this->type;
     }
 
-    public function setType(PlayerType $type)
+    public function setType(UserType $type)
     {
         $this->type = $type;
     }

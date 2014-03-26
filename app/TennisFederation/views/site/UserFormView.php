@@ -7,13 +7,13 @@ use TennisFederation\components\Button;
 use TennisFederation\components\DatetimePicker;
 use TennisFederation\components\EntityCombobox;
 use TennisFederation\components\Form;
-use TennisFederation\models\Player;
+use TennisFederation\models\User;
 use TennisFederation\views\site\SiteView;
 
-class PlayerFormView extends SiteView
+class UserFormView extends SiteView
 {
-    private $player;
-    private $playertypes;
+    private $user;
+    private $usertypes;
     private $countries;
     private $provinces;
     private $myAccountMode = false;
@@ -89,13 +89,13 @@ class PlayerFormView extends SiteView
             
             function validateUsername ()
             {
-                var valid = false;
+                var valid = true;
                 var $usernameField = $("input[name=username]");
                 var username = $usernameField[0].value;
                 var response = $.ajax(
                 {
                     type: "GET",
-                    url: "' . $this->getUrl("site/player/checkUsername") . '?username=" + username,
+                    url: "' . $this->getUrl("site/user/checkUsername") . '?username=" + username,
                     async: false
                 }).responseText;
                 if (response == "true")
@@ -116,8 +116,12 @@ class PlayerFormView extends SiteView
                 valid = valid & validateEmptyField("firstname");
                 valid = valid & validateEmptyField("lastname");
                 valid = valid & validateBirthdate();
-                ' . ($this->player != null? '' : 'valid = valid & validateUsername();') . '
+                ' . ($this->user != null? '' : 'valid = valid & validateUsername();') . '
                 valid = valid & validatePasswords();
+                
+
+                console.log("Valid: " + valid);
+
                 if (valid == 0) valid = false;
                 return valid;
             }
@@ -129,14 +133,14 @@ class PlayerFormView extends SiteView
         $this->myAccountMode = $myAccountMode;
     }
     
-    public function setPlayer (Player $player)
+    public function setUser (User $user)
     {
-        $this->player = $player;
+        $this->user = $user;
     }
     
-    public function setPlayerTypes ($playertypes)
+    public function setUserTypes ($usertypes)
     {
-        $this->playertypes = $playertypes;
+        $this->usertypes = $usertypes;
     }
     
     public function setCountries ($countries)
@@ -151,7 +155,7 @@ class PlayerFormView extends SiteView
     
     protected function createMainContent() 
     {
-        $title = $this->player != null? "Edición de Jugador" : "Creación de Jugador";
+        $title = $this->user != null? "Edición de Usuario" : "Creación de Usuario";
         if ($this->myAccountMode)
             $title = "Mi Cuenta";
         $container = parent::createMainContent();
@@ -162,9 +166,9 @@ class PlayerFormView extends SiteView
     
     protected function createForm ()
     {
-        $idHiddenField = new Tag("input", array("type"=>"hidden", "name"=>"playerid"));
+        $idHiddenField = new Tag("input", array("type"=>"hidden", "name"=>"userid"));
         if (!$this->myAccountMode)
-            $userTypeField = new EntityCombobox(array("placeholder"=>"Tipo de usuario", "class"=>"form-control", "name"=>"playertypeid"), $this->playertypes);
+            $userTypeField = new EntityCombobox(array("placeholder"=>"Tipo de usuario", "class"=>"form-control", "name"=>"usertypeid"), $this->usertypes);
         $usernameTextField = new Tag("input", array("placeholder"=>"Nombre de Usuario", "type"=>"text", "class"=>"form-control", "name"=>"username"));
         $passwordTextField = new Tag("input", array("placeholder"=>"Contraseña", "type"=>"password", "class"=>"form-control", "name"=>"password"));
         $passwordRepeatTextField = new Tag("input", array("placeholder"=>"Contraseña (Rep)", "type"=>"password", "class"=>"form-control", "name"=>"passwordrepeat"));
@@ -180,30 +184,30 @@ class PlayerFormView extends SiteView
         $contactVia2TextField = new Tag("input", array("placeholder"=>"Telefono 2", "type"=>"text", "class"=>"form-control", "name"=>"contactvia2"));
         $contactVia3TextField = new Tag("input", array("placeholder"=>"Telefono 3", "type"=>"text", "class"=>"form-control", "name"=>"contactvia3"));
         $emailTextField = new Tag("input", array("placeholder"=>"E-mail", "type"=>"text", "class"=>"form-control", "name"=>"email"));
-        if ($this->player != null)
+        if ($this->user != null)
         {
-            $idHiddenField->setAttribute("value", $this->player->getId());
+            $idHiddenField->setAttribute("value", $this->user->getId());
             if (!$this->myAccountMode)
-                $userTypeField->setAttribute("value", $this->player->getType()->getId());
-            $usernameTextField->setAttribute("value", $this->player->getUsername());
+                $userTypeField->setAttribute("value", $this->user->getType()->getId());
+            $usernameTextField->setAttribute("value", $this->user->getUsername());
             if ($this->myAccountMode)
                 $usernameTextField->setAttribute("disabled", true);
-            $passwordTextField->setAttribute("value", $this->player->getPassword());
-            $passwordRepeatTextField->setAttribute("value", $this->player->getPassword());
-            $firstnameTextField->setAttribute("value", $this->player->getFirstname());
-            $lastnameTextField->setAttribute("value", $this->player->getLastname());
-            $birthDateField->setAttribute("value", $this->player->getBirthDate());
-            $documentTextField->setAttribute("value", $this->player->getDocumentNumber());
-            $countryField->setAttribute("value", $this->player->getCountry()->getId());
-            $provinceField->setAttribute("value", $this->player->getProvince()->getId());
-            $addressTextField->setAttribute("value", $this->player->getAddress());
-            $contactVia1TextField->setAttribute("value", $this->player->getContactVia1());
-            $contactVia2TextField->setAttribute("value", $this->player->getContactVia2());
-            $contactVia3TextField->setAttribute("value", $this->player->getContactVia3());
-            $emailTextField->setAttribute("value", $this->player->getEmail());
+            $passwordTextField->setAttribute("value", $this->user->getPassword());
+            $passwordRepeatTextField->setAttribute("value", $this->user->getPassword());
+            $firstnameTextField->setAttribute("value", $this->user->getFirstname());
+            $lastnameTextField->setAttribute("value", $this->user->getLastname());
+            $birthDateField->setAttribute("value", $this->user->getBirthDate());
+            $documentTextField->setAttribute("value", $this->user->getDocumentNumber());
+            $countryField->setAttribute("value", $this->user->getCountry()->getId());
+            $provinceField->setAttribute("value", $this->user->getProvince()->getId());
+            $addressTextField->setAttribute("value", $this->user->getAddress());
+            $contactVia1TextField->setAttribute("value", $this->user->getContactVia1());
+            $contactVia2TextField->setAttribute("value", $this->user->getContactVia2());
+            $contactVia3TextField->setAttribute("value", $this->user->getContactVia3());
+            $emailTextField->setAttribute("value", $this->user->getEmail());
         }
 
-        $action = ($this->player != null)? "updatePlayer" : "createPlayer";
+        $action = ($this->user != null)? "updateUser" : "createUser";
         if ($this->myAccountMode)
             $action = "myAccountSave";
         $form = new Form(array("method"=>"post", "enctype"=>"multipart/form-data", "action"=>$action));

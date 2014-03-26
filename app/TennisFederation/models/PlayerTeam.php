@@ -9,13 +9,13 @@ class PlayerTeam extends Model
     private $playerA;
     private $playerB;
     
-    public function __construct(Player $playerA = null, Player $playerB = null)
+    public function __construct(User $playerA = null, User $playerB = null)
     {
         $this->playerA = $playerA;
         $this->playerB = $playerB;
     }
     
-    public function setPlayerA (Player $player)
+    public function setPlayerA (User $player)
     {
         $this->playerA = $player;
     }
@@ -25,7 +25,7 @@ class PlayerTeam extends Model
         return $this->playerA;
     }
     
-    public function setPlayerB (Player $player)
+    public function setPlayerB (User $player)
     {
         $this->playerB = $player;
     }

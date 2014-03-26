@@ -3,7 +3,7 @@
 namespace TennisFederation\views\site;
 
 use NeoPHP\web\html\Tag;
-use TennisFederation\models\PlayerType;
+use TennisFederation\models\UserType;
 
 class SiteView extends DefaultView
 {
@@ -65,11 +65,11 @@ class SiteView extends DefaultView
     {
         $sidebar = new Tag("div", array("class"=>"col-sm-3 col-md-2 sidebar"));
         $sidebar->add ($this->createMainToolsMenu());
-        if ($this->getSession()->type == PlayerType::PLAYERTYPE_ADMINISTRATOR)
+        if ($this->getSession()->type == UserType::USERTYPE_ADMINISTRATOR)
             $sidebar->add ($this->createAdministratorToolsMenu());
-        if ($this->getSession()->type == PlayerType::PLAYERTYPE_ADMINISTRATOR || $this->getSession()->type == PlayerType::PLAYERTYPE_ORGANIZER)
+        if ($this->getSession()->type == UserType::USERTYPE_ADMINISTRATOR || $this->getSession()->type == UserType::USERTYPE_ORGANIZER)
             $sidebar->add ($this->createOrganizerToolsMenu());
-        if ($this->getSession()->type == PlayerType::PLAYERTYPE_ADMINISTRATOR || $this->getSession()->type == PlayerType::PLAYERTYPE_ORGANIZER || $this->getSession()->type == PlayerType::PLAYERTYPE_PLAYER)
+        if ($this->getSession()->type == UserType::USERTYPE_ADMINISTRATOR || $this->getSession()->type == UserType::USERTYPE_ORGANIZER || $this->getSession()->type == UserType::USERTYPE_PLAYER)
             $sidebar->add ($this->createPlayerToolsMenu());
         return $sidebar;
     }
@@ -84,7 +84,7 @@ class SiteView extends DefaultView
     protected function createAdministratorToolsMenu ()
     {
         $list = new Tag("ul", array("class"=>"nav nav-sidebar"));
-        $list->add ($this->createToolMenuItem ("Adm Jugadores", "site/player/"));
+        $list->add ($this->createToolMenuItem ("Adm Usuarios", "site/user/"));
         $list->add ($this->createToolMenuItem ("Adm Categorías", "site/category/"));
         $list->add ($this->createToolMenuItem ("Adm Clubes", "site/club/"));
         $list->add ($this->createToolMenuItem ("Adm Paises", "site/country/"));
@@ -146,7 +146,7 @@ class SiteView extends DefaultView
             <li class="dropdown">            
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-user"></i> ' . $this->getSession()->firstname . ' ' . $this->getSession()->lastname . ' <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="' . $this->getUrl("site/player/myAccount") . '"><i class="icon-user"></i> Mi Cuenta</a></li>
+                    <li><a href="' . $this->getUrl("site/user/myAccount") . '"><i class="icon-user"></i> Mi Cuenta</a></li>
                     <li><a href="' . $this->getUrl("settings/") . '"><i class="icon-gear"></i> Configuración</a></li>
                     <li class="divider"></li>
                     <li><a href="' . $this->getUrl("site/logout") . '"><i class="icon-power-off"></i> Salir</a></li>

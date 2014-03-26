@@ -5,16 +5,16 @@ namespace TennisFederation\models;
 use NeoPHP\mvc\Model;
 
 /**
- * @Table (tableName="playertype")
+ * @Table (tableName="usertype")
  */
-class PlayerType extends Model 
+class UserType extends Model 
 {
-    const PLAYERTYPE_ADMINISTRATOR = 1;
-    const PLAYERTYPE_ORGANIZER = 2;
-    const PLAYERTYPE_PLAYER = 3;
+    const USERTYPE_ADMINISTRATOR = 1;
+    const USERTYPE_ORGANIZER = 2;
+    const USERTYPE_PLAYER = 3;
     
     /**
-     * @Column (columnName="playertypeid", id=true)
+     * @Column (columnName="usertypeid", id=true)
      */
     private $id;
     
