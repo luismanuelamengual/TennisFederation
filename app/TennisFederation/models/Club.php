@@ -29,6 +29,21 @@ class Club extends Model
      */
     private $longitude;
     
+    /**
+     * @Column (columnName="address")
+     */
+    private $address;
+    
+    /**
+     * @Column (columnName="contactvia1")
+     */
+    private $contactvia1;
+    
+    /**
+     * @Column (columnName="contactvia2")
+     */
+    private $contactvia2;
+
     public function getId() 
     {
         return $this->id;
@@ -67,6 +82,36 @@ class Club extends Model
     public function setLongitude($longitude) 
     {
         $this->longitude = $longitude;
+    }
+    
+    public function getAddress()
+    {
+        return $this->address;
+    }
+
+    public function setAddress($address)
+    {
+        $this->address = $address;
+    }
+
+    public function getContactvia1()
+    {
+        return $this->contactvia1;
+    }
+
+    public function setContactvia1($contactvia1)
+    {
+        $this->contactvia1 = $contactvia1;
+    }
+
+    public function getContactvia2()
+    {
+        return $this->contactvia2;
+    }
+
+    public function setContactvia2($contactvia2)
+    {
+        $this->contactvia2 = $contactvia2;
     }
 }
 

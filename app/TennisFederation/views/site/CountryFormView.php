@@ -35,7 +35,7 @@ class CountryFormView extends SiteView
             $descriptionTextField->setAttribute("value", $this->country->getDescription());
         }
         
-        $form = new Form(Form::TYPE_HORIZONTAL, array("method"=>"post", "action"=>($this->country != null)? "updateCountry" : "createCountry"));
+        $form = new Form(array("method"=>"post", "action"=>($this->country != null)? "updateCountry" : "createCountry"));
         $form->add($idHiddenField);
         $form->addField($descriptionTextField, "Descripción");
         $form->addButton(new Button("Guardar datos", array("class"=>"btn btn-primary")));

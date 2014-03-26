@@ -39,6 +39,9 @@ class ClubsView extends SiteView
         $table = new EntityTable(array("id"=>"clubsTable"));
         $table->addColumn ("#", "id");
         $table->addColumn ("Nombre", "description");
+        $table->addColumn ("Dirección", "address");
+        $table->addColumn ("Teléfono 1", "contactvia1");
+        $table->addColumn ("Teléfono 2", "contactvia2");
         $table->setEntities($this->clubs);
         $table->addEntityProperty("clubId", "id");
         return $table;

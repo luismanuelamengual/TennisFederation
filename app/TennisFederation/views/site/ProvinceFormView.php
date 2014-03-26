@@ -35,7 +35,7 @@ class ProvinceFormView extends SiteView
             $descriptionTextField->setAttribute("value", $this->province->getDescription());
         }
         
-        $form = new Form(Form::TYPE_HORIZONTAL, array("method"=>"post", "action"=>($this->province != null)? "updateProvince" : "createProvince"));
+        $form = new Form(array("method"=>"post", "action"=>($this->province != null)? "updateProvince" : "createProvince"));
         $form->add($idHiddenField);
         $form->addField($descriptionTextField, "Descripción");
         $form->addButton(new Button("Guardar datos", array("class"=>"btn btn-primary")));

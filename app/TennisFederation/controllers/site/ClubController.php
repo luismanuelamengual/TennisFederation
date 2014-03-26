@@ -35,19 +35,18 @@ class ClubController extends SiteController
         $clubView->render();
     }
     
-    public function createClubAction($description)
+    public function createClubAction()
     {
         $club = new Club();
-        $club->setDescription($description);
+        $club->completeFromFieldsArray($this->getRequest()->getParameters()->getVars());
         $this->createClub($club);
         $this->renderClubsView();
     }
     
-    public function updateClubAction($clubid, $description)
+    public function updateClubAction()
     {
         $club = new Club();
-        $club->setId($clubid);
-        $club->setDescription($description);
+        $club->completeFromFieldsArray($this->getRequest()->getParameters()->getVars());
         $this->updateClub($club);
         $this->renderClubsView();
     }
@@ -101,6 +100,9 @@ class ClubController extends SiteController
         $database = $this->getApplication()->getDefaultDatabase ();
         $doClub = $database->getDataObject ("club");
         $doClub->description = $club->getDescription();
+        $doClub->address = $club->getAddress();
+        $doClub->contactvia1 = $club->getContactvia1();
+        $doClub->contactvia2 = $club->getContactvia2();
         $doClub->insert();
     }
     
@@ -109,6 +111,9 @@ class ClubController extends SiteController
         $database = $this->getApplication()->getDefaultDatabase ();
         $doClub = $database->getDataObject ("club");
         $doClub->description = $club->getDescription();
+        $doClub->address = $club->getAddress();
+        $doClub->contactvia1 = $club->getContactvia1();
+        $doClub->contactvia2 = $club->getContactvia2();
         $doClub->addWhereCondition("clubid = " . $club->getId());
         $doClub->update();
     }

@@ -39,7 +39,7 @@ class CategoryFormView extends SiteView
             $matchTypeCombobox->setAttribute("value", $this->category->getMatchType());
         }
         
-        $form = new Form(Form::TYPE_HORIZONTAL, array("method"=>"post", "action"=>($this->category != null)? "updateCategory" : "createCategory"));
+        $form = new Form(array("method"=>"post", "action"=>($this->category != null)? "updateCategory" : "createCategory"));
         $form->add($idHiddenField);
         $form->addField($descriptionTextField, "Descripción");
         $form->addField($matchTypeCombobox, "Tipo de Partido");    
