@@ -173,7 +173,8 @@ class PlayerController extends SiteController
         $doPlayer->email = $player->getEmail();
         $doPlayer->firstname = $player->getFirstname();
         $doPlayer->lastname = $player->getLastname();
-        $doPlayer->username = $player->getUsername();
+        if (!empty($player->getUsername()))
+            $doPlayer->username = $player->getUsername();
         $doPlayer->password = $player->getPassword();
         $doPlayer->provinceid = $player->getProvince()->getId();
         $doPlayer->addWhereCondition("playerid = " . $player->getId());

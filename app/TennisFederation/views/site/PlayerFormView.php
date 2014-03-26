@@ -115,7 +115,7 @@ class PlayerFormView extends SiteView
                 valid = valid & validateEmptyField("firstname");
                 valid = valid & validateEmptyField("lastname");
                 valid = valid & validateBirthdate();
-                valid = valid & validateUsername();
+                ' . ($this->player != null? '' : 'valid = valid & validateUsername();') . '
                 valid = valid & validatePasswords();
                 if (valid == 0) valid = false;
                 return valid;
@@ -175,6 +175,8 @@ class PlayerFormView extends SiteView
             $idHiddenField->setAttribute("value", $this->player->getId());
             $userTypeField->setAttribute("value", $this->player->getType()->getId());
             $usernameTextField->setAttribute("value", $this->player->getUsername());
+            if ($this->player != null)
+                $usernameTextField->setAttribute("disabled", true);
             $passwordTextField->setAttribute("value", $this->player->getPassword());
             $passwordRepeatTextField->setAttribute("value", $this->player->getPassword());
             $firstnameTextField->setAttribute("value", $this->player->getFirstname());
