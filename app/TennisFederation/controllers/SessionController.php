@@ -45,6 +45,7 @@ class SessionController extends WebRestController
             $this->getSession()->start();
             $this->getSession()->sessionId = session_id();
             $this->getSession()->sessionName = session_name();
+            $this->getSession()->playerId = $player->getId();
             $this->getSession()->firstname = $player->getFirstname();
             $this->getSession()->lastname = $player->getLastname();
             $this->getSession()->type = $player->getType()->getId();

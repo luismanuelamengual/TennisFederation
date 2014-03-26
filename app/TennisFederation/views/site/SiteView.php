@@ -146,7 +146,7 @@ class SiteView extends DefaultView
             <li class="dropdown">            
                 <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-user"></i> ' . $this->getSession()->firstname . ' ' . $this->getSession()->lastname . ' <b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                    <li><a href="' . $this->getUrl("account/") . '"><i class="icon-user"></i> Mi Cuenta</a></li>
+                    <li><a href="' . $this->getUrl("site/player/myAccount") . '"><i class="icon-user"></i> Mi Cuenta</a></li>
                     <li><a href="' . $this->getUrl("settings/") . '"><i class="icon-gear"></i> Configuración</a></li>
                     <li class="divider"></li>
                     <li><a href="' . $this->getUrl("site/logout") . '"><i class="icon-power-off"></i> Salir</a></li>

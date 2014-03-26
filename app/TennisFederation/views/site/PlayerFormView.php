@@ -16,6 +16,7 @@ class PlayerFormView extends SiteView
     private $playertypes;
     private $countries;
     private $provinces;
+    private $myAccountMode = false;
     
     protected function addScripts ()
     {
@@ -123,6 +124,11 @@ class PlayerFormView extends SiteView
         ');
     }
     
+    public function setMyAccountMode ($myAccountMode)
+    {
+        $this->myAccountMode = $myAccountMode;
+    }
+    
     public function setPlayer (Player $player)
     {
         $this->player = $player;
@@ -145,8 +151,11 @@ class PlayerFormView extends SiteView
     
     protected function createMainContent() 
     {
+        $title = $this->player != null? "Edición de Jugador" : "Creación de Jugador";
+        if ($this->myAccountMode)
+            $title = "Mi Cuenta";
         $container = parent::createMainContent();
-        $container->add (new Tag("h1", array("class"=>"page-header"), $this->player != null? "Edición de Jugador" : "Creación de Jugador"));
+        $container->add (new Tag("h1", array("class"=>"page-header"), $title));
         $container->add ($this->createForm());
         return $container;
     }
@@ -154,7 +163,8 @@ class PlayerFormView extends SiteView
     protected function createForm ()
     {
         $idHiddenField = new Tag("input", array("type"=>"hidden", "name"=>"playerid"));
-        $userTypeField = new EntityCombobox(array("placeholder"=>"Tipo de usuario", "class"=>"form-control", "name"=>"playertypeid"), $this->playertypes);
+        if (!$this->myAccountMode)
+            $userTypeField = new EntityCombobox(array("placeholder"=>"Tipo de usuario", "class"=>"form-control", "name"=>"playertypeid"), $this->playertypes);
         $usernameTextField = new Tag("input", array("placeholder"=>"Nombre de Usuario", "type"=>"text", "class"=>"form-control", "name"=>"username"));
         $passwordTextField = new Tag("input", array("placeholder"=>"Contraseña", "type"=>"password", "class"=>"form-control", "name"=>"password"));
         $passwordRepeatTextField = new Tag("input", array("placeholder"=>"Contraseña (Rep)", "type"=>"password", "class"=>"form-control", "name"=>"passwordrepeat"));
@@ -173,9 +183,10 @@ class PlayerFormView extends SiteView
         if ($this->player != null)
         {
             $idHiddenField->setAttribute("value", $this->player->getId());
-            $userTypeField->setAttribute("value", $this->player->getType()->getId());
+            if (!$this->myAccountMode)
+                $userTypeField->setAttribute("value", $this->player->getType()->getId());
             $usernameTextField->setAttribute("value", $this->player->getUsername());
-            if ($this->player != null)
+            if ($this->myAccountMode)
                 $usernameTextField->setAttribute("disabled", true);
             $passwordTextField->setAttribute("value", $this->player->getPassword());
             $passwordRepeatTextField->setAttribute("value", $this->player->getPassword());
@@ -191,11 +202,15 @@ class PlayerFormView extends SiteView
             $contactVia3TextField->setAttribute("value", $this->player->getContactVia3());
             $emailTextField->setAttribute("value", $this->player->getEmail());
         }
-        
-        $form = new Form(array("method"=>"post", "enctype"=>"multipart/form-data", "action"=>($this->player != null)? "updatePlayer" : "createPlayer"));
+
+        $action = ($this->player != null)? "updatePlayer" : "createPlayer";
+        if ($this->myAccountMode)
+            $action = "myAccountSave";
+        $form = new Form(array("method"=>"post", "enctype"=>"multipart/form-data", "action"=>$action));
         $form->setColumns(2);
         $form->add($idHiddenField);
-        $form->addField($userTypeField, "Tipo de usuario");
+        if (!$this->myAccountMode)
+            $form->addField($userTypeField, "Tipo de usuario");
         $form->addField($usernameTextField, "Nombre de Usuario");
         $form->addField($passwordTextField, "Contraseña");
         $form->addField($passwordRepeatTextField, "Contraseña (Rep)");  

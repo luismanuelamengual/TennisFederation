@@ -43,6 +43,25 @@ class PlayerController extends SiteController
         $playerView->render();
     }
     
+    public function myAccountAction()
+    {
+        $playerView = $this->createView("site/playerForm");
+        $playerView->setMyAccountMode(true);
+        $playerView->setCountries ($this->getApplication()->getController("site/country")->getCountries());
+        $playerView->setProvinces ($this->getApplication()->getController("site/province")->getProvinces());
+        $playerView->setPlayerTypes ($this->getPlayerTypes());
+        $playerView->setPlayer($this->getPlayer($this->getSession()->playerId));
+        $playerView->render();
+    }
+    
+    public function myAccountSaveAction()
+    {
+        $player = new Player();
+        $player->completeFromFieldsArray($this->getRequest()->getParameters()->getVars());
+        $this->updatePlayer($player);
+        $this->executeAction("site/dashboard/");
+    }
+    
     public function createPlayerAction()
     {
         $player = new Player();
@@ -161,7 +180,8 @@ class PlayerController extends SiteController
     {
         $database = $this->getApplication()->getDefaultDatabase ();
         $doPlayer = $database->getDataObject ("player");
-        $doPlayer->playertypeid = $player->getType()->getId();
+        if ($player->getType() != null)
+            $doPlayer->playertypeid = $player->getType()->getId();
         $doPlayer->address = $player->getAddress();
         if (!empty($player->getBirthDate()))
             $doPlayer->birthdate = $player->getBirthDate();
