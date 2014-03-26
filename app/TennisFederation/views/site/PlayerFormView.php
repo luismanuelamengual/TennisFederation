@@ -78,10 +78,28 @@ class PlayerFormView extends SiteView
                 var valid = true;
                 var $birthdateField = $("input[name=birthdate]");
                 var value = $birthdateField[0].value.trim();
-                
                 if (value != "" && !value.match(/^(\d{4})([\/-])(\d{1,2})\2(\d{1,2})$/))
                 {
                     addFieldError("birthdate", "El campo de fecha no contiene un valor valido");
+                    valid = false;
+                }
+                return valid;
+            }
+            
+            function validateUsername ()
+            {
+                var valid = false;
+                var $usernameField = $("input[name=username]");
+                var username = $usernameField[0].value;
+                var response = $.ajax(
+                {
+                    type: "GET",
+                    url: "' . $this->getUrl("site/player/checkUsername") . '?username=" + username,
+                    async: false
+                }).responseText;
+                if (response == "true")
+                {
+                    addFieldError("username", "El nombre de usuario ya existe");
                     valid = false;
                 }
                 return valid;
@@ -97,6 +115,7 @@ class PlayerFormView extends SiteView
                 valid = valid & validateEmptyField("firstname");
                 valid = valid & validateEmptyField("lastname");
                 valid = valid & validateBirthdate();
+                valid = valid & validateUsername();
                 valid = valid & validatePasswords();
                 if (valid == 0) valid = false;
                 return valid;

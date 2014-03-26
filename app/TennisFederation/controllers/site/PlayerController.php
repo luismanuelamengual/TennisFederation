@@ -22,6 +22,11 @@ class PlayerController extends SiteController
         $this->showPlayerListAction();
     }
     
+    public function checkUsernameAction ($username)
+    {
+        echo $this->getPlayerForUsername($username) != null? "true" : "false";
+    }
+    
     public function showPlayerListAction ()
     {
         $this->renderPlayersView();
@@ -106,6 +111,20 @@ class PlayerController extends SiteController
         $database = $this->getApplication()->getDefaultDatabase ();
         $doPlayer = $database->getDataObject ("player");
         $doPlayer->addWhereCondition("playerid = " . $playerid);
+        if ($doPlayer->find(true))
+        {
+            $player = new Player();
+            $player->completeFromFieldsArray($doPlayer->getFields());
+        }
+        return $player;
+    }
+    
+    public function getPlayerForUsername ($username)
+    {
+        $player = null;
+        $database = $this->getApplication()->getDefaultDatabase ();
+        $doPlayer = $database->getDataObject ("player");
+        $doPlayer->addWhereCondition("username = '" . $username . "'");
         if ($doPlayer->find(true))
         {
             $player = new Player();
