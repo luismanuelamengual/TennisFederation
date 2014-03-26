@@ -12,7 +12,7 @@ class PlayerController extends SiteController
     public function onBeforeActionExecution ($action)
     {
         $executeAction = parent::onBeforeActionExecution($action);
-        if ($executeAction && $this->getSession()->type != PlayerType::PLAYERTYPE_ADMINISTRATOR)
+        if ($executeAction && ($this->getSession()->type != PlayerType::PLAYERTYPE_ADMINISTRATOR && $action != "myAccount" && $action != "myAccountSave" ))
             throw new Exception ("No tiene permisos para acceder a este controlador");
         return $executeAction;
     }

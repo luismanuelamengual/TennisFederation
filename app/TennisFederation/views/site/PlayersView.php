@@ -40,9 +40,9 @@ class PlayersView extends SiteView
         $table->addColumn ("#", "id");
         $table->addColumn ("Nombre", "firstname");
         $table->addColumn ("Apellido", "lastname");
-        $table->addColumn ("EMail", "email");
-        $table->addColumn ("Telefono 1", "contactVia1");
-        $table->addColumn ("Telefono 2", "contactVia2");
+        $table->addColumn ("E-mail", "email");
+        $table->addColumn ("Teléfono 1", "contactVia1");
+        $table->addColumn ("Teléfono 2", "contactVia2");
         $table->setEntities($this->players);
         $table->addEntityProperty("playerId", "id");
         return $table;
