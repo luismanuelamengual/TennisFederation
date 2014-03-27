@@ -85,6 +85,11 @@ class User extends Model
     private $province;
     
     /**
+     * @Column (columnName="clubid", relatedTableName="club")
+     */
+    private $club;
+    
+    /**
      * @Column (columnName="disponibility")
      */
     private $disponibility;
@@ -242,6 +247,16 @@ class User extends Model
     public function setProvince(Province $province)
     {
         $this->province = $province;
+    }
+    
+    public function getClub()
+    {
+        return $this->club;
+    }
+
+    public function setClub(Club $club)
+    {
+        $this->club = $club;
     }
 
     public function getDisponibility()

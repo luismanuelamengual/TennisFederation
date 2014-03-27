@@ -37,6 +37,7 @@ class UserController extends SiteController
         $userView = $this->createView("site/userForm");
         $userView->setCountries ($this->getApplication()->getController("site/country")->getCountries());
         $userView->setProvinces ($this->getApplication()->getController("site/province")->getProvinces());
+        $userView->setClubs ($this->getApplication()->getController("site/club")->getClubs());
         $userView->setUserTypes ($this->getUserTypes());
         if ($userid != null)
             $userView->setUser($this->getUser($userid));
@@ -49,6 +50,7 @@ class UserController extends SiteController
         $userView->setMyAccountMode(true);
         $userView->setCountries ($this->getApplication()->getController("site/country")->getCountries());
         $userView->setProvinces ($this->getApplication()->getController("site/province")->getProvinces());
+        $userView->setClubs ($this->getApplication()->getController("site/club")->getClubs());
         $userView->setUserTypes ($this->getUserTypes());
         $userView->setUser($this->getUser($this->getSession()->userId));
         $userView->render();
@@ -171,6 +173,7 @@ class UserController extends SiteController
         $doUser->username = $user->getUsername();
         $doUser->password = $user->getPassword();
         $doUser->provinceid = $user->getProvince()->getId();
+        $doUser->clubid = $user->getClub()->getId();
         $doUser->active = true;
         $doUser->insert();
         return intval($database->getLastInsertedId("user_userid_seq"));
@@ -197,6 +200,7 @@ class UserController extends SiteController
             $doUser->username = $user->getUsername();
         $doUser->password = $user->getPassword();
         $doUser->provinceid = $user->getProvince()->getId();
+        $doUser->clubid = $user->getClub()->getId();
         $doUser->addWhereCondition("userid = " . $user->getId());
         $doUser->update();
     }

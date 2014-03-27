@@ -16,6 +16,7 @@ class UserFormView extends SiteView
     private $usertypes;
     private $countries;
     private $provinces;
+    private $clubs;
     private $myAccountMode = false;
     
     protected function addScripts ()
@@ -153,6 +154,11 @@ class UserFormView extends SiteView
         $this->provinces = $provinces;
     }
     
+    public function setClubs ($clubs)
+    {
+        $this->clubs = $clubs;
+    }
+    
     protected function createMainContent() 
     {
         $title = $this->user != null? "Edición de Usuario" : "Creación de Usuario";
@@ -179,6 +185,7 @@ class UserFormView extends SiteView
         $birthDateField->setTimeEnabled(false);
         $countryField = new EntityCombobox(array("placeholder"=>"País", "class"=>"form-control", "name"=>"countryid"), $this->countries);
         $provinceField = new EntityCombobox(array("placeholder"=>"Provincia", "class"=>"form-control", "name"=>"provinceid"), $this->provinces);
+        $clubField = new EntityCombobox(array("placeholder"=>"Club", "class"=>"form-control", "name"=>"clubid"), $this->clubs);
         $addressTextField = new Tag("input", array("placeholder"=>"Dirección", "type"=>"text", "class"=>"form-control", "name"=>"address"));
         $contactVia1TextField = new Tag("input", array("placeholder"=>"Telefono 1", "type"=>"text", "class"=>"form-control", "name"=>"contactvia1"));
         $contactVia2TextField = new Tag("input", array("placeholder"=>"Telefono 2", "type"=>"text", "class"=>"form-control", "name"=>"contactvia2"));
@@ -200,6 +207,7 @@ class UserFormView extends SiteView
             $documentTextField->setAttribute("value", $this->user->getDocumentNumber());
             $countryField->setAttribute("value", $this->user->getCountry()->getId());
             $provinceField->setAttribute("value", $this->user->getProvince()->getId());
+            $clubField->setAttribute("value", $this->user->getClub()->getId());
             $addressTextField->setAttribute("value", $this->user->getAddress());
             $contactVia1TextField->setAttribute("value", $this->user->getContactVia1());
             $contactVia2TextField->setAttribute("value", $this->user->getContactVia2());
@@ -224,6 +232,7 @@ class UserFormView extends SiteView
         $form->addField($documentTextField, "Número de Documento");
         $form->addField($countryField, "País");
         $form->addField($provinceField, "Provincia");
+        $form->addField($clubField, "Club");
         $form->addField($addressTextField, "Dirección");
         $form->addField($contactVia1TextField, "Telefono 1");
         $form->addField($contactVia2TextField, "Telefono 2");
