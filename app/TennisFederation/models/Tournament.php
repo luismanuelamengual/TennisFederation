@@ -49,6 +49,11 @@ class Tournament extends Model
      */
     private $state;
     
+    /**
+     * @Column (columnName="organizerid", relatedTableName="user")
+     */
+    private $organizer;
+    
     private $phases = array();
     private $categories = array();
     private $inscriptions = array();
@@ -172,6 +177,16 @@ class Tournament extends Model
         if (!isset($this->inscriptions[$category]))
             $this->inscriptions[$category] = array();
         $this->inscriptions[$category][] = $team;
+    }
+    
+    public function getOrganizer()
+    {
+        return $this->organizer;
+    }
+
+    public function setOrganizer(User $organizer)
+    {
+        $this->organizer = $organizer;
     }
 }
 
