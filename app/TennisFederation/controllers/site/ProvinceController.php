@@ -101,6 +101,7 @@ class ProvinceController extends SiteController
         $database = $this->getApplication()->getDefaultDatabase ();
         $doProvince = $database->getDataObject ("province");
         $doProvince->description = $province->getDescription();
+        $doProvince->countryid = $province->getCountry()->getId();
         $doProvince->insert();
     }
     
@@ -109,6 +110,7 @@ class ProvinceController extends SiteController
         $database = $this->getApplication()->getDefaultDatabase ();
         $doProvince = $database->getDataObject ("province");
         $doProvince->description = $province->getDescription();
+        $doProvince->countryid = $province->getCountry()->getId();
         $doProvince->addWhereCondition("provinceid = " . $province->getId());
         $doProvince->update();
     }

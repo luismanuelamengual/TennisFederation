@@ -19,6 +19,11 @@ class Province extends Model
      */
     private $description;
     
+    /**
+     * @Column (columnName="countryid", relatedTableName="country")
+     */
+    private $country;
+    
     public function getId() 
     {
         return $this->id;
@@ -37,6 +42,16 @@ class Province extends Model
     public function setDescription($description) 
     {
         $this->description = $description;
+    }
+    
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    public function setCountry(Country $country)
+    {
+        $this->country = $country;
     }
 }
 

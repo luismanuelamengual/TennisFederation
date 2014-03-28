@@ -103,6 +103,7 @@ class ClubController extends SiteController
         $doClub->address = $club->getAddress();
         $doClub->contactvia1 = $club->getContactvia1();
         $doClub->contactvia2 = $club->getContactvia2();
+        $doClub->provinceid = $club->getProvince()->getId();
         $doClub->insert();
     }
     
@@ -114,6 +115,7 @@ class ClubController extends SiteController
         $doClub->address = $club->getAddress();
         $doClub->contactvia1 = $club->getContactvia1();
         $doClub->contactvia2 = $club->getContactvia2();
+        $doClub->provinceid = $club->getProvince()->getId();
         $doClub->addWhereCondition("clubid = " . $club->getId());
         $doClub->update();
     }

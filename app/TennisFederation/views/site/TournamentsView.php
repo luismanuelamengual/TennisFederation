@@ -5,7 +5,6 @@ namespace TennisFederation\views\site;
 use NeoPHP\web\html\Tag;
 use TennisFederation\components\Button;
 use TennisFederation\components\EntityTable;
-use TennisFederation\models\Match;
 use TennisFederation\views\site\SiteView;
 
 class TournamentsView extends SiteView

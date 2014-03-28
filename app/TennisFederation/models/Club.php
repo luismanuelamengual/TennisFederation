@@ -44,6 +44,11 @@ class Club extends Model
      */
     private $contactvia2;
 
+    /**
+     * @Column (columnName="provinceid", relatedTableName="province")
+     */
+    private $province;
+    
     public function getId() 
     {
         return $this->id;
@@ -112,6 +117,16 @@ class Club extends Model
     public function setContactvia2($contactvia2)
     {
         $this->contactvia2 = $contactvia2;
+    }
+    
+    public function getProvince()
+    {
+        return $this->province;
+    }
+
+    public function setProvince(Province $province)
+    {
+        $this->province = $province;
     }
 }
 
