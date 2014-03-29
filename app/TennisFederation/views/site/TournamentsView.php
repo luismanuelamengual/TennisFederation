@@ -19,7 +19,7 @@ class TournamentsView extends SiteView
     protected function createMainContent() 
     {
         $container = parent::createMainContent();
-        $container->add (new Tag("h1", array("class"=>"page-header"), "Lista de Torneos"));
+        $container->add (new Tag("h1", array("class"=>"page-header"), "Administración de Torneos"));
         $container->add ($this->createButtonToolbar());
         $container->add ($this->createTournamentsTable());
         return $container;
@@ -39,8 +39,6 @@ class TournamentsView extends SiteView
         $table = new EntityTable(array("id"=>"tournamentsTable"));
         $table->addColumn ("#", "id");
         $table->addColumn ("Nombre", "description");
-        $table->addColumn ("Pais", "country_description");
-        $table->addColumn ("Provincia", "province_description");
         $table->addColumn ("Club", "club_description");
         $table->addColumn ("Fecha inicia", "startDate");
         $table->addColumn ("Fecha cierre", "inscriptionDate");

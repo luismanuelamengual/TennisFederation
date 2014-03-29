@@ -39,7 +39,7 @@ class ProvinceController extends SiteController
     {
         $province = new Province();
         $province->setDescription($description);
-        $this->createProvince($province);
+        $this->saveProvince($province);
         $this->renderProvincesView();
     }
     
@@ -48,7 +48,7 @@ class ProvinceController extends SiteController
         $province = new Province();
         $province->setId($provinceid);
         $province->setDescription($description);
-        $this->updateProvince($province);
+        $this->saveProvince($province);
         $this->renderProvincesView();
     }
     
@@ -96,23 +96,22 @@ class ProvinceController extends SiteController
         return $province;
     }
     
-    public function createProvince (Province $province)
+    public function saveProvince (Province $province)
     {
         $database = $this->getApplication()->getDefaultDatabase ();
         $doProvince = $database->getDataObject ("province");
         $doProvince->description = $province->getDescription();
-        $doProvince->countryid = $province->getCountry()->getId();
-        $doProvince->insert();
-    }
-    
-    public function updateProvince (Province $province)
-    {
-        $database = $this->getApplication()->getDefaultDatabase ();
-        $doProvince = $database->getDataObject ("province");
-        $doProvince->description = $province->getDescription();
-        $doProvince->countryid = $province->getCountry()->getId();
-        $doProvince->addWhereCondition("provinceid = " . $province->getId());
-        $doProvince->update();
+        if ($province->getCountry() != null)
+            $doProvince->countryid = $province->getCountry()->getId();
+        if ($province->getId() != null)
+        {
+            $doProvince->addWhereCondition("provinceid = " . $province->getId());
+            $doProvince->update();
+        }
+        else 
+        {
+            $doProvince->insert();
+        }
     }
     
     public function deleteProvince ($provinceid)

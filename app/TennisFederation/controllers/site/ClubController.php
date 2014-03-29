@@ -39,7 +39,7 @@ class ClubController extends SiteController
     {
         $club = new Club();
         $club->completeFromFieldsArray($this->getRequest()->getParameters()->getVars());
-        $this->createClub($club);
+        $this->saveClub($club);
         $this->renderClubsView();
     }
     
@@ -47,7 +47,7 @@ class ClubController extends SiteController
     {
         $club = new Club();
         $club->completeFromFieldsArray($this->getRequest()->getParameters()->getVars());
-        $this->updateClub($club);
+        $this->saveClub($club);
         $this->renderClubsView();
     }
     
@@ -95,7 +95,7 @@ class ClubController extends SiteController
         return $club;
     }
     
-    public function createClub (Club $club)
+    public function saveClub (Club $club)
     {
         $database = $this->getApplication()->getDefaultDatabase ();
         $doClub = $database->getDataObject ("club");
@@ -103,21 +103,17 @@ class ClubController extends SiteController
         $doClub->address = $club->getAddress();
         $doClub->contactvia1 = $club->getContactvia1();
         $doClub->contactvia2 = $club->getContactvia2();
-        $doClub->provinceid = $club->getProvince()->getId();
-        $doClub->insert();
-    }
-    
-    public function updateClub (Club $club)
-    {
-        $database = $this->getApplication()->getDefaultDatabase ();
-        $doClub = $database->getDataObject ("club");
-        $doClub->description = $club->getDescription();
-        $doClub->address = $club->getAddress();
-        $doClub->contactvia1 = $club->getContactvia1();
-        $doClub->contactvia2 = $club->getContactvia2();
-        $doClub->provinceid = $club->getProvince()->getId();
-        $doClub->addWhereCondition("clubid = " . $club->getId());
-        $doClub->update();
+        if ($club->getProvince() != null)
+            $doClub->provinceid = $club->getProvince()->getId();
+        if ($club->getId() != null)
+        {
+            $doClub->addWhereCondition("clubid = " . $club->getId());
+            $doClub->update();
+        }
+        else
+        {
+            $doClub->insert();
+        }
     }
     
     public function deleteClub ($clubid)
