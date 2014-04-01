@@ -29,6 +29,7 @@ class TournamentController extends SiteController
         $tournamentView = $this->createView("site/tournamentForm");
         $tournamentView->setCountries ($this->getApplication()->getController("site/country")->getCountries());
         $tournamentView->setProvinces ($this->getApplication()->getController("site/province")->getProvinces());
+        $tournamentView->setClubs ($this->getApplication()->getController("site/club")->getClubs());
         if ($tournamentid != null)
             $tournamentView->setTournament($this->getCategory($tournamentid));
         $tournamentView->render();

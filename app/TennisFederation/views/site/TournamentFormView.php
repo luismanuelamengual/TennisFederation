@@ -4,6 +4,7 @@ namespace TennisFederation\views\site;
 
 use NeoPHP\web\html\Tag;
 use TennisFederation\components\Button;
+use TennisFederation\components\DatetimePicker;
 use TennisFederation\components\EntityCombobox;
 use TennisFederation\components\Form;
 use TennisFederation\models\Tournament;
@@ -14,6 +15,7 @@ class TournamentFormView extends SiteView
     private $tournament;
     private $countries;
     private $provinces;
+    private $clubs;
     
     public function setTournament (Tournament $tournament)
     {
@@ -30,6 +32,11 @@ class TournamentFormView extends SiteView
         $this->provinces = $provinces;
     }
     
+    public function setClubs ($clubs)
+    {
+        $this->clubs = $clubs;
+    }
+    
     protected function createMainContent() 
     {
         $container = parent::createMainContent();
@@ -44,19 +51,31 @@ class TournamentFormView extends SiteView
         $descriptionTextField = new Tag("input", array("placeholder"=>"Descripción", "type"=>"text", "class"=>"form-control", "name"=>"description"));
         $countryField = new EntityCombobox(array("placeholder"=>"País", "class"=>"form-control", "name"=>"countryid"), $this->countries);
         $provinceField = new EntityCombobox(array("placeholder"=>"Provincia", "class"=>"form-control", "name"=>"provinceid"), $this->provinces);
+        $clubField = new EntityCombobox(array("placeholder"=>"Club", "class"=>"form-control", "name"=>"clubid"), $this->clubs);
+        $startDateField = new DatetimePicker($this, array("placeholder"=>"Fecha de inicio", "name"=>"startdate"));
+        $startDateField->setTimeEnabled(false);
+        $inscriptionDateField = new DatetimePicker($this, array("placeholder"=>"Fecha de cierre de inscripción", "name"=>"inscriptiondate"));
+        $inscriptionDateField->setTimeEnabled(false);
         if ($this->tournament != null)
         {
             $idHiddenField->setAttribute("value", $this->tournament->getId());
             $descriptionTextField->setAttribute("value", $this->tournament->getDescription());
-            $countryField->setAttribute("value", $this->user->getCountry()->getId());
-            $provinceField->setAttribute("value", $this->user->getProvince()->getId());
+            $countryField->setAttribute("value", $this->tournament->getCountry()->getId());
+            $provinceField->setAttribute("value", $this->tournament->getProvince()->getId());
+            $clubField->setAttribute("value", $this->tournament->getClub()->getId());
+            $startDateField->setAttribute("value", $this->tournament->getStartDate());
+            $inscriptionDateField->setAttribute("value", $this->tournament->getInscriptionDate());
         }
         
         $form = new Form(array("method"=>"post", "action"=>($this->tournament != null)? "updateTournament" : "createTournament"));
+        $form->setColumns(2);
         $form->add($idHiddenField);
         $form->addField($descriptionTextField, "Descripción");
         $form->addField($countryField, "País");
         $form->addField($provinceField, "Provincia");
+        $form->addField($clubField, "Club");
+        $form->addField($startDateField, "Fecha de inicio");
+        $form->addField($inscriptionDateField, "Fecha de cierre de inscripción");
         $form->addButton(new Button("Guardar datos", array("class"=>"btn btn-primary")));
         return $form;
     }
