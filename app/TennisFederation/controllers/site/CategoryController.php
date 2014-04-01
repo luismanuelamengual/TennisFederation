@@ -40,7 +40,7 @@ class CategoryController extends SiteController
         $category = new Category();
         $category->setDescription($description);
         $category->setMatchType($matchtype);
-        $this->createCategory($category);
+        $this->saveCategory($category);
         $this->renderCategoriesView();
     }
     
@@ -50,7 +50,7 @@ class CategoryController extends SiteController
         $category->setId($categoryid);
         $category->setDescription($description);
         $category->setMatchType($matchtype);
-        $this->updateCategory($category);
+        $this->saveCategory($category);
         $this->renderCategoriesView();
     }
     
@@ -98,23 +98,21 @@ class CategoryController extends SiteController
         return $category;
     }
     
-    public function createCategory (Category $category)
+    public function saveCategory (Category $category)
     {
         $database = $this->getApplication()->getDefaultDatabase ();
         $doCategory = $database->getDataObject ("category");
         $doCategory->description = $category->getDescription();
         $doCategory->matchtype = $category->getMatchType();
-        $doCategory->insert();
-    }
-    
-    public function updateCategory (Category $category)
-    {
-        $database = $this->getApplication()->getDefaultDatabase ();
-        $doCategory = $database->getDataObject ("category");
-        $doCategory->description = $category->getDescription();
-        $doCategory->matchtype = $category->getMatchType();
-        $doCategory->addWhereCondition("categoryid = " . $category->getId());
-        $doCategory->update();
+        if ($category->getId() != null)
+        {
+            $doCategory->addWhereCondition("categoryid = " . $category->getId());
+            $doCategory->update();
+        }
+        else
+        {
+            $doCategory->insert();
+        }
     }
     
     public function deleteCategory ($categoryid)

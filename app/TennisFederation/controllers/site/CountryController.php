@@ -39,7 +39,7 @@ class CountryController extends SiteController
     {
         $country = new Country();
         $country->setDescription($description);
-        $this->createCountry($country);
+        $this->saveCountry($country);
         $this->renderCountriesView();
     }
     
@@ -48,7 +48,7 @@ class CountryController extends SiteController
         $country = new Country();
         $country->setId($countryid);
         $country->setDescription($description);
-        $this->updateCountry($country);
+        $this->saveCountry($country);
         $this->renderCountriesView();
     }
     
@@ -96,21 +96,20 @@ class CountryController extends SiteController
         return $country;
     }
     
-    public function createCountry (Country $country)
+    public function saveCountry (Country $country)
     {
         $database = $this->getApplication()->getDefaultDatabase ();
         $doCountry = $database->getDataObject ("country");
         $doCountry->description = $country->getDescription();
-        $doCountry->insert();
-    }
-    
-    public function updateCountry (Country $country)
-    {
-        $database = $this->getApplication()->getDefaultDatabase ();
-        $doCountry = $database->getDataObject ("country");
-        $doCountry->description = $country->getDescription();
-        $doCountry->addWhereCondition("countryid = " . $country->getId());
-        $doCountry->update();
+        if ($country->getId() != null)
+        {
+            $doCountry->addWhereCondition("countryid = " . $country->getId());
+            $doCountry->update();
+        }
+        else
+        {
+            $doCountry->insert();
+        }
     }
     
     public function deleteCountry ($countryid)

@@ -60,7 +60,7 @@ class UserController extends SiteController
     {
         $user = new User();
         $user->completeFromFieldsArray($this->getRequest()->getParameters()->getVars());
-        $this->updateUser($user);
+        $this->saveUser($user);
         $this->executeAction("site/dashboard/");
     }
     
@@ -68,7 +68,7 @@ class UserController extends SiteController
     {
         $user = new User();
         $user->completeFromFieldsArray($this->getRequest()->getParameters()->getVars());
-        $this->createUser($user);
+        $this->saveUser($user);
         $this->renderUsersView();
     }
     
@@ -76,7 +76,7 @@ class UserController extends SiteController
     {
         $user = new User();
         $user->completeFromFieldsArray($this->getRequest()->getParameters()->getVars());
-        $this->updateUser($user);
+        $this->saveUser($user);
         $this->renderUsersView();
     }
     
@@ -154,44 +154,18 @@ class UserController extends SiteController
         return $user;
     }
     
-    public function createUser (User $user)
-    {
-        $database = $this->getApplication()->getDefaultDatabase ();
-        $doUser = $database->getDataObject ("user");
-        $doUser->usertypeid = $user->getType()->getId();
-        $doUser->address = $user->getAddress();
-        if (!empty($user->getBirthDate()))
-            $doUser->birthdate = $user->getBirthDate();
-        $doUser->contactvia1 = $user->getContactVia1();
-        $doUser->contactvia2 = $user->getContactVia2();
-        $doUser->contactvia3 = $user->getContactVia3();
-        $doUser->countryid = $user->getCountry()->getId();
-        $doUser->documentnumber = $user->getDocumentNumber();
-        $doUser->email = $user->getEmail();
-        $doUser->firstname = $user->getFirstname();
-        $doUser->lastname = $user->getLastname();
-        $doUser->username = $user->getUsername();
-        $doUser->password = $user->getPassword();
-        $doUser->provinceid = $user->getProvince()->getId();
-        $doUser->clubid = $user->getClub()->getId();
-        $doUser->active = true;
-        $doUser->insert();
-        return intval($database->getLastInsertedId("user_userid_seq"));
-    }
-    
-    public function updateUser (User $user)
+    public function saveUser (User $user)
     {
         $database = $this->getApplication()->getDefaultDatabase ();
         $doUser = $database->getDataObject ("user");
         if ($user->getType() != null)
             $doUser->usertypeid = $user->getType()->getId();
-        $doUser->address = $user->getAddress();
         if (!empty($user->getBirthDate()))
             $doUser->birthdate = $user->getBirthDate();
+        $doUser->address = $user->getAddress();
         $doUser->contactvia1 = $user->getContactVia1();
         $doUser->contactvia2 = $user->getContactVia2();
         $doUser->contactvia3 = $user->getContactVia3();
-        $doUser->countryid = $user->getCountry()->getId();
         $doUser->documentnumber = $user->getDocumentNumber();
         $doUser->email = $user->getEmail();
         $doUser->firstname = $user->getFirstname();
@@ -199,10 +173,22 @@ class UserController extends SiteController
         if (!empty($user->getUsername()))
             $doUser->username = $user->getUsername();
         $doUser->password = $user->getPassword();
-        $doUser->provinceid = $user->getProvince()->getId();
-        $doUser->clubid = $user->getClub()->getId();
-        $doUser->addWhereCondition("userid = " . $user->getId());
-        $doUser->update();
+        if ($user->getCountry() != null)
+            $doUser->countryid = $user->getCountry()->getId();
+        if ($user->getProvince() != null)
+            $doUser->provinceid = $user->getProvince()->getId();
+        if ($user->getClub() != null)
+            $doUser->clubid = $user->getClub()->getId();
+        if ($user->getId() != null)
+        {
+            $doUser->addWhereCondition("userid = " . $user->getId());
+            $doUser->update();
+        }
+        else
+        {
+            $doUser->active = true;
+            $doUser->insert();
+        }
     }
     
     public function updateUserImage ($userid)
