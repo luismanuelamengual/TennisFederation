@@ -9,6 +9,10 @@ use NeoPHP\mvc\Model;
  */
 class Tournament extends Model
 {
+    const TOURNAMENTSTATE_INSCRIPTION = 1;
+    const TOURNAMENTSTATE_PLAYING = 2;
+    const TOURNAMENTSTATE_FINALIZED = 3;
+    
     /**
      * @Column (columnName="tournamentid", id=true)
      */
@@ -45,7 +49,7 @@ class Tournament extends Model
     private $inscriptionDate;
     
     /**
-     * @Column (columnName="tournamentstateid")
+     * @Column (columnName="tournamentstateid", relateTableName="tournamentstate")
      */
     private $state;
     
