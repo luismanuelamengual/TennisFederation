@@ -9,9 +9,9 @@ use NeoPHP\mvc\Model;
  */
 class Tournament extends Model
 {
-    const TOURNAMENTSTATE_INSCRIPTION = 1;
-    const TOURNAMENTSTATE_PLAYING = 2;
-    const TOURNAMENTSTATE_FINALIZED = 3;
+    const STATE_INSCRIPTION = 1;
+    const STATE_PLAYING = 2;
+    const STATE_FINALIZED = 3;
     
     /**
      * @Column (columnName="tournamentid", id=true)
@@ -44,9 +44,9 @@ class Tournament extends Model
     private $startDate;
     
     /**
-     * @Column (columnName="inscriptiondate")
+     * @Column (columnName="inscriptionsdate")
      */
-    private $inscriptionDate;
+    private $inscriptionsDate;
     
     /**
      * @Column (columnName="state")
@@ -86,7 +86,7 @@ class Tournament extends Model
         return $this->country;
     }
 
-    public function setCountry($country)
+    public function setCountry(Country $country)
     {
         $this->country = $country;
     }
@@ -96,7 +96,7 @@ class Tournament extends Model
         return $this->province;
     }
 
-    public function setProvince($province)
+    public function setProvince(Province $province)
     {
         $this->province = $province;
     }
@@ -106,7 +106,7 @@ class Tournament extends Model
         return $this->club;
     }
 
-    public function setClub($club)
+    public function setClub(Club $club)
     {
         $this->club = $club;
     }
@@ -121,14 +121,14 @@ class Tournament extends Model
         $this->startDate = $startDate;
     }
 
-    public function getInscriptionDate()
+    public function getInscriptionsDate()
     {
-        return $this->inscriptionDate;
+        return $this->inscriptionsDate;
     }
 
-    public function setInscriptionDate($inscriptionDate)
+    public function setInscriptionsDate($inscriptionsDate)
     {
-        $this->inscriptionDate = $inscriptionDate;
+        $this->inscriptionsDate = $inscriptionsDate;
     }
 
     public function getState()
@@ -136,7 +136,7 @@ class Tournament extends Model
         return $this->state;
     }
 
-    public function setState(TournamentState $state)
+    public function setState($state)
     {
         $this->state = $state;
     }

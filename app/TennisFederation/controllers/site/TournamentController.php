@@ -12,6 +12,14 @@ class TournamentController extends SiteController
         $this->showTournamentsListAction();
     }
     
+    public function createTournamentAction()
+    {
+        $tournament = new Tournament();
+        $tournament->completeFromFieldsArray($this->getRequest()->getParameters()->getVars());
+        $this->saveTournament($tournament);
+        $this->showTournamentsListAction();
+    }
+    
     public function showTournamentsListAction ()
     {
         $tournaments = $this->getTournaments();        
@@ -28,8 +36,6 @@ class TournamentController extends SiteController
     public function showTournamentFormAction ($tournamentid)
     {
         $tournamentView = $this->createView("site/tournamentForm");
-        $tournamentView->setCountries ($this->getApplication()->getController("site/country")->getCountries());
-        $tournamentView->setProvinces ($this->getApplication()->getController("site/province")->getProvinces());
         $tournamentView->setClubs ($this->getApplication()->getController("site/club")->getClubs());
         if ($tournamentid != null)
             $tournamentView->setTournament($this->getTournament($tournamentid));
@@ -41,6 +47,10 @@ class TournamentController extends SiteController
         $tournaments = array();
         $database = $this->getApplication()->getDefaultDatabase ();
         $doTournament = $database->getDataObject ("tournament");
+        $doClub = $database->getDataObject ("club");
+        $doTournament->addSelectField ("tournament.*");
+        $doTournament->addSelectFields (array("clubid","description"), "club_%s", "club");
+        $doTournament->addJoin ($doClub);
         $doTournament->addOrderByField ("tournamentid");
         $doTournament->find();
         while ($doTournament->fetch())
@@ -57,6 +67,8 @@ class TournamentController extends SiteController
         $tournament = null;
         $database = $this->getApplication()->getDefaultDatabase ();
         $doTournament = $database->getDataObject ("tournament");
+        $doClub = $database->getDataObject ("club");
+        $doTournament->addJoin ($doClub);
         $doTournament->addWhereCondition("tournamentid = " . $tournamentid);
         if ($doTournament->find(true))
         {
@@ -78,9 +90,8 @@ class TournamentController extends SiteController
         if ($tournament->getClub() != null)
             $doTournament->clubid = $tournament->getClub()->getId();
         $doTournament->startdate = $tournament->getStartDate();
-        $doTournament->inscriptiondate = $tournament->getInscriptionDate();
-        if ($tournament->getState() != null)
-            $doTournament->tournamentstateid = $tournament->getState()->getId();
+        $doTournament->inscriptionsdate = $tournament->getInscriptionsDate();
+        $doTournament->state = !empty($tournament->getState())? $tournament->getState() : Tournament::STATE_INSCRIPTION;
         if ($tournament->getId() != null)
         {
             $doTournament->addWhereCondition("tournamentid = " . $tournament->getId());

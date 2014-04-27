@@ -6,6 +6,7 @@ use NeoPHP\web\html\Tag;
 use TennisFederation\components\Button;
 use TennisFederation\components\EntityTable;
 use TennisFederation\views\site\SiteView;
+use TennisFederation\models\Tournament;
 
 class TournamentsView extends SiteView
 {
@@ -41,8 +42,16 @@ class TournamentsView extends SiteView
         $table->addColumn ("Nombre", "description");
         $table->addColumn ("Club", "club_description");
         $table->addColumn ("Fecha inicia", "startDate");
-        $table->addColumn ("Fecha cierre", "inscriptionDate");
-        $table->addColumn ("Estado", "state");
+        $table->addColumn ("Fecha cierre", "inscriptionsDate"); 
+        $table->addColumn ("Estado", "state", function ($state) 
+        {
+            switch ($state)
+            {
+                case Tournament::STATE_INSCRIPTION: return "Inscripción"; break;
+                case Tournament::STATE_PLAYING: return "En Juego"; break;
+                case Tournament::STATE_FINALIZED: return "Finalizado"; break;
+            }
+        });
         $table->setEntities($this->tournaments);
         $table->addEntityProperty("tournamentId", "id");
         return $table;
@@ -81,7 +90,7 @@ class TournamentsView extends SiteView
             {
                 var selectedTournamentId = getSelectedTournamentId();
                 if (selectedTournamentId != false)
-                    if (window.confirm("Esta seguro de eliminar la categoría " + selectedTournamentId + " ?"))
+                    if (window.confirm("Esta seguro de eliminar el torneo " + selectedTournamentId + " ?"))
                         window.open("' . $this->getUrl("site/tournament/deleteTournament") . '?tournamentid=" + selectedTournamentId, "_self");
             }
         ');
