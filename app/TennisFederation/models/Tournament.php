@@ -49,7 +49,7 @@ class Tournament extends Model
     private $inscriptionDate;
     
     /**
-     * @Column (columnName="tournamentstateid", relateTableName="tournamentstate")
+     * @Column (columnName="state")
      */
     private $state;
     
@@ -58,7 +58,6 @@ class Tournament extends Model
      */
     private $organizer;
     
-    private $phases = array();
     private $categories = array();
     private $inscriptions = array();
     
