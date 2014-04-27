@@ -41,13 +41,13 @@ class TournamentsView extends SiteView
         $table->addColumn ("#", "id");
         $table->addColumn ("Nombre", "description");
         $table->addColumn ("Club", "club_description");
-        $table->addColumn ("Fecha inicia", "startDate");
-        $table->addColumn ("Fecha cierre", "inscriptionsDate"); 
+        $table->addColumn ("Fecha inicia", "startDate", function ($date) { return date("Y-m-d", strtotime($date)); } );
+        $table->addColumn ("Fecha cierre", "inscriptionsDate", function ($date) { return date("Y-m-d", strtotime($date)); } );
         $table->addColumn ("Estado", "state", function ($state) 
         {
             switch ($state)
             {
-                case Tournament::STATE_INSCRIPTION: return "Inscripción"; break;
+                case Tournament::STATE_INSCRIPTION: return "Fase de Inscripción"; break;
                 case Tournament::STATE_PLAYING: return "En Juego"; break;
                 case Tournament::STATE_FINALIZED: return "Finalizado"; break;
             }

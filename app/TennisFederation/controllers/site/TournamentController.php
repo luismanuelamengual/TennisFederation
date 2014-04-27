@@ -20,6 +20,20 @@ class TournamentController extends SiteController
         $this->showTournamentsListAction();
     }
     
+    public function updateTournamentAction()
+    {
+        $tournament = new Tournament();
+        $tournament->completeFromFieldsArray($this->getRequest()->getParameters()->getVars());
+        $this->saveTournament($tournament);
+        $this->showTournamentsListAction();
+    }
+    
+    public function deleteTournamentAction($tournamentid)
+    {
+        $this->deleteTournament($tournamentid);
+        $this->showTournamentsListAction();
+    }
+    
     public function showTournamentsListAction ()
     {
         $tournaments = $this->getTournaments();        
@@ -67,8 +81,6 @@ class TournamentController extends SiteController
         $tournament = null;
         $database = $this->getApplication()->getDefaultDatabase ();
         $doTournament = $database->getDataObject ("tournament");
-        $doClub = $database->getDataObject ("club");
-        $doTournament->addJoin ($doClub);
         $doTournament->addWhereCondition("tournamentid = " . $tournamentid);
         if ($doTournament->find(true))
         {

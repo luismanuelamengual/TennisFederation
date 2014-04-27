@@ -48,7 +48,7 @@ class TournamentFormView extends SiteView
             $descriptionTextField->setAttribute("value", $this->tournament->getDescription());
             $clubField->setAttribute("value", $this->tournament->getClub()->getId());
             $startDateField->setAttribute("value", $this->tournament->getStartDate());
-            $inscriptionDateField->setAttribute("value", $this->tournament->getInscriptionDate());
+            $inscriptionDateField->setAttribute("value", $this->tournament->getInscriptionsDate());
         }
         
         $form = new Form(array("method"=>"post", "action"=>($this->tournament != null)? "updateTournament" : "createTournament"));
