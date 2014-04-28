@@ -141,8 +141,7 @@ class TournamentController extends SiteController
             }
             else
             {
-                if ($tournament->getOrganizer() != null)
-                    $doTournament->organizerid = $tournament->getOrganizer()->getId();
+                $doTournament->organizerid = ($tournament->getOrganizer() != null)? $tournament->getOrganizer()->getId() : $this->getSession()->userId;
                 $doTournament->insert();
                 $tournamentId = intval($database->getLastInsertedId("tournament_tournamentid_seq"));
                 if (empty($tournamentId))
