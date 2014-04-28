@@ -16,7 +16,7 @@ class TournamentController extends SiteController
     
     public function viewAllAction()
     {
-        $this->showTournamentsListAction(true);
+        $this->showTournamentsListAction(false);
     }
     
     public function createTournamentAction()
@@ -51,12 +51,12 @@ class TournamentController extends SiteController
         return $tournament;
     }
     
-    public function showTournamentsListAction ($viewerMode=false)
+    public function showTournamentsListAction ($admMode=true)
     {
         $tournaments = $this->getTournaments();
         $tournamentsView = $this->createView("site/tournaments");
         $tournamentsView->setTournaments ($tournaments);
-        $tournamentsView->setViewerMode($viewerMode);
+        $tournamentsView->setAdmMode($admMode);
         $tournamentsView->render();
     }
     

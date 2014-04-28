@@ -10,12 +10,12 @@ use TennisFederation\models\Tournament;
 
 class TournamentsView extends SiteView
 {
-    private $viewerMode = false;
+    private $admMode = false;
     private $tournaments = array();
     
-    public function setViewerMode ($viewerMode)
+    public function setAdmMode ($admMode)
     {
-        $this->viewerMode = $viewerMode;
+        $this->admMode = $admMode;
     }
     
     public function setTournaments ($tournaments)
@@ -26,7 +26,7 @@ class TournamentsView extends SiteView
     protected function createMainContent() 
     {
         $container = parent::createMainContent();
-        $container->add (new Tag("h1", array("class"=>"page-header"), $this->viewerMode? "Listado de Torneos" : "Administración de Torneos"));
+        $container->add (new Tag("h1", array("class"=>"page-header"), $this->admMode? "Administración de Torneos" : "Listado de Torneos"));
         $container->add ($this->createButtonToolbar());
         $container->add ($this->createTournamentsTable());
         return $container;
@@ -35,9 +35,15 @@ class TournamentsView extends SiteView
     protected function createButtonToolbar()
     {
         $toolbar = new Tag("ul", array("class"=>"nav nav-pills"));
-        $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-file"></span>&nbsp;Crear', array("class"=>"btn btn-primary", "onclick"=>"createTournament();"))));
-        $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-pencil"></span>&nbsp;Modifiar', array("id"=>"updateButton", "class"=>"btn btn-primary", "onclick"=>"updateTournament();", "disabled"=>"true"))));
-        $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-trash"></span>&nbsp;Eliminar', array("id"=>"deleteButton", "class"=>"btn btn-primary", "onclick"=>"deleteTournament();", "disabled"=>"true"))));
+        if ($this->admMode)
+        {
+            $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-file"></span>&nbsp;Crear', array("class"=>"btn btn-primary", "onclick"=>"createTournament();"))));
+            $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-pencil"></span>&nbsp;Modifiar', array("id"=>"updateButton", "class"=>"btn btn-primary", "onclick"=>"updateTournament();", "disabled"=>"true"))));
+            $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-trash"></span>&nbsp;Eliminar', array("id"=>"deleteButton", "class"=>"btn btn-primary", "onclick"=>"deleteTournament();", "disabled"=>"true"))));
+            $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-list-alt"></span>&nbsp;Administrar partidos', array("id"=>"manageMatchesButton", "class"=>"btn btn-primary", "onclick"=>"manageMatches();", "disabled"=>"true"))));
+        }
+        $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-list-alt"></span>&nbsp;Ver Inscriptos', array("id"=>"viewInscriptionsButton", "class"=>"btn btn-primary", "onclick"=>"viewInscriptions();", "disabled"=>"true"))));
+        $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-list-alt"></span>&nbsp;Ver Partidos', array("id"=>"viewMatchesButton", "class"=>"btn btn-primary", "onclick"=>"viewMatches();", "disabled"=>"true"))));
         return $toolbar;
     }
     
@@ -78,6 +84,9 @@ class TournamentsView extends SiteView
                 $("tr[tournamentId=" + tournamentId + "]").addClass("danger").siblings().removeClass("danger");
                 $("#updateButton").prop("disabled",false); 
                 $("#deleteButton").prop("disabled",false);
+                $("#manageMatchesButton").prop("disabled",false); 
+                $("#viewInscriptionsButton").prop("disabled",false); 
+                $("#viewMatchesButton").prop("disabled",false); 
             }
 
             function createTournament ()
@@ -98,6 +107,27 @@ class TournamentsView extends SiteView
                 if (selectedTournamentId != false)
                     if (window.confirm("Esta seguro de eliminar el torneo " + selectedTournamentId + " ?"))
                         window.open("' . $this->getUrl("site/tournament/deleteTournament") . '?tournamentid=" + selectedTournamentId, "_self");
+            }
+            
+            function manageMatches ()
+            {
+                var selectedTournamentId = getSelectedTournamentId();
+                if (selectedTournamentId != false)
+                    window.open("' . $this->getUrl("site/match/manageMatches") . '?tournamentid=" + selectedTournamentId, "_self");
+            }
+            
+            function viewInscriptions ()
+            {
+                var selectedTournamentId = getSelectedTournamentId();
+                if (selectedTournamentId != false)
+                    window.open("' . $this->getUrl("site/tournament/viewInscriptions") . '?tournamentid=" + selectedTournamentId, "_self");
+            }
+            
+            function viewMatches ()
+            {
+                var selectedTournamentId = getSelectedTournamentId();
+                if (selectedTournamentId != false)
+                    window.open("' . $this->getUrl("site/match/viewMatches") . '?tournamentid=" + selectedTournamentId, "_self");
             }
         ');
         
