@@ -2,8 +2,10 @@
 
 namespace TennisFederation\controllers\site;
 
+use Exception;
 use TennisFederation\controllers\SiteController;
 use TennisFederation\models\Tournament;
+use TennisFederation\models\Category;
 
 class TournamentController extends SiteController
 {
@@ -14,16 +16,14 @@ class TournamentController extends SiteController
     
     public function createTournamentAction()
     {
-        $tournament = new Tournament();
-        $tournament->completeFromFieldsArray($this->getRequest()->getParameters()->getVars());
+        $tournament = $this->createTournamentFromRequest();
         $this->saveTournament($tournament);
         $this->showTournamentsListAction();
     }
     
     public function updateTournamentAction()
     {
-        $tournament = new Tournament();
-        $tournament->completeFromFieldsArray($this->getRequest()->getParameters()->getVars());
+        $tournament = $this->createTournamentFromRequest();
         $this->saveTournament($tournament);
         $this->showTournamentsListAction();
     }
@@ -32,6 +32,18 @@ class TournamentController extends SiteController
     {
         $this->deleteTournament($tournamentid);
         $this->showTournamentsListAction();
+    }
+    
+    private function createTournamentFromRequest ()
+    {
+        $tournament = new Tournament();
+        $tournament->completeFromFieldsArray($this->getRequest()->getParameters()->getVars());
+        if (!empty($this->getRequest()->getParameters()->categories) && sizeof($this->getRequest()->getParameters()->categories) > 0)
+        {
+            foreach ($this->getRequest()->getParameters()->categories as $categoryId)
+                $tournament->addCategory(new Category($categoryId));
+        }
+        return $tournament;
     }
     
     public function showTournamentsListAction ()
@@ -50,6 +62,7 @@ class TournamentController extends SiteController
     public function showTournamentFormAction ($tournamentid)
     {
         $tournamentView = $this->createView("site/tournamentForm");
+        $tournamentView->setCategories ($this->getApplication()->getController("site/category")->getCategories());
         $tournamentView->setClubs ($this->getApplication()->getController("site/club")->getClubs());
         if ($tournamentid != null)
             $tournamentView->setTournament($this->getTournament($tournamentid));
@@ -87,39 +100,82 @@ class TournamentController extends SiteController
             $tournament = new Tournament();
             $tournament->completeFromFieldsArray($doTournament->getFields());
         }
+        if ($tournament != null)
+        {
+            $doTournamentCategory = $database->getDataObject ("tournamentcategory");
+            $doTournamentCategory->addWhereCondition("tournamentid = " . $tournamentid);
+            $doTournamentCategory->find();
+            while ($doTournamentCategory->fetch())
+            {
+                $tournament->addCategory(new Category($doTournamentCategory->categoryid));
+            }
+        }
         return $tournament;
     }
     
     public function saveTournament (Tournament $tournament)
     {
         $database = $this->getApplication()->getDefaultDatabase ();
-        $doTournament = $database->getDataObject ("tournament");
-        $doTournament->description = $tournament->getDescription();
-        if ($tournament->getCountry() != null)
-            $doTournament->countryid = $tournament->getCountry()->getId();
-        if ($tournament->getProvince() != null)
-            $doTournament->provinceid = $tournament->getProvince()->getId();
-        if ($tournament->getClub() != null)
-            $doTournament->clubid = $tournament->getClub()->getId();
-        $doTournament->startdate = $tournament->getStartDate();
-        $doTournament->inscriptionsdate = $tournament->getInscriptionsDate();
-        $doTournament->state = !empty($tournament->getState())? $tournament->getState() : Tournament::STATE_INSCRIPTION;
-        if ($tournament->getId() != null)
+        $database->beginTransaction();
+        try 
         {
-            $doTournament->addWhereCondition("tournamentid = " . $tournament->getId());
-            $doTournament->update();
+            $doTournament = $database->getDataObject ("tournament");
+            $doTournament->description = $tournament->getDescription();
+            if ($tournament->getCountry() != null)
+                $doTournament->countryid = $tournament->getCountry()->getId();
+            if ($tournament->getProvince() != null)
+                $doTournament->provinceid = $tournament->getProvince()->getId();
+            if ($tournament->getClub() != null)
+                $doTournament->clubid = $tournament->getClub()->getId();
+            $doTournament->startdate = $tournament->getStartDate();
+            $doTournament->inscriptionsdate = $tournament->getInscriptionsDate();
+            $doTournament->state = !empty($tournament->getState())? $tournament->getState() : Tournament::STATE_INSCRIPTION;
+            $tournamentId = $tournament->getId();
+            if ($tournamentId != null)
+            {
+                $doTournament->addWhereCondition("tournamentid = " . $tournament->getId());
+                $doTournament->update();
+                $doTournamentCategory = $database->getDataObject ("tournamentcategory");
+                $doTournamentCategory->addWhereCondition("tournamentid = " . $tournamentId);
+                $doTournamentCategory->delete();
+            }
+            else
+            {
+                if ($tournament->getOrganizer() != null)
+                    $doTournament->organizerid = $tournament->getOrganizer()->getId();
+                $doTournament->insert();
+                $tournamentId = intval($database->getLastInsertedId("tournament_tournamentid_seq"));
+                if (empty($tournamentId))
+                    throw new Exception ("Id for new tournament could not be retrieved");
+            }
+            
+            $categories = $tournament->getCategories();
+            if (sizeof($categories) > 0)
+            {
+                $doTournamentCategory = $database->getDataObject ("tournamentcategory");
+                $doTournamentCategory->tournamentid = $tournamentId;
+                foreach ($categories as $category)
+                {
+                    $doTournamentCategory->categoryid = $category->getId();
+                    $doTournamentCategory->insert();
+                }
+            }
+            
+            $database->commitTransaction();
         }
-        else
+        catch (Exception $exception)
         {
-            if ($tournament->getOrganizer() != null)
-                $doTournament->organizerid = $tournament->getOrganizer()->getId();
-            $doTournament->insert();
+            $database->rollbackTransaction();
+            throw $exception;
         }
     }
     
     public function deleteTournament ($tournamentid)
     {
         $database = $this->getApplication()->getDefaultDatabase ();
+        $doTournamentCategory = $database->getDataObject ("tournamentcategory");
+        $doTournamentCategory->addWhereCondition("tournamentid = " . $tournamentid);
+        $doTournamentCategory->delete();
         $doTournament = $database->getDataObject ("tournament");
         $doTournament->addWhereCondition("tournamentid = " . $tournamentid);
         $doTournament->delete();

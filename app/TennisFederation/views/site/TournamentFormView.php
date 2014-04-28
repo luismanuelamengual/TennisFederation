@@ -14,6 +14,7 @@ class TournamentFormView extends SiteView
 {
     private $tournament;
     private $clubs;
+    private $categories;
     
     public function setTournament (Tournament $tournament)
     {
@@ -23,6 +24,11 @@ class TournamentFormView extends SiteView
     public function setClubs ($clubs)
     {
         $this->clubs = $clubs;
+    }
+    
+    public function setCategories ($categories)
+    {
+        $this->categories = $categories;
     }
     
     protected function createMainContent() 
@@ -42,6 +48,7 @@ class TournamentFormView extends SiteView
         $startDateField->setTimeEnabled(false);
         $inscriptionDateField = new DatetimePicker($this, array("placeholder"=>"Fecha de cierre de inscripción", "name"=>"inscriptionsdate"));
         $inscriptionDateField->setTimeEnabled(false);
+        $categoriesField = new EntityCombobox(array("placeholder"=>"Categorías", "class"=>"form-control", "name"=>"categories[]", "multiple"=>"true"), $this->categories);
         if ($this->tournament != null)
         {
             $idHiddenField->setAttribute("value", $this->tournament->getId());
@@ -49,6 +56,11 @@ class TournamentFormView extends SiteView
             $clubField->setAttribute("value", $this->tournament->getClub()->getId());
             $startDateField->setAttribute("value", $this->tournament->getStartDate());
             $inscriptionDateField->setAttribute("value", $this->tournament->getInscriptionsDate());
+            $categories = array();
+            foreach ($this->tournament->getCategories() as $category)
+                $categories[] = $category->getId();
+            if (sizeof($categories) > 0)
+                $categoriesField->setAttribute("value", $categories);
         }
         
         $form = new Form(array("method"=>"post", "action"=>($this->tournament != null)? "updateTournament" : "createTournament"));
@@ -58,6 +70,7 @@ class TournamentFormView extends SiteView
         $form->addField($clubField, "Club");
         $form->addField($startDateField, "Fecha de inicio");
         $form->addField($inscriptionDateField, "Fecha de cierre de inscripción");
+        $form->addField($categoriesField, "Categorias");
         $form->addButton(new Button("Guardar datos", array("class"=>"btn btn-primary")));
         return $form;
     }

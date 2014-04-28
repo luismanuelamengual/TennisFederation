@@ -26,10 +26,9 @@ class Combobox extends Tag
             $content = $this->getContent();
             foreach ($content as $optionTag)
             {
-                if ($optionTag->getAttribute("value") == $value)
+                if (is_array($value)? array_search($optionTag->getAttribute("value"), $value) !== false : $optionTag->getAttribute("value") == $value)
                 {
                     $optionTag->setAttribute("selected", true);
-                    break;
                 }
             }
         }

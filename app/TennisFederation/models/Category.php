@@ -24,6 +24,11 @@ class Category extends Model
      */
     private $matchType;
     
+    public function __construct ($id=null)
+    {
+        $this->id = $id;
+    }
+    
     public function getId() 
     {
         return $this->id;
