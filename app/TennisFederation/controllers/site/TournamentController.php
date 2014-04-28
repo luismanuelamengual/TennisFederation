@@ -14,6 +14,11 @@ class TournamentController extends SiteController
         $this->showTournamentsListAction();
     }
     
+    public function viewAllAction()
+    {
+        $this->showTournamentsListAction(true);
+    }
+    
     public function createTournamentAction()
     {
         $tournament = $this->createTournamentFromRequest();
@@ -46,17 +51,13 @@ class TournamentController extends SiteController
         return $tournament;
     }
     
-    public function showTournamentsListAction ()
+    public function showTournamentsListAction ($viewerMode=false)
     {
-        $tournaments = $this->getTournaments();        
+        $tournaments = $this->getTournaments();
         $tournamentsView = $this->createView("site/tournaments");
         $tournamentsView->setTournaments ($tournaments);
+        $tournamentsView->setViewerMode($viewerMode);
         $tournamentsView->render();
-    }
-    
-    public function showADMTournamentsListAction ()
-    {
-        
     }
     
     public function showTournamentFormAction ($tournamentid)

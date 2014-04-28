@@ -10,7 +10,13 @@ use TennisFederation\models\Tournament;
 
 class TournamentsView extends SiteView
 {
+    private $viewerMode = false;
     private $tournaments = array();
+    
+    public function setViewerMode ($viewerMode)
+    {
+        $this->viewerMode = $viewerMode;
+    }
     
     public function setTournaments ($tournaments)
     {
@@ -20,7 +26,7 @@ class TournamentsView extends SiteView
     protected function createMainContent() 
     {
         $container = parent::createMainContent();
-        $container->add (new Tag("h1", array("class"=>"page-header"), "Administración de Torneos"));
+        $container->add (new Tag("h1", array("class"=>"page-header"), $this->viewerMode? "Listado de Torneos" : "Administración de Torneos"));
         $container->add ($this->createButtonToolbar());
         $container->add ($this->createTournamentsTable());
         return $container;
