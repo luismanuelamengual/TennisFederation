@@ -42,6 +42,7 @@ class TournamentsView extends SiteView
             $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-trash"></span>&nbsp;Eliminar', array("id"=>"deleteButton", "class"=>"btn btn-primary", "onclick"=>"deleteTournament();", "disabled"=>"true"))));
             $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-list-alt"></span>&nbsp;Administrar partidos', array("id"=>"manageMatchesButton", "class"=>"btn btn-primary", "onclick"=>"manageMatches();", "disabled"=>"true"))));
         }
+        $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-list-alt"></span>&nbsp;Inscribirse', array("id"=>"registerButton", "class"=>"btn btn-primary", "onclick"=>"registerTournament();", "disabled"=>"true"))));
         $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-list-alt"></span>&nbsp;Ver Inscriptos', array("id"=>"viewInscriptionsButton", "class"=>"btn btn-primary", "onclick"=>"viewInscriptions();", "disabled"=>"true"))));
         $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-list-alt"></span>&nbsp;Ver Partidos', array("id"=>"viewMatchesButton", "class"=>"btn btn-primary", "onclick"=>"viewMatches();", "disabled"=>"true"))));
         return $toolbar;
@@ -66,6 +67,7 @@ class TournamentsView extends SiteView
         });
         $table->setEntities($this->tournaments);
         $table->addEntityProperty("tournamentId", "id");
+        $table->addEntityProperty("state", "state");
         return $table;
     }
     
@@ -81,12 +83,15 @@ class TournamentsView extends SiteView
             
             function selectTournament (tournamentId)
             {
-                $("tr[tournamentId=" + tournamentId + "]").addClass("danger").siblings().removeClass("danger");
+                var $tournamentRow = $("tr[tournamentId=" + tournamentId + "]");
+                var tournamentState = $tournamentRow.attr("state");
+                $tournamentRow.addClass("danger").siblings().removeClass("danger");
                 $("#updateButton").prop("disabled",false); 
                 $("#deleteButton").prop("disabled",false);
                 $("#manageMatchesButton").prop("disabled",false); 
                 $("#viewInscriptionsButton").prop("disabled",false); 
                 $("#viewMatchesButton").prop("disabled",false); 
+                $("#registerButton").prop("disabled",tournamentState == 1? false : true); 
             }
 
             function createTournament ()
@@ -109,6 +114,13 @@ class TournamentsView extends SiteView
                         window.open("' . $this->getUrl("site/tournament/deleteTournament") . '?tournamentid=" + selectedTournamentId, "_self");
             }
             
+            function registerTournament ()
+            {
+                var selectedTournamentId = getSelectedTournamentId();
+                if (selectedTournamentId != false)
+                    window.open("' . $this->getUrl("site/tournament/registerTournament") . '?tournamentid=" + selectedTournamentId, "_self");
+            }
+
             function manageMatches ()
             {
                 var selectedTournamentId = getSelectedTournamentId();
