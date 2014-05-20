@@ -146,8 +146,8 @@ class TournamentsView extends SiteView
         $this->addOnDocumentReadyScript('
             var tableRows = $("#tournamentsTable > tbody > tr");
             tableRows.on("click", function(event) { selectTournament($(this).attr("tournamentId")); });
-            tableRows.on("dblclick", function(event) { updateTournament(); });
-        ');
+            ' . ($this->admMode? 'tableRows.on("dblclick", function(event) { updateTournament(); });' : '')
+        );
     }
 }
 
