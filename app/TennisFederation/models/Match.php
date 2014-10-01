@@ -2,12 +2,12 @@
 
 namespace TennisFederation\models;
 
-use NeoPHP\mvc\Model;
+use NeoPHP\mvc\DatabaseModel;
 
 /**
  * @Table (tableName="match")
  */
-class Match extends Model
+class Match extends DatabaseModel
 {
     const MATCHTYPE_SINGLES = 1;
     const MATCHTYPE_DOUBLES = 2;

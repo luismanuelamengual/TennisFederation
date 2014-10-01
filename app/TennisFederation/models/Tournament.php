@@ -2,12 +2,12 @@
 
 namespace TennisFederation\models;
 
-use NeoPHP\mvc\Model;
+use NeoPHP\mvc\DatabaseModel;
 
 /**
  * @Table (tableName="tournament")
  */
-class Tournament extends Model
+class Tournament extends DatabaseModel
 {
     const STATE_INSCRIPTION = 1;
     const STATE_PLAYING = 2;

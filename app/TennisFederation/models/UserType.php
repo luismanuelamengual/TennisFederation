@@ -2,12 +2,12 @@
 
 namespace TennisFederation\models;
 
-use NeoPHP\mvc\Model;
+use NeoPHP\mvc\DatabaseModel;
 
 /**
  * @Table (tableName="usertype")
  */
-class UserType extends Model 
+class UserType extends DatabaseModel 
 {
     const USERTYPE_ADMINISTRATOR = 1;
     const USERTYPE_ORGANIZER = 2;

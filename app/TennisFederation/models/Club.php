@@ -2,12 +2,12 @@
 
 namespace TennisFederation\models;
 
-use NeoPHP\mvc\Model;
+use NeoPHP\mvc\DatabaseModel;
 
 /**
  * @Table (tableName="club")
  */
-class Club extends Model 
+class Club extends DatabaseModel 
 {
     /**
      * @Column (columnName="clubid", id=true)
