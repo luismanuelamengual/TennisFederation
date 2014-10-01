@@ -24,8 +24,16 @@ class Match extends Model
      * @Column (columnName="matchtype")
      */
     private $matchType;
-    private $teamA;
-    private $teamB;
+    
+    /**
+     * @Column (columnName="userid")
+     */
+    private $user1;
+    
+    /**
+     * @Column (columnName="opponentuserid")
+     */
+    private $user2;
     
     /**
      * @Column (columnName="tournamentphaseid", relatedTableName="tournamentphase")
@@ -72,24 +80,24 @@ class Match extends Model
         $this->matchType = $matchType;
     }
     
-    public function getTeamA()
+    public function getUser1()
     {
-        return $this->teamA;
+        return $this->user1;
     }
     
-    public function setTeamA(PlayerTeam $teamA)
+    public function setUser1(User $user)
     {
-        $this->teamA = $teamA;
+        $this->user1 = $user;
     }
     
-    public function getTeamB()
+    public function getUser2()
     {
-        return $this->teamB;
+        return $this->user2;
     }
     
-    public function setTeamB(PlayerTeam $teamB)
+    public function setUser2(User $user)
     {
-        $this->teamB = $teamB;
+        $this->user2 = $user;
     }
     
     public function getPhase ()

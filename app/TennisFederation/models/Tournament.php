@@ -54,7 +54,7 @@ class Tournament extends Model
     private $state;
     
     /**
-     * @Column (columnName="organizerid", relatedTableName="user")
+     * @Column (columnName="organizeruserid", relatedTableName="user")
      */
     private $organizer;
     
@@ -139,16 +139,6 @@ class Tournament extends Model
     public function setState($state)
     {
         $this->state = $state;
-    }
-    
-    public function getPhases()
-    {
-        return $this->phases;
-    }
-    
-    public function addPhase (TournamentPhase $phase)
-    {
-        $this->phases[] = $phase;
     }
     
     public function getCategories ()
