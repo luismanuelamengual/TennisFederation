@@ -8,7 +8,8 @@ class DashboardController extends SiteController
 {
     public function indexAction ()
     {
-        $this->createView("site/dashboard")->render();
+        $view = new \TennisFederation\view\DashboardView();
+        $view->render();
     }
 }
 

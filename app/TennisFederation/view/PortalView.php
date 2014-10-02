@@ -113,7 +113,7 @@ class PortalView extends DefaultView
                         var data = jQuery.parseJSON(jsonData);
                         if (data.success)
                         {
-                            window.open("' . $this->getUrl("site/dashboard/") . '", "_self");
+                            window.open("' . $this->getUrl("dashboard/") . '", "_self");
                         }
                         else
                         {
