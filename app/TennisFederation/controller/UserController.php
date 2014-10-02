@@ -1,6 +1,6 @@
 <?php
 
-namespace TennisFederation\controllers\site;
+namespace TennisFederation\controllers;
 
 use Exception;
 use TennisFederation\controllers\SiteController;

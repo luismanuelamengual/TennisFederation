@@ -8,7 +8,8 @@ class MainController extends WebController
 {
     public function indexAction ()
     {
-        $this->executeAction("site/portal/");
+        echo "yes";
+//        $this->executeAction("site/portal/");
     }
 }
 
