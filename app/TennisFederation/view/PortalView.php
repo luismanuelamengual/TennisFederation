@@ -6,8 +6,6 @@ use TennisFederation\component\Button;
 
 class PortalView extends DefaultView
 {
-    private $message;
-    
     protected function build ()
     {
         parent::build();
@@ -79,12 +77,7 @@ class PortalView extends DefaultView
     {
         return '<div id="footer">' . $this->createFooterContent() . '</div>';
     }
-    
-    public function setMessage ($message)
-    {
-        $this->message = $message;
-    }
-    
+        
     protected function createFooterContent ()
     {
         return '

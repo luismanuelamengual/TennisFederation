@@ -3,6 +3,7 @@
 namespace TennisFederation\controller;
 
 use NeoPHP\web\WebController;
+use TennisFederation\view\PortalView;
 
 class PortalController extends WebController
 {   
@@ -14,7 +15,8 @@ class PortalController extends WebController
     
     public function indexAction ()
     {
-//        $this->createView('site/portal')->render();
+        $view = new PortalView();
+        $view->render();
     }
 }
 

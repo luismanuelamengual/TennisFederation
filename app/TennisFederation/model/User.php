@@ -278,6 +278,20 @@ class User extends DatabaseModel
     {
         return $this->active;
     }
+    
+    public static function getUserForUsernameAndPassword ($username, $password)
+    {
+        $user = null;
+        $doUser = self::getDataObject ("user");
+        $doUser->addWhereCondition("username = '" . $username . "'");
+        $doUser->addWhereCondition("password = '" . $password . "'");
+        if ($doUser->find(true))
+        {
+            $user = new User();
+            $user->setFieldValues ($doUser->getFields());
+        }
+        return $user;
+    }
 }
 
 ?>

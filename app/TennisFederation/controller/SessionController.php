@@ -3,13 +3,42 @@
 namespace TennisFederation\controller;
 
 use Exception;
-use NeoPHP\web\WebRestController;
+use NeoPHP\web\WebController;
 use stdClass;
-use TennisFederation\models\User;
+use TennisFederation\model\User;
 
-class SessionController extends WebRestController
+class SessionController extends WebController
 {
-    public function onAfterActionExecution ($action, $response)
+    public function processAction ($action, array $parameters = array())
+    {
+        $response = null;
+        if ($action == "index")
+        {
+            $method = $this->getRequest()->getMethod ();
+            switch ($method)
+            {
+                case "GET":
+                    $response = $this->processAction("getResource");
+                    break;
+                case "PUT":
+                    $response = $this->processAction("createResource");
+                    break;
+                case "POST":
+                    $response = $this->processAction("updateResource"); 
+                    break;
+                case "DELETE":
+                    $response = $this->processAction("deleteResource");
+                    break;
+            }
+        }
+        else
+        {
+            $response = parent::processAction($action, $parameters);
+        }
+        return $response;
+    }
+    
+    public function onAfterActionExecution ($action, $params, $response)
     {
         if ($this->getRequest()->getParameters()->returnFormat == "json")
         {
@@ -39,7 +68,7 @@ class SessionController extends WebRestController
     {
         $this->getSession()->destroy();
         $sessionId = false;
-        $user = $this->getUserForUsernameAndPassword($username, $password);
+        $user = User::getUserForUsernameAndPassword($username, $password);
         if ($user != null)
         {
             $this->getSession()->start();
@@ -61,21 +90,6 @@ class SessionController extends WebRestController
     public function deleteResourceAction ()
     {
         $this->getSession()->destroy();
-    }
-    
-    private function getUserForUsernameAndPassword ($username, $password)
-    {
-        $user = null;
-        $database = $this->getApplication()->getDefaultDatabase ();
-        $doUser = $database->getDataObject ("user");
-        $doUser->addWhereCondition("username = '" . $username . "'");
-        $doUser->addWhereCondition("password = '" . $password . "'");
-        if ($doUser->find(true))
-        {
-            $user = new User();
-            $user->completeFromFieldsArray($doUser->getFields());
-        }
-        return $user;
     }
 }
 
