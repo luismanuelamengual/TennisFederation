@@ -1,12 +1,12 @@
 <?php
 
-namespace TennisFederation\views\site;
+namespace TennisFederation\view;
 
 use NeoPHP\web\html\Tag;
-use TennisFederation\components\Button;
-use TennisFederation\components\EntityTable;
-use TennisFederation\models\Match;
-use TennisFederation\views\site\SiteView;
+use TennisFederation\component\Button;
+use TennisFederation\component\EntityTable;
+use TennisFederation\model\Match;
+use TennisFederation\view\SiteView;
 
 class CategoriesView extends SiteView
 {

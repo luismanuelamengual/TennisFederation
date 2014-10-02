@@ -1,6 +1,6 @@
 <?php
 
-namespace TennisFederation\views\site;
+namespace TennisFederation\view;
 
 use Exception;
 use NeoPHP\web\html\HTMLView;

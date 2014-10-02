@@ -1,14 +1,14 @@
 <?php
 
-namespace TennisFederation\views\site;
+namespace TennisFederation\view;
 
 use NeoPHP\web\html\Tag;
-use TennisFederation\components\Button;
-use TennisFederation\components\DatetimePicker;
-use TennisFederation\components\EntityCombobox;
-use TennisFederation\components\Form;
-use TennisFederation\models\Tournament;
-use TennisFederation\views\site\SiteView;
+use TennisFederation\component\Button;
+use TennisFederation\component\DatetimePicker;
+use TennisFederation\component\EntityCombobox;
+use TennisFederation\component\Form;
+use TennisFederation\model\Tournament;
+use TennisFederation\view\SiteView;
 
 class TournamentFormView extends SiteView
 {

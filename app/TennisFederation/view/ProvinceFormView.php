@@ -1,12 +1,12 @@
 <?php
 
-namespace TennisFederation\views\site;
+namespace TennisFederation\view;
 
 use NeoPHP\web\html\Tag;
-use TennisFederation\components\Button;
-use TennisFederation\components\Form;
-use TennisFederation\models\Province;
-use TennisFederation\views\site\SiteView;
+use TennisFederation\component\Button;
+use TennisFederation\component\Form;
+use TennisFederation\model\Province;
+use TennisFederation\view\SiteView;
 
 class ProvinceFormView extends SiteView
 {

@@ -6,15 +6,15 @@ use NeoPHP\web\WebController;
 
 class PortalController extends WebController
 {   
-    public function onBeforeActionExecution ($action)
+    public function onBeforeActionExecution ($action, $params)
     {
-        $this->executeAction("session/deleteResource");
+        $this->getSession()->destroy();
         return true;
     }
     
     public function indexAction ()
     {
-        $this->createView('site/portal')->render();
+//        $this->createView('site/portal')->render();
     }
 }
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace TennisFederation\views\site;
+namespace TennisFederation\view;
 
-use TennisFederation\components\Button;
+use TennisFederation\component\Button;
 
 class PortalView extends DefaultView
 {

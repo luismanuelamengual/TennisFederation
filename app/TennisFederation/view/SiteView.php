@@ -1,9 +1,9 @@
 <?php
 
-namespace TennisFederation\views\site;
+namespace TennisFederation\view;
 
 use NeoPHP\web\html\Tag;
-use TennisFederation\models\UserType;
+use TennisFederation\model\UserType;
 
 class SiteView extends DefaultView
 {

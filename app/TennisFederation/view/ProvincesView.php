@@ -1,11 +1,11 @@
 <?php
 
-namespace TennisFederation\views\site;
+namespace TennisFederation\view;
 
 use NeoPHP\web\html\Tag;
-use TennisFederation\components\Button;
-use TennisFederation\components\EntityTable;
-use TennisFederation\views\site\SiteView;
+use TennisFederation\component\Button;
+use TennisFederation\component\EntityTable;
+use TennisFederation\view\SiteView;
 
 class ProvincesView extends SiteView
 {

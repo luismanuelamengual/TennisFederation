@@ -1,14 +1,14 @@
 <?php
 
-namespace TennisFederation\views\site;
+namespace TennisFederation\view;
 
 use NeoPHP\web\html\Tag;
-use TennisFederation\components\Button;
-use TennisFederation\components\Combobox;
-use TennisFederation\components\Form;
-use TennisFederation\models\Category;
-use TennisFederation\models\Match;
-use TennisFederation\views\site\SiteView;
+use TennisFederation\component\Button;
+use TennisFederation\component\Combobox;
+use TennisFederation\component\Form;
+use TennisFederation\model\Category;
+use TennisFederation\model\Match;
+use TennisFederation\view\SiteView;
 
 class CategoryFormView extends SiteView
 {

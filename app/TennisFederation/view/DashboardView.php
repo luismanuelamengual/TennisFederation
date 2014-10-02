@@ -1,8 +1,8 @@
 <?php
 
-namespace TennisFederation\views\site;
+namespace TennisFederation\view;
 
-use TennisFederation\views\site\SiteView;
+use TennisFederation\view\SiteView;
 
 class DashboardView extends SiteView
 {   
