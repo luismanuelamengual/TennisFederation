@@ -1,6 +1,6 @@
 <?php
 
-namespace TennisFederation\databases;
+namespace TennisFederation\database;
 
 use NeoPHP\data\Database;
 
