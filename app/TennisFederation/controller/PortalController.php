@@ -1,6 +1,6 @@
 <?php
 
-namespace TennisFederation\controllers;
+namespace TennisFederation\controller;
 
 use NeoPHP\web\WebController;
 

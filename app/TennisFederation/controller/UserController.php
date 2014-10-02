@@ -1,9 +1,9 @@
 <?php
 
-namespace TennisFederation\controllers;
+namespace TennisFederation\controller;
 
 use Exception;
-use TennisFederation\controllers\SiteController;
+use TennisFederation\controller\SiteController;
 use TennisFederation\models\User;
 use TennisFederation\models\UserType;
 

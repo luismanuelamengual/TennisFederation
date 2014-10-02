@@ -1,8 +1,8 @@
 <?php
 
-namespace TennisFederation\controllers;
+namespace TennisFederation\controller;
 
-use TennisFederation\controllers\SiteController;
+use TennisFederation\controller\SiteController;
 
 class DashboardController extends SiteController
 {

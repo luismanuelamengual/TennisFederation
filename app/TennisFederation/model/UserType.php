@@ -1,6 +1,6 @@
 <?php
 
-namespace TennisFederation\models;
+namespace TennisFederation\model;
 
 use NeoPHP\mvc\DatabaseModel;
 
