@@ -1,6 +1,6 @@
 <?php
 
-namespace TennisFederation\components;
+namespace TennisFederation\component;
 
 use NeoPHP\web\html\Tag;
 
