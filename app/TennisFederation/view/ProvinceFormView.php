@@ -5,6 +5,8 @@ namespace TennisFederation\view;
 use NeoPHP\web\html\Tag;
 use TennisFederation\component\Button;
 use TennisFederation\component\Form;
+use TennisFederation\component\HiddenField;
+use TennisFederation\component\TextField;
 use TennisFederation\model\Province;
 use TennisFederation\view\SiteView;
 
@@ -27,8 +29,8 @@ class ProvinceFormView extends SiteView
     
     protected function createForm ()
     {
-        $idHiddenField = new Tag("input", array("type"=>"hidden", "name"=>"provinceid"));
-        $descriptionTextField = new Tag("input", array("placeholder"=>"Descripción", "type"=>"text", "class"=>"form-control", "name"=>"description"));
+        $idHiddenField = new HiddenField(array("name"=>"provinceid"));
+        $descriptionTextField = new TextField(array("placeholder"=>"Descripción", "name"=>"description"));
         if ($this->province != null)
         {
             $idHiddenField->setAttribute("value", $this->province->getId());
