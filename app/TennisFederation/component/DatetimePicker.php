@@ -20,31 +20,28 @@ class DatetimePicker extends HTMLComponent
     private $timeFormat;
     private $useMinutes;
     private $useSeconds;
+    private $value;
     private $showPickerButton;
     
-    public function __construct(HTMLView $view, $attributes = array())
+    public function __construct(HTMLView $view)
     {
         static $idCounter = 0;
         $this->id = "datetimepicker_" . ($idCounter++);        
         $this->view = $view;
-        $this->attributes = $attributes;
+        $this->attributes = array();
         $this->dateEnabled = true;
         $this->timeEnabled = true;
         $this->dateFormat = null;
         $this->timeFormat = null;
         $this->useMinutes = true;
         $this->useSeconds = false;
+        $this->value = null;
         $this->showPickerButton = true;
     }
     
     public function setAttributes ($attributes)
     {
         $this->attributes = $attributes;
-    }
-    
-    public function setAttribute ($key, $value)
-    {
-        $this->attributes[$key] = $value;
     }
     
     public function setDateEnabled ($dateEnabled)
@@ -75,6 +72,11 @@ class DatetimePicker extends HTMLComponent
     public function setUseSeconds ($useSeconds)
     {
         $this->useSeconds = $useSeconds;
+    }
+    
+    public function setValue ($value)
+    {
+        $this->value = $value;
     }
     
     public function setShowPickerButton ($showPickerButton)
@@ -132,7 +134,7 @@ class DatetimePicker extends HTMLComponent
                     pickTime: ' . ($this->timeEnabled?"true":"false") . ',
                     useMinutes: ' . ($this->useMinutes?"true":"false") . ',
                     useSeconds: ' . ($this->useSeconds?"true":"false") . ',  
-                    defaultDate: ' . (isset($this->attributes["value"])? ('"' . $this->attributes["value"] . '"'):"null") . ',  
+                    defaultDate: ' . (isset($this->value)? ('"' . $this->value . '"'):"null") . ',  
                 });
             });
         ');

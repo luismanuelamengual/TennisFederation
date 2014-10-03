@@ -28,7 +28,7 @@ class EntityTable extends HTMLComponent
         $this->entities = array();
         $this->entityProperties = array();
         $this->attributes = $attributes;
-        $this->hover = false;
+        $this->hover = true;
         $this->striped = true;
         $this->bordered = false;
         $this->responsive = true;
@@ -168,7 +168,7 @@ class EntityTable extends HTMLComponent
         $table = new Tag("table", array_merge(array("id"=>$this->id, "class"=>$tableClassName, "style"=>"cursor:pointer;"), $this->attributes));
         $table->add($tableHead);
         $table->add($tableBody);
-        return ($this->responsive)? new Tag("div", array("class"=>"table-responsive"), $table) : $table;
+        return ($this->responsive)? new Tag("div", array("class"=>"table-wrapper"), $table) : $table;
     }
 }
 
