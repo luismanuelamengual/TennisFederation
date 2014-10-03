@@ -17,10 +17,10 @@ class ProvinceFormView extends SiteView
         $this->province = $province;
     }
     
-    protected function createMainContent() 
+    protected function createContent() 
     {
-        $container = parent::createMainContent();
-        $container->add (new Tag("h1", array("class"=>"page-header"), $this->province != null? "Edición de Provincia" : "Creación de Provincia"));
+        $container = new Tag("div", array("class"=>"container"));
+        $container->add (new Tag("h2", array("class"=>"page-header"), $this->province != null? "Edición de Provincia" : "Creación de Provincia"));
         $container->add ($this->createForm());
         return $container;
     }

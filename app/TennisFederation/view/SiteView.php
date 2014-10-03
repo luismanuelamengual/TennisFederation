@@ -84,28 +84,28 @@ abstract class SiteView extends DefaultView
     protected function createAdministratorToolsMenu ()
     {
         $list = new Tag("ul", array("class"=>"dropdown-menu"));
-        $list->add ($this->createToolMenuItem ("Adm Usuarios", "site/user/"));
-        $list->add ($this->createToolMenuItem ("Adm Categorías", "site/category/"));
-        $list->add ($this->createToolMenuItem ("Adm Clubes", "site/club/"));
-        $list->add ($this->createToolMenuItem ("Adm Paises", "site/country/"));
-        $list->add ($this->createToolMenuItem ("Adm Provincias", "site/province/"));
+        $list->add ($this->createToolMenuItem ("Adm Usuarios", "user/"));
+        $list->add ($this->createToolMenuItem ("Adm Categorías", "category/"));
+        $list->add ($this->createToolMenuItem ("Adm Clubes", "club/"));
+        $list->add ($this->createToolMenuItem ("Adm Paises", "country/"));
+        $list->add ($this->createToolMenuItem ("Adm Provincias", "province/showProvinceList"));
         return new Tag("li", array(new Tag("a", array("href"=>"#", "class"=>"dropdown-toggle", "data-toggle"=>"dropdown"), "&nbsp;Administración<b class=\"caret\"></b>"), $list));;
     }
     
     protected function createOrganizerToolsMenu ()
     {
         $list = new Tag("ul", array("class"=>"dropdown-menu"));
-        $list->add ($this->createToolMenuItem ("Adm Torneos", "site/tournament/"));
-        $list->add ($this->createToolMenuItem ("Adm Rankings", "site/ranking/"));
-        $list->add ($this->createToolMenuItem ("Adm Anuncios", "site/notification/"));
+        $list->add ($this->createToolMenuItem ("Adm Torneos", "tournament/"));
+        $list->add ($this->createToolMenuItem ("Adm Rankings", "ranking/"));
+        $list->add ($this->createToolMenuItem ("Adm Anuncios", "notification/"));
         return new Tag("li", array(new Tag("a", array("href"=>"#", "class"=>"dropdown-toggle", "data-toggle"=>"dropdown"), "&nbsp;Organización<b class=\"caret\"></b>"), $list));;
     }
     
     protected function createPlayerToolsMenu ()
     {
         $list = new Tag("ul", array("class"=>"dropdown-menu"));
-        $list->add ($this->createToolMenuItem ("Ver Torneos", "site/tournament/viewAll"));
-        $list->add ($this->createToolMenuItem ("Ver Rankings", "site/ranking/viewAll"));
+        $list->add ($this->createToolMenuItem ("Ver Torneos", "tournament/viewAll"));
+        $list->add ($this->createToolMenuItem ("Ver Rankings", "ranking/viewAll"));
         return new Tag("li", array(new Tag("a", array("href"=>"#", "class"=>"dropdown-toggle", "data-toggle"=>"dropdown"), "&nbsp;Jugadores<b class=\"caret\"></b>"), $list));;
     }
     
