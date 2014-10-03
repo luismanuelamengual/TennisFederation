@@ -5,7 +5,7 @@ namespace TennisFederation\view;
 use NeoPHP\web\html\Tag;
 use TennisFederation\model\UserType;
 
-class SiteView extends DefaultView
+abstract class SiteView extends DefaultView
 {
     protected function build ()
     {
@@ -26,87 +26,87 @@ class SiteView extends DefaultView
     {
     }
     
-    protected function buildBody ()
+    protected function buildBody()
     {
-        $this->bodyTag->add($this->createHeader());
-        $this->bodyTag->add($this->createContent());
-        $this->bodyTag->add($this->createFooter());
+        $this->getBodyTag()->add($this->createHeader());
+        $this->getBodyTag()->add($this->createContent());
     }
     
     protected function createHeader ()
     {   
         return '
-        <div id="mainNavbar" class="navbar navbar-default navbar-fixed-top">
+        <nav id="header" class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a href="' . $this->getUrl('site/dashboard/') . '" class="navbar-brand">' . $this->getApplication()->getName() . '</a>
+                    <a href="' . $this->getUrl("site/dashboard/") . '" class="navbar-brand" href="#">' . $this->getApplication()->getName() . '</a>
                 </div>
-                <div class="navbar-collapse collapse">
-                    ' . $this->createHeaderContent() . '
+                <div class="navbar-collapse collapse navbar-responsive-collapse">
+                    ' . $this->createMainMenu() . '
+                    ' . $this->createUserMenu() . '
                 </div>
             </div>
-        </div>';
+        </nav>';
     }
     
-    protected function createContent()
+    protected function createMainMenu()
     {
-        $container = new Tag("div", array("class"=>"container-fluid"));
-        $container->add ($this->createSideBar());
-        $container->add ($this->createMainContent());
-        return $container;
-    }
-    
-    protected function createSideBar ()
-    {
-        $sidebar = new Tag("div", array("class"=>"col-sm-3 col-md-2 sidebar"));
-        $sidebar->add ($this->createMainToolsMenu());
+        $mainMenu = new Tag("ul", array("class"=>"nav navbar-nav navbar-left"));
         if ($this->getSession()->type == UserType::USERTYPE_ADMINISTRATOR)
-            $sidebar->add ($this->createAdministratorToolsMenu());
+            $mainMenu->add ($this->createAdministratorToolsMenu());
         if ($this->getSession()->type == UserType::USERTYPE_ADMINISTRATOR || $this->getSession()->type == UserType::USERTYPE_ORGANIZER)
-            $sidebar->add ($this->createOrganizerToolsMenu());
+            $mainMenu->add ($this->createOrganizerToolsMenu());
         if ($this->getSession()->type == UserType::USERTYPE_ADMINISTRATOR || $this->getSession()->type == UserType::USERTYPE_ORGANIZER || $this->getSession()->type == UserType::USERTYPE_PLAYER)
-            $sidebar->add ($this->createPlayerToolsMenu());
-        return $sidebar;
+            $mainMenu->add ($this->createPlayerToolsMenu());
+        return $mainMenu;
     }
     
-    protected function createMainToolsMenu ()
+    protected function createUserMenu()
     {
-        $list = new Tag("ul", array("class"=>"nav nav-sidebar"));
-        $list->add ($this->createToolMenuItem ("Tabla de Anuncios", "site/dashboard/"));
-        return $list;
+        return '
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">            
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="fa fa-user"></i> ' . $this->getSession()->firstname . ' ' . $this->getSession()->lastname . ' <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#" onclick="loadUrl(\'' . $this->getUrl("account/") . '\')"><i class="fa fa-user"></i> Mi Cuenta</a></li>
+                    <li><a href="#" onclick="loadUrl(\'' . $this->getUrl("settings/") . '\')"><i class="fa fa-gear"></i> Configuración</a></li>
+                    <li class="divider"></li>
+                    <li><a href="' . $this->getUrl("site/logout") . '"><i class="fa fa-power-off"></i> Salir</a></li>
+                </ul>
+            </li>
+        </ul>';
     }
     
     protected function createAdministratorToolsMenu ()
     {
-        $list = new Tag("ul", array("class"=>"nav nav-sidebar"));
+        $list = new Tag("ul", array("class"=>"dropdown-menu"));
         $list->add ($this->createToolMenuItem ("Adm Usuarios", "site/user/"));
         $list->add ($this->createToolMenuItem ("Adm Categorías", "site/category/"));
         $list->add ($this->createToolMenuItem ("Adm Clubes", "site/club/"));
         $list->add ($this->createToolMenuItem ("Adm Paises", "site/country/"));
         $list->add ($this->createToolMenuItem ("Adm Provincias", "site/province/"));
-        return $list;
+        return new Tag("li", array(new Tag("a", array("href"=>"#", "class"=>"dropdown-toggle", "data-toggle"=>"dropdown"), "&nbsp;Administración<b class=\"caret\"></b>"), $list));;
     }
     
     protected function createOrganizerToolsMenu ()
     {
-        $list = new Tag("ul", array("class"=>"nav nav-sidebar"));
+        $list = new Tag("ul", array("class"=>"dropdown-menu"));
         $list->add ($this->createToolMenuItem ("Adm Torneos", "site/tournament/"));
         $list->add ($this->createToolMenuItem ("Adm Rankings", "site/ranking/"));
         $list->add ($this->createToolMenuItem ("Adm Anuncios", "site/notification/"));
-        return $list;
+        return new Tag("li", array(new Tag("a", array("href"=>"#", "class"=>"dropdown-toggle", "data-toggle"=>"dropdown"), "&nbsp;Organización<b class=\"caret\"></b>"), $list));;
     }
     
     protected function createPlayerToolsMenu ()
     {
-        $list = new Tag("ul", array("class"=>"nav nav-sidebar"));
+        $list = new Tag("ul", array("class"=>"dropdown-menu"));
         $list->add ($this->createToolMenuItem ("Ver Torneos", "site/tournament/viewAll"));
         $list->add ($this->createToolMenuItem ("Ver Rankings", "site/ranking/viewAll"));
-        return $list;
+        return new Tag("li", array(new Tag("a", array("href"=>"#", "class"=>"dropdown-toggle", "data-toggle"=>"dropdown"), "&nbsp;Jugadores<b class=\"caret\"></b>"), $list));;
     }
     
     protected function createToolMenuItem ($title, $action)
@@ -154,6 +154,8 @@ class SiteView extends DefaultView
             </li>
         </ul>';
     }
+    
+    protected abstract function createContent();
 }
 
 ?>

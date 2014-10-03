@@ -6,7 +6,7 @@ use TennisFederation\view\SiteView;
 
 class DashboardView extends SiteView
 {   
-    protected function createMainContent() 
+    protected function createContent() 
     {
     }
 }
