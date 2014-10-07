@@ -6,7 +6,6 @@ use NeoPHP\web\html\Tag;
 use TennisFederation\component\Button;
 use TennisFederation\component\Form;
 use TennisFederation\model\Country;
-use TennisFederation\view\SiteView;
 
 class CountryFormView extends SiteView
 {
@@ -17,10 +16,10 @@ class CountryFormView extends SiteView
         $this->country = $country;
     }
     
-    protected function createMainContent() 
+    protected function createContent() 
     {
-        $container = parent::createMainContent();
-        $container->add (new Tag("h1", array("class"=>"page-header"), $this->country != null? "Edición de Pais" : "Creación de Pais"));
+        $container = new Tag("div", array("class"=>"container"));
+        $container->add (new Tag("h2", array("class"=>"page-header"), $this->country != null? "Edición de Pais" : "Creación de Pais"));
         $container->add ($this->createForm());
         return $container;
     }
@@ -37,8 +36,8 @@ class CountryFormView extends SiteView
         
         $form = new Form(array("method"=>"post", "action"=>($this->country != null)? "updateCountry" : "createCountry"));
         $form->add($idHiddenField);
-        $form->addField($descriptionTextField, "Descripción");
-        $form->addButton(new Button("Guardar datos", array("class"=>"btn btn-primary")));
+        $form->addField($descriptionTextField, array("label"=>"Descripción"));
+        $form->add(new Button("Guardar datos", array("type"=>"submit", "class"=>"btn btn-primary")));
         return $form;
     }
 }

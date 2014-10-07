@@ -87,7 +87,7 @@ abstract class SiteView extends DefaultView
         $list->add ($this->createToolMenuItem ("Adm Usuarios", "user/"));
         $list->add ($this->createToolMenuItem ("Adm Categorías", "category/"));
         $list->add ($this->createToolMenuItem ("Adm Clubes", "club/"));
-        $list->add ($this->createToolMenuItem ("Adm Paises", "country/"));
+        $list->add ($this->createToolMenuItem ("Adm Paises", "country/showCountryList"));
         $list->add ($this->createToolMenuItem ("Adm Provincias", "province/showProvinceList"));
         return new Tag("li", array(new Tag("a", array("href"=>"#", "class"=>"dropdown-toggle", "data-toggle"=>"dropdown"), "&nbsp;Administración<b class=\"caret\"></b>"), $list));;
     }

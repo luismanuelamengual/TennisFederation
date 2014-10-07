@@ -16,9 +16,46 @@ class CountriesView extends SiteView
         $this->countries = $countries;
     }
     
-    protected function createMainContent() 
+    protected function build()
     {
-        $container = parent::createMainContent();
+        parent::build();
+        $this->addScript('
+            $("#countriesTable tr").on(
+            {
+                click: function (e) 
+                {
+                    $("#countriesTable tr").removeClass("danger");
+                    $(this).addClass("danger");
+                    $("#updateButton").prop("disabled",false); 
+                    $("#deleteButton").prop("disabled",false); 
+                },
+                dblclick: function (e)
+                {
+                    var id = $(this).attr("countryId");
+                    window.open("showCountryForm?countryid=" + id, "_self");
+                }
+            });
+            $("#createButton").click(function (e) 
+            {
+                window.open("showCountryForm", "_self");
+            });
+            $("#updateButton").click(function (e) 
+            {
+                var id = $("#countriesTable tr.danger").attr("countryId");
+                window.open("showCountryForm?countryid=" + id, "_self");
+            });
+            $("#deleteButton").click(function (e) 
+            {
+                var id = $("#countriesTable tr.danger").attr("countryId");
+                if (window.confirm("Esta seguro de eliminar el pais " + id + " ?"))
+                    window.open("deleteCountry?countryid=" + id, "_self");
+            });
+        ');
+    }
+    
+    protected function createContent() 
+    {
+        $container = new Tag("div", array("class"=>"container"));
         $container->add (new Tag("h1", array("class"=>"page-header"), "Administración de Paises"));
         $container->add ($this->createButtonToolbar());
         $container->add ($this->createCountriesTable());
@@ -28,9 +65,9 @@ class CountriesView extends SiteView
     protected function createButtonToolbar()
     {
         $toolbar = new Tag("ul", array("class"=>"nav nav-pills"));
-        $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-file"></span>&nbsp;Crear', array("class"=>"btn btn-primary", "onclick"=>"createCountry();"))));
-        $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-pencil"></span>&nbsp;Modifiar', array("id"=>"updateButton", "class"=>"btn btn-primary", "onclick"=>"updateCountry();", "disabled"=>"true"))));
-        $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-trash"></span>&nbsp;Eliminar', array("id"=>"deleteButton", "class"=>"btn btn-primary", "onclick"=>"deleteCountry();", "disabled"=>"true"))));
+        $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-file"></span>&nbsp;Crear', array("id"=>"createButton", "class"=>"btn btn-primary"))));
+        $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-pencil"></span>&nbsp;Modifiar', array("id"=>"updateButton", "class"=>"btn btn-primary", "disabled"=>"true"))));
+        $toolbar->add (new Tag("li", new Button('<span class="glyphicon glyphicon-trash"></span>&nbsp;Eliminar', array("id"=>"deleteButton", "class"=>"btn btn-primary", "disabled"=>"true"))));
         return $toolbar;
     }
     
@@ -42,51 +79,6 @@ class CountriesView extends SiteView
         $table->setEntities($this->countries);
         $table->addEntityProperty("countryId", "id");
         return $table;
-    }
-    
-    protected function addScripts ()
-    {
-        parent::addScripts();
-        $this->addScript ('
-            function getSelectedCountryId ()
-            {
-                var selectedRows = $("#countriesTable > tbody > tr.danger"); 
-                return (selectedRows.length > 0)? selectedRows.first().attr("countryId") : false;
-            }
-            
-            function selectCountry (countryId)
-            {
-                $("tr[countryId=" + countryId + "]").addClass("danger").siblings().removeClass("danger");
-                $("#updateButton").prop("disabled",false); 
-                $("#deleteButton").prop("disabled",false);
-            }
-
-            function createCountry ()
-            {
-                window.open("' . $this->getUrl("site/country/showCountryForm") . '", "_self");
-            }
-            
-            function updateCountry ()
-            {
-                var selectedCountryId = getSelectedCountryId();
-                if (selectedCountryId != false)
-                    window.open("' . $this->getUrl("site/country/showCountryForm") . '?countryid=" + selectedCountryId, "_self");
-            }
-            
-            function deleteCountry ()
-            {
-                var selectedCountryId = getSelectedCountryId();
-                if (selectedCountryId != false)
-                    if (window.confirm("Esta seguro de eliminar la categoría " + selectedCountryId + " ?"))
-                        window.open("' . $this->getUrl("site/country/deleteCountry") . '?countryid=" + selectedCountryId, "_self");
-            }
-        ');
-        
-        $this->addOnDocumentReadyScript('
-            var tableRows = $("#countriesTable > tbody > tr");
-            tableRows.on("click", function(event) { selectCountry($(this).attr("countryId")); });
-            tableRows.on("dblclick", function(event) { updateCountry(); });
-        ');
     }
 }
 
