@@ -84,9 +84,9 @@ abstract class SiteView extends DefaultView
     protected function createAdministratorToolsMenu ()
     {
         $list = new Tag("ul", array("class"=>"dropdown-menu"));
-        $list->add ($this->createToolMenuItem ("Adm Usuarios", "user/"));
-        $list->add ($this->createToolMenuItem ("Adm Categorías", "category/"));
-        $list->add ($this->createToolMenuItem ("Adm Clubes", "club/"));
+        $list->add ($this->createToolMenuItem ("Adm Usuarios", "user/showUserList"));
+        $list->add ($this->createToolMenuItem ("Adm Categorías", "category/showCategoryList"));
+        $list->add ($this->createToolMenuItem ("Adm Clubes", "club/showClubList"));
         $list->add ($this->createToolMenuItem ("Adm Paises", "country/showCountryList"));
         $list->add ($this->createToolMenuItem ("Adm Provincias", "province/showProvinceList"));
         return new Tag("li", array(new Tag("a", array("href"=>"#", "class"=>"dropdown-toggle", "data-toggle"=>"dropdown"), "&nbsp;Administración<b class=\"caret\"></b>"), $list));;

@@ -26,8 +26,8 @@ class CountryFormView extends SiteView
     
     protected function createForm ()
     {
-        $idHiddenField = new Tag("input", array("type"=>"hidden", "name"=>"countryid"));
-        $descriptionTextField = new Tag("input", array("placeholder"=>"Descripción", "type"=>"text", "class"=>"form-control", "name"=>"description"));
+        $idHiddenField = new HiddenField(array("name"=>"countryid"));
+        $descriptionTextField = new TextField(array("placeholder"=>"Descripción", "name"=>"description"));
         if ($this->country != null)
         {
             $idHiddenField->setAttribute("value", $this->country->getId());

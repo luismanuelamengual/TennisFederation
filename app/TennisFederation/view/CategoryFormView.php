@@ -19,10 +19,10 @@ class CategoryFormView extends SiteView
         $this->category = $category;
     }
     
-    protected function createMainContent() 
+    protected function createContent() 
     {
-        $container = parent::createMainContent();
-        $container->add (new Tag("h1", array("class"=>"page-header"), $this->category != null? "Edición de Categoría" : "Creación de Categoría"));
+        $container = new Tag("div", array("class"=>"container"));
+        $container->add (new Tag("h2", array("class"=>"page-header"), $this->category != null? "Edición de Categoría" : "Creación de Categoría"));
         $container->add ($this->createForm());
         return $container;
     }
@@ -41,9 +41,9 @@ class CategoryFormView extends SiteView
         
         $form = new Form(array("method"=>"post", "action"=>($this->category != null)? "updateCategory" : "createCategory"));
         $form->add($idHiddenField);
-        $form->addField($descriptionTextField, "Descripción");
-        $form->addField($matchTypeCombobox, "Tipo de Partido");    
-        $form->addButton(new Button("Guardar datos", array("class"=>"btn btn-primary")));
+        $form->addField($descriptionTextField, array("label"=>"Descripción"));
+        $form->addField($matchTypeCombobox, array("label"=>"Tipo de Partido"));
+        $form->add(new Button("Guardar datos", array("type"=>"submit", "class"=>"btn btn-primary")));
         return $form;
     }
 }

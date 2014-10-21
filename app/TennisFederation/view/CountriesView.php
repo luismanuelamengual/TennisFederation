@@ -56,7 +56,7 @@ class CountriesView extends SiteView
     protected function createContent() 
     {
         $container = new Tag("div", array("class"=>"container"));
-        $container->add (new Tag("h1", array("class"=>"page-header"), "Administración de Paises"));
+        $container->add (new Tag("h2", array("class"=>"page-header"), "Administración de Paises"));
         $container->add ($this->createButtonToolbar());
         $container->add ($this->createCountriesTable());
         return $container;
