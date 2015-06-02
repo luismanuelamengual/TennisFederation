@@ -1,1 +1,0 @@
-<br>[CONTENIDO INLINE:<?php echo $parameters["name"]; ?>]

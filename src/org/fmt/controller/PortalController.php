@@ -23,7 +23,6 @@ class PortalController extends WebController
     public function showPortal ()
     {
         return new WebScriptView("org\\fmt\\view\\PortalView");
-//        return new PortalView();
     }
 }
 
