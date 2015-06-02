@@ -37,22 +37,22 @@ class SessionController extends WebController
                 $this->getSession()->type = $user->getType()->getId();
                 $responseObject->success = true;
                 $responseObject->sessionId = $this->getSession()->getId();
-                $response->setJsonContent($responseObject);
+                $response->setContent(json_encode($responseObject));
             }
             else
             {
                 $responseObject->success = false;
-                $responseObject->message = "Nombre de usuario o contraseña incorrecta";
+                $responseObject->errorMessage = "Nombre de usuario o contraseña incorrecta";
                 $response->setStatusCode(401);
-                $response->setJsonContent($responseObject);
+                $response->setContent(json_encode($responseObject));
             }
         }
         catch (Exception $ex)
         {
             $responseObject->success = false;
-            $responseObject->message = $ex->getMessage();
+            $responseObject->errorMessage = $ex->getMessage();
             $response->setStatusCode(500);
-            $response->setJsonContent($responseObject);
+            $response->setContent(json_encode($responseObject));
         }
         
         return $response;

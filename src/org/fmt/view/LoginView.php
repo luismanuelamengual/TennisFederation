@@ -31,7 +31,7 @@
                             </fieldset>
                         </div>
                         <div class="modal-footer">
-                            <input type="submit" name="loginbutton" class="btn btn-primary" onclick="login(); return false;" value="Iniciar sesión"></input>
+                            <input type="submit" name="loginbutton" class="btn btn-primary" value="Iniciar sesión"></input>
                         </div>
                     </div>
                 </div>
@@ -78,14 +78,15 @@
             $("input[name=username]").focus();
         }
 
-        function login ()
+        $("input[name=loginbutton]").click(function(event)
         {
             clearErrorMessage ();
             disableLoginControls();
             var username = $("input[name=username]")[0].value;
             var password = $("input[name=password]")[0].value;
-            $.ajax("<?php echo $this->getUrl("session/"); ?>?username=" + username + "&password=" + password + "&returnFormat=json",
+            $.ajax("<?php echo $this->getUrl("session/"); ?>?username=" + username + "&password=" + password,
             {
+                method: "PUT",
                 success: function (data)
                 {
                     if (data.success)
@@ -100,7 +101,15 @@
                 },
                 error: function (qXHR, textStatus, errorThrown)
                 {
-                    showErrorMessage(textStatus + " - " + errorThrown);
+                    if (qXHR.responseText)
+                    {
+                        var responseObject = jQuery.parseJSON(qXHR.responseText);
+                        showErrorMessage(responseObject.errorMessage);
+                    }
+                    else
+                    {
+                        showErrorMessage(textStatus + " - " + errorThrown);
+                    }
                     enableLoginControls();
                 },
                 timeout: function ()
@@ -109,6 +118,7 @@
                     enableLoginControls();
                 }
             });
-        }
+            return false;
+        });
     </script>
 </html>
