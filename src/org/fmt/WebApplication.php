@@ -1,6 +1,6 @@
 <?php
 
-namespace TennisFederation;
+namespace org\fmt;
 
 class WebApplication extends \NeoPHP\web\WebApplication
 {

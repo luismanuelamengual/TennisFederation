@@ -7,8 +7,15 @@ use TennisFederation\model\Country;
 use TennisFederation\view\CountriesView;
 use TennisFederation\view\CountryFormView;
 
+/**
+ * @Route (path  = "/countries")
+ * @Route  (path="/country" )
+ */
 class CountryController extends SiteController
 {
+    /**
+     * @RouteAction (name = "showCountries")
+     */
     public function showCountryListAction ()
     {
         $countryView = new CountriesView();
@@ -16,6 +23,9 @@ class CountryController extends SiteController
         $countryView->render();
     }
     
+    /**
+     * @RouteAction (name = "showCountry")
+     */
     public function showCountryFormAction($countryid=null)
     {
         $countryView = new CountryFormView();
@@ -24,6 +34,9 @@ class CountryController extends SiteController
         $countryView->render();
     }
     
+    /**
+     * @RouteAction (name = "createCountry")
+     */
     public function createCountryAction($description)
     {
         $country = new Country();
@@ -32,6 +45,9 @@ class CountryController extends SiteController
         $this->showCountryListAction ();
     }
     
+    /**
+     * @RouteAction (name = "updateCountry")
+     */
     public function updateCountryAction($countryid, $description)
     {
         $country = new Country();
@@ -41,6 +57,9 @@ class CountryController extends SiteController
         $this->showCountryListAction ();
     }
     
+    /**
+     * @RouteAction (name = "deleteCountry")
+     */
     public function deleteCountryAction($countryid)
     {
         $country = new Country();
