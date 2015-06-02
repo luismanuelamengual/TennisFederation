@@ -5,8 +5,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" type="text/css" href="<?php echo $this->getBaseUrl(); ?>assets/bootstrap-3.3.4/css/bootstrap.min.css" />
-        <link rel="stylesheet" type="text/css" href="<?php echo $this->getBaseUrl(); ?>css/login.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo $this->getBaseUrl(); ?>res/assets/bootstrap-3.3.4/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo $this->getBaseUrl(); ?>res/css/login.css" />
     </head>
     <body id="loginBody">
         <form role="form">
@@ -38,8 +38,8 @@
             </div>
         </form>
     </body>
-    <script type="text/javascript" src="<?php echo $this->getBaseUrl(); ?>assets/jquery-1.11.2/jquery.min.js"></script>
-    <script type="text/javascript" src="<?php echo $this->getBaseUrl(); ?>assets/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?php echo $this->getBaseUrl(); ?>res/assets/jquery-1.11.2/jquery.min.js"></script>
+    <script type="text/javascript" src="<?php echo $this->getBaseUrl(); ?>res/assets/bootstrap-3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         function checkPageLocation ()
         {
