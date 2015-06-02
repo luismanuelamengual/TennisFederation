@@ -6,9 +6,9 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" type="text/css" href="<?php echo $this->getBaseUrl(); ?>assets/bootstrap-3.3.4/css/bootstrap.min.css" />
-        <link rel="stylesheet" type="text/css" href="<?php echo $this->getBaseUrl(); ?>css/style.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo $this->getBaseUrl(); ?>css/login.css" />
     </head>
-    <body>
+    <body id="loginBody">
         <form role="form">
             <div class="modal show">
                 <div class="modal-dialog">
@@ -51,46 +51,46 @@
 
         function showErrorMessage (message)
         {
-            $(\'.form-group\').addClass ("has-error");
-            $(\'#errorMessage\').html("<label class=\"control-label\" >" + message + "</label>");
+            $(".form-group").addClass ("has-error");
+            $("#errorMessage").html("<label class=\"control-label\" >" + message + "</label>");
         }
 
         function clearErrorMessage ()
         {
-            $(\'.form-group\').removeClass ("has-error");
-            $(\'#errorMessage\').html("");
+            $(".form-group").removeClass ("has-error");
+            $("#errorMessage").html("");
         }
 
         function disableLoginControls ()
         {
-            $(\'input[name=username]\').prop("disabled", true);
-            $(\'input[name=password]\').prop("disabled", true);
-            $(\'input[name=loginbutton]\').prop("disabled", true);
+            $("input[name=username]").prop("disabled", true);
+            $("input[name=password]").prop("disabled", true);
+            $("input[name=loginbutton]").prop("disabled", true);
             $("body").css("cursor", "progress");
         }
 
         function enableLoginControls ()
         {
-            $(\'input[name=username]\').prop("disabled", false);
-            $(\'input[name=password]\').prop("disabled", false);
-            $(\'input[name=loginbutton]\').prop("disabled", false);
+            $("input[name=username]").prop("disabled", false);
+            $("input[name=password]").prop("disabled", false);
+            $("input[name=loginbutton]").prop("disabled", false);
             $("body").css("cursor", "default");
-            $(\'input[name=username]\').focus();
+            $("input[name=username]").focus();
         }
 
         function login ()
         {
             clearErrorMessage ();
             disableLoginControls();
-            var username = $(\'input[name=username]\')[0].value;
-            var password = $(\'input[name=password]\')[0].value;
-            $.ajax("' . $this->getUrl("session/") . '?username=" + username + "&password=" + password + "&returnFormat=json",
+            var username = $("input[name=username]")[0].value;
+            var password = $("input[name=password]")[0].value;
+            $.ajax("<?php echo $this->getUrl("session/"); ?>?username=" + username + "&password=" + password + "&returnFormat=json",
             {
                 success: function (data)
                 {
                     if (data.success)
                     {
-                        window.open("' . $this->getUrl("site/main/") . '", "_self");
+                        window.open("<?php echo $this->getUrl("site/main/"); ?>", "_self");
                     }
                     else
                     {
