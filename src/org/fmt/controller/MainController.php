@@ -21,7 +21,7 @@ class MainController extends WebController
      */
     public function showPortal ()
     {
-        return new WebScriptView("org\\fmt\\view\\LoginView");
+        return new WebScriptView("org\\fmt\\view\\PortalView");
     }
 }
 
