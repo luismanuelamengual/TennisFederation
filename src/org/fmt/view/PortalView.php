@@ -2,7 +2,7 @@
 
 namespace org\fmt\view;
 
-class PortalView extends SiteView
+class PortalView extends DefaultView
 {
     protected function build()
     {

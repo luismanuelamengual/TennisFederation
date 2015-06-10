@@ -5,7 +5,7 @@ namespace org\fmt\view;
 use NeoPHP\web\html\HTMLView;
 use NeoPHP\web\html\Tag;
 
-abstract class SiteView extends HTMLView
+abstract class DefaultView extends HTMLView
 {
     protected function build()
     {
