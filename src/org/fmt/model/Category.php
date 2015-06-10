@@ -2,25 +2,23 @@
 
 namespace org\fmt\model;
 
-use NeoPHP\mvc\DatabaseModel;
-
 /**
- * @Table (tableName="category")
+ * @table (tableName="category")
  */
-class Category extends DatabaseModel
+class Category extends Entity
 {
     /**
-     * @Column (columnName="categoryid", id=true)
+     * @column (columnName="categoryid", id=true)
      */
     private $id;
     
     /**
-     * @Column (columnName="description")
+     * @column (columnName="description")
      */
     private $description;
     
     /**
-     * @Column (columnName="matchtype")
+     * @column (columnName="matchtype")
      */
     private $matchType;
     

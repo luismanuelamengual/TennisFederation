@@ -2,100 +2,98 @@
 
 namespace org\fmt\model;
 
-use NeoPHP\mvc\DatabaseModel;
-
 /**
- * @Table (tableName="user")
+ * @table (tableName="user")
  */
-class User extends DatabaseModel
-{
+class User extends Entity
+{   
     /**
-     * @Column (columnName="userid", id=true)
+     * @column (columnName="userid", id=true)
      */
     private $id;
     
     /**
-     * @Column (columnName="username")
+     * @column (columnName="username")
      */
     private $username;
     
     /**
-     * @Column (columnName="password")
+     * @column (columnName="password")
      */
     private $password;
     
     /**
-     * @Column (columnName="usertypeid", relatedTableName="usertype")
+     * @column (columnName="usertypeid", relatedTableName="usertype")
      */
     private $type;
     
     /**
-     * @Column (columnName="firstname")
+     * @column (columnName="firstname")
      */
     private $firstname;
     
     /**
-     * @Column (columnName="lastname")
+     * @column (columnName="lastname")
      */
     private $lastname;
     
     /**
-     * @Column (columnName="birthdate")
+     * @column (columnName="birthdate")
      */
     private $birthDate;
     
     /**
-     * @Column (columnName="address")
+     * @column (columnName="address")
      */
     private $address;
     
     /**
-     * @Column (columnName="contactvia1")
+     * @column (columnName="contactvia1")
      */
     private $contactVia1;
     
     /**
-     * @Column (columnName="contactvia2")
+     * @column (columnName="contactvia2")
      */
     private $contactVia2;
     
     /**
-     * @Column (columnName="contactvia3")
+     * @column (columnName="contactvia3")
      */
     private $contactVia3;
     
     /**
-     * @Column (columnName="email")
+     * @column (columnName="email")
      */
     private $email;
     
     /**
-     * @Column (columnName="documentnumber")
+     * @column (columnName="documentnumber")
      */
     private $documentNumber;
     
     /**
-     * @Column (columnName="countryid", relatedTableName="country")
+     * @column (columnName="countryid", relatedTableName="country")
      */
     private $country;
     
     /**
-     * @Column (columnName="provinceid", relatedTableName="province")
+     * @column (columnName="provinceid", relatedTableName="province")
      */
     private $province;
     
     /**
-     * @Column (columnName="clubid", relatedTableName="club")
+     * @column (columnName="clubid", relatedTableName="club")
      */
     private $club;
     
     /**
-     * @Column (columnName="disponibility")
+     * @column (columnName="disponibility")
      */
     private $disponibility;
     
     /**
-     * @Column (columnName="active")
+     * @column (columnName="active")
      */
     private $active;
     
@@ -283,8 +281,8 @@ class User extends DatabaseModel
     {
         $user = null;
         $doUser = self::getDataObject ("user");
-        $doUser->addWhereCondition("username = '" . $username . "'");
-        $doUser->addWhereCondition("password = '" . $password . "'");
+        $doUser->addWhereCondition("username = '$username'");
+        $doUser->addWhereCondition("password = '$password'");
         if ($doUser->find(true))
         {
             $user = new User();

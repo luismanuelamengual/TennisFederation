@@ -17,6 +17,11 @@ class PortalView extends DefaultView
                 }
             }
 
+            function clearErrorMessage ()
+            {
+                $("#messageBox .modal-body").html("");
+            }
+
             function showErrorMessage (message)
             {
                 $("#messageBox .modal-body").html(message);
@@ -42,14 +47,16 @@ class PortalView extends DefaultView
 
             $("button[name=loginbutton]").click(function(event)
             {
+                clearErrorMessage();
                 disableLoginControls();
                 var username = $("input[name=username]")[0].value;
                 var password = $("input[name=password]")[0].value;
                 $.ajax("' . $this->getUrl("session/") . '?username=" + username + "&password=" + password,
                 {
                     method: "PUT",
-                    success: function (data)
+                    success: function (response)
                     {
+                        var data = jQuery.parseJSON(response);
                         if (data.success)
                         {
                             window.open("' . $this->getUrl("site/main/") . '", "_self");

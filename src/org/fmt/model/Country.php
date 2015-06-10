@@ -2,20 +2,18 @@
 
 namespace org\fmt\model;
 
-use NeoPHP\mvc\DatabaseModel;
-
 /**
- * @Table (tableName="country")
+ * @table (tableName="country")
  */
-class Country extends DatabaseModel 
+class Country extends Entity 
 {
     /**
-     * @Column (columnName="countryid", id=true)
+     * @column (columnName="countryid", id=true)
      */
     private $id;
     
     /**
-     * @Column (columnName="description")
+     * @column (columnName="description")
      */
     private $description;
     

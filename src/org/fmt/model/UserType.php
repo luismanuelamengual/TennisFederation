@@ -2,24 +2,22 @@
 
 namespace org\fmt\model;
 
-use NeoPHP\mvc\DatabaseModel;
-
 /**
- * @Table (tableName="usertype")
+ * @table (tableName="usertype")
  */
-class UserType extends DatabaseModel 
+class UserType extends Entity 
 {
     const USERTYPE_ADMINISTRATOR = 1;
     const USERTYPE_ORGANIZER = 2;
     const USERTYPE_PLAYER = 3;
     
     /**
-     * @Column (columnName="usertypeid", id=true)
+     * @column (columnName="usertypeid", id=true)
      */
     private $id;
     
     /**
-     * @Column (columnName="description")
+     * @column (columnName="description")
      */
     private $description;
     

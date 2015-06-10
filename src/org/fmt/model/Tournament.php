@@ -2,59 +2,57 @@
 
 namespace org\fmt\model;
 
-use NeoPHP\mvc\DatabaseModel;
-
 /**
- * @Table (tableName="tournament")
+ * @table (tableName="tournament")
  */
-class Tournament extends DatabaseModel
+class Tournament extends Entity
 {
     const STATE_INSCRIPTION = 1;
     const STATE_PLAYING = 2;
     const STATE_FINALIZED = 3;
     
     /**
-     * @Column (columnName="tournamentid", id=true)
+     * @column (columnName="tournamentid", id=true)
      */
     private $id;
     
     /**
-     * @Column (columnName="description")
+     * @column (columnName="description")
      */
     private $description;
     
     /**
-     * @Column (columnName="countryid", relatedTableName="country")
+     * @column (columnName="countryid", relatedTableName="country")
      */
     private $country;
     
     /**
-     * @Column (columnName="provinceid", relatedTableName="province")
+     * @column (columnName="provinceid", relatedTableName="province")
      */
     private $province;
     
     /**
-     * @Column (columnName="clubid", relatedTableName="club")
+     * @column (columnName="clubid", relatedTableName="club")
      */
     private $club;
     
     /**
-     * @Column (columnName="startdate")
+     * @column (columnName="startdate")
      */
     private $startDate;
     
     /**
-     * @Column (columnName="inscriptionsdate")
+     * @column (columnName="inscriptionsdate")
      */
     private $inscriptionsDate;
     
     /**
-     * @Column (columnName="state")
+     * @column (columnName="state")
      */
     private $state;
     
     /**
-     * @Column (columnName="organizeruserid", relatedTableName="user")
+     * @column (columnName="organizeruserid", relatedTableName="user")
      */
     private $organizer;
     

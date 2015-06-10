@@ -2,50 +2,48 @@
 
 namespace org\fmt\model;
 
-use NeoPHP\mvc\DatabaseModel;
-
 /**
- * @Table (tableName="club")
+ * @table (tableName="club")
  */
-class Club extends DatabaseModel 
+class Club extends Entity 
 {
     /**
-     * @Column (columnName="clubid", id=true)
+     * @column (columnName="clubid", id=true)
      */
     private $id;
     
     /**
-     * @Column (columnName="description")
+     * @column (columnName="description")
      */
     private $description;
     
     /**
-     * @Column (columnName="latitude")
+     * @column (columnName="latitude")
      */
     private $latitude;
     
     /**
-     * @Column (columnName="longitude")
+     * @column (columnName="longitude")
      */
     private $longitude;
     
     /**
-     * @Column (columnName="address")
+     * @column (columnName="address")
      */
     private $address;
     
     /**
-     * @Column (columnName="contactvia1")
+     * @column (columnName="contactvia1")
      */
     private $contactvia1;
     
     /**
-     * @Column (columnName="contactvia2")
+     * @column (columnName="contactvia2")
      */
     private $contactvia2;
 
     /**
-     * @Column (columnName="provinceid", relatedTableName="province")
+     * @column (columnName="provinceid", relatedTableName="province")
      */
     private $province;
     

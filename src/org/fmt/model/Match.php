@@ -2,12 +2,10 @@
 
 namespace org\fmt\model;
 
-use NeoPHP\mvc\DatabaseModel;
-
 /**
- * @Table (tableName="match")
+ * @table (tableName="match")
  */
-class Match extends DatabaseModel
+class Match extends Entity
 {
     const MATCHTYPE_SINGLES = 1;
     const MATCHTYPE_DOUBLES = 2;
@@ -16,47 +14,47 @@ class Match extends DatabaseModel
     const RESULT_TEAMBWIN = 2;
     
     /**
-     * @Column (columnName="matchid", id=true)
+     * @column (columnName="matchid", id=true)
      */
     private $id;
     
     /**
-     * @Column (columnName="matchtype")
+     * @column (columnName="matchtype")
      */
     private $matchType;
     
     /**
-     * @Column (columnName="userid")
+     * @column (columnName="userid")
      */
     private $user1;
     
     /**
-     * @Column (columnName="opponentuserid")
+     * @column (columnName="opponentuserid")
      */
     private $user2;
     
     /**
-     * @Column (columnName="tournamentphaseid", relatedTableName="tournamentphase")
+     * @column (columnName="tournamentphaseid", relatedTableName="tournamentphase")
      */
     private $phase;
     
     /**
-     * @Column (columnName="tournamentzoneid", relatedTableName="tournamentzone")
+     * @column (columnName="tournamentzoneid", relatedTableName="tournamentzone")
      */
     private $zone;
     
     /**
-     * @Column (columnName="date")
+     * @column (columnName="date")
      */
     private $date;
     
     /**
-     * @Column (columnName="result")
+     * @column (columnName="result")
      */
     private $result;
     
     /**
-     * @Column (columnName="resultdetail")
+     * @column (columnName="resultdetail")
      */
     private $resultDetail;
     
