@@ -3,13 +3,13 @@
 namespace org\fmt\model;
 
 use NeoPHP\mvc\DatabaseModel;
-use org\fmt\database\ProductionDatabase;
+use org\fmt\connection\ProductionConnection;
 
 abstract class Entity extends DatabaseModel
 {
-    protected static function getDatabase()
+    protected static function getConnection()
     {
-        return ProductionDatabase::getInstance();
+        return ProductionConnection::getInstance();
     }
 }
 

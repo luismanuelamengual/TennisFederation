@@ -1,10 +1,10 @@
 <?php
 
-namespace org\fmt\database;
+namespace org\fmt\connection;
 
-use NeoPHP\sql\PostgreSQLDatabase;
+use NeoPHP\sql\PostgreSQLConnection;
 
-class ProductionDatabase extends PostgreSQLDatabase
+class ProductionConnection extends PostgreSQLConnection
 {
     public function getDatabaseName()
     {

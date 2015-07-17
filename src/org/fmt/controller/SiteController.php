@@ -11,6 +11,11 @@ use org\fmt\view\DashboardView;
  */
 class SiteController extends WebController
 {
+    protected function onBeforeActionExecution($action, $parameters)
+    {
+        return parent::onBeforeActionExecution($action, $parameters);
+    }
+    
     /**
      * @routeAction
      */
