@@ -2,8 +2,10 @@
 
 namespace org\fmt\controller;
 
+use NeoPHP\sql\ConnectionUtils;
 use NeoPHP\web\WebController;
-use org\fmt\view\PortalView;
+use org\fmt\connection\ProductionConnection;
+use org\fmt\model\Country;
 
 /**
  * @route (path="/")
@@ -21,7 +23,21 @@ class MainController extends WebController
      */
     public function showPortal ()
     {
-        return new PortalView();
+//        return new PortalView();
+        
+        
+        $conn = ProductionConnection::getInstance();
+        
+        
+        $country = new Country();
+        $country->setDescription("Afganistan");
+        ConnectionUtils::insertEntity($conn, $country);
+        
+        
+        $countries = $conn->getTable("country")->get(Country::getClass());
+        echo "<pre>";
+        print_r ($countries);
+        echo "</pre>";
     }
 }
 

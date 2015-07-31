@@ -5,7 +5,7 @@ namespace org\fmt\controller;
 use Exception;
 use NeoPHP\web\http\Response;
 use NeoPHP\web\WebController;
-use org\fmt\model\User;
+use org\fmt\manager\UsersManager;
 use stdClass;
 
 /**
@@ -25,7 +25,7 @@ class SessionController extends WebController
         {
             $this->getSession()->destroy();
             $sessionId = false;
-            $user = User::getUserForUsernameAndPassword($username, $password);
+            $user = UsersManager::getInstance()->getUserByUsernameAndPassword($username, $password);
             if ($user != null)
             {
                 $this->getSession()->start();

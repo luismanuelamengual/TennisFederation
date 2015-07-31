@@ -2,10 +2,12 @@
 
 namespace org\fmt\model;
 
+use NeoPHP\mvc\Model;
+
 /**
  * @table (tableName="tournament")
  */
-class Tournament extends Entity
+class Tournament extends Model
 {
     const STATE_INSCRIPTION = 1;
     const STATE_PLAYING = 2;

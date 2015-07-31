@@ -2,10 +2,12 @@
 
 namespace org\fmt\model;
 
+use NeoPHP\mvc\Model;
+
 /**
  * @table (tableName="match")
  */
-class Match extends Entity
+class Match extends Model
 {
     const MATCHTYPE_SINGLES = 1;
     const MATCHTYPE_DOUBLES = 2;

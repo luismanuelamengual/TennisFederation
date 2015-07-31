@@ -2,10 +2,12 @@
 
 namespace org\fmt\model;
 
+use NeoPHP\mvc\Model;
+
 /**
  * @table (tableName="user")
  */
-class User extends Entity
+class User extends Model
 {   
     /**
      * @column (columnName="userid", id=true)
@@ -275,20 +277,6 @@ class User extends Entity
     public function isActive()
     {
         return $this->active;
-    }
-    
-    public static function getUserForUsernameAndPassword ($username, $password)
-    {
-        $user = null;
-        $doUser = self::getDataObject ("user");
-        $doUser->addWhereCondition("username = '$username'");
-        $doUser->addWhereCondition("password = '$password'");
-        if ($doUser->find(true))
-        {
-            $user = new User();
-            $user->setFieldValues ($doUser->getFields());
-        }
-        return $user;
     }
 }
 

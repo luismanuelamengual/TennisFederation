@@ -2,10 +2,12 @@
 
 namespace org\fmt\model;
 
+use NeoPHP\mvc\Model;
+
 /**
  * @table (tableName="usertype")
  */
-class UserType extends Entity 
+class UserType extends Model 
 {
     const USERTYPE_ADMINISTRATOR = 1;
     const USERTYPE_ORGANIZER = 2;

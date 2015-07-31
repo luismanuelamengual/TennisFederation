@@ -4,21 +4,44 @@ namespace org\fmt\manager;
 
 use NeoPHP\mvc\Manager;
 use org\fmt\connection\ProductionConnection;
+use org\fmt\model\User;
 use PDO;
 
-class UsersManager extends Manager
+class UsersManager extends MainManager
 {
     public function getUserByUsernameAndPassword ($username, $password)
     {
-        $statement = ProductionConnection::getInstance()->query("SELECT * FROM \"user\" WHERE username = ? AND password = ?", array($username, $password));
-        $record = $statement->fetch(PDO::FETCH_OBJ);
-        if ($record != false)
-        {
-            echo "<pre>";
-            print_r ($record);
-            echo "</pre>";
-        }
-        echo "func llamado OK";
+        $user = null;
+        $userTable = $this->getConnection()->getTable("\"user\"");
+        $userTable->addWhere("username", "=", $username);
+        $userTable->addWhere("password", "=", $password);
+        $user = $userTable->get(User::getClass());
+        
+        echo "<pre>";
+        print_r ($user);
+        echo "</pre>";
+        
+        
+        
+//        while ($userTable->hasNext())
+//        {
+//            $user = $userTable->next(User::getClass());
+////            $user = 
+//        }
+        
+        
+        
+//        if ($userTable->find(true))
+//        {
+//            $userTable->fetch(User::getClass());
+//            
+//            echo "<pre>";
+//            print_r ($userTable->getFields());
+//            echo "</pre>";
+//
+//    //        $user = new User($record);
+//        }
+        return $user;
     }
 }
 

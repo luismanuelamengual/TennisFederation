@@ -2,10 +2,12 @@
 
 namespace org\fmt\model;
 
+use NeoPHP\mvc\Model;
+
 /**
  * @table (tableName="province")
  */
-class Province extends Entity 
+class Province extends Model 
 {
     /**
      * @column (columnName="provinceid", id=true)
