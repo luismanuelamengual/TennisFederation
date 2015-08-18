@@ -23,7 +23,7 @@ class ProductionConnection extends PostgreSQLConnection
     
     public function getPassword ()
     {
-        return "tuvieja.com";
+        return "postgres";
     }
 }
 

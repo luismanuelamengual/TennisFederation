@@ -16,6 +16,11 @@ class SiteController extends WebController
         return parent::onBeforeActionExecution($action, $parameters);
     }
     
+    public function pepeAction ()
+    {
+        echo "pepe action !!!!";
+    }
+    
     /**
      * @routeAction
      */

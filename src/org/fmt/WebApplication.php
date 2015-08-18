@@ -8,7 +8,6 @@ class WebApplication extends \NeoPHP\web\WebApplication
     {
         parent::initialize();
         $this->setName ("Federación Mendocina de Tenis");
-        $this->addRoutesFromAnnotations();
         $this->setRestfull (true);
     }
 }
