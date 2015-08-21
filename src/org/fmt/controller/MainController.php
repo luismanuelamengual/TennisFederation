@@ -5,7 +5,7 @@ namespace org\fmt\controller;
 use com\bootstrap\component\BSAlert;
 use com\bootstrap\component\BSButton;
 use com\bootstrap\component\BSContainer;
-use com\bootstrap\component\BSContainerConstraints;
+use com\bootstrap\component\BSLayoutConstraints;
 use com\bootstrap\component\BSDropdownItem;
 use com\bootstrap\component\BSDropdownMenu;
 use com\bootstrap\component\BSNav;
@@ -53,7 +53,7 @@ class MainController extends WebController
         $table->setCellStyle(3, 2, BSTable::STYLE_DANGER);
         
         $form = new BSForm();
-        $formConstraints = new BSContainerConstraints();
+        $formConstraints = new BSLayoutConstraints();
         $formConstraints->colsSm = 6;
         $form->addField(new BSTextField(["label"=>"Nombre", "helpTexts"=>["(*) Campo requerido"]]));
         $form->addField(new BSTextField(["label"=>"Apellido", "value"=>"Super campo", "style"=>BSFormField::STYLE_WARNING]));
@@ -68,7 +68,7 @@ class MainController extends WebController
         $alert->setDismissible(true);
         
         $container = new BSContainer();
-        $containerConstraints = new BSContainerConstraints();
+        $containerConstraints = new BSLayoutConstraints();
         $containerConstraints->colsSm = 6;
         $container->addElement($alert);
         $container->addElement($table, $containerConstraints);
