@@ -4,14 +4,17 @@ namespace org\fmt\controller;
 
 use com\bootstrap\component\BSAlert;
 use com\bootstrap\component\BSButton;
+use com\bootstrap\component\BSCarousel;
 use com\bootstrap\component\BSContainer;
-use com\bootstrap\component\BSLayoutConstraints;
 use com\bootstrap\component\BSDropdownItem;
 use com\bootstrap\component\BSDropdownMenu;
+use com\bootstrap\component\BSLayoutConstraints;
 use com\bootstrap\component\BSNav;
 use com\bootstrap\component\BSNavBar;
 use com\bootstrap\component\BSNavItem;
 use com\bootstrap\component\BSTable;
+use com\bootstrap\component\card\BSCard;
+use com\bootstrap\component\card\BSCardColumns;
 use com\bootstrap\component\form\BSForm;
 use com\bootstrap\component\form\BSFormField;
 use com\bootstrap\component\form\BSTextField;
@@ -39,9 +42,14 @@ class MainController extends WebController
         $nav = new BSNav();
         $nav->addItem($item1);
         $nav->addItem($item2);
-        $navBar = new BSNavBar();
+        $navBar = new BSNavBar(["useContainer"=>true]);
         $navBar->setBrand("Sitrack.com");
         $navBar->addNav($nav);
+        
+        
+        $carousel = new BSCarousel();
+        $carousel->addSlide("res/images/background1.jpg", "Titular 1", "Este es un texto de prueba");
+        $carousel->addSlide("res/images/background4.jpg", "Titulo 2", "Lorem ipsum dolor sit amet");
         
         $table = new BSTable();
         $table->setHeaders(["Id", "Nombre", "Apellido", "Edad"]);
@@ -67,12 +75,29 @@ class MainController extends WebController
         $alert->setStyle(BSAlert::STYLE_DANGER);
         $alert->setDismissible(true);
         
+        $cardColumns = new BSCardColumns();
+        for($i = 1; $i <= 8; $i++)
+        {
+            $card = new BSCard();
+            if ($i == 2)
+            {
+                $card->setInversed(true);
+                $card->setStyle (BSCard::STYLE_INFO);
+            }
+            if ($i%4==0)
+                $card->addHeader ("Encabezado de carta");
+            $card->addTitle("Super carta " . $i);
+            $card->addText($i%2==0?"Lorem ipsum dolor sit amet":"Rembla ripola dorem spsum dolor sit amet alessandra rampolla laralaral ambar de gorilla");
+            $cardColumns->addCard($card);
+        }
+        
         $container = new BSContainer();
         $containerConstraints = new BSLayoutConstraints();
-        $containerConstraints->colsSm = 6;
+        $containerConstraints->colsMd = 6;
         $container->addElement($alert);
         $container->addElement($table, $containerConstraints);
         $container->addElement($form, $containerConstraints);
+        $container->addElement($cardColumns);
         
         
         $page = new BSPage();        
