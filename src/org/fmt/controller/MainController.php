@@ -9,6 +9,7 @@ use com\bootstrap\component\BSContainer;
 use com\bootstrap\component\BSDropdownItem;
 use com\bootstrap\component\BSDropdownMenu;
 use com\bootstrap\component\BSLayoutConstraints;
+use com\bootstrap\component\BSModal;
 use com\bootstrap\component\BSNav;
 use com\bootstrap\component\BSNavBar;
 use com\bootstrap\component\BSNavItem;
@@ -31,6 +32,12 @@ class MainController extends WebController
    
     public function indexAction ()
     {
+        $modal = new BSModal();
+        $modal->setTitle("Super formulario modal");
+        $modal->addElement("Este es el contenido del modal");
+        $modal->addFooterElement(new BSButton("Guardar"));
+        
+        
         $dropMenu = new BSDropdownMenu();
         $dropMenu->addItem(new BSDropdownItem("PEPE"));
         $dropMenu->addItem(new BSDropdownItem("HONGEX"));
@@ -100,9 +107,19 @@ class MainController extends WebController
         $container->addElement($cardColumns);
         
         
-        $page = new BSPage();        
+        $page = new BSPage();    
+        $page->addElement($modal);
         $page->addElement($navBar);
         $page->addElement($container);
+        $page->addScript("
+            (function () 
+            {
+                $('#bs18').click(function() 
+                {
+                    $('#bs1').modal();
+                });
+            })();
+        ");
         
         return $page;
     }
