@@ -5,22 +5,26 @@ namespace org\fmt\model;
 use NeoPHP\mvc\Model;
 
 /**
- * @table (tableName="province")
+ * @Entity
+ * @Table (name="province")
  */
 class Province extends Model 
 {
     /**
-     * @column (columnName="provinceid", id=true)
+     * @Id
+     * @GeneratedValue
+     * @Column (name="provinceid", type="integer")
      */
     private $id;
     
     /**
-     * @column (columnName="description")
+     * @Column (type="string")
      */
     private $description;
     
     /**
-     * @column (columnName="countryid", relatedTableName="country")
+     * @OneToOne (targetEntity="Country")
+     * @JoinColumn (name="countryid", referencedColumnName="countryid")
      */
     private $country;
     

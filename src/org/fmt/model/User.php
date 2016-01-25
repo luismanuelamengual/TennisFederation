@@ -1,6 +1,6 @@
 <?php
 
-namespace org\fmt\model;
+namespace com\rd\model;
 
 use NeoPHP\mvc\Model;
 
@@ -73,32 +73,7 @@ class User extends Model
      * @column (columnName="documentnumber")
      */
     private $documentNumber;
-    
-    /**
-     * @column (columnName="countryid", relatedTableName="country")
-     */
-    private $country;
-    
-    /**
-     * @column (columnName="provinceid", relatedTableName="province")
-     */
-    private $province;
-    
-    /**
-     * @column (columnName="clubid", relatedTableName="club")
-     */
-    private $club;
-    
-    /**
-     * @column (columnName="disponibility")
-     */
-    private $disponibility;
-    
-    /**
-     * @column (columnName="active")
-     */
-    private $active;
-    
+        
     public function getId()
     {
         return $this->id;
@@ -227,56 +202,6 @@ class User extends Model
     public function setDocumentNumber($documentNumber)
     {
         $this->documentNumber = $documentNumber;
-    }
-
-    public function getCountry()
-    {
-        return $this->country;
-    }
-
-    public function setCountry(Country $country)
-    {
-        $this->country = $country;
-    }
-
-    public function getProvince()
-    {
-        return $this->province;
-    }
-
-    public function setProvince(Province $province)
-    {
-        $this->province = $province;
-    }
-    
-    public function getClub()
-    {
-        return $this->club;
-    }
-
-    public function setClub(Club $club)
-    {
-        $this->club = $club;
-    }
-
-    public function getDisponibility()
-    {
-        return $this->disponibility;
-    }
-
-    public function setDisponibility($disponibility)
-    {
-        $this->disponibility = $disponibility;
-    }
-    
-    public function setActive($active)
-    {
-        $this->active = $active;
-    }
-    
-    public function isActive()
-    {
-        return $this->active;
     }
 }
 

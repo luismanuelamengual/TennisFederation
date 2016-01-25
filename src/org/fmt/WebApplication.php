@@ -4,9 +4,9 @@ namespace org\fmt;
 
 class WebApplication extends \NeoPHP\web\WebApplication
 {
-    protected function initialize ()
+    public function __construct ()
     {
-        parent::initialize();
+        parent::__construct();
         $this->setName ("Federación Mendocina de Tenis");
         $this->setRestfull (true);
     }

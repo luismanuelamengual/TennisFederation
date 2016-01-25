@@ -5,17 +5,20 @@ namespace org\fmt\model;
 use NeoPHP\mvc\Model;
 
 /**
- * @table (tableName="country")
+ * @Entity
+ * @Table (name="country")
  */
 class Country extends Model 
 {
     /**
-     * @column (columnName="countryid", id=true)
+     * @Id
+     * @GeneratedValue
+     * @Column (name="countryid", type="integer")
      */
     private $id;
     
     /**
-     * @column (columnName="description")
+     * @Column (type="string")
      */
     private $description;
     
