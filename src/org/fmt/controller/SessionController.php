@@ -4,19 +4,19 @@ namespace org\fmt\controller;
 
 use Exception;
 use NeoPHP\web\http\Response;
-use NeoPHP\web\WebController;
-use org\fmt\manager\UsersManager;
+use NeoPHP\web\WebRestController;
+use org\fmt\connection\ProductionConnection;
+use org\fmt\model\User;
 use stdClass;
 
-/**
- * @route (path="session")
- */
-class SessionController extends WebController
+class SessionController extends WebRestController
 {
-    /**
-     * @routeAction (method="PUT")
-     */
-    public function createSession ($username, $password)
+    public function getResource ($username, $password)
+    {
+        return $this->createResource($username, $password); 
+    }
+    
+    public function createResource ($username, $password)
     {
         $response = new Response();
         $responseObject = new stdClass();
@@ -25,7 +25,12 @@ class SessionController extends WebController
         {
             $this->getSession()->destroy();
             $sessionId = false;
-            $user = UsersManager::getInstance()->getUserByUsernameAndPassword($username, $password);
+            $connection = ProductionConnection::getInstance();
+            $userTable = $connection->getTable("\"user\"");
+            $userTable->addWhere("username", "=", $username);
+            $userTable->addWhere("password", "=", $password);
+            $user = $userTable->getFirst(User::getClass());
+            
             if ($user != null)
             {
                 $this->getSession()->start();

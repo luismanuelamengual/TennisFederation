@@ -1,76 +1,76 @@
 <?php
 
-namespace com\rd\model;
+namespace org\fmt\model;
 
 use NeoPHP\mvc\Model;
 
 /**
- * @table (tableName="user")
+ * @table (name='\"user\"')
  */
 class User extends Model
 {   
     /**
-     * @column (columnName="userid", id=true)
+     * @column (name="userid", id=true)
      */
     private $id;
     
     /**
-     * @column (columnName="username")
+     * @column (name="username")
      */
     private $username;
     
     /**
-     * @column (columnName="password")
+     * @column (name="password")
      */
     private $password;
     
     /**
-     * @column (columnName="usertypeid", relatedTableName="usertype")
+     * @column (name="usertypeid", entityClassName="UserType")
      */
     private $type;
     
     /**
-     * @column (columnName="firstname")
+     * @column (name="firstname")
      */
     private $firstname;
     
     /**
-     * @column (columnName="lastname")
+     * @column (name="lastname")
      */
     private $lastname;
     
     /**
-     * @column (columnName="birthdate")
+     * @column (name="birthdate")
      */
     private $birthDate;
     
     /**
-     * @column (columnName="address")
+     * @column (name="address")
      */
     private $address;
     
     /**
-     * @column (columnName="contactvia1")
+     * @column (name="contactvia1")
      */
     private $contactVia1;
     
     /**
-     * @column (columnName="contactvia2")
+     * @column (name="contactvia2")
      */
     private $contactVia2;
     
     /**
-     * @column (columnName="contactvia3")
+     * @column (name="contactvia3")
      */
     private $contactVia3;
     
     /**
-     * @column (columnName="email")
+     * @column (name="email")
      */
     private $email;
     
     /**
-     * @column (columnName="documentnumber")
+     * @column (name="documentnumber")
      */
     private $documentNumber;
         

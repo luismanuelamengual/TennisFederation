@@ -15,7 +15,7 @@ class MainController extends WebController
    
     public function indexAction ()
     {
-        return new PortalView();
+        return new PortalView();        
     }
 }
 
