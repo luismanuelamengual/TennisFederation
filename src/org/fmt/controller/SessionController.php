@@ -16,6 +16,11 @@ class SessionController extends WebRestController
         return $this->createResource($username, $password); 
     }
     
+    public function updateResource ($username, $password)       
+    {
+        return $this->createResource($username, $password); 
+    }
+    
     public function createResource ($username, $password)
     {
         $response = new Response();
@@ -42,22 +47,18 @@ class SessionController extends WebRestController
                 $this->getSession()->type = $user->getType()->getId();
                 $responseObject->success = true;
                 $responseObject->sessionId = $this->getSession()->getId();
-                $response->setContent(json_encode($responseObject));
+                $response->setContent($this->getSession()->getId());
             }
             else
             {
-                $responseObject->success = false;
-                $responseObject->errorMessage = "Nombre de usuario o contraseña incorrecta";
                 $response->setStatusCode(401);
-                $response->setContent(json_encode($responseObject));
+                $response->setContent("Nombre de usuario o contraseña incorrecta");
             }
         }
         catch (Exception $ex)
         {
-            $responseObject->success = false;
-            $responseObject->errorMessage = $ex->getMessage();
             $response->setStatusCode(500);
-            $response->setContent(json_encode($responseObject));
+            $response->setContent($ex->getMessage());
         }
         
         return $response;

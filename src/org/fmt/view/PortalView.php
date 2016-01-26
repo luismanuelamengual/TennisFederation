@@ -2,170 +2,33 @@
 
 namespace org\fmt\view;
 
+use NeoPHP\web\html\HTMLTag;
+
 class PortalView extends DefaultView
 {
     public function __construct()
     {
         parent::__construct();
-//        $this->getMainHeader()->addElement("hola");
+        $this->getMainContent()->addElement($this->createMainJumbotron()); 
+        $this->getMainContent()->addElement($this->createInformationContent()); 
+        $this->getMainContent()->addElement($this->createFooter()); 
+    }
+    
+    protected function createMainJumbotron()
+    {        
+        $jumbotronTitle = new HTMLTag("h1", ["class"=>"jumbotrontitle"], $this->getApplication()->getName());
+        $jumbotronText = new HTMLTag("p", ["class"=>"lead jumbotrontext"], "La Federación Mendocina de tenis creada el 29 de mayo de 1928, es una Asociación Civil sin fines de lucro, con domicilio legal en la Ciudad de Mendoza y con alcance jurisdiccional en toda la Provincia.");
+        $jumbotronbody = new HTMLTag("div", ["id"=>"mainjumbotronbody"], [$jumbotronTitle, $jumbotronText]);
+        $jumbotron = new HTMLTag("div", ["id"=>"mainjumbotron"], [$jumbotronbody]);
+        return $jumbotron;
+    }
         
-        
-//        $this->getBodyTag()->add($this->createMessageBox());
-//        $this->addScript('
-//            function checkPageLocation ()
-//            {
-//                var src = window.location.href;
-//                if(window.top != window.self) {
-//                    window.open(src,"_top");
-//                }
-//            }
-//
-//            function clearErrorMessage ()
-//            {
-//                $("#messageBox .modal-body").html("");
-//            }
-//
-//            function showErrorMessage (message)
-//            {
-//                $("#messageBox .modal-body").html(message);
-//                $("#messageBox").modal("show");
-//            }
-//
-//            function disableLoginControls ()
-//            {
-//                $("input[name=username]").prop("disabled", true);
-//                $("input[name=password]").prop("disabled", true);
-//                $("button[name=loginbutton]").prop("disabled", true);
-//                $("body").css("cursor", "progress");
-//            }
-//
-//            function enableLoginControls ()
-//            {
-//                $("input[name=username]").prop("disabled", false);
-//                $("input[name=password]").prop("disabled", false);
-//                $("button[name=loginbutton]").prop("disabled", false);
-//                $("body").css("cursor", "default");
-//                $("input[name=username]").focus();
-//            }
-//
-//            $("button[name=loginbutton]").click(function(event)
-//            {
-//                clearErrorMessage();
-//                disableLoginControls();
-//                var username = $("input[name=username]")[0].value;
-//                var password = $("input[name=password]")[0].value;
-//                $.ajax("' . $this->getUrl("session/") . '?username=" + username + "&password=" + password,
-//                {
-//                    method: "PUT",
-//                    success: function (response)
-//                    {
-//                        var data = jQuery.parseJSON(response);
-//                        if (data.success)
-//                        {
-//                            window.open("' . $this->getUrl("site/") . '", "_self");
-//                        }
-//                        else
-//                        {
-//                            showErrorMessage(data.errorMessage);
-//                            enableLoginControls();
-//                        }
-//                    },
-//                    error: function (qXHR, textStatus, errorThrown)
-//                    {
-//                        if (qXHR.responseText)
-//                        {
-//                            var responseObject = jQuery.parseJSON(qXHR.responseText);
-//                            showErrorMessage(responseObject.errorMessage);
-//                        }
-//                        else
-//                        {
-//                            showErrorMessage(textStatus + " - " + errorThrown);
-//                        }
-//                        enableLoginControls();
-//                    },
-//                    timeout: function ()
-//                    {
-//                        showErrorMessage("Se ha agotado el tiempo de conexión. Intente más tarde");
-//                        enableLoginControls();
-//                    }
-//                });
-//                return false;
-//            });
-//        ');
-    }
-    
-    protected function createMessageBox()
-    {
-        return '
-        <div id="messageBox" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title">' . $this->getApplication()->getName() . '</h4>
-                    </div>
-                    <div class="modal-body"></div>
-                </div>
-            </div>
-        </div>';
-    }
-    
-    protected function createHeaderContent()
-    {
-        return '
-        <form class="navbar-form navbar-right">
-            <div class="form-group">
-                <input type="text" name="username" placeholder="Usuario" class="form-control">
-            </div>
-            <div class="form-group">
-                <input type="password" name="password" placeholder="Contraseña" class="form-control">
-            </div>
-            <button type="button" name="loginbutton" class="btn btn-primary">Ingresar</button>
-        </form>';
-    }
-    
-    protected function createContent()
-    {
-        $content = "";
-        $content .= $this->createCarousel();
-        $content .= $this->createInformationContent();
-        $content .= $this->createFooter();
-        return $content;
-    }
-    
-    protected function createCarousel()
-    {
-        return '
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-            </ol>
-            <div class="carousel-inner">
-                <div class="item active">
-                    <img src="' . $this->getBaseUrl() . 'res/images/background1.jpg" alt="">
-                    <div class="carousel-caption">
-                        <h1 style="color:#ffffff">Federación Mendocina de Tenis</h1>
-                        <p>La Federación Mendocina de tenis creada el 29 de mayo de 1928, es una Asociación Civil sin fines de lucro, con domicilio legal en la Ciudad de Mendoza y con alcance jurisdiccional en toda la Provincia.</p>
-                    </div>
-                </div>
-                <div class="item">
-                    <img src="' . $this->getBaseUrl() . 'res/images/background4.jpg" alt="">
-                    <div class="carousel-caption">
-                        <h1 style="color:#ffffff">Federación Mendocina de Tenis</h1>
-                        <p>La F.M.T organiza por año más de 100 torneos para menores, seniors y profesionales en sus distintas categorías</p>
-                    </div>
-                </div>
-            </div>
-            <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-            <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-        </div>';
-    }
-    
     protected function createInformationContent()
     {
         return '
         <div class="container">
+            <hr class="featurette-divider">
+
             <div class="row text-center">
                 <div class="col-sm-4">
                     <img class="img-thumbnail" src="' . $this->getBaseUrl() . 'res/images/featurette3.jpg" data-src="holder.js/260x175" alt="" style="width: 260px; height: 175px;">
@@ -180,7 +43,7 @@ class PortalView extends DefaultView
                     <h2>Profesionales</h2>
                 </div>
             </div>
-                <hr class="featurette-divider">
+            <hr class="featurette-divider">
 
             <div class="row featurette">
                 <div class="col-md-12">
