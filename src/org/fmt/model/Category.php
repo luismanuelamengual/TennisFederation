@@ -5,22 +5,22 @@ namespace org\fmt\model;
 use NeoPHP\mvc\Model;
 
 /**
- * @table (tableName="category")
+ * @table (name="category")
  */
 class Category extends Model
 {
     /**
-     * @column (columnName="categoryid", id=true)
+     * @column (name="categoryid", id=true)
      */
     private $id;
     
     /**
-     * @column (columnName="description")
+     * @column (name="description")
      */
     private $description;
     
     /**
-     * @column (columnName="matchtype")
+     * @column (name="matchtype")
      */
     private $matchType;
     

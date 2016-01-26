@@ -5,7 +5,7 @@ namespace org\fmt\model;
 use NeoPHP\mvc\Model;
 
 /**
- * @table (tableName="tournament")
+ * @table (name="tournament")
  */
 class Tournament extends Model
 {
@@ -14,47 +14,47 @@ class Tournament extends Model
     const STATE_FINALIZED = 3;
     
     /**
-     * @column (columnName="tournamentid", id=true)
+     * @column (name="tournamentid", id=true)
      */
     private $id;
     
     /**
-     * @column (columnName="description")
+     * @column (name="description")
      */
     private $description;
     
     /**
-     * @column (columnName="countryid", relatedTableName="country")
+     * @column (name="countryid", relatedTableName="country")
      */
     private $country;
     
     /**
-     * @column (columnName="provinceid", relatedTableName="province")
+     * @column (name="provinceid", relatedTableName="province")
      */
     private $province;
     
     /**
-     * @column (columnName="clubid", relatedTableName="club")
+     * @column (name="clubid", relatedTableName="club")
      */
     private $club;
     
     /**
-     * @column (columnName="startdate")
+     * @column (name="startdate")
      */
     private $startDate;
     
     /**
-     * @column (columnName="inscriptionsdate")
+     * @column (name="inscriptionsdate")
      */
     private $inscriptionsDate;
     
     /**
-     * @column (columnName="state")
+     * @column (name="state")
      */
     private $state;
     
     /**
-     * @column (columnName="organizeruserid", relatedTableName="user")
+     * @column (name="organizeruserid", relatedTableName="user")
      */
     private $organizer;
     

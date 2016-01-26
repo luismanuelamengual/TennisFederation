@@ -5,7 +5,7 @@ namespace org\fmt\model;
 use NeoPHP\mvc\Model;
 
 /**
- * @table (tableName="match")
+ * @table (name="match")
  */
 class Match extends Model
 {
@@ -16,47 +16,42 @@ class Match extends Model
     const RESULT_TEAMBWIN = 2;
     
     /**
-     * @column (columnName="matchid", id=true)
+     * @column (name="matchid", id=true)
      */
     private $id;
     
     /**
-     * @column (columnName="matchtype")
+     * @column (name="matchtype")
      */
     private $matchType;
     
     /**
-     * @column (columnName="userid")
+     * @column (name="userid")
      */
     private $user1;
     
     /**
-     * @column (columnName="opponentuserid")
+     * @column (name="opponentuserid")
      */
     private $user2;
     
     /**
-     * @column (columnName="tournamentphaseid", relatedTableName="tournamentphase")
+     * @column (name="phase")
      */
     private $phase;
     
     /**
-     * @column (columnName="tournamentzoneid", relatedTableName="tournamentzone")
-     */
-    private $zone;
-    
-    /**
-     * @column (columnName="date")
+     * @column (name="date")
      */
     private $date;
     
     /**
-     * @column (columnName="result")
+     * @column (name="result")
      */
     private $result;
     
     /**
-     * @column (columnName="resultdetail")
+     * @column (name="resultdetail")
      */
     private $resultDetail;
     
@@ -105,19 +100,9 @@ class Match extends Model
         return $this->phase;
     }
     
-    public function setPhase (TournamentPhase $phase)
+    public function setPhase ($phase)
     {
         $this->phase = $phase;
-    }
-    
-    public function getZone ()
-    {
-        return $this->zone;
-    }
-    
-    public function setZone (TournamentZone $zone)
-    {
-        $this->zone = $zone;
     }
     
     public function getDate ()

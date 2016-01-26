@@ -5,47 +5,47 @@ namespace org\fmt\model;
 use NeoPHP\mvc\Model;
 
 /**
- * @table (tableName="club")
+ * @table (name="club")
  */
 class Club extends Model 
 {
     /**
-     * @column (columnName="clubid", id=true)
+     * @column (name="clubid", id=true)
      */
     private $id;
     
     /**
-     * @column (columnName="description")
+     * @column (name="description")
      */
     private $description;
     
     /**
-     * @column (columnName="latitude")
+     * @column (name="latitude")
      */
     private $latitude;
     
     /**
-     * @column (columnName="longitude")
+     * @column (name="longitude")
      */
     private $longitude;
     
     /**
-     * @column (columnName="address")
+     * @column (name="address")
      */
     private $address;
     
     /**
-     * @column (columnName="contactvia1")
+     * @column (name="contactvia1")
      */
     private $contactvia1;
     
     /**
-     * @column (columnName="contactvia2")
+     * @column (name="contactvia2")
      */
     private $contactvia2;
 
     /**
-     * @column (columnName="provinceid", relatedTableName="province")
+     * @column (name="provinceid", entityClassName="Province")
      */
     private $province;
     

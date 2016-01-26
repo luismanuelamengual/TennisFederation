@@ -5,17 +5,17 @@ namespace org\fmt\model;
 use NeoPHP\mvc\Model;
 
 /**
- * @table (tableName="usertype")
+ * @table (name="usertype")
  */
 class UserType extends Model 
 {   
     /**
-     * @column (columnName="usertypeid", id=true)
+     * @column (name="usertypeid", id=true)
      */
     private $id;
     
     /**
-     * @column (columnName="description")
+     * @column (name="description")
      */
     private $description;
     
