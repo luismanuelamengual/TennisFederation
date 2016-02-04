@@ -2,6 +2,7 @@
 
 namespace org\fmt\view;
 
+use com\bootstrap\component\BSCarousel;
 use NeoPHP\web\html\HTMLTag;
 
 class PortalView extends DefaultView
@@ -15,12 +16,11 @@ class PortalView extends DefaultView
     }
     
     protected function createMainJumbotron()
-    {        
-        $jumbotronTitle = new HTMLTag("h1", ["class"=>"jumbotrontitle"], $this->getApplication()->getName());
-        $jumbotronText = new HTMLTag("p", ["class"=>"lead jumbotrontext"], "La Federación Mendocina de tenis creada el 29 de mayo de 1928, es una Asociación Civil sin fines de lucro, con domicilio legal en la Ciudad de Mendoza y con alcance jurisdiccional en toda la Provincia.");
-        $jumbotronbody = new HTMLTag("div", ["id"=>"mainjumbotronbody"], [$jumbotronTitle, $jumbotronText]);
-        $jumbotron = new HTMLTag("div", ["id"=>"mainjumbotron"], [$jumbotronbody]);
-        return $jumbotron;
+    { 
+        $carousel = new BSCarousel();
+        $carousel->addSlide($this->getBaseUrl() . "res/images/background1.jpg", $this->getApplication()->getName(), "La Federación Mendocina de tenis creada el 29 de mayo de 1928, es una Asociación Civil sin fines de lucro, con domicilio legal en la Ciudad de Mendoza y con alcance jurisdiccional en toda la Provincia.");
+        $carousel->addSlide($this->getBaseUrl() . "res/images/background3.jpg", $this->getApplication()->getName(), "La Federacións Mendocina de tenis creada el 29 de mayo de 1928, es una Asociación Civil sin fines de lucro, con domicilio legal en la Ciudad de Mendoza y con alcance jurisdiccional en toda la Provincia.");
+        return $carousel; 
     }
         
     protected function createInformationContent()
