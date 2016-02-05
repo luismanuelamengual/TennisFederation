@@ -3,7 +3,7 @@
 namespace org\fmt\controller;
 
 use NeoPHP\web\WebController;
-use org\fmt\view\PortalView;
+use NeoPHP\web\WebScriptView;
 
 class MainController extends WebController
 {
@@ -14,8 +14,8 @@ class MainController extends WebController
     }
    
     public function indexAction ()
-    {
-        return new PortalView();        
+    {      
+        return new WebScriptView("portal");
     }
 }
 
