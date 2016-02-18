@@ -7,7 +7,7 @@
         <title>{{ $this->getApplication()->getName() }}</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="{{ $this->getBaseUrl() }}css/site.css" />
+        <link rel="stylesheet" type="text/css" href="@resource('css/site.css')" />
         @yield("stylesheets")
     </head>
     <body>
@@ -46,7 +46,7 @@
                 <div class="collapse navbar-collapse" id="mainnavbar_collasiblecontent">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="nav-item">
-                            <a id="bs7" href="{{ $this->getUrl("user/showRegistrationForm"); }}" class="nav-link">Registrate</a>
+                            <a id="bs7" href="@url('user/showRegistrationForm')" class="nav-link">Registrate</a>
                         </li>
                         <li class="nav-item">
                             <a data-toggle="modal" data-target="#mainmodal" id="bs8" href="#" class="nav-link">Ingresa</a>
