@@ -98,7 +98,7 @@
                 var $form = $(this).closest("form");
                 var username = $form.find("input[name=loginUsername]")[0].value;
                 var password = $form.find("input[name=loginPassword]")[0].value;
-                $.ajax("{{ $this->getUrl("session/"); }}",
+                $.ajax("@url('session/')", 
                 {
                     method: "POST",
                     data:
@@ -108,7 +108,8 @@
                     },
                     success: function (contents)
                     {
-                        window.open("http://localhost/fmt/site/?PHPSESSID=" + contents, "_self");
+                        var siteUrl = "@url('site/')";
+                        window.open(siteUrl + "?PHPSESSID=" + contents, "_self");                     
                     },
                     error: function (qXHR, textStatus, errorThrown)
                     {
