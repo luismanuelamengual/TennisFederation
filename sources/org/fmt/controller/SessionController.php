@@ -5,7 +5,6 @@ namespace org\fmt\controller;
 use Exception;
 use NeoPHP\web\http\Response;
 use NeoPHP\web\WebRestController;
-use org\fmt\connection\ProductionConnection;
 use org\fmt\model\User;
 use stdClass;
 
@@ -30,8 +29,7 @@ class SessionController extends WebRestController
         {
             $this->getSession()->destroy();
             $sessionId = false;
-            $connection = ProductionConnection::getInstance();
-            $userTable = $connection->getTable("\"user\"");
+            $userTable = $this->getConnection()->getTable("\"user\"");
             $userTable->addWhere("username", "=", $username);
             $userTable->addWhere("password", "=", $password);
             $user = $userTable->getFirst(User::getClass());
