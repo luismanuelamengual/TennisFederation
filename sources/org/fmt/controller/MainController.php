@@ -3,7 +3,7 @@
 namespace org\fmt\controller;
 
 use NeoPHP\web\WebController;
-use NeoPHP\web\WebScriptView;
+use NeoPHP\web\WebTemplateView;
 
 class MainController extends WebController
 {
@@ -15,7 +15,7 @@ class MainController extends WebController
    
     public function indexAction ()
     {      
-        return new WebScriptView("portal");
+        return new WebTemplateView("portal");
     }
 }
 
