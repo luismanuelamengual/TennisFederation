@@ -1,8 +1,9 @@
 <?php
 
 require_once ("../../NeoPHP2/autoload.php");
-NeoPHP\core\ClassLoader::getInstance()->addIncludePath("../sources");
-$app = new org\fmt\WebApplication(realpath(".."));
+$app = new NeoPHP\web\WebApplication(realpath(".."));
+$app->setName ("Federación Mendocina de Tenis");
+$app->setRestfull (true);
 $app->handleRequest();
 
 ?>
