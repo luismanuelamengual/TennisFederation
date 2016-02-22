@@ -7,12 +7,15 @@ use NeoPHP\web\WebTemplateView;
 
 class MainController extends WebController
 {
-    public function onBeforeActionExecution ($action, $params)
+    public function onBeforeAction ($action, $params)
     {
         $this->getSession()->destroy();
         return true;
     }
    
+    /**
+     * @action
+     */
     public function indexAction ()
     {      
         return new WebTemplateView("portal");
