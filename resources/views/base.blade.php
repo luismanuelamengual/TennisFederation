@@ -7,7 +7,7 @@
         <title>{{ $this->getApplication()->getName() }}</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="@resource('css/site.css')" />
+        <link rel="stylesheet" type="text/css" href="{{ $this->getResourceUrl('css/site.css') }}" />
         @yield("stylesheets")
     </head>
     <body>
@@ -40,13 +40,13 @@
         <nav id="mainheader" class="navbar navbar-default navbar-fixed-top bg-faded">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand">Federación Mendocina de Tenis</a>
+                    <a class="navbar-brand">{{ $this->getApplication()->getName() }}</a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainnavbar_collasiblecontent" aria-expanded="false"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
                 </div>
                 <div class="collapse navbar-collapse" id="mainnavbar_collasiblecontent">
                     <ul class="nav navbar-nav navbar-right">
                         <li class="nav-item">
-                            <a id="bs7" href="@url('user/showRegistrationForm')" class="nav-link">Registrate</a>
+                            <a id="bs7" href="{{ $this->getUrl('user/showRegistrationForm') }}" class="nav-link">Registrate</a>
                         </li>
                         <li class="nav-item">
                             <a data-toggle="modal" data-target="#mainmodal" id="bs8" href="#" class="nav-link">Ingresa</a>
@@ -98,7 +98,7 @@
                 var $form = $(this).closest("form");
                 var username = $form.find("input[name=loginUsername]")[0].value;
                 var password = $form.find("input[name=loginPassword]")[0].value;
-                $.ajax("@url('session/')", 
+                $.ajax("{{ $this->getUrl('session/') }}", 
                 {
                     method: "POST",
                     data:
@@ -108,7 +108,7 @@
                     },
                     success: function (contents)
                     {
-                        var siteUrl = "@url('site/')";
+                        var siteUrl = "{{ $this->getUrl('site/') }}";
                         window.open(siteUrl + "?PHPSESSID=" + contents, "_self");                     
                     },
                     error: function (qXHR, textStatus, errorThrown)

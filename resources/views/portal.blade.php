@@ -9,14 +9,14 @@
         </ol>
         <div class="carousel-inner" role="listbox">
             <div class="item active">
-                <img class="img-responsive" style="width:100%; height: 500px" src="@resource('images/background1.jpg')" />
+                <img class="img-responsive" style="width:100%; height: 500px" src="{{ $this->getResourceUrl('images/background1.jpg') }}" />
                 <div class="carousel-caption">
                     <h3>Federación Mendocina de Tenis</h3>
                     <p>La Federación Mendocina de tenis creada el 29 de mayo de 1928, es una Asociación Civil sin fines de lucro, con domicilio legal en la Ciudad de Mendoza y con alcance jurisdiccional en toda la Provincia.</p>
                 </div>
             </div>
             <div class="item">
-                <img class="img-responsive" style="width:100%; height: 500px" src="@resource('images/background3.jpg')" />
+                <img class="img-responsive" style="width:100%; height: 500px" src="{{ $this->getResourceUrl('images/background3.jpg') }}" />
                 <div class="carousel-caption">
                     <h3>Federación Mendocina de Tenis</h3>
                     <p>La Federacións Mendocina de tenis creada el 29 de mayo de 1928, es una Asociación Civil sin fines de lucro, con domicilio legal en la Ciudad de Mendoza y con alcance jurisdiccional en toda la Provincia.</p>
@@ -38,15 +38,15 @@
 
         <div class="row text-center">
             <div class="col-sm-4">
-                <img class="img-thumbnail" src="@resource('images/featurette3.jpg')" data-src="holder.js/260x175" alt="" style="width: 260px; height: 175px;">
+                <img class="img-thumbnail" src="{{ $this->getResourceUrl('images/featurette3.jpg') }}" data-src="holder.js/260x175" alt="" style="width: 260px; height: 175px;">
                 <h2>Menores</h2>
             </div>
             <div class="col-sm-4">
-                <img class="img-thumbnail" src="@resource('images/featurette7.jpg')" data-src="holder.js/260x175" alt="" style="width: 260px; height: 175px;">
+                <img class="img-thumbnail" src="{{ $this->getResourceUrl('images/featurette7.jpg') }}" data-src="holder.js/260x175" alt="" style="width: 260px; height: 175px;">
                 <h2>Categorías - Seniors</h2>
             </div>
             <div class="col-sm-4">
-                <img class="img-thumbnail" src="@resource('images/featurette5.jpg')" data-src="holder.js/260x175" alt="" style="width: 260px; height: 175px;">
+                <img class="img-thumbnail" src="{{ $this->getResourceUrl('images/featurette5.jpg') }}" data-src="holder.js/260x175" alt="" style="width: 260px; height: 175px;">
                 <h2>Profesionales</h2>
             </div>
         </div>
