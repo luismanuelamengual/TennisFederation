@@ -50,18 +50,34 @@
                 </div>
                 <div class="collapse navbar-collapse" id="mainnavbar_collasiblecontent">
                     
-                    @if (!isset($this->getSession()->sessionId))
-                    
                     <ul class="nav navbar-nav navbar-right">
+                    
+                        @if (!isset($this->getSession()->sessionId))
+                        
                         <li class="nav-item">
                             <a id="bs7" href="{{ $this->getUrl('user/showRegistrationForm') }}" class="nav-link">Registrate</a>
                         </li>
                         <li class="nav-item">
                             <a data-toggle="modal" data-target="#mainmodal" id="bs8" href="#" class="nav-link">Ingresa</a>
                         </li>
-                    </ul>
+                        
+                        @else
                     
-                    @endif
+                        <li class="nav-item dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $this->getSession()->firstname . " " . $this->getSession()->lastname }} <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="{{ $this->getUrl("site/showMyAccount") }}" class="dropdown-item"><span class="glyphicon glyphicon-user"></span> Mi cuenta</a>
+                                </li>
+                                <li>
+                                    <a href="{{ $this->getUrl("site/logout") }}" class="dropdown-item"><span class="glyphicon glyphicon-off"></span> Salir</a>
+                                </li>
+                            </ul>
+                        </li>
+                        
+                        @endif  
+                        
+                    </ul>
                 </div>
             </div>
         </nav>
