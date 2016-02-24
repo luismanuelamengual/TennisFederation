@@ -42,13 +42,13 @@
         
         @endif
         
-        <nav id="mainheader" class="navbar navbar-default navbar-fixed-top bg-faded">
+        <nav id="mainheader" class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                     <a class="navbar-brand">{{ $this->getApplication()->getName() }}</a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainnavbar_collasiblecontent" aria-expanded="false"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
                 </div>
-                <div class="collapse navbar-collapse" id="mainnavbar_collasiblecontent">
+                <div id="mainnavbar_collasiblecontent" class="collapse navbar-collapse">
                     
                     <ul class="nav navbar-nav navbar-right">
                     

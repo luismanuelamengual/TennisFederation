@@ -1,22 +1,19 @@
 
-#maincontainer
-{
+#maincontainer {
     position: absolute;
     width: 100%;
     height: 100%;
     padding-top: 50px;
 }
 
-#maincontent
-{
+#maincontent {
     position: relative;
     width: 100%;
     height: 100%;
     overflow-y: auto;
 }
 
-#mainheader
-{
+#mainheader {
     background: #ff9a15; /* Old browsers */
     background: -moz-linear-gradient(top,  #ff9a15 0%, #de6f00 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ff9a15), color-stop(100%,#de6f00)); /* Chrome,Safari4+ */
@@ -32,8 +29,7 @@
     box-shadow: 0px 2px 9px 2px rgba(0,0,0,0.37);
 }
 
-#mainheader .navbar-brand
-{
+#mainheader .navbar-brand {
     color: white;
 }
 
@@ -71,6 +67,10 @@
     background: white;
 }
 
+#mainheader .dropdown-toggle {
+    background: transparent;
+}
+
 @media (max-width: 767px) {
     #mainheader .navbar-nav .open .dropdown-menu>li>a {
         color: white;
@@ -95,4 +95,8 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+}
+
+#footer {
+    margin-bottom: 20px;
 }
