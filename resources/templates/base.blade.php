@@ -67,10 +67,10 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $this->getSession()->firstname . " " . $this->getSession()->lastname }} <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="{{ $this->getUrl("site/showMyAccount") }}" class="dropdown-item"><span class="glyphicon glyphicon-user"></span> Mi cuenta</a>
+                                    <a href="{{ $this->getUrl("user/showMyAccount") }}" class="dropdown-item"><span class="glyphicon glyphicon-user"></span> Mi cuenta</a>
                                 </li>
                                 <li>
-                                    <a href="{{ $this->getUrl("site/logout") }}" class="dropdown-item"><span class="glyphicon glyphicon-off"></span> Salir</a>
+                                    <a href="{{ $this->getUrl("logout") }}" class="dropdown-item"><span class="glyphicon glyphicon-off"></span> Salir</a>
                                 </li>
                             </ul>
                         </li>
@@ -137,7 +137,7 @@
                     },
                     success: function (contents)
                     {
-                        window.open("{{ $this->getUrl('dashboard/') }}", "_self");                     
+                        window.open("{{ $this->getUrl('/') }}", "_self");                     
                     },
                     error: function (qXHR, textStatus, errorThrown)
                     {

@@ -8,18 +8,39 @@ use NeoPHP\web\WebTemplateView;
 
 class SiteController extends WebController
 {
+    private $sessionlessActions = ["logout"];
+    
     protected function onBeforeAction($action, $parameters) 
     {
         $this->getSession()->start();
         
-        if (!isset($this->getSession()->sessionId))
+        if (!empty($action) && !in_array($action, $this->sessionlessActions))
         {
-            $response = new RedirectResponse("/");
-            $response->send();
-            return false;
+            if (!isset($this->getSession()->sessionId))
+            {
+                $response = new RedirectResponse("/");
+                $response->send();
+                return false;
+            }
         }
         
         return parent::onBeforeAction($action, $parameters);
+    }
+    
+    /**
+     * @action
+     */
+    public function index ()
+    {      
+        if (!isset($this->getSession()->sessionId))
+        {
+            $view = new WebTemplateView("portal");
+        }
+        else
+        {
+            $view = new WebTemplateView("dashboard");
+        }
+        return $view;
     }
     
     /**
@@ -27,6 +48,7 @@ class SiteController extends WebController
      */
     public function logout ()
     {
+        $this->getSession()->destroy();
         return new RedirectResponse("/");
     }
 }
