@@ -4,38 +4,29 @@ namespace org\fmt\controller;
 
 use NeoPHP\web\http\RedirectResponse;
 use NeoPHP\web\WebController;
-use org\fmt\view\DashboardView;
+use NeoPHP\web\WebTemplateView;
 
-/**
- * @route (path="site")
- */
 class SiteController extends WebController
 {
-    protected function onBeforeActionExecution($action, $parameters)
+    protected function onBeforeAction($action, $parameters) 
     {
-        return parent::onBeforeActionExecution($action, $parameters);
-    }
-    
-    public function pepeAction ()
-    {
-        echo "pepe action !!!!";
-    }
-    
-    /**
-     * @routeAction
-     */
-    public function showDashboard ()
-    {
-        return new DashboardView();
+        $this->getSession()->start();
+        
+        if (!isset($this->getSession()->sessionId))
+        {
+            $response = new RedirectResponse("/");
+            $response->send();
+            return false;
+        }
+        
+        return parent::onBeforeAction($action, $parameters);
     }
     
     /**
-     * @routeAction (action="logout")
+     * @action (name="logout")
      */
     public function logout ()
     {
         return new RedirectResponse("/");
     }
 }
-
-?>

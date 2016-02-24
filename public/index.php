@@ -6,6 +6,7 @@ $app->setName ("Federación Mendocina de Tenis");
 $app->setRestfull (true);
 $app->addRoute("/", "org\\fmt\\controller\\MainController");
 $app->addRoute("/session/", "org\\fmt\\controller\\SessionController");
+$app->addRoute("/dashboard/", "org\\fmt\\controller\\DashboardController");
 $app->handleRequest();
 
 ?>

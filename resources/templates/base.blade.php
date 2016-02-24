@@ -110,8 +110,7 @@
                     },
                     success: function (contents)
                     {
-                        var siteUrl = "{{ $this->getUrl('site/') }}";
-                        window.open(siteUrl + "?PHPSESSID=" + contents, "_self");                     
+                        window.open("{{ $this->getUrl('dashboard/') }}", "_self");                     
                     },
                     error: function (qXHR, textStatus, errorThrown)
                     {
