@@ -11,6 +11,8 @@
         @yield("stylesheets")
     </head>
     <body>
+        @if (!isset($this->getSession()->sessionId))
+        
         <div class="modal fade" id="mainmodal" tabindex="-1" role="dialog" aria-labelledby="mainmodal_label" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -37,6 +39,9 @@
                 </div>
             </div>
         </div>
+        
+        @endif
+        
         <nav id="mainheader" class="navbar navbar-default navbar-fixed-top bg-faded">
             <div class="container">
                 <div class="navbar-header">
@@ -44,6 +49,9 @@
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainnavbar_collasiblecontent" aria-expanded="false"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
                 </div>
                 <div class="collapse navbar-collapse" id="mainnavbar_collasiblecontent">
+                    
+                    @if (!isset($this->getSession()->sessionId))
+                    
                     <ul class="nav navbar-nav navbar-right">
                         <li class="nav-item">
                             <a id="bs7" href="{{ $this->getUrl('user/showRegistrationForm') }}" class="nav-link">Registrate</a>
@@ -52,6 +60,8 @@
                             <a data-toggle="modal" data-target="#mainmodal" id="bs8" href="#" class="nav-link">Ingresa</a>
                         </li>
                     </ul>
+                    
+                    @endif
                 </div>
             </div>
         </nav>
@@ -63,6 +73,7 @@
     </body>
     <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    @if (!isset($this->getSession()->sessionId))
     <script type="text/javascript">
         (function ()
         {
@@ -142,5 +153,6 @@
             })
         })();
     </script>
+    @endif
     @yield("scripts")
 </html>
