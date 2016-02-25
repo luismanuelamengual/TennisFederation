@@ -43,12 +43,63 @@
         @endif
         
         <nav id="mainheader" class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="navbar-header">
                     <a class="navbar-brand">{{ $this->getApplication()->getName() }}</a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainnavbar_collasiblecontent" aria-expanded="false"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
                 </div>
                 <div id="mainnavbar_collasiblecontent" class="collapse navbar-collapse">
+                    
+                    @if (isset($this->getSession()->sessionId))
+                    
+                    <ul class="nav navbar-nav navbar-left">
+                        
+                        @if ($this->getSession()->type == org\fmt\model\UserType::USERTYPE_ADMINISTRATOR)
+                        
+                        <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">&nbsp;Administración<b class="caret"></b>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Adm Usuarios</a></li>
+                                <li><a href="#">Adm Categorías</a></li>
+                                <li><a href="#">Adm Clubes</a></li>
+                                <li><a href="#">Adm Paises</a></li>
+                                <li><a href="#">Adm Provincias</a></li>
+                            </ul>
+                            </a>
+                        </li>
+                        
+                        @endif
+                        
+                        @if ($this->getSession()->type == org\fmt\model\UserType::USERTYPE_ADMINISTRATOR or $this->getSession()->type == org\fmt\model\UserType::USERTYPE_ORGANIZER)
+                        
+                        <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">&nbsp;Organizador<b class="caret"></b>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Adm Torneos</a></li>
+                                <li><a href="#">Adm Rankings</a></li>
+                                <li><a href="#">Adm Anuncios</a></li>
+                            </ul>
+                            </a>
+                        </li>
+                        
+                        @endif
+                        
+                        @if ($this->getSession()->type == org\fmt\model\UserType::USERTYPE_ADMINISTRATOR or $this->getSession()->type == org\fmt\model\UserType::USERTYPE_ORGANIZER or $this->getSession()->type == org\fmt\model\UserType::USERTYPE_PLAYER)
+                        
+                        <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">&nbsp;Jugadores<b class="caret"></b>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Ver Torneos</a></li>
+                                <li><a href="#">Ver Rankings</a></li>
+                            </ul>
+                            </a>
+                        </li>
+                        
+                        @endif
+                         
+                    </ul>
+                    
+                    @endif
                     
                     <ul class="nav navbar-nav navbar-right">
                     

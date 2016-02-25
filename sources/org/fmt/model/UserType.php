@@ -9,6 +9,10 @@ use NeoPHP\mvc\Model;
  */
 class UserType extends Model 
 {   
+    const USERTYPE_ADMINISTRATOR = 1;
+    const USERTYPE_ORGANIZER = 2;
+    const USERTYPE_PLAYER = 3;
+    
     /**
      * @column (name="usertypeid", id=true)
      */
