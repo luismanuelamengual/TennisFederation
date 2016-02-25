@@ -1,10 +1,12 @@
-@extends ("base")
+@extends ("publicbase")
 
 @section("scriptFiles")
+    @parent
     <script type="text/javascript" src="{{ $this->getResourceUrl("assets/jquery.backstretch.min.js") }}"></script>
 @stop
 
 @section("scripts")
+    @parent
     <script type="text/javascript">
         $("#masterhead").backstretch(
         [
