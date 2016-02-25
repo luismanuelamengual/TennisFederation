@@ -11,36 +11,6 @@
         @yield("stylesheets")
     </head>
     <body>
-        @if (!isset($this->getSession()->sessionId))
-        
-        <div class="modal fade" id="mainmodal" tabindex="-1" role="dialog" aria-labelledby="mainmodal_label" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            <span class="sr-only">Close</span>
-                        </button>
-                        <h4 class="modal-title" id="mainmodal_label">Inicio de sesión</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form id="bs2">
-                            <div class="form-group">
-                                <label class="control-label" for="bs3">Usuario</label>
-                                <input id="bs3" name="loginUsername" type="text" class="form-control" placeholder="Nombre de Usuario"></input>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label" for="bs4">Contraseña</label>
-                                <input id="bs4" name="loginPassword" type="password" class="form-control" placeholder="Contraseña"></input>
-                            </div>
-                            <button class="btn btn-primary" id="loginButton" type="submit">Iniciar sesión</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        @endif
         
         <nav id="mainheader" class="navbar navbar-default navbar-fixed-top">
             <div class="container-fluid">
@@ -105,12 +75,15 @@
                     
                         @if (!isset($this->getSession()->sessionId))
                         
-                        <li class="nav-item">
-                            <a id="bs7" href="{{ $this->getUrl('user/showRegistrationForm') }}" class="nav-link">Registrate</a>
-                        </li>
-                        <li class="nav-item">
-                            <a data-toggle="modal" data-target="#mainmodal" id="bs8" href="#" class="nav-link">Ingresa</a>
-                        </li>
+                        <form class="navbar-form">
+                            <div class="form-group">
+                                <input type="text" id="usernameField" placeholder="Usuario" class="form-control" autofocus>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="passwordField" placeholder="Contraseña" class="form-control">
+                            </div>
+                            <button id="loginButton" type="submit" class="btn btn-primary">Ingresar</button>
+                        </form>
                         
                         @else
                     
@@ -140,51 +113,30 @@
     </body>
     <script type="text/javascript" src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    @yield("scriptFiles")
     @if (!isset($this->getSession()->sessionId))
     <script type="text/javascript">
         (function ()
         {
-            function disableLoginControls ()
-            {
-                $("#mainmodal input").attr("disabled", "true");
-                $("#mainmodal button").attr("disabled", "disabled");
-            }
-
-            function enableLoginControls ()
-            {
-                $("#mainmodal input").removeAttr("disabled");
-                $("#mainmodal button").removeAttr("disabled");
-            }
-
-            function clearLoginError ()
-            {
-                $("#mainmodal .help-block").remove();
-                $("#mainmodal .alert").remove();
-                $("#mainmodal .has-error").removeClass("has-error");
-            }
-
-            function showLoginError (message)
-            {
-                clearLoginError();
-                $("#mainmodal .form-group").addClass("has-error");
-                $("#mainmodal .modal-body").prepend($("<div>").addClass("alert").addClass("alert-danger").html(message));
-            }
-
             $("#loginButton").click(function() 
             {
-                clearLoginError();
-                disableLoginControls();
+                var $usernameField = $("#usernameField");
+                var $passwordField = $("#passwordField");
+                var $button = $(this);
+                
+                $usernameField.attr("disabled", "true");
+                $passwordField.attr("disabled", "true");
+                $button.attr("disabled", "disabled");
+                
                 $("body").css("cursor", "wait");
-                var $form = $(this).closest("form");
-                var username = $form.find("input[name=loginUsername]")[0].value;
-                var password = $form.find("input[name=loginPassword]")[0].value;
+                
                 $.ajax("{{ $this->getUrl('session/') }}", 
                 {
                     method: "POST",
                     data:
                     {
-                        username: username,
-                        password: password
+                        username: $usernameField.val(),
+                        password: $passwordField.val()
                     },
                     success: function (contents)
                     {
@@ -192,34 +144,24 @@
                     },
                     error: function (qXHR, textStatus, errorThrown)
                     {
-                        showLoginError(qXHR.responseText);
+                        alert(qXHR.responseText);
                     },
                     timeout: function ()
                     {
-                        showLoginError("Se ha agotado el tiempo de conexión. Intente más tarde");
+                        alert("Se ha agotado el tiempo de conexión. Intente más tarde");
                     },
                     complete: function ()
                     {
-                        enableLoginControls();
-                        $("input[name=username]").focus();
+                        $usernameField.removeAttr("disabled", "true");
+                        $passwordField.removeAttr("disabled", "true");
+                        $button.removeAttr("disabled", "disabled");
+                        $usernameField.focus();
                         $("body").css("cursor", "default");
                     }
                 });
             });
-
-            $("#mainmodal").on("shown.bs.modal", function (e) 
-            {
-                $("input[name=username]").focus();
-            })
-
-            $("#mainmodal").on("show.bs.modal", function (e) 
-            {
-                clearLoginError();
-                $("input[name=loginUsername]").val("");
-                $("input[name=loginPassword]").val("");
-            })
         })();
     </script>
-    @endif
     @yield("scripts")
+    @endif
 </html>
