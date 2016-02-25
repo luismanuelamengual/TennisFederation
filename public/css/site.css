@@ -87,7 +87,7 @@
     background-color: #dd4814;
 }
 
-#mainjumbotron {
+#masterhead {
     display: table;
     width: 100%;
     height: 100%;
@@ -95,6 +95,35 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+}
+
+#masterhead #masterhead-body {
+    display: table-cell;
+    vertical-align: bottom;
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 100px 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+#masterhead #mainicon {
+    margin: 0 auto 130px;
+    background-color: transparent;
+    border: 1px solid #cdbfe3;
+    width: 280px;
+    height: 144px;
+    font-size: 108px;
+    line-height: 140px;
+    display: block;
+    font-weight: 500;
+    color: #fff;
+    text-align: center;
+    cursor: default;
+    border-radius: 20%;
 }
 
 #footer {

@@ -3,7 +3,7 @@
 @section("scripts")
     <script type="text/javascript" src="{{ $this->getResourceUrl("assets/jquery.backstretch.min.js") }}"></script>
     <script type="text/javascript">
-        $("#mainjumbotron").backstretch(
+        $("#masterhead").backstretch(
         [
             "{{ $this->getResourceUrl('images/background1.jpg') }}", 
             "{{ $this->getResourceUrl('images/background2.jpg') }}",
@@ -15,7 +15,15 @@
 
 @section("contents")
 
-    <header id="mainjumbotron"></header>
+    <div id="masterhead">
+        <div id="masterhead-body">
+            <div class="container"> 
+                <span id="mainicon">FMT</span>
+                <p class="lead">La Federación Mendocina de tenis creada el 29 de mayo de 1928, es una Asociación Civil sin fines de lucro, con domicilio legal en la Ciudad de Mendoza y con alcance jurisdiccional en toda la Provincia.</p> 
+                <p class="lead">La F.M.T organiza por año más de 100 torneos para menores, seniors y profesionales en sus distintas categorías</p>
+            </div>
+        </div>
+    </div>
 
     <div class="container">
         <hr class="featurette-divider">
