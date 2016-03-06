@@ -1,6 +1,6 @@
 @extends ("base")
 
-@section("mainbarContents")
+@section("login")
     <form class="navbar-form navbar-right">
         <div class="form-group">
             <input type="text" id="usernameField" placeholder="Usuario" class="form-control" autofocus>
