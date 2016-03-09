@@ -1,0 +1,13 @@
+{
+    "connections":
+    [
+        {
+            "name": "main",
+            "driver": "pgsql",
+            "database": "tennisfederation",
+            "host": "localhost",
+            "username": "postgres",
+            "password": "tuvieja.com"
+        }
+    ]
+}
