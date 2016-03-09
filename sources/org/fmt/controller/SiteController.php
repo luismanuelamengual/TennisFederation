@@ -34,11 +34,11 @@ class SiteController extends WebController
     {      
         if (!isset($this->getSession()->sessionId))
         {
-            $view = new WebTemplateView("portal");
+            $view = new WebTemplateView("public.portal");
         }
         else
         {
-            $view = new WebTemplateView("dashboard");
+            $view = new WebTemplateView("site.dashboard");
         }
         return $view;
     }
