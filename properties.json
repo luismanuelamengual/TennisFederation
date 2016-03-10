@@ -9,5 +9,16 @@
             "username": "postgres",
             "password": "tuvieja.com"
         }
+    ],
+    "routes":
+    [
+        {
+            "path": "/",
+            "controller": "org\\fmt\\controller\\SiteController"
+        },
+        {
+            "path": "/session/",
+            "controller": "org\\fmt\\controller\\SessionController"
+        }
     ]
 }
