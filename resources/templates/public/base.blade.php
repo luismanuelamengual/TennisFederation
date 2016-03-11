@@ -1,14 +1,14 @@
 @extends ("base")
 
-@section("login")
-    <form class="navbar-form navbar-right">
+@section("mainbarContents")
+    <form class="form-inline pull-xs-right">
         <div class="form-group">
             <input type="text" id="usernameField" placeholder="Usuario" class="form-control" autofocus>
         </div>
         <div class="form-group">
             <input type="password" id="passwordField" placeholder="Contraseña" class="form-control">
         </div>
-        <button id="loginButton" type="submit" class="btn btn-primary">Ingresar</button>
+        <button id="loginButton" type="button" class="btn btn-danger">Ingresar</button>
     </form>
 @stop
 
