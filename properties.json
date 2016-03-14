@@ -23,6 +23,14 @@
         {
             "path": "/session/",
             "controller": "org\\fmt\\controller\\SessionController"
+        },
+        {
+            "path": "/category/",
+            "controller": "org\\fmt\\controller\\CategoriesController"
+        },
+        {
+            "path": "/club/",
+            "controller": "org\\fmt\\controller\\ClubsController"
         }
     ]
 }

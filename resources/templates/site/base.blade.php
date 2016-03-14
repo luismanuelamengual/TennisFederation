@@ -2,6 +2,16 @@
 
 @use ("org\fmt\model\UserType")
 
+@section("scripts")
+    <script>
+        (function ($)
+        {
+            var $activeLinks = $(".profile-usermenu a[href=\"" + window.location + "\"]");
+            $activeLinks.closest("li").addClass("active");
+        })(jQuery);
+    </script>
+@stop
+
 @section("contents")
 
     <div class="container-fluid">
@@ -25,7 +35,7 @@
                     <div class="profile-usermenu">
                         <ul class="nav">
                             
-                            <li class="active"><a href="{{ $this->getUrl("/dashboard/") }}"><i class="glyphicon glyphicon-home"></i>Inicio</a></li>
+                            <li><a href="{{ $this->getUrl("/dashboard/") }}"><i class="glyphicon glyphicon-home"></i>Inicio</a></li>
                             
                             @if ($this->getSession()->type == UserType::USERTYPE_ADMINISTRATOR)
                             <li><a href="{{ $this->getUrl("/user/") }}"><i class="glyphicon glyphicon-triangle-right"></i>Adm Usuarios</a></li>

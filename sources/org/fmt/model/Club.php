@@ -43,11 +43,6 @@ class Club extends Model
      * @column (name="contactvia2")
      */
     private $contactvia2;
-
-    /**
-     * @column (name="provinceid", entityClassName="Province")
-     */
-    private $province;
     
     public function getId() 
     {
@@ -117,16 +112,6 @@ class Club extends Model
     public function setContactvia2($contactvia2)
     {
         $this->contactvia2 = $contactvia2;
-    }
-    
-    public function getProvince()
-    {
-        return $this->province;
-    }
-
-    public function setProvince(Province $province)
-    {
-        $this->province = $province;
     }
 }
 
