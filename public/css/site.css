@@ -10,6 +10,14 @@ body {
     border-radius: 0px;
 }
 
+#mainheader .navbar-brand {
+    color: white;
+}
+
 #maincontent {
     margin-top: 70px;
+}
+
+#mainjumbotron * {
+    color: white;
 }

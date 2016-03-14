@@ -21,10 +21,9 @@
 
     <div class="container">
         <div id="mainjumbotron" class="jumbotron">
-            <h1 class="display-3" style="color:white;">Federación mendocina de Tenis</h1>
-            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-            <hr class="m-y-2">
-            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+            <h1 class="display-3">Federación mendocina de Tenis</h1>
+            <p class="lead">La federeción de mendocina de tenis organiza mas de 100 torneos al año tanto para menores, seniors, categorías y profesionales</p>
+            <p>Cientos de jugadores de toda mendoza estan compitiendo hoy, No te quedes afuera ... Inscribite ahora</p>
         </div>
     </div>
 
