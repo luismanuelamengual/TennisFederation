@@ -1,64 +1,61 @@
 @extends ("base")
 
-@section("mainbarContents")
-    <ul class="nav navbar-nav navbar-left">
-                        
-        @if ($this->getSession()->type == org\fmt\model\UserType::USERTYPE_ADMINISTRATOR)
+@use ("org\fmt\model\UserType")
 
-        <li>
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">&nbsp;Administración<b class="caret"></b>
-            <ul class="dropdown-menu">
-                <li><a href="#">Adm Usuarios</a></li>
-                <li><a href="#">Adm Categorías</a></li>
-                <li><a href="#">Adm Clubes</a></li>
-                <li><a href="#">Adm Paises</a></li>
-                <li><a href="#">Adm Provincias</a></li>
-            </ul>
-            </a>
-        </li>
+@section("contents")
 
-        @endif
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="profile-sidebar">
+                    <div class="profile-userpic">
+                        <img src="{{ $this->getResourceUrl("images/users/" . $this->getSession()->userId . ".jpg") }}" class="img-responsive img-rounded" alt="">
+                    </div>
+                    <div class="profile-usertitle">
+                        <div class="profile-usertitle-name">
+                            {{ $this->getSession()->firstname . " " . $this->getSession()->lastname }}
+                        </div>
+                        <div class="profile-usertitle-job">
+                            Developer
+                        </div>
+                    </div>
+                    <div class="profile-userbuttons">                        
+                        <a href="{{ $this->getUrl("logout") }}" class="btn btn-danger btn-sm">Salir</a>
+                    </div>
+                    <div class="profile-usermenu">
+                        <ul class="nav">
+                            
+                            <li class="active"><a href="#"><i class="glyphicon glyphicon-home"></i>Home </a></li>
+                            
+                            @if ($this->getSession()->type == org\fmt\model\UserType::USERTYPE_ADMINISTRATOR)
+                            <li><a href="#"><i class="glyphicon glyphicon-triangle-right"></i>Adm Usuarios</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-triangle-right"></i>Adm Categorías</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-triangle-right"></i>Adm Clubes</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-triangle-right"></i>Adm Paises</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-triangle-right"></i>Adm Provincias</a></li>
+                            @endif
+                            
+                            @if ($this->getSession()->type == org\fmt\model\UserType::USERTYPE_ADMINISTRATOR or $this->getSession()->type == org\fmt\model\UserType::USERTYPE_ORGANIZER)
+                            <li><a href="#"><i class="glyphicon glyphicon-triangle-right"></i>Adm Torneos</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-triangle-right"></i>Adm Rankings</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-triangle-right"></i>Adm Anuncios</a></li>
+                            @endif
+                            
+                            @if ($this->getSession()->type == org\fmt\model\UserType::USERTYPE_ADMINISTRATOR or $this->getSession()->type == org\fmt\model\UserType::USERTYPE_ORGANIZER or $this->getSession()->type == org\fmt\model\UserType::USERTYPE_PLAYER)
+                            <li><a href="#"><i class="glyphicon glyphicon-triangle-right"></i>Ver Torneos</a></li>
+                            <li><a href="#"><i class="glyphicon glyphicon-triangle-right"></i>Ver Rankings</a></li>
+                            @endif
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="profile-content">
+                    Some user related content goes here...
+                </div>
+            </div>
+        </div>
+    </div>
 
-        @if ($this->getSession()->type == org\fmt\model\UserType::USERTYPE_ADMINISTRATOR or $this->getSession()->type == org\fmt\model\UserType::USERTYPE_ORGANIZER)
-
-        <li>
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">&nbsp;Organizador<b class="caret"></b>
-            <ul class="dropdown-menu">
-                <li><a href="#">Adm Torneos</a></li>
-                <li><a href="#">Adm Rankings</a></li>
-                <li><a href="#">Adm Anuncios</a></li>
-            </ul>
-            </a>
-        </li>
-
-        @endif
-
-        @if ($this->getSession()->type == org\fmt\model\UserType::USERTYPE_ADMINISTRATOR or $this->getSession()->type == org\fmt\model\UserType::USERTYPE_ORGANIZER or $this->getSession()->type == org\fmt\model\UserType::USERTYPE_PLAYER)
-
-        <li>
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">&nbsp;Jugadores<b class="caret"></b>
-            <ul class="dropdown-menu">
-                <li><a href="#">Ver Torneos</a></li>
-                <li><a href="#">Ver Rankings</a></li>
-            </ul>
-            </a>
-        </li>
-
-        @endif
-
-    </ul>
-
-    <ul class="nav navbar-nav navbar-right">
-        <li class="nav-item dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ $this->getSession()->firstname . " " . $this->getSession()->lastname }} <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-                <li>
-                    <a href="{{ $this->getUrl("user/showMyAccount") }}" class="dropdown-item"><span class="glyphicon glyphicon-user"></span> Mi cuenta</a>
-                </li>
-                <li>
-                    <a href="{{ $this->getUrl("logout") }}" class="dropdown-item"><span class="glyphicon glyphicon-off"></span> Salir</a>
-                </li>
-            </ul>
-        </li>
-    </ul>
 @stop
