@@ -30,6 +30,9 @@ class SessionController extends WebRestController
             $this->getSession()->destroy();
             $sessionId = false;
             $userTable = $this->getConnection()->getTable("\"user\"");
+            $userTable->addJoin("usertype", "\"user\".usertypeid", "usertype.usertypeid");
+            $userTable->addField("*");
+            $userTable->addFields(["usertypeid", "description"], "type_%s", "usertype");
             $userTable->addWhere("username", "=", $username);
             $userTable->addWhere("password", "=", $password);
             $user = $userTable->getFirst(User::getClass());
@@ -43,6 +46,7 @@ class SessionController extends WebRestController
                 $this->getSession()->firstname = $user->getFirstname();
                 $this->getSession()->lastname = $user->getLastname();
                 $this->getSession()->type = $user->getType()->getId();
+                $this->getSession()->typeDescription = $user->getType()->getDescription();
                 $responseObject->success = true;
                 $responseObject->sessionId = $this->getSession()->getId();
                 $response->setContent($this->getSession()->getId());
@@ -62,5 +66,3 @@ class SessionController extends WebRestController
         return $response;
     }
 }
-
-?>

@@ -16,7 +16,7 @@
                             {{ $this->getSession()->firstname . " " . $this->getSession()->lastname }}
                         </div>
                         <div class="profile-usertitle-job">
-                            Developer
+                            {{ $this->getSession()->typeDescription }}
                         </div>
                     </div>
                     <div class="profile-userbuttons">                        
