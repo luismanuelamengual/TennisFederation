@@ -23,13 +23,12 @@ body {
     color: white;
 }
 
-.profile {
-  margin: 20px 0;
-}
-
 .profile-sidebar {
   padding: 20px 0 10px 0;
+  margin-bottom: 20px;
   background: #fff;
+  border: 2px solid orange;
+  border-radius: 6px;
 }
 
 .profile-userpic img {
@@ -114,13 +113,4 @@ body {
 .profile-usermenu ul li.active a {
   color: #5b9bd1;
   background-color: #FAF4E8;
-  border-left: 2px solid #FFC787;
-  margin-left: -2px;
-}
-
-/* Profile Content */
-.profile-content {
-  padding: 20px;
-  background: #fff;
-  min-height: 460px;
 }

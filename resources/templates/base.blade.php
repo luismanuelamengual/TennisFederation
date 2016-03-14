@@ -13,7 +13,7 @@
     </head>
     <body>
         <nav id="mainheader" class="navbar navbar-default navbar-inverse navbar-fixed-top">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainheader-collapsiblecontent" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span>

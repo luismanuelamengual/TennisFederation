@@ -4,12 +4,12 @@
 
 @section("contents")
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-3 col-sm-4">
                 <div class="profile-sidebar">
                     <div class="profile-userpic">
-                        <img src="{{ $this->getResourceUrl("images/users/" . $this->getSession()->userId . ".png") }}" class="img-responsive img-rounded" alt="">
+                        <img src="{{ $this->getResourceUrl("images/users/" . $this->getSession()->userId . ".png") }}" class="img-responsive" alt="">
                     </div>
                     <div class="profile-usertitle">
                         <div class="profile-usertitle-name">
@@ -50,10 +50,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-9">
-                <div class="profile-content">
-                    Some user related content goes here...
-                </div>
+            <div class="col-md-9 col-sm-8">
+                @yield("mainContents")
             </div>
         </div>
     </div>
