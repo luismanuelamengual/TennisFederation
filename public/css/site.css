@@ -1,6 +1,7 @@
 
 body {
-    background: antiquewhite;
+    background-image: url("images/background.jpg");
+    background-repeat: repeat;
 }
 
 #mainheader {
