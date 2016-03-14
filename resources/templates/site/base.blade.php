@@ -9,7 +9,7 @@
             <div class="col-md-3">
                 <div class="profile-sidebar">
                     <div class="profile-userpic">
-                        <img src="{{ $this->getResourceUrl("images/users/" . $this->getSession()->userId . ".jpg") }}" class="img-responsive img-rounded" alt="">
+                        <img src="{{ $this->getResourceUrl("images/users/" . $this->getSession()->userId . ".png") }}" class="img-responsive img-rounded" alt="">
                     </div>
                     <div class="profile-usertitle">
                         <div class="profile-usertitle-name">
