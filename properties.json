@@ -14,7 +14,11 @@
     [
         {
             "path": "/",
-            "controller": "org\\fmt\\controller\\SiteController"
+            "controller": "org\\fmt\\controller\\PublicSiteController"
+        },
+        {
+            "path": "/dashboard/",
+            "controller": "org\\fmt\\controller\\DashboardController"
         },
         {
             "path": "/session/",

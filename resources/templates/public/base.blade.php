@@ -38,7 +38,7 @@
                     },
                     success: function (contents)
                     {
-                        window.open("{{ $this->getUrl('/') }}", "_self");                     
+                        window.open("{{ $this->getUrl('/dashboard/') }}", "_self");                     
                     },
                     error: function (qXHR, textStatus, errorThrown)
                     {

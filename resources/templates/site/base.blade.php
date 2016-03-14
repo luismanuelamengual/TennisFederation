@@ -25,7 +25,7 @@
                     <div class="profile-usermenu">
                         <ul class="nav">
                             
-                            <li class="active"><a href="#"><i class="glyphicon glyphicon-home"></i>Home </a></li>
+                            <li class="active"><a href="#"><i class="glyphicon glyphicon-home"></i>Inicio</a></li>
                             
                             @if ($this->getSession()->type == UserType::USERTYPE_ADMINISTRATOR)
                             <li><a href="#"><i class="glyphicon glyphicon-triangle-right"></i>Adm Usuarios</a></li>
