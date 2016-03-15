@@ -19,7 +19,7 @@
             <div class="col-md-3 col-sm-4">
                 <div class="profile-sidebar">
                     <div class="profile-userpic">
-                        <img src="{{ $this->getResourceUrl("images/users/" . $this->getSession()->userId . ".png") }}" class="img-responsive" alt="">
+                        <a href="http://es.gravatar.com/"><img src="{{ "http://www.gravatar.com/avatar/" . md5(strtolower(trim($this->getSession()->email))) . "/?s=200" }}" class="img-responsive" alt=""></a>
                     </div>
                     <div class="profile-usertitle">
                         <div class="profile-usertitle-name">
