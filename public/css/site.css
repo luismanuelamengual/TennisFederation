@@ -119,6 +119,10 @@ body {
     border-color: #FFBB73;
 }
 
+.panel>.panel-heading {
+    font-weight: bold;
+}
+
 .panel-default>.panel-heading {
     background: #FFBB73;
 }
