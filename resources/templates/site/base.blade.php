@@ -30,7 +30,7 @@
                         </div>
                     </div>
                     <div class="profile-userbuttons">
-                        <a href="{{ $this->getUrl("/user/showMyAccount") }}" class="btn btn-success btn-sm"><i class="glyphicon glyphicon-user"></i> Mi Cuenta</a>
+                        <a href="{{ $this->getUrl("/user/showMyAccount") }}" class="btn btn-default btn-sm"><i class="glyphicon glyphicon-user"></i> Mi Cuenta</a>
                         <a href="{{ $this->getUrl("logout") }}" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-off"></i> Salir</a>
                     </div>
                     <div class="profile-usermenu">
