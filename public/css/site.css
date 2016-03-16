@@ -126,3 +126,7 @@ body {
 .panel-default>.panel-heading {
     background: #FFBB73;
 }
+
+.table tr.selected {
+    background: #FFBB73 !important;
+}

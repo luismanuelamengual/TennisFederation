@@ -9,7 +9,7 @@
                 <li><button id="updateButton" class="btn btn-default" disabled="disabled"><span class="glyphicon glyphicon-pencil"></span> Modifiar</button></li>
                 <li><button id="deleteButton" class="btn btn-danger" disabled="disabled"><span class="glyphicon glyphicon-trash"></span> Eliminar</button></li>
             </ul>
-            <table class="table table-striped table-hover">
+            <table id="crudTable" class="table table-striped table-hover">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -19,7 +19,7 @@
                 </thead>
                 <tbody>
                     @foreach ($categories as $category)
-                    <tr>
+                    <tr data-categoryid="{{ $category->getId() }}">
                         <td>{{ $category->getId() }}</td>
                         <td>{{ $category->getDescription() }}</td>
                         <td>{{ $category->getMatchType() == 1? "Singles":"Dobles" }}</td>
@@ -30,3 +30,23 @@
         </div>
     </div>
 @stop 
+
+@section ("scripts")
+    @parent
+    <script>
+        $("#crudTable tr").on(
+        {
+            click: function (e) 
+            {
+                $("#crudTable tr.selected").removeClass("selected");
+                $(this).addClass("selected");
+                $("#updateButton").prop("disabled",false); 
+                $("#deleteButton").prop("disabled",false); 
+            },
+            dblclick: function (e)
+            {
+                window.open("showCategoryForm?categoryid=" + $(this).data("categoryid"), "_self");
+            }
+        });
+    </script>
+@stop

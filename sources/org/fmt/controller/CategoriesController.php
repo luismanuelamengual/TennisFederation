@@ -7,10 +7,7 @@ use org\fmt\model\Category;
 
 class CategoriesController extends SiteController 
 {
-    /**
-     * @action
-     */
-    public function index ()
+    public function indexAction ()
     {
         $categoriesView = new WebTemplateView("site.categories");
         $categoriesView->categories = $this->getConnection()->getEntityManager()->findAll(Category::getClass());

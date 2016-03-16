@@ -14,18 +14,12 @@ class PublicSiteController extends WebController
         return true;
     }
 
-    /**
-     * @action
-     */
-    public function index ()
+    public function indexAction ()
     {
         return new WebTemplateView("public.portal");
     }
     
-    /**
-     * @action (name="logout")
-     */
-    public function logout ()
+    public function logoutAction ()
     {
         $this->getSession()->destroy();
         return new RedirectResponse("/");

@@ -6,10 +6,7 @@ use NeoPHP\web\WebController;
 
 class ClubsController extends WebController 
 {
-    /**
-     * @action
-     */
-    public function index ()
+    public function indexAction ()
     {
         echo "holach";
     }

@@ -5,11 +5,8 @@ namespace org\fmt\controller;
 use NeoPHP\web\WebTemplateView;
 
 class DashboardController extends SiteController 
-{    
-    /**
-     * @action
-     */
-    public function index ()
+{
+    public function indexAction ()
     {
         return new WebTemplateView("site.dashboard");        
     }
