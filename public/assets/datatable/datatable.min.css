@@ -1,0 +1,52 @@
+
+
+.datatable table {
+    table-layout: fixed; 
+}
+
+.datatable table td {
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.datatable table th {
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.datatable table th.sorted-asc:after {
+    position: absolute;    
+    content: "\2193";
+    right: 0.5em;
+}
+
+.datatable table th.sorted-desc:after {
+    position: absolute;    
+    content: "\2191";
+    right: 0.5em;
+}
+
+.datatable-body table {
+    margin-bottom: 0px;
+}
+
+.datatable-toolbar
+{
+    margin-bottom: 0px;
+}
+
+.datatable-toolbar .navbar-form {
+    border: none;
+    padding: 0px;
+}
+
+@media (min-width: 768px) {
+    
+    .datatable-toolbar .container-fluid {
+        padding-left: 0px;
+    }
+}

@@ -10,7 +10,7 @@ class CategoriesController extends SiteController
     public function indexAction ()
     {
         $categoriesView = new WebTemplateView("site.categories");
-        $categoriesView->categories = $this->getConnection()->getEntityManager()->findAll(Category::getClass());
+        $categoriesView->categories = $this->getDatabase()->getEntityManager()->findAll(Category::getClass());
         return $categoriesView;
     }
 }
