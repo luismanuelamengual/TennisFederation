@@ -4,23 +4,13 @@ namespace org\fmt\model;
 
 use NeoPHP\mvc\Model;
 
-/**
- * @table (name="usertype")
- */
 class UserType extends Model 
 {   
     const USERTYPE_ADMINISTRATOR = 1;
     const USERTYPE_ORGANIZER = 2;
     const USERTYPE_PLAYER = 3;
     
-    /**
-     * @column (name="usertypeid", id=true)
-     */
     private $id;
-    
-    /**
-     * @column (name="description")
-     */
     private $description;
     
     public function __construct($id=null)
@@ -48,5 +38,3 @@ class UserType extends Model
         $this->description = $description;
     }
 }
-
-?>

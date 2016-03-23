@@ -5,7 +5,7 @@ namespace org\fmt\controller;
 use Exception;
 use NeoPHP\web\http\Response;
 use NeoPHP\web\WebRestController;
-use org\fmt\model\User;
+use org\fmt\manager\UsersManager;
 use stdClass;
 
 class SessionController extends WebRestController
@@ -29,10 +29,7 @@ class SessionController extends WebRestController
         {
             $this->getSession()->destroy();
             $sessionId = false;
-            $userTable = $this->getDatabase()->table("\"user\"")->select("*")->select(["usertypeid", "description"], "type_%s", "usertype")->join("usertype", "\"user\".usertypeid", "usertype.usertypeid");
-            $userTable->where("username", "=", $username);
-            $userTable->where("password", "=", $password);
-            $user = $userTable->getFirst(User::getClass());
+            $user = UsersManager::getInstance()->getUserForUsernameAndPassword($username,$password);
             
             if ($user != null)
             {

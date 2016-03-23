@@ -4,74 +4,20 @@ namespace org\fmt\model;
 
 use NeoPHP\mvc\Model;
 
-/**
- * @table (name='\"user\"')
- */
 class User extends Model
 {   
-    /**
-     * @column (name="userid", id=true)
-     */
     private $id;
-    
-    /**
-     * @column (name="username")
-     */
     private $username;
-    
-    /**
-     * @column (name="password")
-     */
     private $password;
-    
-    /**
-     * @column (name="usertypeid", entityClassName="UserType")
-     */
     private $type;
-    
-    /**
-     * @column (name="firstname")
-     */
     private $firstname;
-    
-    /**
-     * @column (name="lastname")
-     */
     private $lastname;
-    
-    /**
-     * @column (name="birthdate")
-     */
     private $birthDate;
-    
-    /**
-     * @column (name="address")
-     */
     private $address;
-    
-    /**
-     * @column (name="contactvia1")
-     */
     private $contactVia1;
-    
-    /**
-     * @column (name="contactvia2")
-     */
     private $contactVia2;
-    
-    /**
-     * @column (name="contactvia3")
-     */
     private $contactVia3;
-    
-    /**
-     * @column (name="email")
-     */
     private $email;
-    
-    /**
-     * @column (name="documentnumber")
-     */
     private $documentNumber;
         
     public function getId()
@@ -204,5 +150,3 @@ class User extends Model
         $this->documentNumber = $documentNumber;
     }
 }
-
-?>
