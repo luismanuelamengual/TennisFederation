@@ -12,7 +12,7 @@ class SiteController extends WebController
         $this->getSession()->start();
         if (!isset($this->getSession()->sessionId))
         {
-            $response = new RedirectResponse("/");
+            $response = new RedirectResponse($this->getUrl("/"));
             $response->send();
             return false;
         }

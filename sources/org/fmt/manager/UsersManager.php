@@ -15,6 +15,7 @@ class UsersManager extends ModelManager {
         $query->addJoin("usertype", "\"user\".usertypeid", "usertype.id");
         $query->addWhere("username", "=", $username);
         $query->addWhere("password", "=", $password);
-        return new User($query->getFirst());
+        $userData = $query->getFirst();
+        return $userData != null? new User($userData) : null;
     }
 }

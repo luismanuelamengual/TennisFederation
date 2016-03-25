@@ -29,7 +29,7 @@ class SessionController extends WebRestController
         {
             $this->getSession()->destroy();
             $sessionId = false;
-            $user = UsersManager::getInstance()->getUserForUsernameAndPassword($username,$password);
+            $user = $this->getManager(UsersManager::class)->getUserForUsernameAndPassword($username,$password);
             
             if ($user != null)
             {
