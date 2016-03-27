@@ -18,7 +18,7 @@ class CategoriesController extends SiteController
     public function indexAction ()
     {
         $categoriesView = $this->createTemplateView("site.categories");
-        $categoriesView->categories = $this->getCategoriesManager()->findCategories();
+        $categoriesView->categories = $this->getCategoriesManager()->getCategories();
         return $categoriesView;
     }
 }

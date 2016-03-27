@@ -16,21 +16,15 @@ class UsersManager extends ModelManager {
         $query->addJoin("usertype", "\"user\".usertypeid", "usertype.id");
         $query->addWhere("username", "=", $username);
         $query->addWhere("password", "=", $password);
-        $userData = $query->getFirst();
-        return $userData != null? new User($userData) : null;
+        return $this->createModel(User::class, $query->getFirst());
     }
     
+    /**
+     * Obtiene todos los usuarios
+     * @return Collection Colección de usuarios
+     */
     public function getUsers ()
     {
-        $users = new Collection();
-        $query = $this->getConnection()->createQuery("\"user\"");
-        $results = $query->get();
-        foreach ($results as $result)
-        {
-            $user = new User();
-            $user->setFrom($result);
-            $users->add($user);
-        }
-        return $users;
+        return $this->createModelCollection(User::class, $this->getConnection()->createQuery("\"user\"")->get());
     }
 }
