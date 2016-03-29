@@ -10,17 +10,17 @@ use stdClass;
 
 class SessionController extends WebRestController
 {
-    public function getResource ($username, $password)
+    public function getResourceAction ($username, $password)
     {
-        return $this->createResource($username, $password); 
+        return $this->createResourceAction($username, $password); 
     }
     
-    public function updateResource ($username, $password)       
+    public function updateResourceAction ($username, $password)       
     {   
-        return $this->createResource($username, $password); 
+        return $this->createResourceAction($username, $password); 
     }
     
-    public function createResource ($username, $password)
+    public function createResourceAction ($username, $password)
     {
         $response = new Response();
         $responseObject = new stdClass();
