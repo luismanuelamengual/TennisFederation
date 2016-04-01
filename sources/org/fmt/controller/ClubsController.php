@@ -8,6 +8,9 @@ class ClubsController extends WebController
 {
     public function indexAction ()
     {
+        
+//        $this->
+        
         echo "holach";
     }
 }

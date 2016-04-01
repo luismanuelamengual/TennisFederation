@@ -1,0 +1,15 @@
+{
+  "name": "fmt",
+  "description": "Federación Mendocina de Tenis",
+  "homepage": "https://github.com/luismanuelamengual/TennisFederation",
+  "author": "Luis <luis.amengual@sitrack.com>",
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "animate.css": "^3.5.1",
+    "bootstrap-sweetalert": "^0.4.5",
+    "malihu-custom-scrollbar-plugin": "^3.1.3",
+    "Waves": "waves#^0.7.5",
+    "material-design-iconic-font": "^2.2.0",
+    "moment": "^2.12.0"
+  }
+}
