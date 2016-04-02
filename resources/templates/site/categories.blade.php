@@ -54,23 +54,3 @@
         </div>
     </div>
 @stop 
-
-@section ("scripts")
-    @parent
-    <script>
-        $("#crudTable tr").on(
-        {
-            click: function (e) 
-            {
-                $("#crudTable tr.selected").removeClass("selected");
-                $(this).addClass("selected");
-                $("#updateButton").prop("disabled",false); 
-                $("#deleteButton").prop("disabled",false); 
-            },
-            dblclick: function (e)
-            {
-                window.open("showCategoryForm?categoryid=" + $(this).data("categoryid"), "_self");
-            }
-        });
-    </script>
-@stop
