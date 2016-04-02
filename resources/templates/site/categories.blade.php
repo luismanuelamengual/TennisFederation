@@ -4,7 +4,7 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <h2>Administración de categorías</h2>
+                <h2>Administración de Categorías</h2>
             </div>
 
             <div class="card-body card-padding">

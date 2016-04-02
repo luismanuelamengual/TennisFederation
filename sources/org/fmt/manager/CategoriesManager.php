@@ -9,7 +9,7 @@ class CategoriesManager extends ModelManager
 {
     public function getCategories ()
     {
-        return $this->createModelCollection(Category::class, $this->getConnection()->createQuery("category")->get());
+        return $this->createModelCollection(Category::class, $this->getConnection()->createQuery("category")->addOrderBy("id", "ASC")->get());
     }
     
     public function getCategory ($id)
