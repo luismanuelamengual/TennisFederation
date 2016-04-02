@@ -1,7 +1,6 @@
 @extends ("site.base")
 
 @section ("mainContents")
-
     <div class="container">
         <div class="card">
             <div class="card-header">
@@ -9,7 +8,7 @@
             </div>
 
             <div class="card-body card-padding">
-                <button class="btn btn-primary btn-icon waves-effect waves-circle waves-float"><i class="zmdi zmdi-plus"></i></button>
+                <a href="{{ $this->getUrl("/category/showCategoryForm") }}" class="btn btn-primary btn-icon waves-effect waves-circle waves-float"><i class="zmdi zmdi-plus"></i></a>
             </div>        
                 
             <div class="card-body table-responsive">
@@ -37,10 +36,10 @@
 
                                         <ul class="dropdown-menu">
                                             <li>
-                                                <a href="">Editar</a>
+                                                <a href="{{ $this->getUrl("/category/showCategoryForm", ["id"=>$category->getId()]) }}">Editar</a>
                                             </li>
                                             <li>
-                                                <a href="">Eliminar</a>
+                                                <a href="{{ $this->getUrl("/category/deleteCategory", ["id"=>$category->getId()]) }}">Eliminar</a>
                                             </li>
                                         </ul>
                                     </li>
