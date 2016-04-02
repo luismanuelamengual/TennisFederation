@@ -91,25 +91,25 @@
 
                 <ul class="main-menu">
                     <li><a href="profile-about.html"><i class="zmdi zmdi-account"></i> Mi Cuenta</a></li>
-                    <li><a href="widget-templates.html"><i class="zmdi zmdi-time-restore"></i> Salir</a></li>
+                    <li><a href="{{ $this->getUrl("logout") }}"><i class="zmdi zmdi-power"></i> Salir</a></li>
                 </ul>
             </div>
 
             <ul class="main-menu">
                 <li><a href="{{ $this->getUrl("/dashboard/") }}"><i class="zmdi zmdi-home"></i>Inicio</a></li>            
                 @if ($this->getSession()->type == UserType::USERTYPE_ADMINISTRATOR)
-                <li><a href="{{ $this->getUrl("/user/") }}"><i class="glyphicon glyphicon-user"></i>Usuarios</a></li>
-                <li><a href="{{ $this->getUrl("/category/") }}"><i class="glyphicon glyphicon-indent-left"></i>Categorías</a></li>
-                <li><a href="{{ $this->getUrl("/club/") }}"><i class="glyphicon glyphicon-home"></i>Clubes</a></li>
+                <li><a href="{{ $this->getUrl("/user/") }}"><i class="zmdi zmdi-accounts-alt"></i>Usuarios</a></li>
+                <li><a href="{{ $this->getUrl("/category/") }}"><i class="zmdi zmdi-accounts-list"></i>Categorías</a></li>
+                <li><a href="{{ $this->getUrl("/club/") }}"><i class="zmdi zmdi-pin"></i>Clubes</a></li>
                 @endif
 
                 @if ($this->getSession()->type == UserType::USERTYPE_ADMINISTRATOR or $this->getSession()->type == UserType::USERTYPE_ORGANIZER)
-                <li><a href="{{ $this->getUrl("/announcement/") }}"><i class="glyphicon glyphicon-list-alt"></i>Anuncios</a></li>
+                <li><a href="{{ $this->getUrl("/announcement/") }}"><i class="zmdi zmdi-receipt"></i></i>Anuncios</a></li>
                 @endif
 
                 @if ($this->getSession()->type == UserType::USERTYPE_ADMINISTRATOR or $this->getSession()->type == UserType::USERTYPE_ORGANIZER or $this->getSession()->type == UserType::USERTYPE_PLAYER)
-                <li><a href="{{ $this->getUrl("/tournament/") }}"><i class="glyphicon glyphicon-blackboard"></i>Torneos</a></li>
-                <li><a href="{{ $this->getUrl("/ranking/") }}"><i class="glyphicon glyphicon-signal"></i>Rankings</a></li>
+                <li><a href="{{ $this->getUrl("/tournament/") }}"><i class="zmdi zmdi-star"></i>Torneos</a></li>
+                <li><a href="{{ $this->getUrl("/ranking/") }}"><i class="zmdi zmdi-trending-up"></i>Rankings</a></li>
                 @endif
             </ul>
         </aside>

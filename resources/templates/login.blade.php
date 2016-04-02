@@ -18,36 +18,36 @@
 
     <!-- Login -->
     <div class="lc-block toggled" id="l-login">
-        <div class="input-group m-b-20">
-            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
-            <div class="fg-line">
-                <input type="text" id="loginUsername" class="form-control" placeholder="Nombre de usuario">
+        <form>
+            <div class="input-group m-b-20">
+                <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
+                <div class="fg-line">
+                    <input type="text" id="loginUsername" class="form-control" placeholder="Nombre de usuario" autofocus="true">
+                </div>
             </div>
-        </div>
 
-        <div class="input-group m-b-20">
-            <span class="input-group-addon"><i class="zmdi zmdi-male"></i></span>
-            <div class="fg-line">
-                <input type="password" id="loginPassword" class="form-control" placeholder="Contraseña">
+            <div class="input-group m-b-20">
+                <span class="input-group-addon"><i class="zmdi zmdi-male"></i></span>
+                <div class="fg-line">
+                    <input type="password" id="loginPassword" class="form-control" placeholder="Contraseña" required="required">
+                </div>
             </div>
-        </div>
 
-        <div class="clearfix"></div>
+            <div class="clearfix"></div>
 
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" value="">
-                <i class="input-helper"></i>
-                Mantenerme logueado
-            </label>
-        </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value=""><i class="input-helper"></i> Mantenerme logueado
+                </label>
+            </div>
 
-        <button id="loginButton" class="btn btn-login btn-danger btn-float"><i class="zmdi zmdi-arrow-forward"></i></button>
+            <button id="loginButton" type="submit" class="btn btn-login btn-danger btn-float"><i class="zmdi zmdi-arrow-forward"></i></button>
 
-        <ul class="login-navigation">
-            <li data-block="#l-register" class="bgm-red">Register</li>
-            <li data-block="#l-forget-password" class="bgm-orange">Forgot Password?</li>
-        </ul>
+            <ul class="login-navigation">
+                <li data-block="#l-register" class="bgm-red">Register</li>
+                <li data-block="#l-forget-password" class="bgm-orange">Forgot Password?</li>
+            </ul>
+        </form>
     </div>
 
     <!-- Register -->
