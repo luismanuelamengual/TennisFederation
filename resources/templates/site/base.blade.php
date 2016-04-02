@@ -83,7 +83,7 @@
             <div class="profile-menu">
                 <a href="widget-templates.html">
                     <div class="profile-pic">
-                        <img src="{{ "http://www.gravatar.com/avatar/" . md5(strtolower(trim($this->getSession()->email))) . "/?s=200" }}" class="img-responsive" alt="">
+                        <!--<img src="{{ "http://www.gravatar.com/avatar/" . md5(strtolower(trim($this->getSession()->email))) . "/?s=200" }}" class="img-responsive" alt="">-->
                     </div>
 
                     <div class="profile-info">{{ $this->getSession()->firstname . " " . $this->getSession()->lastname }}<i class="zmdi zmdi-caret-down"></i></div>

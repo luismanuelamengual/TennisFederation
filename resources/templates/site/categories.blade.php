@@ -11,7 +11,7 @@
                 <a href="{{ $this->getUrl("/category/showCategoryForm") }}" class="btn btn-primary btn-icon waves-effect waves-circle waves-float"><i class="zmdi zmdi-plus"></i></a>
             </div>        
                 
-            <div class="card-body table-responsive">
+            <div class="card-body">
                 <table id="crudTable" class="table table-hover">
                     <thead>
                         <tr>
