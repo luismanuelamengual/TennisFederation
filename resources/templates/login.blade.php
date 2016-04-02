@@ -20,14 +20,14 @@
             <div class="input-group m-b-20">
                 <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
                 <div class="fg-line">
-                    <input type="text" id="loginUsername" class="form-control" placeholder="Nombre de usuario" autofocus="true">
+                    <input type="text" name="username" id="loginUsername" class="form-control" placeholder="Nombre de usuario" autofocus="true">
                 </div>
             </div>
 
             <div class="input-group m-b-20">
                 <span class="input-group-addon"><i class="zmdi zmdi-male"></i></span>
                 <div class="fg-line">
-                    <input type="password" id="loginPassword" class="form-control" placeholder="Contraseña" required="required">
+                    <input type="password" name="password" id="loginPassword" class="form-control" placeholder="Contraseña">
                 </div>
             </div>
 
