@@ -22,7 +22,7 @@
     <script>
         (function ($)
         {
-            var $activeLinks = $(".profile-usermenu a[href=\"" + window.location + "\"]");
+            var $activeLinks = $(".main-menu a[href=\"" + window.location + "\"]");
             $activeLinks.closest("li").addClass("active");
         })(jQuery);
     </script>

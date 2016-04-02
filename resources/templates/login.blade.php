@@ -15,8 +15,6 @@
 
 @section("contentType", "login-content")
 @section("contents")
-
-    <!-- Login -->
     <div class="lc-block toggled" id="l-login">
         <form>
             <div class="input-group m-b-20">
@@ -42,80 +40,23 @@
             </div>
 
             <button id="loginButton" type="submit" class="btn btn-login btn-danger btn-float"><i class="zmdi zmdi-arrow-forward"></i></button>
-
-            <ul class="login-navigation">
-                <li data-block="#l-register" class="bgm-red">Register</li>
-                <li data-block="#l-forget-password" class="bgm-orange">Forgot Password?</li>
-            </ul>
         </form>
     </div>
-
-    <!-- Register -->
-    <div class="lc-block" id="l-register">
-        <div class="input-group m-b-20">
-            <span class="input-group-addon"><i class="zmdi zmdi-account"></i></span>
-            <div class="fg-line">
-                <input type="text" class="form-control" placeholder="Username">
-            </div>
-        </div>
-
-        <div class="input-group m-b-20">
-            <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
-            <div class="fg-line">
-                <input type="text" class="form-control" placeholder="Email Address">
-            </div>
-        </div>
-
-        <div class="input-group m-b-20">
-            <span class="input-group-addon"><i class="zmdi zmdi-male"></i></span>
-            <div class="fg-line">
-                <input type="password" class="form-control" placeholder="Password">
-            </div>
-        </div>
-
-        <div class="clearfix"></div>
-
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" value="">
-                <i class="input-helper"></i>
-                Accept the license agreement
-            </label>
-        </div>
-
-        <a href="" class="btn btn-login btn-danger btn-float"><i class="zmdi zmdi-arrow-forward"></i></a>
-
-        <ul class="login-navigation">
-            <li data-block="#l-login" class="bgm-green">Login</li>
-            <li data-block="#l-forget-password" class="bgm-orange">Forgot Password?</li>
-        </ul>
-    </div>
-
-    <!-- Forgot Password -->
-    <div class="lc-block" id="l-forget-password">
-        <p class="text-left">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu risus. Curabitur commodo lorem fringilla enim feugiat commodo sed ac lacus.</p>
-
-        <div class="input-group m-b-20">
-            <span class="input-group-addon"><i class="zmdi zmdi-email"></i></span>
-            <div class="fg-line">
-                <input type="text" class="form-control" placeholder="Email Address">
-            </div>
-        </div>
-
-        <a href="" class="btn btn-login btn-danger btn-float"><i class="zmdi zmdi-arrow-forward"></i></a>
-
-        <ul class="login-navigation">
-            <li data-block="#l-login" class="bgm-green">Login</li>
-            <li data-block="#l-register" class="bgm-red">Register</li>
-        </ul>
-    </div>
-        
 @stop
 
 @section("scripts")
     <script type="text/javascript">
         (function ()
         {
+            function showErrorMessage (errorMessage)
+            {
+                var $loginWidget = $("#l-login");
+                var $errorMessage = $loginWidget.find(".errorMessage");
+                if ($errorMessage.length == 0)
+                    $errorMessage = $("<div>").addClass("alert").addClass("alert-danger").addClass("errorMessage").attr("role","alert").prependTo($loginWidget);
+                $errorMessage.html(errorMessage);
+            }
+            
             $("#loginButton").click(function() 
             {
                 var $usernameField = $("#loginUsername");
@@ -142,11 +83,11 @@
                     },
                     error: function (qXHR, textStatus, errorThrown)
                     {
-                        sweetAlert("Oops", qXHR.responseText, "error");
+                        showErrorMessage(qXHR.responseText);
                     },
                     timeout: function ()
                     {
-                        sweetAlert("Oops", "Se ha agotado el tiempo de conexión. Intente más tarde", "error");
+                        showErrorMessage("Se ha agotado el tiempo de conexión. Intente más tarde");
                     },
                     complete: function ()
                     {
