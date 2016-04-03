@@ -14,32 +14,34 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group fg-line">
-                                <label class="control-label" for="typeField">Tipo</label>
-                                <select id="typeField" name="type" class="form-control" placeholder="Tipo">
-                                    <option value="1">Administrador</option>
-                                    <option value="2"{{ (isset($this->user) && $this->user->getType()->getId() == 2)? " selected=\"selected\"" : "" }}>Organizador</option>
-                                </select> 
+                                <label class="control-label" for="usernameField">Nombre de usuario</label>
+                                <input type="text" id="usernameField" name="username" class="form-control" value="{{ isset($this->user)?  $this->user->getUsername() : "" }}" autofocus="true">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group fg-line">
-                                <label class="control-label" for="usernameField">Nombre de usuario</label>
-                                <input type="text" id="usernameField" name="username" class="form-control" placeholder="Nombre de usuario" value="{{ isset($this->user)?  $this->user->getUsername() : "" }}">
+                                <label class="control-label" for="typeField">Tipo</label>
+                                <select id="typeField" name="type" class="form-control">
+                                    <option value="1">Administrador</option>
+                                    <option value="2"{{ (isset($this->user) && $this->user->getType() == 2)? " selected=\"selected\"" : "" }}>Organizador</option>
+                                    <option value="2"{{ (isset($this->user) && $this->user->getType() == 3)? " selected=\"selected\"" : "" }}>Jugador</option>
+                                </select> 
                             </div>
                         </div>
+                        
                     </div>
                     
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group fg-line">
                                 <label class="control-label" for="passwordField">Contraseña</label>
-                                <input type="text" id="passwordField" name="password" class="form-control" placeholder="Contraseña" value="{{ isset($this->user)?  $this->user->getPassword() : "" }}">
+                                <input type="text" id="passwordField" name="password" class="form-control" value="{{ isset($this->user)?  $this->user->getPassword() : "" }}">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group fg-line">
                                 <label class="control-label" for="passwordRepeatField">Repetir Contraseña</label>
-                                <input type="text" id="passwordRepeatField" name="password" class="form-control" placeholder="Contraseña" value="{{ isset($this->user)?  $this->user->getPassword() : "" }}">
+                                <input type="text" id="passwordRepeatField" name="password" class="form-control" value="{{ isset($this->user)?  $this->user->getPassword() : "" }}">
                             </div>
                         </div>
                     </div>
@@ -48,13 +50,13 @@
                         <div class="col-sm-6">
                             <div class="form-group fg-line">
                                 <label class="control-label" for="firstnameField">Nombre</label>
-                                <input type="text" id="firstnameField" name="firstname" class="form-control" placeholder="Nombre" value="{{ isset($this->user)?  $this->user->getFirstname() : "" }}">
+                                <input type="text" id="firstnameField" name="firstname" class="form-control" value="{{ isset($this->user)?  $this->user->getFirstname() : "" }}">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group fg-line">
                                 <label class="control-label" for="lastnameField">Apellido</label>
-                                <input type="text" id="lastnameField" name="lastname" class="form-control" placeholder="Apellido" value="{{ isset($this->user)?  $this->user->getLastname() : "" }}">
+                                <input type="text" id="lastnameField" name="lastname" class="form-control" value="{{ isset($this->user)?  $this->user->getLastname() : "" }}">
                             </div>
                         </div>
                     </div>
