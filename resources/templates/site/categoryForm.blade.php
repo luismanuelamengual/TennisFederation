@@ -12,7 +12,7 @@
                     @endif
                     <div class="form-group fg-line">
                         <label class="control-label" for="descriptionField">Descripción</label>
-                        <input type="text" id="descriptionField" name="description" class="form-control" placeholder="Descripción" value="{{ isset($this->category)?  $this->category->getDescription() : "" }}">
+                        <input type="text" id="descriptionField" name="description" class="form-control" placeholder="Descripción" value="{{ isset($this->category)?  $this->category->getDescription() : "" }}" autofocus="true">
                     </div>
                     <div class="form-group fg-line">
                         <label class="control-label" for="typeField">Tipo</label>
