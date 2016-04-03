@@ -26,4 +26,12 @@ class UsersController extends SiteController
         $usersView->users = $this->getUsersManager()->getUsers();
         return $usersView;
     }
+    
+    public function showUserFormAction($id = null)
+    {
+        $userFormView = $this->createTemplateView("site.userForm");
+        if (!empty($id))
+            $userFormView->user = $this->getUsersManager()->getUser($id);
+        return $userFormView;
+    }
 }

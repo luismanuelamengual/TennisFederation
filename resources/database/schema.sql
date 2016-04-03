@@ -2,18 +2,19 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.1.13
--- Dumped by pg_dump version 9.1.13
--- Started on 2016-03-15 08:58:40 ART
+-- Dumped from database version 9.4.5
+-- Dumped by pg_dump version 9.4.5
+-- Started on 2016-04-03 15:31:16 ART
 
 SET statement_timeout = 0;
+SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 
 --
--- TOC entry 178 (class 3079 OID 11717)
+-- TOC entry 187 (class 3079 OID 11935)
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
 --
 
@@ -21,8 +22,8 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- TOC entry 2009 (class 0 OID 0)
--- Dependencies: 178
+-- TOC entry 2143 (class 0 OID 0)
+-- Dependencies: 187
 -- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
 
@@ -36,23 +37,21 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- TOC entry 161 (class 1259 OID 32402)
--- Dependencies: 6
+-- TOC entry 172 (class 1259 OID 16623)
 -- Name: category; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE category (
-    categoryid integer NOT NULL,
+    id integer NOT NULL,
     description text NOT NULL,
     matchtype integer NOT NULL
 );
 
 
-ALTER TABLE public.category OWNER TO postgres;
+ALTER TABLE category OWNER TO postgres;
 
 --
--- TOC entry 162 (class 1259 OID 32408)
--- Dependencies: 161 6
+-- TOC entry 173 (class 1259 OID 16629)
 -- Name: category_categoryid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -64,25 +63,24 @@ CREATE SEQUENCE category_categoryid_seq
     CACHE 1;
 
 
-ALTER TABLE public.category_categoryid_seq OWNER TO postgres;
+ALTER TABLE category_categoryid_seq OWNER TO postgres;
 
 --
--- TOC entry 2010 (class 0 OID 0)
--- Dependencies: 162
+-- TOC entry 2144 (class 0 OID 0)
+-- Dependencies: 173
 -- Name: category_categoryid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE category_categoryid_seq OWNED BY category.categoryid;
+ALTER SEQUENCE category_categoryid_seq OWNED BY category.id;
 
 
 --
--- TOC entry 163 (class 1259 OID 32410)
--- Dependencies: 6
+-- TOC entry 174 (class 1259 OID 16631)
 -- Name: club; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE club (
-    clubid integer NOT NULL,
+    id integer NOT NULL,
     description text NOT NULL,
     latitude real,
     longitude real,
@@ -92,11 +90,10 @@ CREATE TABLE club (
 );
 
 
-ALTER TABLE public.club OWNER TO postgres;
+ALTER TABLE club OWNER TO postgres;
 
 --
--- TOC entry 164 (class 1259 OID 32416)
--- Dependencies: 163 6
+-- TOC entry 175 (class 1259 OID 16637)
 -- Name: club_clubid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -108,25 +105,24 @@ CREATE SEQUENCE club_clubid_seq
     CACHE 1;
 
 
-ALTER TABLE public.club_clubid_seq OWNER TO postgres;
+ALTER TABLE club_clubid_seq OWNER TO postgres;
 
 --
--- TOC entry 2011 (class 0 OID 0)
--- Dependencies: 164
+-- TOC entry 2145 (class 0 OID 0)
+-- Dependencies: 175
 -- Name: club_clubid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE club_clubid_seq OWNED BY club.clubid;
+ALTER SEQUENCE club_clubid_seq OWNED BY club.id;
 
 
 --
--- TOC entry 176 (class 1259 OID 32696)
--- Dependencies: 6
+-- TOC entry 176 (class 1259 OID 16639)
 -- Name: match; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE match (
-    matchid integer NOT NULL,
+    id integer NOT NULL,
     matchtype integer NOT NULL,
     description text,
     player1id integer,
@@ -140,11 +136,10 @@ CREATE TABLE match (
 );
 
 
-ALTER TABLE public.match OWNER TO postgres;
+ALTER TABLE match OWNER TO postgres;
 
 --
--- TOC entry 175 (class 1259 OID 32694)
--- Dependencies: 176 6
+-- TOC entry 177 (class 1259 OID 16645)
 -- Name: match_matchid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -156,25 +151,24 @@ CREATE SEQUENCE match_matchid_seq
     CACHE 1;
 
 
-ALTER TABLE public.match_matchid_seq OWNER TO postgres;
+ALTER TABLE match_matchid_seq OWNER TO postgres;
 
 --
--- TOC entry 2012 (class 0 OID 0)
--- Dependencies: 175
+-- TOC entry 2146 (class 0 OID 0)
+-- Dependencies: 177
 -- Name: match_matchid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE match_matchid_seq OWNED BY match.matchid;
+ALTER SEQUENCE match_matchid_seq OWNED BY match.id;
 
 
 --
--- TOC entry 165 (class 1259 OID 32434)
--- Dependencies: 6
+-- TOC entry 178 (class 1259 OID 16647)
 -- Name: notification; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE notification (
-    notificationid integer NOT NULL,
+    id integer NOT NULL,
     expirationdate timestamp without time zone,
     message text,
     creationuserid integer,
@@ -182,11 +176,10 @@ CREATE TABLE notification (
 );
 
 
-ALTER TABLE public.notification OWNER TO postgres;
+ALTER TABLE notification OWNER TO postgres;
 
 --
--- TOC entry 166 (class 1259 OID 32440)
--- Dependencies: 165 6
+-- TOC entry 179 (class 1259 OID 16653)
 -- Name: notification_notificationid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -198,20 +191,19 @@ CREATE SEQUENCE notification_notificationid_seq
     CACHE 1;
 
 
-ALTER TABLE public.notification_notificationid_seq OWNER TO postgres;
+ALTER TABLE notification_notificationid_seq OWNER TO postgres;
 
 --
--- TOC entry 2013 (class 0 OID 0)
--- Dependencies: 166
+-- TOC entry 2147 (class 0 OID 0)
+-- Dependencies: 179
 -- Name: notification_notificationid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE notification_notificationid_seq OWNED BY notification.notificationid;
+ALTER SEQUENCE notification_notificationid_seq OWNED BY notification.id;
 
 
 --
--- TOC entry 167 (class 1259 OID 32450)
--- Dependencies: 6
+-- TOC entry 180 (class 1259 OID 16655)
 -- Name: ranking; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -223,16 +215,15 @@ CREATE TABLE ranking (
 );
 
 
-ALTER TABLE public.ranking OWNER TO postgres;
+ALTER TABLE ranking OWNER TO postgres;
 
 --
--- TOC entry 168 (class 1259 OID 32453)
--- Dependencies: 6
+-- TOC entry 181 (class 1259 OID 16658)
 -- Name: tournament; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE tournament (
-    tournamentid integer NOT NULL,
+    id integer NOT NULL,
     description text NOT NULL,
     clubid integer NOT NULL,
     startdate timestamp without time zone NOT NULL,
@@ -242,11 +233,10 @@ CREATE TABLE tournament (
 );
 
 
-ALTER TABLE public.tournament OWNER TO postgres;
+ALTER TABLE tournament OWNER TO postgres;
 
 --
--- TOC entry 169 (class 1259 OID 32459)
--- Dependencies: 168 6
+-- TOC entry 182 (class 1259 OID 16664)
 -- Name: tournament_tournamentid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -258,20 +248,19 @@ CREATE SEQUENCE tournament_tournamentid_seq
     CACHE 1;
 
 
-ALTER TABLE public.tournament_tournamentid_seq OWNER TO postgres;
+ALTER TABLE tournament_tournamentid_seq OWNER TO postgres;
 
 --
--- TOC entry 2014 (class 0 OID 0)
--- Dependencies: 169
+-- TOC entry 2148 (class 0 OID 0)
+-- Dependencies: 182
 -- Name: tournament_tournamentid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE tournament_tournamentid_seq OWNED BY tournament.tournamentid;
+ALTER SEQUENCE tournament_tournamentid_seq OWNED BY tournament.id;
 
 
 --
--- TOC entry 170 (class 1259 OID 32461)
--- Dependencies: 6
+-- TOC entry 183 (class 1259 OID 16666)
 -- Name: tournamentcategory; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -281,11 +270,10 @@ CREATE TABLE tournamentcategory (
 );
 
 
-ALTER TABLE public.tournamentcategory OWNER TO postgres;
+ALTER TABLE tournamentcategory OWNER TO postgres;
 
 --
--- TOC entry 177 (class 1259 OID 32705)
--- Dependencies: 6
+-- TOC entry 184 (class 1259 OID 16669)
 -- Name: tournamentinscription; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -297,19 +285,18 @@ CREATE TABLE tournamentinscription (
 );
 
 
-ALTER TABLE public.tournamentinscription OWNER TO postgres;
+ALTER TABLE tournamentinscription OWNER TO postgres;
 
 --
--- TOC entry 171 (class 1259 OID 32467)
--- Dependencies: 6
+-- TOC entry 185 (class 1259 OID 16672)
 -- Name: user; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
 --
 
 CREATE TABLE "user" (
-    userid integer NOT NULL,
+    id integer NOT NULL,
     username text NOT NULL,
     password text NOT NULL,
-    usertypeid integer NOT NULL,
+    type integer NOT NULL,
     firstname text NOT NULL,
     lastname text NOT NULL,
     birthdate timestamp without time zone,
@@ -325,11 +312,10 @@ CREATE TABLE "user" (
 );
 
 
-ALTER TABLE public."user" OWNER TO postgres;
+ALTER TABLE "user" OWNER TO postgres;
 
 --
--- TOC entry 172 (class 1259 OID 32473)
--- Dependencies: 171 6
+-- TOC entry 186 (class 1259 OID 16678)
 -- Name: user_userid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -341,182 +327,121 @@ CREATE SEQUENCE user_userid_seq
     CACHE 1;
 
 
-ALTER TABLE public.user_userid_seq OWNER TO postgres;
+ALTER TABLE user_userid_seq OWNER TO postgres;
 
 --
--- TOC entry 2015 (class 0 OID 0)
--- Dependencies: 172
+-- TOC entry 2149 (class 0 OID 0)
+-- Dependencies: 186
 -- Name: user_userid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
-ALTER SEQUENCE user_userid_seq OWNED BY "user".userid;
+ALTER SEQUENCE user_userid_seq OWNED BY "user".id;
 
 
 --
--- TOC entry 173 (class 1259 OID 32475)
--- Dependencies: 6
--- Name: usertype; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+-- TOC entry 2007 (class 2604 OID 16688)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-CREATE TABLE usertype (
-    usertypeid integer NOT NULL,
-    description text
-);
-
-
-ALTER TABLE public.usertype OWNER TO postgres;
-
---
--- TOC entry 174 (class 1259 OID 32481)
--- Dependencies: 173 6
--- Name: usertype_usertypeid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE usertype_usertypeid_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE public.usertype_usertypeid_seq OWNER TO postgres;
-
---
--- TOC entry 2016 (class 0 OID 0)
--- Dependencies: 174
--- Name: usertype_usertypeid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE usertype_usertypeid_seq OWNED BY usertype.usertypeid;
+ALTER TABLE ONLY category ALTER COLUMN id SET DEFAULT nextval('category_categoryid_seq'::regclass);
 
 
 --
--- TOC entry 1878 (class 2604 OID 32483)
--- Dependencies: 162 161
--- Name: categoryid; Type: DEFAULT; Schema: public; Owner: postgres
+-- TOC entry 2008 (class 2604 OID 16689)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY category ALTER COLUMN categoryid SET DEFAULT nextval('category_categoryid_seq'::regclass);
-
-
---
--- TOC entry 1879 (class 2604 OID 32484)
--- Dependencies: 164 163
--- Name: clubid; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY club ALTER COLUMN clubid SET DEFAULT nextval('club_clubid_seq'::regclass);
+ALTER TABLE ONLY club ALTER COLUMN id SET DEFAULT nextval('club_clubid_seq'::regclass);
 
 
 --
--- TOC entry 1884 (class 2604 OID 32699)
--- Dependencies: 176 175 176
--- Name: matchid; Type: DEFAULT; Schema: public; Owner: postgres
+-- TOC entry 2009 (class 2604 OID 16690)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY match ALTER COLUMN matchid SET DEFAULT nextval('match_matchid_seq'::regclass);
-
-
---
--- TOC entry 1880 (class 2604 OID 32487)
--- Dependencies: 166 165
--- Name: notificationid; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY notification ALTER COLUMN notificationid SET DEFAULT nextval('notification_notificationid_seq'::regclass);
+ALTER TABLE ONLY match ALTER COLUMN id SET DEFAULT nextval('match_matchid_seq'::regclass);
 
 
 --
--- TOC entry 1881 (class 2604 OID 32489)
--- Dependencies: 169 168
--- Name: tournamentid; Type: DEFAULT; Schema: public; Owner: postgres
+-- TOC entry 2010 (class 2604 OID 16691)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY tournament ALTER COLUMN tournamentid SET DEFAULT nextval('tournament_tournamentid_seq'::regclass);
-
-
---
--- TOC entry 1882 (class 2604 OID 32490)
--- Dependencies: 172 171
--- Name: userid; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY "user" ALTER COLUMN userid SET DEFAULT nextval('user_userid_seq'::regclass);
+ALTER TABLE ONLY notification ALTER COLUMN id SET DEFAULT nextval('notification_notificationid_seq'::regclass);
 
 
 --
--- TOC entry 1883 (class 2604 OID 32491)
--- Dependencies: 174 173
--- Name: usertypeid; Type: DEFAULT; Schema: public; Owner: postgres
+-- TOC entry 2011 (class 2604 OID 16692)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY usertype ALTER COLUMN usertypeid SET DEFAULT nextval('usertype_usertypeid_seq'::regclass);
+ALTER TABLE ONLY tournament ALTER COLUMN id SET DEFAULT nextval('tournament_tournamentid_seq'::regclass);
 
 
 --
--- TOC entry 1886 (class 2606 OID 32493)
--- Dependencies: 161 161 2003
+-- TOC entry 2012 (class 2604 OID 16693)
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY "user" ALTER COLUMN id SET DEFAULT nextval('user_userid_seq'::regclass);
+
+
+--
+-- TOC entry 2014 (class 2606 OID 16696)
 -- Name: category_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY category
-    ADD CONSTRAINT category_pkey PRIMARY KEY (categoryid);
+    ADD CONSTRAINT category_pkey PRIMARY KEY (id);
 
 
 --
--- TOC entry 1888 (class 2606 OID 32495)
--- Dependencies: 163 163 2003
+-- TOC entry 2016 (class 2606 OID 16698)
 -- Name: club_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY club
-    ADD CONSTRAINT club_pkey PRIMARY KEY (clubid);
+    ADD CONSTRAINT club_pkey PRIMARY KEY (id);
 
 
 --
--- TOC entry 1900 (class 2606 OID 32704)
--- Dependencies: 176 176 2003
+-- TOC entry 2018 (class 2606 OID 16700)
 -- Name: match_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY match
-    ADD CONSTRAINT match_pkey PRIMARY KEY (matchid);
+    ADD CONSTRAINT match_pkey PRIMARY KEY (id);
 
 
 --
--- TOC entry 1890 (class 2606 OID 32501)
--- Dependencies: 165 165 2003
+-- TOC entry 2020 (class 2606 OID 16702)
 -- Name: notification_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY notification
-    ADD CONSTRAINT notification_pkey PRIMARY KEY (notificationid);
+    ADD CONSTRAINT notification_pkey PRIMARY KEY (id);
 
 
 --
--- TOC entry 1892 (class 2606 OID 32505)
--- Dependencies: 168 168 2003
+-- TOC entry 2022 (class 2606 OID 16704)
 -- Name: tournament_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY tournament
-    ADD CONSTRAINT tournament_pkey PRIMARY KEY (tournamentid);
+    ADD CONSTRAINT tournament_pkey PRIMARY KEY (id);
 
 
 --
--- TOC entry 1894 (class 2606 OID 32509)
--- Dependencies: 171 171 2003
+-- TOC entry 2024 (class 2606 OID 16706)
 -- Name: user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
 ALTER TABLE ONLY "user"
-    ADD CONSTRAINT user_pkey PRIMARY KEY (userid);
+    ADD CONSTRAINT user_pkey PRIMARY KEY (id);
 
 
 --
--- TOC entry 1896 (class 2606 OID 32511)
--- Dependencies: 171 171 2003
+-- TOC entry 2026 (class 2606 OID 16708)
 -- Name: user_username_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
@@ -525,17 +450,7 @@ ALTER TABLE ONLY "user"
 
 
 --
--- TOC entry 1898 (class 2606 OID 32513)
--- Dependencies: 173 173 2003
--- Name: usertype_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
---
-
-ALTER TABLE ONLY usertype
-    ADD CONSTRAINT usertype_pkey PRIMARY KEY (usertypeid);
-
-
---
--- TOC entry 2008 (class 0 OID 0)
+-- TOC entry 2142 (class 0 OID 0)
 -- Dependencies: 6
 -- Name: public; Type: ACL; Schema: -; Owner: postgres
 --
@@ -546,7 +461,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2016-03-15 08:58:40 ART
+-- Completed on 2016-04-03 15:31:16 ART
 
 --
 -- PostgreSQL database dump complete

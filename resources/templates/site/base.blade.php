@@ -1,6 +1,6 @@
 @extends ("base")
 
-@use ("org\fmt\model\UserType")
+@use ("org\fmt\model\User")
 
 @section ("vendorStyleFiles")
     <link rel="stylesheet" type="text/css" href="{{ $this->getResourceUrl('assets/animate.css/animate.min.css') }}">
@@ -97,17 +97,17 @@
 
             <ul class="main-menu">
                 <li><a href="{{ $this->getUrl("/dashboard/") }}"><i class="zmdi zmdi-home"></i>Inicio</a></li>            
-                @if ($this->getSession()->type == UserType::USERTYPE_ADMINISTRATOR)
+                @if ($this->getSession()->type == User::TYPE_ADMINISTRATOR)
                 <li><a href="{{ $this->getUrl("/user/") }}"><i class="zmdi zmdi-accounts-alt"></i>Usuarios</a></li>
                 <li><a href="{{ $this->getUrl("/category/") }}"><i class="zmdi zmdi-accounts-list"></i>Categorías</a></li>
                 <li><a href="{{ $this->getUrl("/club/") }}"><i class="zmdi zmdi-pin"></i>Clubes</a></li>
                 @endif
 
-                @if ($this->getSession()->type == UserType::USERTYPE_ADMINISTRATOR or $this->getSession()->type == UserType::USERTYPE_ORGANIZER)
+                @if ($this->getSession()->type == User::TYPE_ADMINISTRATOR or $this->getSession()->type == User::TYPE_ORGANIZER)
                 <li><a href="{{ $this->getUrl("/announcement/") }}"><i class="zmdi zmdi-receipt"></i></i>Anuncios</a></li>
                 @endif
 
-                @if ($this->getSession()->type == UserType::USERTYPE_ADMINISTRATOR or $this->getSession()->type == UserType::USERTYPE_ORGANIZER or $this->getSession()->type == UserType::USERTYPE_PLAYER)
+                @if ($this->getSession()->type == User::TYPE_ADMINISTRATOR or $this->getSession()->type == User::TYPE_ORGANIZER or $this->getSession()->type == User::TYPE_PLAYER)
                 <li><a href="{{ $this->getUrl("/tournament/") }}"><i class="zmdi zmdi-star"></i>Torneos</a></li>
                 <li><a href="{{ $this->getUrl("/ranking/") }}"><i class="zmdi zmdi-trending-up"></i>Rankings</a></li>
                 @endif

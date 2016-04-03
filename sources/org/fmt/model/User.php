@@ -6,6 +6,10 @@ use NeoPHP\mvc\Model;
 
 class User extends Model
 {   
+    const TYPE_ADMINISTRATOR = 1;
+    const TYPE_ORGANIZER = 2;
+    const TYPE_PLAYER = 3;
+    
     private $id;
     private $username;
     private $password;
@@ -55,7 +59,7 @@ class User extends Model
         return $this->type;
     }
 
-    public function setType(UserType $type)
+    public function setType($type)
     {
         $this->type = $type;
     }

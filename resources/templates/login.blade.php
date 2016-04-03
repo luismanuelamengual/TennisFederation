@@ -2,7 +2,6 @@
 
 @section ("vendorStyleFiles")
     <link rel="stylesheet" type="text/css" href="{{ $this->getResourceUrl('assets/animate.css/animate.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ $this->getResourceUrl('assets/bootstrap-sweetalert/lib/sweet-alert.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ $this->getResourceUrl('assets/material-design-iconic-font/dist/css/material-design-iconic-font.min.css') }}">    
 @stop
 
@@ -10,7 +9,6 @@
     <script src="{{ $this->getResourceUrl('assets/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ $this->getResourceUrl('assets/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <script src="{{ $this->getResourceUrl('assets/Waves/dist/waves.min.js') }}"></script>
-    <script src="{{ $this->getResourceUrl('assets/bootstrap-sweetalert/lib/sweet-alert.min.js') }}"></script>
 @stop
 
 @section("contentType", "login-content")
