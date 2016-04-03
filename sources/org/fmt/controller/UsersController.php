@@ -2,10 +2,9 @@
 
 namespace org\fmt\controller;
 
-use NeoPHP\web\WebController;
 use org\fmt\manager\UsersManager;
 
-class UsersController extends WebController
+class UsersController extends SiteController
 {
     /**
      * Obtiene el manejador de categorias
@@ -22,7 +21,7 @@ class UsersController extends WebController
     }
     
     public function showUsersListAction()
-    {
+    {        
         $usersView = $this->createTemplateView("site.users");
         $usersView->users = $this->getUsersManager()->getUsers();
         return $usersView;

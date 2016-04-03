@@ -11,12 +11,15 @@
                 <a href="{{ $this->getUrl("/user/showUserForm") }}" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Agregar</a>
             </div>        
                 
-            <div class="card-body">
+            <div class="card-body table-responsive">
                 <table id="crudTable" class="table table-hover">
                     <thead>
                         <tr>
                             <th>#</th>
                             <th>Nombre</th>
+                            <th>Documento</th>
+                            <th>Email</th>
+                            <th>Celular</th>
                             <th>Acciones</th>
                         <tr>
                     </thead>
@@ -25,6 +28,9 @@
                         <tr>
                             <td>{{ $user->getId() }}</td>
                             <td>{{ $user->getFirstname() . " " . $user->getLastname() }}</td>
+                            <td>{{ $user->getDocumentNumber() }}</td>
+                            <td>{{ $user->getEmail() }}</td>
+                            <td>{{ $user->getContactVia1() }}</td>
                             <td>
                                 <ul class="actions">
                                     <li class="dropdown">

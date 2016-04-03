@@ -11,7 +11,7 @@
                 <a href="{{ $this->getUrl("/category/showCategoryForm") }}" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Agregar</a>
             </div>        
                 
-            <div class="card-body">
+            <div class="card-body table-responsive">
                 <table id="crudTable" class="table table-hover">
                     <thead>
                         <tr>
