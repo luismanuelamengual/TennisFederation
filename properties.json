@@ -7,7 +7,7 @@
             "database": "tennisfederation",
             "host": "localhost",
             "username": "postgres",
-            "password": "tuvieja.com"
+            "password": "postgres"
         }
     ],
     "routes":
@@ -31,6 +31,10 @@
         {
             "path": "/club/",
             "controller": "org\\fmt\\controller\\ClubsController"
+        },
+        {
+            "path": "/user/",
+            "controller": "org\\fmt\\controller\\UsersController"
         }
     ]
 }

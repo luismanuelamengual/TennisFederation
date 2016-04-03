@@ -25,6 +25,6 @@ class UsersManager extends ModelManager {
      */
     public function getUsers ()
     {
-        return $this->createModelCollection(User::class, $this->getConnection()->createQuery("\"user\"")->get());
+        return $this->createModelCollection(User::class, $this->getConnection()->createQuery("\"user\"")->addOrderBy("id")->get());
     }
 }
