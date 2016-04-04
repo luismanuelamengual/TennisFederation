@@ -2,7 +2,9 @@
 
 namespace org\fmt\controller;
 
+use NeoPHP\web\http\RedirectResponse;
 use org\fmt\manager\UsersManager;
+use org\fmt\model\User;
 
 class UsersController extends SiteController
 {
@@ -33,5 +35,19 @@ class UsersController extends SiteController
         if (!empty($id))
             $userFormView->user = $this->getUsersManager()->getUser($id);
         return $userFormView;
+    }
+    
+    public function saveUserAction ()
+    {
+        $user = new User();
+        $user->setFrom($this->getRequest()->getParameters()->get());
+        $this->getUsersManager()->persistUser($user);
+        return new RedirectResponse($this->getUrl("user/showUsersList"));
+    }
+    
+    public function deleteUserAction ($id)
+    {
+        $this->getUsersManager()->deleteUser($id);
+        return new RedirectResponse($this->getUrl("user/showUsersList"));
     }
 }

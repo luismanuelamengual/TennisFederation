@@ -23,6 +23,7 @@ class User extends Model
     private $contactVia3;
     private $email;
     private $documentNumber;
+    private $active = true;
         
     public function getId()
     {
@@ -152,5 +153,15 @@ class User extends Model
     public function setDocumentNumber($documentNumber)
     {
         $this->documentNumber = $documentNumber;
+    }
+    
+    public function getActive() 
+    {
+        return $this->active;
+    }
+
+    public function setActive($active) 
+    {
+        $this->active = $active;
     }
 }

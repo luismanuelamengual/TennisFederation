@@ -34,4 +34,29 @@ class UsersManager extends ModelManager {
     {
         return $this->createModel(User::class, $this->getConnection()->createQuery("\"user\"")->addWhere("id", "=", $id)->getFirst());
     }
+    
+    /**
+     * Persiste un usuario
+     * @param User $user
+     */
+    public function persistUser (User $user)
+    {
+        $query = $this->getConnection()->createQuery("\"user\"");
+        if (!empty($user->getId()))
+        {
+            $query->addWhere("id", "=", $user->getId());
+            $query->update($user->toArray());
+        }
+        else
+        {
+            $userData = $user->toArray();
+            unset($userData["id"]);
+            $query->insert($userData);
+        }
+    }
+    
+    public function deleteUser ($id)
+    {
+        $this->getConnection()->createQuery("\"user\"")->addWhere("id", "=", $id)->delete();
+    }
 }
