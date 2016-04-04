@@ -59,7 +59,7 @@
                                 <select id="typeField" name="type" class="form-control">
                                     <option value="1">Administrador</option>
                                     <option value="2"{{ (isset($this->user) && $this->user->getType() == 2)? " selected=\"selected\"" : "" }}>Organizador</option>
-                                    <option value="2"{{ (isset($this->user) && $this->user->getType() == 3)? " selected=\"selected\"" : "" }}>Jugador</option>
+                                    <option value="3"{{ (isset($this->user) && $this->user->getType() == 3)? " selected=\"selected\"" : "" }}>Jugador</option>
                                 </select> 
                             </div>
                         </div>
