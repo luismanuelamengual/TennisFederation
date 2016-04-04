@@ -4,9 +4,6 @@ namespace org\fmt\model;
 
 use NeoPHP\mvc\Model;
 
-/**
- * @table (name="match")
- */
 class Match extends Model
 {
     const MATCHTYPE_SINGLES = 1;
@@ -15,125 +12,125 @@ class Match extends Model
     const RESULT_TEAMAWIN = 1;
     const RESULT_TEAMBWIN = 2;
     
-    /**
-     * @column (name="matchid", id=true)
-     */
     private $id;
-    
-    /**
-     * @column (name="matchtype")
-     */
+    private $description;
+    private $tournament;
     private $matchType;
-    
-    /**
-     * @column (name="userid")
-     */
-    private $user1;
-    
-    /**
-     * @column (name="opponentuserid")
-     */
-    private $user2;
-    
-    /**
-     * @column (name="phase")
-     */
-    private $phase;
-    
-    /**
-     * @column (name="date")
-     */
+    private $player1;    
+    private $player2;
+    private $player3;    
+    private $player4;
     private $date;
-    
-    /**
-     * @column (name="result")
-     */
     private $result;
-    
-    /**
-     * @column (name="resultdetail")
-     */
     private $resultDetail;
     
     public function getId()
     {
         return $this->id;
     }
-    
-    public function setId($id)
+
+    public function getDescription()
     {
-        $this->id = $id;
+        return $this->description;
     }
-    
+
+    public function getTournament()
+    {
+        return $this->tournament;
+    }
+
     public function getMatchType()
     {
         return $this->matchType;
     }
-    
+
+    public function getPlayer1()
+    {
+        return $this->player1;
+    }
+
+    public function getPlayer2()
+    {
+        return $this->player2;
+    }
+
+    public function getPlayer3()
+    {
+        return $this->player3;
+    }
+
+    public function getPlayer4()
+    {
+        return $this->player4;
+    }
+
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    public function getResult()
+    {
+        return $this->result;
+    }
+
+    public function getResultDetail()
+    {
+        return $this->resultDetail;
+    }
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    public function setTournament(Tournament $tournament)
+    {
+        $this->tournament = $tournament;
+    }
+
     public function setMatchType($matchType)
     {
         $this->matchType = $matchType;
     }
-    
-    public function getUser1()
+
+    public function setPlayer1($player1)
     {
-        return $this->user1;
+        $this->player1 = $player1;
     }
-    
-    public function setUser1(User $user)
+
+    public function setPlayer2($player2)
     {
-        $this->user1 = $user;
+        $this->player2 = $player2;
     }
-    
-    public function getUser2()
+
+    public function setPlayer3($player3)
     {
-        return $this->user2;
+        $this->player3 = $player3;
     }
-    
-    public function setUser2(User $user)
+
+    public function setPlayer4($player4)
     {
-        $this->user2 = $user;
+        $this->player4 = $player4;
     }
-    
-    public function getPhase ()
-    {
-        return $this->phase;
-    }
-    
-    public function setPhase ($phase)
-    {
-        $this->phase = $phase;
-    }
-    
-    public function getDate ()
-    {
-        return $this->date;
-    }
-    
-    public function setDate ($date)
+
+    public function setDate($date)
     {
         $this->date = $date;
     }
-    
-    public function getResult ()
-    {
-        return $this->result;
-    }
-    
-    public function setResult ($result)
+
+    public function setResult($result)
     {
         $this->result = $result;
     }
-    
-    public function getResultDetail ()
-    {
-        return $this->resultDetail;
-    }
-    
-    public function setResultDetail ($resultDetail)
+
+    public function setResultDetail($resultDetail)
     {
         $this->resultDetail = $resultDetail;
     }
 }
-
-?>

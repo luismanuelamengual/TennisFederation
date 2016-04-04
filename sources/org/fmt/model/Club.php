@@ -4,44 +4,14 @@ namespace org\fmt\model;
 
 use NeoPHP\mvc\Model;
 
-/**
- * @table (name="club")
- */
 class Club extends Model 
 {
-    /**
-     * @column (name="clubid", id=true)
-     */
     private $id;
-    
-    /**
-     * @column (name="description")
-     */
     private $description;
-    
-    /**
-     * @column (name="latitude")
-     */
     private $latitude;
-    
-    /**
-     * @column (name="longitude")
-     */
     private $longitude;
-    
-    /**
-     * @column (name="address")
-     */
     private $address;
-    
-    /**
-     * @column (name="contactvia1")
-     */
     private $contactvia1;
-    
-    /**
-     * @column (name="contactvia2")
-     */
     private $contactvia2;
     
     public function getId() 
@@ -114,5 +84,3 @@ class Club extends Model
         $this->contactvia2 = $contactvia2;
     }
 }
-
-?>
