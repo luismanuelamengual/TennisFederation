@@ -36,7 +36,7 @@ $(document).ready(function(){
             }
         });
     })();
-
+    
     /* --------------------------------------------------------
         Scrollbar
     -----------------------------------------------------------*/
@@ -874,12 +874,14 @@ $(document).ready(function(){
     /*
      * Skin Change
      */
+    var savedSkin = localStorage.getItem('ma-skin');
+    if (!savedSkin)
+        savedSkin = "blue";
+    $('[data-current-skin]').attr('data-current-skin', savedSkin);
     $('body').on('click', '[data-skin]', function() {
         var currentSkin = $('[data-current-skin]').data('current-skin');
         var skin = $(this).data('skin');
-
-        $('[data-current-skin]').attr('data-current-skin', skin)
-
+        localStorage.setItem('ma-skin', skin);
+        $('[data-current-skin]').attr('data-current-skin', skin);
     });
-
 });
