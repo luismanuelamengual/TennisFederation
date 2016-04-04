@@ -32,7 +32,7 @@
                         <div class="col-sm-12">
                             <div class="form-group fg-line">
                                 <label class="control-label" for="usernameField">Nombre de usuario (*)</label>
-                                <input type="text" id="usernameField" name="username" class="form-control" value="{{ isset($this->user)?  $this->user->getUsername() : "" }}" autofocus="true" required>
+                                <input type="text" id="usernameField" name="username" class="form-control" value="{{ isset($this->user)?  $this->user->getUsername() : "" }}" autofocus="true" required minlength="8">
                             </div>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                         <div class="col-sm-6">
                             <div class="form-group fg-line">
                                 <label class="control-label" for="passwordField">Contraseña (*)</label>
-                                <input type="password" id="passwordField" name="password" class="form-control" value="{{ isset($this->user)?  $this->user->getPassword() : "" }}" required>
+                                <input type="password" id="passwordField" name="password" class="form-control" value="{{ isset($this->user)?  $this->user->getPassword() : "" }}" required minlength="8">
                             </div>
                         </div>
                         <div class="col-sm-6">
