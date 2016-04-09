@@ -3,17 +3,14 @@
 namespace org\fmt\manager;
 
 use NeoPHP\core\Collection;
-use NeoPHP\mvc\ModelManager;
+use NeoPHP\mvc\ConnectionModelManager;
 use org\fmt\model\User;
 
-class UsersManager extends ModelManager {
+class UsersManager extends ConnectionModelManager {
     
     public function getUserForUsernameAndPassword ($username, $password)
     {
-        $query = $this->getConnection()->createQuery("\"user\"");
-        $query->addWhere("username", "=", $username);
-        $query->addWhere("password", "=", $password);
-        return $this->createModel(User::class, $query->getFirst());
+        return $this->createModelFromFields(User::class, $this->getConnection()->createQuery("\"user\"")->addWhere("username", "=", $username)->addWhere("password", "=", $password)->getFirst());
     }
     
     /**
@@ -22,7 +19,7 @@ class UsersManager extends ModelManager {
      */
     public function getUsers ()
     {
-        return $this->createModelCollection(User::class, $this->getConnection()->createQuery("\"user\"")->addOrderBy("id")->get());
+        return $this->getAllModels(User::class);
     }
     
     /**
@@ -32,7 +29,7 @@ class UsersManager extends ModelManager {
      */
     public function getUser ($id)
     {
-        return $this->createModel(User::class, $this->getConnection()->createQuery("\"user\"")->addWhere("id", "=", $id)->getFirst());
+        return $this->getModel(User::class, $id);
     }
     
     /**
@@ -41,22 +38,16 @@ class UsersManager extends ModelManager {
      */
     public function persistUser (User $user)
     {
-        $query = $this->getConnection()->createQuery("\"user\"");
-        if (!empty($user->getId()))
-        {
-            $query->addWhere("id", "=", $user->getId());
-            $query->update($user->toArray());
-        }
-        else
-        {
-            $userData = $user->toArray();
-            unset($userData["id"]);
-            $query->insert($userData);
-        }
+        return $this->persistModel($user);
     }
     
-    public function deleteUser ($id)
+    /**
+     * Borra un usuario
+     * @param User $user
+     * @return type
+     */
+    public function deleteUser (User $user)
     {
-        $this->getConnection()->createQuery("\"user\"")->addWhere("id", "=", $id)->delete();
+        return $this->deleteModel($user);
     }
 }

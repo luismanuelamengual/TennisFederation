@@ -2,37 +2,28 @@
 
 namespace org\fmt\manager;
 
-use NeoPHP\mvc\ModelManager;
+use NeoPHP\mvc\ConnectionModelManager;
 use org\fmt\model\Category;
 
-class CategoriesManager extends ModelManager
+class CategoriesManager extends ConnectionModelManager
 {
     public function getCategories ()
     {
-        return $this->createModelCollection(Category::class, $this->getConnection()->createQuery("category")->addOrderBy("id", "ASC")->get());
+        return $this->getAllModels(Category::class);
     }
     
     public function getCategory ($id)
     {
-        return $this->createModel(Category::class, $this->getConnection()->createQuery("category")->addWhere("id", "=", $id)->getFirst());
+        return $this->getModel(Category::class, $id);
     }
     
     public function persistCategory (Category $category)
     {
-        $query = $this->getConnection()->createQuery("category");
-        if (!empty($category->getId()))
-        {
-            $query->addWhere("id", "=", $category->getId());
-            $query->update(["description"=>$category->getDescription(), "matchtype"=>$category->getMatchType()]);
-        }
-        else
-        {
-            $query->insert(["description"=>$category->getDescription(), "matchtype"=>$category->getMatchType()]);
-        }
+        return $this->persistModel($category);
     }
     
-    public function deleteCategory ($id)
+    public function deleteCategory (Category $category)
     {
-        $this->getConnection()->createQuery("category")->addWhere("id", "=", $id)->delete();
+        return $this->deleteModel($category);
     }
 }

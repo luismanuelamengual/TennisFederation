@@ -4,10 +4,24 @@ namespace org\fmt\model;
 
 use NeoPHP\mvc\Model;
 
+/**
+ * @table (name="category")
+ */
 class Category extends Model
 {
+    /**
+     * @column (id=true)
+     */
     private $id;
+    
+    /**
+     * @column
+     */
     private $description;
+    
+    /**
+     * @column
+     */
     private $matchType;
     
     public function __construct ($id=null)

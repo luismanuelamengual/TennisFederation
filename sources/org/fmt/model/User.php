@@ -4,25 +4,83 @@ namespace org\fmt\model;
 
 use NeoPHP\mvc\Model;
 
+/**
+ * @table (name='\"user\"')
+ */
 class User extends Model
 {   
     const TYPE_ADMINISTRATOR = 1;
     const TYPE_ORGANIZER = 2;
     const TYPE_PLAYER = 3;
     
+    /**
+     * @column (id=true)
+     */
     private $id;
+    
+    /**
+     * @column
+     */
     private $username;
+    
+    /**
+     * @column
+     */
     private $password;
+    
+    /**
+     * @column
+     */
     private $type;
+    
+    /**
+     * @column
+     */
     private $firstname;
+    
+    /**
+     * @column
+     */
     private $lastname;
+    
+    /**
+     * @column
+     */
     private $birthDate;
+    
+    /**
+     * @column
+     */
     private $address;
+    
+    /**
+     * @column
+     */
     private $contactVia1;
+    
+    /**
+     * @column
+     */
     private $contactVia2;
+    
+    /**
+     * @column
+     */
     private $contactVia3;
+    
+    /**
+     * @column
+     */
     private $email;
+    
+    /**
+     * @column
+     */
     private $documentNumber;
+    
+    /**
+     * @column
+     */
     private $active = true;
         
     public function getId()

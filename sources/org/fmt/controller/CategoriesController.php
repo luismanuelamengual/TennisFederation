@@ -50,7 +50,9 @@ class CategoriesController extends SiteController
     
     public function deleteCategoryAction ($id)
     {
-        $this->getCategoriesManager()->deleteCategory($id);
+        $category = new Category();
+        $category->setId($id);
+        $this->getCategoriesManager()->deleteCategory($category);
         return new RedirectResponse($this->getUrl("category/showCategoriesList"));
     }
 }
