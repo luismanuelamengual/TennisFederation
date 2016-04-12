@@ -47,7 +47,9 @@ class UsersController extends SiteController
     
     public function deleteUserAction ($id)
     {
-        $this->getUsersManager()->deleteUser($id);
+        $user = new User();
+        $user->setId($id);
+        $this->getUsersManager()->deleteUser($user);
         return new RedirectResponse($this->getUrl("user/showUsersList"));
     }
 }
