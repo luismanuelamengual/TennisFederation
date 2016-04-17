@@ -3,10 +3,10 @@
 namespace org\fmt\manager;
 
 use NeoPHP\core\Collection;
-use NeoPHP\mvc\ConnectionModelManager;
+use NeoPHP\mvc\ModelManager;
 use org\fmt\model\User;
 
-class UsersManager extends ConnectionModelManager {
+class UsersManager extends ModelManager {
     
     public function getUserForUsernameAndPassword ($username, $password)
     {
