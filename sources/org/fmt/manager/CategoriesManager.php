@@ -2,10 +2,10 @@
 
 namespace org\fmt\manager;
 
-use NeoPHP\mvc\ConnectionModelManager;
+use NeoPHP\mvc\ModelManager;
 use org\fmt\model\Category;
 
-class CategoriesManager extends ConnectionModelManager
+class CategoriesManager extends ModelManager
 {
     public function getCategories ()
     {
