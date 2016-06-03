@@ -5,25 +5,26 @@ namespace org\fmt\model;
 use NeoPHP\mvc\Model;
 
 /**
- * @table (name="category")
+ * @entity
  */
 class Category extends Model
 {
     /**
-     * @column (id=true)
+     * @id
+     * @attribute
      */
     private $id;
     
     /**
-     * @column
+     * @attribute
      */
     private $description;
     
     /**
-     * @column
+     * @attribute
      */
     private $matchType;
-    
+
     public function __construct ($id=null)
     {
         $this->id = $id;

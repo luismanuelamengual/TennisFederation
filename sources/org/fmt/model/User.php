@@ -5,7 +5,7 @@ namespace org\fmt\model;
 use NeoPHP\mvc\Model;
 
 /**
- * @table (name='\"user\"')
+ * @entity (name='\"user\"')
  */
 class User extends Model
 {   
@@ -14,72 +14,73 @@ class User extends Model
     const TYPE_PLAYER = 3;
     
     /**
-     * @column (id=true)
+     * @id
+     * @attribute
      */
     private $id;
     
     /**
-     * @column
+     * @attribute
      */
     private $username;
     
     /**
-     * @column
+     * @attribute
      */
     private $password;
     
     /**
-     * @column
+     * @attribute
      */
     private $type;
     
     /**
-     * @column
+     * @attribute
      */
     private $firstname;
     
     /**
-     * @column
+     * @attribute
      */
     private $lastname;
     
     /**
-     * @column
+     * @attribute
      */
     private $birthDate;
     
     /**
-     * @column
+     * @attribute
      */
     private $address;
     
     /**
-     * @column
+     * @attribute
      */
     private $contactVia1;
     
     /**
-     * @column
+     * @attribute
      */
     private $contactVia2;
     
     /**
-     * @column
+     * @attribute
      */
     private $contactVia3;
     
     /**
-     * @column
+     * @attribute
      */
     private $email;
     
     /**
-     * @column
+     * @attribute
      */
     private $documentNumber;
     
     /**
-     * @column
+     * @attribute
      */
     private $active = true;
         
