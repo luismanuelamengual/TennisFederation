@@ -1,40 +1,13 @@
 {
     "connections":
-    [
+    {
+        "main":
         {
-            "name": "main",
             "driver": "pgsql",
             "database": "tennisfederation",
             "host": "localhost",
             "username": "postgres",
             "password": "postgres"
         }
-    ],
-    "routes":
-    [
-        {
-            "path": "/",
-            "controller": "org\\fmt\\controller\\PublicSiteController"
-        },
-        {
-            "path": "/dashboard/",
-            "controller": "org\\fmt\\controller\\DashboardController"
-        },
-        {
-            "path": "/session/",
-            "controller": "org\\fmt\\controller\\SessionController"
-        },
-        {
-            "path": "/category/",
-            "controller": "org\\fmt\\controller\\CategoriesController"
-        },
-        {
-            "path": "/club/",
-            "controller": "org\\fmt\\controller\\ClubsController"
-        },
-        {
-            "path": "/user/",
-            "controller": "org\\fmt\\controller\\UsersController"
-        }
-    ]
+    }
 }
