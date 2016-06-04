@@ -2,6 +2,7 @@
 
 namespace org\fmt\manager;
 
+use MongoClient;
 use NeoPHP\core\Collection;
 use NeoPHP\mvc\ModelManager;
 use org\fmt\model\User;
@@ -10,7 +11,7 @@ class UsersManager extends ModelManager {
     
     public function getUserForUsernameAndPassword ($username, $password)
     {
-        return $this->createModelFromFields(User::class, $this->getConnection()->createQuery("\"user\"")->addWhere("username", "=", $username)->addWhere("password", "=", $password)->getFirst());
+        return $this->createModelFromAttributes(User::class, $this->getConnection()->createQuery("\"user\"")->addWhere("username", "=", $username)->addWhere("password", "=", $password)->getFirst());
     }
     
     /**
