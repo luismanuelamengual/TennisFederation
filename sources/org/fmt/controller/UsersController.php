@@ -3,20 +3,10 @@
 namespace org\fmt\controller;
 
 use NeoPHP\web\http\RedirectResponse;
-use org\fmt\manager\UsersManager;
 use org\fmt\model\User;
 
 class UsersController extends SiteController
 {
-    /**
-     * Obtiene el manejador de categorias
-     * @return UsersManager Manejador de categorias
-     */
-    private function getUsersManager ()
-    {
-        return $this->getManager(UsersManager::class);
-    }
-    
     public function indexAction()
     {
         return $this->showUsersListAction();
@@ -25,7 +15,7 @@ class UsersController extends SiteController
     public function showUsersListAction()
     {        
         $usersView = $this->createTemplateView("site.users");
-        $usersView->users = $this->getUsersManager()->getUsers();
+        $usersView->users = $this->retrieveModels(User::class);
         return $usersView;
     }
     
@@ -33,7 +23,7 @@ class UsersController extends SiteController
     {
         $userFormView = $this->createTemplateView("site.userForm");
         if (!empty($id))
-            $userFormView->user = $this->getUsersManager()->getUser($id);
+            $userFormView->user = $this->retrieveModel (User::class, $id);
         return $userFormView;
     }
     
@@ -41,7 +31,7 @@ class UsersController extends SiteController
     {
         $user = new User();
         $user->setFrom($this->getRequest()->getParameters()->get());
-        $this->getUsersManager()->persistUser($user);
+        $this->persistModel($user);
         return new RedirectResponse($this->getUrl("user/showUsersList"));
     }
     
@@ -49,7 +39,7 @@ class UsersController extends SiteController
     {
         $user = new User();
         $user->setId($id);
-        $this->getUsersManager()->deleteUser($user);
+        $this->deleteModel($user);
         return new RedirectResponse($this->getUrl("user/showUsersList"));
     }
 }

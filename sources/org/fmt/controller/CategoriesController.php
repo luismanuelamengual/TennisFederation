@@ -3,20 +3,10 @@
 namespace org\fmt\controller;
 
 use NeoPHP\web\http\RedirectResponse;
-use org\fmt\manager\CategoriesManager;
 use org\fmt\model\Category;
 
 class CategoriesController extends SiteController 
-{
-    /**
-     * Obtiene el manejador de categorias
-     * @return CategoriesManager Manejador de categorias
-     */
-    private function getCategoriesManager ()
-    {
-        return $this->getManager(CategoriesManager::class);
-    }
-    
+{   
     public function indexAction ()
     {
         return $this->showCategoriesListAction();
@@ -25,7 +15,7 @@ class CategoriesController extends SiteController
     public function showCategoriesListAction ()
     {
         $categoriesView = $this->createTemplateView("site.categories");
-        $categoriesView->categories = $this->getCategoriesManager()->getCategories();
+        $categoriesView->categories = $this->retrieveModels(Category::class, [], ["id"]);
         return $categoriesView;
     }
     
@@ -33,7 +23,7 @@ class CategoriesController extends SiteController
     {
         $categoryFormView = $this->createTemplateView("site.categoryForm");
         if (!empty($id))
-            $categoryFormView->category = $this->getCategoriesManager()->getCategory ($id);
+            $categoryFormView->category = $this->retrieveModel(Category::class, $id);
         return $categoryFormView;
     }
     
@@ -44,7 +34,7 @@ class CategoriesController extends SiteController
             $category->setId ($id);
         $category->setDescription($description);
         $category->setMatchType($type);
-        $this->getCategoriesManager()->persistCategory($category);
+        $this->persistModel($category);
         return new RedirectResponse($this->getUrl("category/showCategoriesList"));
     }
     
@@ -52,7 +42,7 @@ class CategoriesController extends SiteController
     {
         $category = new Category();
         $category->setId($id);
-        $this->getCategoriesManager()->deleteCategory($category);
+        $this->deleteModel($category);
         return new RedirectResponse($this->getUrl("category/showCategoriesList"));
     }
 }
