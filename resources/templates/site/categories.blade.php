@@ -27,14 +27,17 @@
                             <td>{{ $category->getId() }}</td>
                             <td>{{ $category->getDescription() }}</td>
                             <td>{{ $category->getMatchType() == 1? "Singles":"Dobles" }}</td>
-                            <td>
+                            <td class="text-left">
                                 <ul class="actions">
-                                    <li class="dropdown">
-                                        <a href="" data-toggle="dropdown" aria-expanded="false"><i class="zmdi zmdi-more-vert"></i></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="{{ $this->getUrl("/category/showCategoryForm", ["id"=>$category->getId()]) }}">Editar</a></li>
-                                            <li><a href="{{ $this->getUrl("/category/deleteCategory", ["id"=>$category->getId()]) }}">Eliminar</a></li>
-                                        </ul>
+                                    <li>
+                                        <a href="{{ $this->getUrl("/category/showCategoryForm", ["id"=>$category->getId()]) }}">
+                                            <i class="zmdi zmdi-edit"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ $this->getUrl("/category/deleteCategory", ["id"=>$category->getId()]) }}">
+                                            <i class="zmdi zmdi-delete"></i>
+                                        </a>
                                     </li>
                                 </ul>
                             </td>

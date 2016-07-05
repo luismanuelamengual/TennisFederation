@@ -33,12 +33,15 @@
                             <td>{{ $user->getContactVia1() }}</td>
                             <td>
                                 <ul class="actions">
-                                    <li class="dropdown">
-                                        <a href="" data-toggle="dropdown" aria-expanded="false"><i class="zmdi zmdi-more-vert"></i></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="{{ $this->getUrl("/user/showUserForm", ["id"=>$user->getId()]) }}">Editar</a></li>
-                                            <li><a href="{{ $this->getUrl("/user/deleteUser", ["id"=>$user->getId()]) }}">Eliminar</a></li>
-                                        </ul>
+                                    <li>
+                                        <a href="{{ $this->getUrl("/user/showUserForm", ["id"=>$user->getId()]) }}">
+                                            <i class="zmdi zmdi-edit"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ $this->getUrl("/user/deleteUser", ["id"=>$user->getId()]) }}">
+                                            <i class="zmdi zmdi-delete"></i>
+                                        </a>
                                     </li>
                                 </ul>
                             </td>
