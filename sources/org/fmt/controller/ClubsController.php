@@ -2,64 +2,38 @@
 
 namespace org\fmt\controller;
 
-use NeoPHP\web\WebController;
+use NeoPHP\web\http\RedirectResponse;
+use org\fmt\model\Club;
 
-class ClubsController extends WebController 
-{
+class ClubsController extends SiteController 
+{   
     public function indexAction ()
     {
-        $mongo = new \MongoClient();
-        
-//        $db = $mongo->mydb;
-//        echo "<br>Database mydb selected";
-//        $collection = $db->mycol;
-//        echo "<br>Collection selected succsessfully";
-//
-//        $document = array( 
-//           "title" => "MongoDB", 
-//           "description" => "database", 
-//           "likes" => 100,
-//           "url" => "http://www.tutorialspoint.com/mongodb/",
-//           "by", "tutorials point"
-//        );
-//
-//        $collection->insert($document);
-//        echo "<br>Document inserted successfully";
-        
-        
-//        $db = $mongo->mydb;
-//        $collection = $db->mycol;
-//        
-//        $results = $collection->find();
-//        
-//        foreach ($results as $document) {
-//            echo "<pre>";
-//            print_r($document);
-//            echo "</pre>";
-//        }
-        
-        
-        $mongo->mydb->mycol->remove();
-        
-        
-//        $a = new \stdClass();
-//        $a->name = "Luis";
-//        $a->profession = "engeineer";
-        
-        $a = new \org\fmt\model\Club();
-        $a->setContactvia1("ramach");
-        $a->setDescription("es un club copado");
-        
-        
-        $mongo->mydb->mycol->insert($a->toArray());
-//        $mongo->mydb->mycol->insert (["name"=>"Luis","lastName"=>"Amengual", "age"=>34]);
-//        $mongo->mydb->mycol->insert (["name"=>"Pepe","lastName"=>"Paredita", "age"=>29]);
-        
-        foreach ($mongo->mydb->mycol->find() as $document) 
-        {
-            echo "<pre>";
-            print_r($document);
-            echo "</pre>";
-        }
+        return $this->showClubsListAction();
+    }
+    
+    public function showClubsListAction ()
+    {
+        return $this->createTemplateView("site.clubs", ["clubs"=>$this->retrieveModels(Club::class, [], ["id"])]);
+    }
+    
+    public function showClubFormAction ($id = null)
+    {
+        return $this->createTemplateView("site.clubForm", ["club"=> !empty($id)? $this->retrieveModel(Club::class, $id) : null]);
+    }
+    
+    public function saveClubAction ()
+    {
+        $club = new Club();
+        $club->setFrom($this->getRequest()->getParameters()->get());
+        $this->persistModel($club);
+        return new RedirectResponse($this->getUrl("club/showClubsList"));
+    }
+    
+    public function deleteClubAction ($id)
+    {
+        $club = new Club($id);
+        $this->deleteModel($club);
+        return new RedirectResponse($this->getUrl("club/showClubsList"));
     }
 }

@@ -40,7 +40,7 @@
                 </div>
             </li>
 
-            <li class="logo hidden-xs">
+            <li class="logo">
                 <a href="#">Federación mendocina de tenis</a>
             </li>
 

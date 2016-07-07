@@ -4,14 +4,45 @@ namespace org\fmt\model;
 
 use NeoPHP\mvc\Model;
 
+/**
+ * @entity
+ */
 class Club extends Model 
 {
+    /**
+     * @id
+     * @attribute
+     */
     private $id;
+    
+    /**
+     * @attribute
+     */
     private $description;
+    
+    /**
+     * @attribute
+     */
     private $latitude;
+    
+    /**
+     * @attribute
+     */
     private $longitude;
+    
+    /**
+     * @attribute
+     */
     private $address;
+    
+    /**
+     * @attribute
+     */
     private $contactvia1;
+    
+    /**
+     * @attribute
+     */
     private $contactvia2;
     
     public function getId() 
