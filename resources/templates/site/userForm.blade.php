@@ -20,10 +20,10 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <h2>{{ isset($this->user)? "Edición de Usuario" : "Creación de Usuario" }}</h2>
+                <h2>{{ isset($user)? "Edición de Usuario" : "Creación de Usuario" }}</h2>
             </div>
             <div class="card-body card-padding">
-                <form method="POST" action="{{ $this->getUrl("/user/saveUser") }}">
+                <form method="POST" action="{{ isset($user)? $this->getUrl("/user/updateUser") : $this->getUrl("/user/createUser") }}">
                     @if (isset($this->user))
                     <input type="hidden" name="id" value="{{ $this->user->getId() }}">
                     @endif

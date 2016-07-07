@@ -22,11 +22,19 @@ class ClubsController extends SiteController
         return $this->createTemplateView("site.clubForm", ["club"=> !empty($id)? $this->retrieveModel(Club::class, $id) : null]);
     }
     
-    public function saveClubAction ()
+    public function createClubAction ()
     {
         $club = new Club();
         $club->setFrom($this->getRequest()->getParameters()->get());
-        $this->persistModel($club);
+        $this->createModel($club);
+        return new RedirectResponse($this->getUrl("club/showClubsList"));
+    }
+    
+    public function updateClubAction ()
+    {
+        $club = new Club();
+        $club->setFrom($this->getRequest()->getParameters()->get());
+        $this->updateModel($club);
         return new RedirectResponse($this->getUrl("club/showClubsList"));
     }
     

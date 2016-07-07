@@ -3,10 +3,10 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <h2>{{ isset($this->club)? "Edición de Club" : "Creación de Club" }}</h2>
+                <h2>{{ isset($club)? "Edición de Club" : "Creación de Club" }}</h2>
             </div>
             <div class="card-body card-padding">
-                <form method="POST" action="{{ $this->getUrl("/club/saveClub") }}">
+                <form method="POST" action="{{ isset($club)? $this->getUrl("/club/updateClub") : $this->getUrl("/club/createClub") }}">
                     @if (isset($this->club))
                     <input type="hidden" name="id" value="{{ $this->club->getId() }}">
                     @endif

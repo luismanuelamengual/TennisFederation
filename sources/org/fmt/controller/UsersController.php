@@ -13,25 +13,28 @@ class UsersController extends SiteController
     }
     
     public function showUsersListAction()
-    {        
-        $usersView = $this->createTemplateView("site.users");
-        $usersView->users = $this->retrieveModels(User::class, [], ["id"]);
-        return $usersView;
+    {
+        return $this->createTemplateView("site.users", ["users"=>$this->retrieveModels(User::class, [], ["id"])]);
     }
     
     public function showUserFormAction($id = null)
     {
-        $userFormView = $this->createTemplateView("site.userForm");
-        if (!empty($id))
-            $userFormView->user = $this->retrieveModel (User::class, $id);
-        return $userFormView;
+        return $this->createTemplateView("site.userForm", ["user"=>$id != null? $this->retrieveModel (User::class, $id) : null]);
     }
     
-    public function saveUserAction ()
+    public function createUserAction ()
     {
         $user = new User();
         $user->setFrom($this->getRequest()->getParameters()->get());
-        $this->persistModel($user);
+        $this->createModel($user);
+        return new RedirectResponse($this->getUrl("user/showUsersList"));
+    }
+    
+    public function updateUserAction ()
+    {
+        $user = new User();
+        $user->setFrom($this->getRequest()->getParameters()->get());
+        $this->updateModel($user);
         return new RedirectResponse($this->getUrl("user/showUsersList"));
     }
     

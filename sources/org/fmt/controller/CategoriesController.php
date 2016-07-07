@@ -14,27 +14,27 @@ class CategoriesController extends SiteController
     
     public function showCategoriesListAction ()
     {
-        $categoriesView = $this->createTemplateView("site.categories");
-        $categoriesView->categories = $this->retrieveModels(Category::class, [], ["id"]);
-        return $categoriesView;
+        return $this->createTemplateView("site.categories", ["categories"=>$this->retrieveModels(Category::class, [], ["id"])]);
     }
     
     public function showCategoryFormAction ($id = null)
     {
-        $categoryFormView = $this->createTemplateView("site.categoryForm");
-        if (!empty($id))
-            $categoryFormView->category = $this->retrieveModel(Category::class, $id);
-        return $categoryFormView;
+        return $this->createTemplateView("site.categoryForm", ["category"=>!empty($id)? $this->retrieveModel(Category::class, $id) : null]);
     }
     
-    public function saveCategoryAction ($id, $description, $type)
+    public function createCategoryAction ()
     {
         $category = new Category();
-        if (!empty($id))
-            $category->setId ($id);
-        $category->setDescription($description);
-        $category->setMatchType($type);
-        $this->persistModel($category);
+        $category->setFrom($this->getRequest()->getParameters()->get());
+        $this->createModel($category);
+        return new RedirectResponse($this->getUrl("category/showCategoriesList"));
+    }
+    
+    public function updateCategoryAction ()
+    {
+        $category = new Category();
+        $category->setFrom($this->getRequest()->getParameters()->get());
+        $this->updateModel($category);
         return new RedirectResponse($this->getUrl("category/showCategoriesList"));
     }
     
