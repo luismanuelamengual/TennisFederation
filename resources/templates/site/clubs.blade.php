@@ -17,6 +17,7 @@
                         <tr>
                             <th>#</th>
                             <th>Descripción</th>
+                            <th>Dirección</th>
                             <th>Acciones</th>
                         <tr>
                     </thead>
@@ -25,6 +26,7 @@
                         <tr>
                             <td>{{ $club->getId() }}</td>
                             <td>{{ $club->getDescription() }}</td>
+                            <td>{{ $club->getAddress() }}</td>
                             <td class="text-left">
                                 <ul class="actions">
                                     <li>
