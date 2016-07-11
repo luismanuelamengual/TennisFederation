@@ -14,12 +14,12 @@ class UsersController extends SiteController
     
     public function showUsersListAction()
     {
-        return $this->createTemplateView("site.users", ["users"=>$this->findModels(User::class, [], ["id"])]);
+        return $this->createTemplateView("site.users.list", ["users"=>$this->findModels(User::class, [], ["id"])]);
     }
     
     public function showUserFormAction($id = null)
     {
-        return $this->createTemplateView("site.userForm", ["user"=>$id != null? $this->findModel (User::class, $id) : null]);
+        return $this->createTemplateView("site.users.form", ["user"=>$id != null? $this->findModel (User::class, $id) : null]);
     }
     
     public function createUserAction ()

@@ -1,14 +1,14 @@
-@extends ("site.base")
+@extends ("site.main")
 
 @section ("mainContents")
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <h2>Administración de Clubes</h2>
+                <h2>Administración de Categorías</h2>
             </div>
 
             <div class="card-body card-padding">
-                <a href="{{ $this->getUrl("/club/showClubForm") }}" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Agregar</a>
+                <a href="{{ $this->getUrl("/category/showCategoryForm") }}" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Agregar</a>
             </div>        
                 
             <div class="card-body table-responsive">
@@ -17,25 +17,25 @@
                         <tr>
                             <th>#</th>
                             <th>Descripción</th>
-                            <th>Dirección</th>
+                            <th>Tipo de Partido</th>
                             <th>Acciones</th>
                         <tr>
                     </thead>
                     <tbody>
-                        @foreach ($clubs as $club)
+                        @foreach ($categories as $category)
                         <tr>
-                            <td>{{ $club->getId() }}</td>
-                            <td>{{ $club->getDescription() }}</td>
-                            <td>{{ $club->getAddress() }}</td>
+                            <td>{{ $category->getId() }}</td>
+                            <td>{{ $category->getDescription() }}</td>
+                            <td>{{ $category->getMatchType() == 1? "Singles":"Dobles" }}</td>
                             <td class="text-left">
                                 <ul class="actions">
                                     <li>
-                                        <a href="{{ $this->getUrl("/club/showClubForm", ["id"=>$club->getId()]) }}">
+                                        <a href="{{ $this->getUrl("/category/showCategoryForm", ["id"=>$category->getId()]) }}">
                                             <i class="zmdi zmdi-edit"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{ $this->getUrl("/club/deleteClub", ["id"=>$club->getId()]) }}">
+                                        <a href="{{ $this->getUrl("/category/deleteCategory", ["id"=>$category->getId()]) }}">
                                             <i class="zmdi zmdi-delete"></i>
                                         </a>
                                     </li>

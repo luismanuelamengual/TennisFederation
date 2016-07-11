@@ -15,7 +15,7 @@ class PublicSiteController extends WebController
 
     public function indexAction ()
     {
-        return $this->createTemplateView("login");
+        return $this->createTemplateView("site.login");
     }
     
     public function logoutAction ()

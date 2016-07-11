@@ -1,1 +1,1 @@
-@extends ("site.base")
+@extends ("site.main")

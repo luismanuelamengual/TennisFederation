@@ -1,14 +1,14 @@
-@extends ("site.base")
+@extends ("site.main")
 
 @section ("mainContents")
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <h2>Administración de Categorías</h2>
+                <h2>Administración de Usuarios</h2>
             </div>
 
             <div class="card-body card-padding">
-                <a href="{{ $this->getUrl("/category/showCategoryForm") }}" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Agregar</a>
+                <a href="{{ $this->getUrl("/user/showUserForm") }}" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Agregar</a>
             </div>        
                 
             <div class="card-body table-responsive">
@@ -16,26 +16,30 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Descripción</th>
-                            <th>Tipo de Partido</th>
+                            <th>Nombre</th>
+                            <th>Documento</th>
+                            <th>Email</th>
+                            <th>Celular</th>
                             <th>Acciones</th>
                         <tr>
                     </thead>
                     <tbody>
-                        @foreach ($categories as $category)
+                        @foreach ($users as $user)
                         <tr>
-                            <td>{{ $category->getId() }}</td>
-                            <td>{{ $category->getDescription() }}</td>
-                            <td>{{ $category->getMatchType() == 1? "Singles":"Dobles" }}</td>
-                            <td class="text-left">
+                            <td>{{ $user->getId() }}</td>
+                            <td>{{ $user->getFirstname() . " " . $user->getLastname() }}</td>
+                            <td>{{ $user->getDocumentNumber() }}</td>
+                            <td>{{ $user->getEmail() }}</td>
+                            <td>{{ $user->getContactVia1() }}</td>
+                            <td>
                                 <ul class="actions">
                                     <li>
-                                        <a href="{{ $this->getUrl("/category/showCategoryForm", ["id"=>$category->getId()]) }}">
+                                        <a href="{{ $this->getUrl("/user/showUserForm", ["id"=>$user->getId()]) }}">
                                             <i class="zmdi zmdi-edit"></i>
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{ $this->getUrl("/category/deleteCategory", ["id"=>$category->getId()]) }}">
+                                        <a href="{{ $this->getUrl("/user/deleteUser", ["id"=>$user->getId()]) }}">
                                             <i class="zmdi zmdi-delete"></i>
                                         </a>
                                     </li>

@@ -14,12 +14,12 @@ class ClubsController extends SiteController
     
     public function showClubsListAction ()
     {
-        return $this->createTemplateView("site.clubs", ["clubs"=>$this->findModels(Club::class, [], ["id"])]);
+        return $this->createTemplateView("site.clubs.list", ["clubs"=>$this->findModels(Club::class, [], ["id"])]);
     }
     
     public function showClubFormAction ($id = null)
     {
-        return $this->createTemplateView("site.clubForm", ["club"=> !empty($id)? $this->findModel(Club::class, $id) : null]);
+        return $this->createTemplateView("site.clubs.form", ["club"=> !empty($id)? $this->findModel(Club::class, $id) : null]);
     }
     
     public function createClubAction ()

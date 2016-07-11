@@ -14,12 +14,12 @@ class CategoriesController extends SiteController
     
     public function showCategoriesListAction ()
     {
-        return $this->createTemplateView("site.categories", ["categories"=>$this->findModels(Category::class, [], ["id"])]);
+        return $this->createTemplateView("site.categories.list", ["categories"=>$this->findModels(Category::class, [], ["id"])]);
     }
     
     public function showCategoryFormAction ($id = null)
     {
-        return $this->createTemplateView("site.categoryForm", ["category"=>!empty($id)? $this->findModel(Category::class, $id) : null]);
+        return $this->createTemplateView("site.categories.form", ["category"=>!empty($id)? $this->findModel(Category::class, $id) : null]);
     }
     
     public function createCategoryAction ()

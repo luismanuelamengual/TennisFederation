@@ -1,4 +1,4 @@
-@extends ("site.base")
+@extends ("site.main")
 @section ("mainContents")
     <div class="container">
         <div class="card">

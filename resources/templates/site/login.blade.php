@@ -1,4 +1,4 @@
-@extends ("base")
+@extends ("site.base")
 
 @section ("vendorStyleFiles")
     <link rel="stylesheet" type="text/css" href="{{ $this->getResourceUrl('assets/animate.css/animate.min.css') }}">
