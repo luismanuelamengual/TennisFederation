@@ -14,34 +14,29 @@ class ClubsController extends SiteController
     
     public function showClubsListAction ()
     {
-        return $this->createTemplateView("site.clubs", ["clubs"=>$this->retrieveModels(Club::class, [], ["id"])]);
+        return $this->createTemplateView("site.clubs", ["clubs"=>$this->findModels(Club::class, [], ["id"])]);
     }
     
     public function showClubFormAction ($id = null)
     {
-        return $this->createTemplateView("site.clubForm", ["club"=> !empty($id)? $this->retrieveModel(Club::class, $id) : null]);
+        return $this->createTemplateView("site.clubForm", ["club"=> !empty($id)? $this->findModel(Club::class, $id) : null]);
     }
     
     public function createClubAction ()
     {
-        $club = new Club();
-        $club->setFrom($this->getRequest()->getParameters()->get());
-        $this->createModel($club);
+        $this->insertModel($this->createModel(Club::class, $this->getRequest()->getParameters()->get()));
         return new RedirectResponse($this->getUrl("club/showClubsList"));
     }
     
     public function updateClubAction ()
     {
-        $club = new Club();
-        $club->setFrom($this->getRequest()->getParameters()->get());
-        $this->updateModel($club);
+        $this->updateModel($this->createModel(Club::class, $this->getRequest()->getParameters()->get()));
         return new RedirectResponse($this->getUrl("club/showClubsList"));
     }
     
     public function deleteClubAction ($id)
     {
-        $club = new Club($id);
-        $this->deleteModel($club);
+        $this->removeModel(new Club($id));
         return new RedirectResponse($this->getUrl("club/showClubsList"));
     }
 }
