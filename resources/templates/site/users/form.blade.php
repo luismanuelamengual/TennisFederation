@@ -1,4 +1,5 @@
 @extends ("site.main")
+@use ("org\fmt\model\User")
 
 @section ("scripts")
     <script>
@@ -55,12 +56,8 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group fg-line">
-                                <label class="control-label" for="typeField">Tipo</label>
-                                <select id="typeField" name="type" class="form-control">
-                                    <option value="1">Administrador</option>
-                                    <option value="2"{{ (isset($this->user) && $this->user->getType() == 2)? " selected=\"selected\"" : "" }}>Organizador</option>
-                                    <option value="3"{{ (isset($this->user) && $this->user->getType() == 3)? " selected=\"selected\"" : "" }}>Jugador</option>
-                                </select> 
+                                <label class="control-label" for="permissionsField">Permisos</label>
+                                <input type="number" id="permissionsField" name="permissions" class="form-control" value="{{ isset($this->user)?  $this->user->getPermissions() : "" }}">
                             </div>
                         </div>
                     </div>

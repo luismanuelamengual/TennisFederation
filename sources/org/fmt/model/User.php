@@ -9,9 +9,8 @@ use NeoPHP\mvc\Model;
  */
 class User extends Model
 {   
-    const TYPE_ADMINISTRATOR = 1;
-    const TYPE_ORGANIZER = 2;
-    const TYPE_PLAYER = 3;
+    const PERMISSION_ORGANIZER = 1;
+    const PERMISSION_ADMINISTRATOR = 2;
     
     /**
      * @id
@@ -32,7 +31,7 @@ class User extends Model
     /**
      * @attribute
      */
-    private $type;
+    private $permissions;
     
     /**
      * @attribute
@@ -114,14 +113,14 @@ class User extends Model
         $this->password = $password;
     }
 
-    public function getType()
+    public function getPermissions()
     {
-        return $this->type;
+        return $this->permissions;
     }
 
-    public function setType($type)
+    public function setPermissions($permissions)
     {
-        $this->type = $type;
+        $this->permissions = $permissions;
     }
 
     public function getFirstname()
