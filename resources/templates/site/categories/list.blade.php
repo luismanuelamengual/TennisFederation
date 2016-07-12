@@ -35,7 +35,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{ $this->getUrl("/category/deleteCategory", ["id"=>$category->getId()]) }}">
+                                        <a href="{{ $this->getUrl("/category/deleteCategory", ["id"=>$category->getId()]) }}" onclick="return confirm('Esta seguro de eliminar la categoría ?')">
                                             <i class="zmdi zmdi-delete"></i>
                                         </a>
                                     </li>

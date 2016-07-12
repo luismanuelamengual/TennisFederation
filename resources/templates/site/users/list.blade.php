@@ -39,7 +39,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{ $this->getUrl("/user/deleteUser", ["id"=>$user->getId()]) }}">
+                                        <a href="{{ $this->getUrl("/user/deleteUser", ["id"=>$user->getId()]) }}" onclick="return confirm('Esta seguro de eliminar el usuario ?')">
                                             <i class="zmdi zmdi-delete"></i>
                                         </a>
                                     </li>

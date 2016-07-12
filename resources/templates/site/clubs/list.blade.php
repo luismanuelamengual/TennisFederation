@@ -35,7 +35,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{ $this->getUrl("/club/deleteClub", ["id"=>$club->getId()]) }}">
+                                        <a href="{{ $this->getUrl("/club/deleteClub", ["id"=>$club->getId()]) }}" onclick="return confirm('Esta seguro de eliminar el club ?')">
                                             <i class="zmdi zmdi-delete"></i>
                                         </a>
                                     </li>
