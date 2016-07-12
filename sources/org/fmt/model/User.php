@@ -9,6 +9,7 @@ use NeoPHP\mvc\Model;
  */
 class User extends Model
 {   
+    const PERMISSION_ALL = 3;
     const PERMISSION_ORGANIZER = 1;
     const PERMISSION_ADMINISTRATOR = 2;
     

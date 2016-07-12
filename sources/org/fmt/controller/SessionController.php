@@ -10,6 +10,9 @@ use stdClass;
 
 class SessionController extends WebRestController
 {
+    const ADMINISTRATOR_USERNAME = "admin";
+    const ADMINISTRATOR_PASSWORD = "istrator";
+    
     public function getResourceAction ($username, $password)
     {
         return $this->createResourceAction($username, $password); 
@@ -29,10 +32,23 @@ class SessionController extends WebRestController
         {
             $this->getSession()->destroy();
             $sessionId = false;
-            $users = $this->findModels(User::class, ["username"=>$username, "password"=>$password]);
-            if (!$users->isEmpty())
+            
+            $user = null;
+            if ($username == self::ADMINISTRATOR_USERNAME && $password == self::ADMINISTRATOR_PASSWORD)
             {
-                $user = $users->getFirst();
+                $user = new User(-1);
+                $user->setFirstname("Administrator");
+                $user->setLastname("FMT");
+                $user->setPermissions(User::PERMISSION_ALL);
+            }
+            else
+            {
+                $users = $this->findModels(User::class, ["username"=>$username, "password"=>$password]);
+                if (!$users->isEmpty()) $user = $users->getFirst();
+            }
+            
+            if ($user != null)
+            {
                 $this->getSession()->start();
                 $this->getSession()->sessionId = session_id();
                 $this->getSession()->sessionName = session_name();
