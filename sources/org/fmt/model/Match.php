@@ -8,21 +8,21 @@ class Match extends Model
 {
     const MATCHTYPE_SINGLES = 1;
     const MATCHTYPE_DOUBLES = 2;
-    const RESULT_NOTPLAYED = 0;
-    const RESULT_TEAMAWIN = 1;
-    const RESULT_TEAMBWIN = 2;
+    const RESULT_NOT_PLAYED = 0;
+    const RESULT_PLAYER_A_WIN = 1;
+    const RESULT_PLAYER_B_WIN = 2;
     
     private $id;
     private $description;
-    private $tournament;
+    private $tournamentStage;
     private $matchType;
-    private $player1;    
-    private $player2;
-    private $player3;    
-    private $player4;
+    private $playerA;
+    private $playerB;
     private $date;
     private $result;
     private $resultDetail;
+    private $playerAMatch;
+    private $playerBMatch;
     
     public function getId()
     {
@@ -34,37 +34,37 @@ class Match extends Model
         return $this->description;
     }
 
-    public function getTournament()
+    public function getTournamentStage()
     {
-        return $this->tournament;
+        return $this->tournamentStage;
     }
 
     public function getMatchType()
     {
         return $this->matchType;
     }
-
-    public function getPlayer1()
+    
+    public function getPlayerA()
     {
-        return $this->player1;
+        return $this->playerA;
     }
 
-    public function getPlayer2()
+    public function getPlayerB()
     {
-        return $this->player2;
+        return $this->playerB;
     }
 
-    public function getPlayer3()
+    public function setPlayerA(Player $playerA)
     {
-        return $this->player3;
+        $this->playerA = $playerA;
     }
 
-    public function getPlayer4()
+    public function setPlayerB(Player $playerB)
     {
-        return $this->player4;
+        $this->playerB = $playerB;
     }
 
-    public function getDate()
+        public function getDate()
     {
         return $this->date;
     }
@@ -89,34 +89,14 @@ class Match extends Model
         $this->description = $description;
     }
 
-    public function setTournament(Tournament $tournament)
+    public function setTournamentStage(TournamentStage $tournamentStage)
     {
-        $this->tournament = $tournament;
+        $this->tournamentStage = $tournamentStage;
     }
 
     public function setMatchType($matchType)
     {
         $this->matchType = $matchType;
-    }
-
-    public function setPlayer1($player1)
-    {
-        $this->player1 = $player1;
-    }
-
-    public function setPlayer2($player2)
-    {
-        $this->player2 = $player2;
-    }
-
-    public function setPlayer3($player3)
-    {
-        $this->player3 = $player3;
-    }
-
-    public function setPlayer4($player4)
-    {
-        $this->player4 = $player4;
     }
 
     public function setDate($date)
@@ -132,5 +112,25 @@ class Match extends Model
     public function setResultDetail($resultDetail)
     {
         $this->resultDetail = $resultDetail;
+    }
+    
+    public function getPlayerAMatch()
+    {
+        return $this->playerAMatch;
+    }
+
+    public function getPlayerBMatch()
+    {
+        return $this->playerBMatch;
+    }
+
+    public function setPlayerAMatch(Match $playerAMatch)
+    {
+        $this->playerAMatch = $playerAMatch;
+    }
+
+    public function setPlayerBMatch(Match $playerBMatch)
+    {
+        $this->playerBMatch = $playerBMatch;
     }
 }

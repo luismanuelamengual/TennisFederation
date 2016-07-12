@@ -3,7 +3,6 @@
 namespace org\fmt\model;
 
 use NeoPHP\mvc\Model;
-use stdClass;
 
 class Tournament extends Model
 {
@@ -20,7 +19,6 @@ class Tournament extends Model
     private $organizer;
     private $categories = [];
     private $inscriptions = [];
-    private $matches = [];
     
     public function getId()
     {
@@ -62,16 +60,6 @@ class Tournament extends Model
         return $this->categories;
     }
 
-    public function getInscriptions()
-    {
-        return $this->inscriptions;
-    }
-
-    public function getMatches()
-    {
-        return $this->matches;
-    }
-
     public function setId($id)
     {
         $this->id = $id;
@@ -82,7 +70,7 @@ class Tournament extends Model
         $this->description = $description;
     }
 
-    public function setClub($club)
+    public function setClub(Club $club)
     {
         $this->club = $club;
     }
@@ -102,7 +90,7 @@ class Tournament extends Model
         $this->state = $state;
     }
 
-    public function setOrganizer($organizer)
+    public function setOrganizer(User $organizer)
     {
         $this->organizer = $organizer;
     }
@@ -112,17 +100,13 @@ class Tournament extends Model
         $this->categories[] = $category;
     }
 
-    public function addMatch(Match $match)
+    public function addInscription(Category $category, Player $player)
     {
-        $this->matches[] = $match;
+        $this->inscriptions[$category->getId()][] = $player;
     }
     
-    public function addInscription(Category $category, User $player1, User $player2=null)
+    public function getInscriptions(Category $category)
     {
-        $inscription = new stdClass();
-        $inscription->category = $category;
-        $inscription->player1 = $player1;
-        $inscription->player2 = $player2;
-        $this->inscriptions[] = $inscription;
+        return $this->inscriptions[$category->getId()];
     }
 }
