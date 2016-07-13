@@ -4,21 +4,54 @@ namespace org\fmt\model;
 
 use NeoPHP\mvc\Model;
 
+/**
+ * @entity
+ */
 class Tournament extends Model
 {
     const STATE_INSCRIPTION = 1;
     const STATE_PLAYING = 2;
     const STATE_FINALIZED = 3;
     
+    /**
+     * @id
+     * @attribute
+     */
     private $id;
+    
+    /**
+     * @attribute
+     */
     private $description;
+    
+    /**
+     * @attribute (name="clubid")
+     */
     private $club;
+    
+    /**
+     * @attribute (name="startdate")
+     */
     private $startDate;
+    
+    /**
+     * @attribute (name="inscriptionsdate")
+     */
     private $inscriptionsDate;
+    
+    /**
+     * @attribute
+     */
     private $state;
+    
+    /**
+     * @attribute (name="organizeruserid")
+     */
     private $organizer;
+    
     private $categories = [];
     private $inscriptions = [];
+    private $stages = [];
     
     public function getId()
     {
@@ -108,5 +141,15 @@ class Tournament extends Model
     public function getInscriptions(Category $category)
     {
         return $this->inscriptions[$category->getId()];
+    }
+    
+    public function addStage (TournamentStage $stage)
+    {
+        $this->stages[] = $stage;
+    }
+    
+    public function getStages ()
+    {
+        return $this->stages;
     }
 }
