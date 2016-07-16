@@ -19,7 +19,10 @@ class TournamentsController extends SiteController
     
     public function showTournamentFormAction ($id = null)
     {
-        return $this->createTemplateView("site.tournaments.form", ["tournament"=> !empty($id)? $this->findModel(Tournament::class, $id) : null]);
+        $parameters = [];
+        $parameters["tournament"] = !empty($id)? $this->findModel(Tournament::class, $id) : null;
+        $parameters["clubs"] = $this->findModels(\org\fmt\model\Club::class);
+        return $this->createTemplateView("site.tournaments.form", $parameters);
     }
     
     public function createTournamentAction ()

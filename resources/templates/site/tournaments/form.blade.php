@@ -1,4 +1,15 @@
 @extends ("site.main")
+
+@section ("vendorStyleFiles")
+    @parent
+    <link rel="stylesheet" type="text/css" href="{{ $this->getResourceUrl('assets/bootstrap-select/dist/css/bootstrap-select.css') }}">
+@stop
+
+@section ("vendorScriptFiles")
+    @parent
+    <script src="{{ $this->getResourceUrl('assets/bootstrap-select/dist/js/bootstrap-select.js') }}"></script>
+@stop
+
 @section ("mainContents")
     <div class="container">
         <div class="card">
@@ -16,6 +27,19 @@
                             <div class="form-group fg-line">
                                 <label class="control-label" for="descriptionField">Descripción (*)</label>
                                 <input type="text" id="descriptionField" name="description" class="form-control" value="{{ isset($this->category)?  $this->category->getDescription() : "" }}" autofocus="true" required>
+                            </div>
+                        </div>
+                    </div> 
+                    
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group fg-line">
+                                <label class="control-label" for="clubField">Club (*)</label>
+                                <select id="clubField" name="clubid" class="selectpicker bs-select-hidden" data-live-search="true">
+                                    @foreach ($clubs as $club)
+                                    <option value="{{ $club->getId() }}">{{ $club->getDescription() }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div> 
