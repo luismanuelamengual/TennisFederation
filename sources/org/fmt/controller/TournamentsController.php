@@ -16,7 +16,7 @@ class TournamentsController extends SiteController
     
     public function showTournamentsListAction ()
     {
-        return $this->createTemplateView("site.tournaments.list", ["tournaments"=>$this->findModels(Tournament::class, [], ["id"])]);
+        return $this->createTemplateView("site.tournaments.list", ["tournaments"=>$this->findModels(Tournament::class, ["sorters"=>["id"]])]);
     }
     
     public function showTournamentFormAction ($id = null)
@@ -29,9 +29,9 @@ class TournamentsController extends SiteController
     
     public function createTournamentAction ()
     {
-        $properties = $this->getRequest()->getParameters()->get();
-        $tournament = $this->createModel(Tournament::class, $properties);
-        $tournament->setClub(new Club($properties["clubid"]));
+        $parameters = $this->getRequest()->getParameters();
+        $tournament = $this->createModel(Tournament::class, $parameters->get());
+        $tournament->setClub(new Club($parameters->clubid));
         $tournament->setState(Tournament::STATE_INSCRIPTION);
         $tournament->setOrganizer(new User($this->getSession()->userId));
         $this->insertModel($tournament);

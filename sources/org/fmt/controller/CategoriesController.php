@@ -14,7 +14,7 @@ class CategoriesController extends SiteController
     
     public function showCategoriesListAction ()
     {
-        return $this->createTemplateView("site.categories.list", ["categories"=>$this->findModels(Category::class, [], ["id"])]);
+        return $this->createTemplateView("site.categories.list", ["categories"=>$this->findModels(Category::class, ["sorters"=>["id"]])]);
     }
     
     public function showCategoryFormAction ($id = null)

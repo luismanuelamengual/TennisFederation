@@ -14,7 +14,7 @@ class UsersController extends SiteController
     
     public function showUsersListAction()
     {
-        return $this->createTemplateView("site.users.list", ["users"=>$this->findModels(User::class, [], ["id"])]);
+        return $this->createTemplateView("site.users.list", ["users"=>$this->findModels(User::class, ["sorters"=>["id"]])]);
     }
     
     public function showUserFormAction($id = null)

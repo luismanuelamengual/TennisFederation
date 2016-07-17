@@ -18,9 +18,9 @@
                         <tr>
                             <th>#</th>
                             <th>Descripción</th>
+                            <th>Club</th>
                             <th>Estado</th>
-                            <th>Fecha cierre inscripción</th>
-                            <th>Fecha inicio</th>
+                            <th>Fecha</th>
                             <th>Acciones</th>
                         <tr>
                     </thead>
@@ -29,16 +29,16 @@
                         <tr>
                             <td>{{ $tournament->getId() }}</td>
                             <td>{{ $tournament->getDescription() }}</td>
+                            <td>{{ $tournament->getClub()->getDescription() }}</td>
                             <td>
                                 @if ($tournament->getState() == Tournament::STATE_INSCRIPTION)
-                                Inscripción abierta
+                                Inscripción abierta (<b>Cierre: {{ $tournament->getInscriptionsDate() }}</b>)
                                 @elseif ($tournament->getState() == Tournament::STATE_PLAYING)
                                 Iniciado
                                 @elseif ($tournament->getState() == Tournament::STATE_FINALIZED)
                                 Finalizado
                                 @endif
                             </td>
-                            <td>{{ $tournament->getInscriptionsDate() }}</td>
                             <td>{{ $tournament->getStartDate() }}</td>
                             <td class="text-left">
                                 <ul class="actions">

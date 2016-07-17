@@ -14,7 +14,7 @@ class ClubsController extends SiteController
     
     public function showClubsListAction ()
     {
-        return $this->createTemplateView("site.clubs.list", ["clubs"=>$this->findModels(Club::class, [], ["id"])]);
+        return $this->createTemplateView("site.clubs.list", ["clubs"=>$this->findModels(Club::class, ["sorters"=>["id"]])]);
     }
     
     public function showClubFormAction ($id = null)

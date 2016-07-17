@@ -43,7 +43,7 @@ class SessionController extends WebRestController
             }
             else
             {
-                $users = $this->findModels(User::class, ["username"=>$username, "password"=>$password]);
+                $users = $this->findModels(User::class, ["filters"=>["username"=>$username, "password"=>$password]]);
                 if (!$users->isEmpty()) $user = $users->getFirst();
             }
             

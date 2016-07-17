@@ -7,9 +7,9 @@ use NeoPHP\mvc\Model;
 
 class TournamentsManager extends DefaultModelManager
 {
-    public function find(array $filters = [], array $sorters = [], array $options = [])
+    public function find(array $options = [])
     {
-        return parent::find($filters, $sorters, $options);
+        return parent::find($options);
     }
 
     public function insert(Model $model, array $options = [])
