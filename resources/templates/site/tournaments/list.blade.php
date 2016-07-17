@@ -9,7 +9,7 @@
             </div>
 
             <div class="card-body card-padding">
-                <a href="{{ $this->getUrl("/tournament/showTournamentForm") }}" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Agregar</a>
+                <a href="{{ $this->getUrl("/tournament/showTournamentForm") }}" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Crear</a>
             </div>        
                 
             <div class="card-body table-responsive">

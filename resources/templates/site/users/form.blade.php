@@ -87,7 +87,7 @@
                         <div class="col-sm-6">
                             <div class="form-group fg-line">
                                 <label class="control-label" for="birthDateField">Fecha de Nacimiento (*)</label>
-                                <input type="date" id="birthDateField" name="birthDate" class="form-control" value="{{ isset($this->user)?  date_format(date_create($this->user->getBirthDate()), "Y-m-d") : "" }}" required>
+                                <input type="date" id="birthDateField" name="birthDate" class="form-control" value="{{ isset($this->user)?  $this->user->getBirthDate()->format("Y-m-d") : "" }}" required>
                             </div>
                         </div>
                     </div>

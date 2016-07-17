@@ -2,6 +2,7 @@
 
 namespace org\fmt\controller;
 
+use DateTime;
 use NeoPHP\web\http\RedirectResponse;
 use org\fmt\model\User;
 
@@ -24,13 +25,17 @@ class UsersController extends SiteController
     
     public function createUserAction ()
     {
-        $this->insertModel($this->createModel(User::class, $this->getRequest()->getParameters()->get()));
+        $user = $this->createModel(User::class, $this->getRequest()->getParameters()->get());
+        $user->setBirthDate(DateTime::createFromFormat("Y-m-d", $this->getRequest()->getParameters()->birthDate));
+        $this->insertModel($user);
         return new RedirectResponse($this->getUrl("user/showUsersList"));
     }
     
     public function updateUserAction ()
     {
-        $this->updateModel($this->createModel(User::class, $this->getRequest()->getParameters()->get()));
+        $user = $this->createModel(User::class, $this->getRequest()->getParameters()->get());
+        $user->setBirthDate(DateTime::createFromFormat("Y-m-d", $this->getRequest()->getParameters()->birthDate));
+        $this->updateModel($user);
         return new RedirectResponse($this->getUrl("user/showUsersList"));
     }
     

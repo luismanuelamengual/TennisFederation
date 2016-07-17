@@ -4,11 +4,11 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <h2>Administración de Usuarios</h2>
+                <h2>Usuarios</h2>
             </div>
 
             <div class="card-body card-padding">
-                <a href="{{ $this->getUrl("/user/showUserForm") }}" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Agregar</a>
+                <a href="{{ $this->getUrl("/user/showUserForm") }}" class="btn btn-primary"><i class="zmdi zmdi-plus"></i> Crear</a>
             </div>        
                 
             <div class="card-body table-responsive">

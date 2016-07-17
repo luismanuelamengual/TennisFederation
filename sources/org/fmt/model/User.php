@@ -2,6 +2,7 @@
 
 namespace org\fmt\model;
 
+use DateTime;
 use NeoPHP\mvc\Model;
 
 /**
@@ -149,7 +150,7 @@ class User extends Model
         return $this->birthDate;
     }
 
-    public function setBirthDate($birthDate)
+    public function setBirthDate(DateTime $birthDate)
     {
         $this->birthDate = $birthDate;
     }
