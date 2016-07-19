@@ -1,6 +1,17 @@
 @extends ("site.main")
 @use ("org\fmt\model\User")
 
+@section ("vendorStyleFiles")
+    @parent
+    <link rel="stylesheet" type="text/css" href="{{ $this->getResourceUrl('assets/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css') }}">
+@stop
+
+@section ("vendorScriptFiles")
+    @parent
+    <script src="{{ $this->getResourceUrl('assets/moment/min/moment.min.js') }}"></script>
+    <script src="{{ $this->getResourceUrl('assets/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js') }}"></script>
+@stop
+
 @section ("scripts")
     <script>
         (function($)
@@ -87,7 +98,7 @@
                         <div class="col-sm-6">
                             <div class="form-group fg-line">
                                 <label class="control-label" for="birthDateField">Fecha de Nacimiento (*)</label>
-                                <input type="date" id="birthDateField" name="birthDate" class="form-control" value="{{ isset($this->user)?  $this->user->getBirthDate()->format("Y-m-d") : "" }}" required>
+                                <input type="text" id="birthDateField" name="birthDate" class="form-control date-picker" value="{{ (isset($this->user) && $this->user->getBirthDate() != null)?  $this->user->getBirthDate()->format("Y-m-d") : "" }}" required>
                             </div>
                         </div>
                     </div>

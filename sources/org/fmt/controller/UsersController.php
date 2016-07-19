@@ -26,7 +26,7 @@ class UsersController extends SiteController
     public function createUserAction ()
     {
         $user = $this->createModel(User::class, $this->getRequest()->getParameters()->get());
-        $user->setBirthDate(DateTime::createFromFormat("Y-m-d", $this->getRequest()->getParameters()->birthDate));
+        $user->setBirthDate(DateTime::createFromFormat("Y/m/d", $this->getRequest()->getParameters()->birthDate));
         $this->insertModel($user);
         return new RedirectResponse($this->getUrl("user/showUsersList"));
     }
@@ -34,7 +34,7 @@ class UsersController extends SiteController
     public function updateUserAction ()
     {
         $user = $this->createModel(User::class, $this->getRequest()->getParameters()->get());
-        $user->setBirthDate(DateTime::createFromFormat("Y-m-d", $this->getRequest()->getParameters()->birthDate));
+        $user->setBirthDate(DateTime::createFromFormat("Y/m/d", $this->getRequest()->getParameters()->birthDate));
         $this->updateModel($user);
         return new RedirectResponse($this->getUrl("user/showUsersList"));
     }

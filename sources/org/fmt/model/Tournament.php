@@ -2,6 +2,7 @@
 
 namespace org\fmt\model;
 
+use DateTime;
 use NeoPHP\mvc\Model;
 
 /**
@@ -108,12 +109,12 @@ class Tournament extends Model
         $this->club = $club;
     }
 
-    public function setStartDate($startDate)
+    public function setStartDate(DateTime $startDate)
     {
         $this->startDate = $startDate;
     }
 
-    public function setInscriptionsDate($inscriptionsDate)
+    public function setInscriptionsDate(DateTime $inscriptionsDate)
     {
         $this->inscriptionsDate = $inscriptionsDate;
     }
